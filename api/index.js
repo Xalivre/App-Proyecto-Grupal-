@@ -1,9 +1,24 @@
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+import express from 'express';
+import { connectDB } from './connection.js'
+import productRoutes from './routes/product-routes.js' 
+import dotenv from "dotenv"
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(process.env.PORT, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
-});
+dotenv.config()
+
+
+const PORT = process.env.PORT || 3000
+export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:testdb"
+
+
+
+const app = express();
+app.use(express.json())
+app.use(productRoutes)
+
+
+connectDB()
+app.listen(PORT);
+
+console.log('Server listening on port', PORT);
+
+
