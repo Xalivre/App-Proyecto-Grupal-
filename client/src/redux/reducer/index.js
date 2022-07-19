@@ -2,14 +2,16 @@ const initialState = {
     allProducts:[],
     products: [],
     details: [],
-    users: []
+    users: [],
+    cart: [],
 }
 
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_DETAILS =  "GET_DETAILS";
 const SORT_PRICE  =  "SORT_PRICE";
 const SORT_RATING = "SORT_RATING";
-const FILTER_CATEGORY = "FILTER_CATEGORY"; 
+const FILTER_CATEGORY = "FILTER_CATEGORY";
+const ADD_TO_CART = "ADD_TO_CART"; 
 
 const rootReducer = (state = initialState, action) =>{
     switch(action.type){
@@ -31,7 +33,9 @@ const rootReducer = (state = initialState, action) =>{
             const sortPrices=
                 action.payload === "Ascending"
                     ? state.products.sort((a,b)=> a.price - b.price)
-                    : state.products.sort((a,b)=> b.price - a.price);
+                    : action.payload === "Descending"
+                    ? state.products.sort((a,b)=> b.price - a.price)
+                    : state.products
             return{
                 ...state,
                 products:sortPrices,
@@ -41,7 +45,9 @@ const rootReducer = (state = initialState, action) =>{
             const sortRating=
                 action.payload === "Ascending"
                     ? state.products.sort((a,b)=> a.rating - b.rating)
-                    : state.products.sort((a,b)=> b.rating - a.rating);
+                    : action.payload === "Descending"
+                    ? state.products.sort((a,b)=> b.price - a.price)
+                    : state.products
             return{
                 ...state,
                 products:sortRating,
@@ -59,6 +65,12 @@ const rootReducer = (state = initialState, action) =>{
                 products:filteredProducts
             }
         
+        case ADD_TO_CART:
+            return{
+                ...state,
+                cart:action.payload,
+            }
+
         default:
             return state;
     }
