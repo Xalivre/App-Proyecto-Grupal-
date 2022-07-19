@@ -4,11 +4,8 @@ import { getProducts, postProduct, deleteProduct, updateProduct } from '../contr
 const router = Router()
 
 router.get('/home', getProducts)
-
 router.post('/home', postProduct)
-
 router.delete('/home/:id', deleteProduct)
-
 router.put('/home/:id', updateProduct)
 
 

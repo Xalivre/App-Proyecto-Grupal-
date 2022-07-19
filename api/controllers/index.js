@@ -38,5 +38,3 @@ export const updateProduct = async (req, res) => {
     console.log(e)
   }
 }
-
-
