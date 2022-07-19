@@ -22,6 +22,9 @@ const rootReducer = (state = initialState, action) =>{
                 ...state,
                 details:action.payload,
             }
+        
+        default:
+            return state;
     }
 }
 
