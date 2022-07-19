@@ -1,0 +1,23 @@
+body {
+  margin: 0px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  text-decoration: none;
+  padding: 10px;
+  color: black;
+  border-bottom: 1px solid black;
+}
+
+.text {
+  text-decoration: none;
+}
+
+.text:visited {
+  color: black;
+  text-decoration: none;
+}
