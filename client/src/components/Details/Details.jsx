@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getProductDetails } from '../../redux/actions'
+import { getProductDetails, viewsUpdate } from '../../redux/actions'
 
 export default function Details(props) {
 
     const dispatch = useDispatch()
     const { id } = useParams()
+    const product = useSelector((state) => state.details)
 
     useEffect(() => {
         dispatch(getProductDetails(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
-    const product = useSelector((state) => state.details)
 
 
     return (
@@ -31,6 +31,9 @@ export default function Details(props) {
                         <div>
                             <div>
                                 {product.description}
+                            </div>
+                            <div>
+                                {product.views}
                             </div>
                         </div>
                     </div>

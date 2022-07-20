@@ -1,0 +1,16 @@
+.axolot {
+    width: 100vw;
+    height: 50vh;
+}
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title {
+    font-size: 30px;
+    justify-content: center;
+    display: flex;
+}

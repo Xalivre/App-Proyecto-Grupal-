@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    views: {
+        type: Number,
+        default: 0
     }
 })
 

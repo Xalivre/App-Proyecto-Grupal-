@@ -10,10 +10,11 @@ export function getProducts() {
     }
 }
 
-export function getProductDetails(id) {
+    export function getProductDetails(id) {
     return async function (dispatch) {
         try {
-            let json = await axios.get("http://localhost:3001/products/" + id)
+            let json = await axios.get("http://localhost:3000/product/" + id)
+            let counter = await axios.put("http://localhost:3000/product/" + id, {views: json.data.views + 1})
             return dispatch({
                 type: "GET_DETAILS",
                 payload: json.data
@@ -41,14 +42,14 @@ export function sortRating(rating) {
 
 export function deleteProduct(id) {
     return async function (dispatch) {
-        let deleted = await axios.delete("http://localhost:3001/products/" + id)
+        let deleted = await axios.delete("http://localhost:3000/products/" + id)
     }
 }
 
 export function addToCart(id) {
     return async function (dispatch) {
         try {
-            let json = await axios.get("http://localhost:3001/products/" + id)
+            let json = await axios.get("http://localhost:3000/products/" + id)
             return dispatch({
                 type: "ADD_TO_CART",
                 payload: json.data
@@ -63,7 +64,7 @@ export function addToCart(id) {
 export function filterProducts() {
     return async function (dispatch) {
         try {
-            let json = await axios.get("http://localhost:3001/products/carousel")
+            let json = await axios.get("http://localhost:3000/carousel")
             return dispatch({
                 type: "CAROUSEL",
                 payload: json.data
