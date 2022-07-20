@@ -2,7 +2,7 @@ import axios from "axios"
 
 export function getProducts() {
     return async function (dispatch) {
-        let json = await axios.get("http://localhost:3001/products", {})
+        let json = await axios.get("http://localhost:3000/home", {})
         return dispatch({
             type: "GET_PRODUCTS",
             payload: json.data
@@ -57,6 +57,28 @@ export function addToCart(id) {
         catch(e) {
             console.log(e)
         }
+    }
+}
+
+export function filterProducts() {
+    return async function (dispatch) {
+        try {
+            let json = await axios.get("http://localhost:3001/products/carousel")
+            return dispatch({
+                type: "CAROUSEL",
+                payload: json.data
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
+    }
+}
+
+export function filterPerCategory(category) {
+    return {
+        type: "FILTER_CATEGORY",
+        payload: category
     }
 }
 
