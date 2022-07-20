@@ -5,7 +5,7 @@ import s from "./NavBar.module.css"
 function NavBar() {
   return (
     <div className={s.container}>
-        <Link to='/' style={{textDecoration: 'none'}} className={s.text}>
+        <Link to='/products' style={{textDecoration: 'none'}} className={s.text}>
             <h1>Productos</h1>
         </Link>
         <Link to='/create' style={{textDecoration: 'none'}} className={s.text}>

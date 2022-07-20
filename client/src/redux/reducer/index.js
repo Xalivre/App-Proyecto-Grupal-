@@ -4,6 +4,7 @@ const initialState = {
     details: [],
     users: [],
     cart: [],
+    carousel: [],
 }
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -12,6 +13,7 @@ const SORT_PRICE  =  "SORT_PRICE";
 const SORT_RATING = "SORT_RATING";
 const FILTER_CATEGORY = "FILTER_CATEGORY";
 const ADD_TO_CART = "ADD_TO_CART"; 
+const CAROUSEL = "CAROUSEL"
 
 const rootReducer = (state = initialState, action) =>{
     switch(action.type){
@@ -21,6 +23,7 @@ const rootReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 products:action.payload,
+                allProducts:action.payload
             }
 
         case GET_DETAILS:
@@ -69,6 +72,12 @@ const rootReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 cart:action.payload,
+            }
+
+        case CAROUSEL:
+            return {
+                ...state,
+                carousel:action.payload
             }
 
         default:
