@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-const PW = 'rrNefjzLOj9kxQh2'
-const BD = 'webstore'
-const URI = `mongodb+srv://pf-grupal:${PW}@cluster0.kvgcdue.mongodb.net/${BD}?retryWrites=true&w=majority`
+const URI = `mongodb+srv://pf-grupal:${process.env.PW}@cluster0.kvgcdue.mongodb.net/${process.env.BD}?retryWrites=true&w=majority`
 
 export async function connectDB() {
   try {
