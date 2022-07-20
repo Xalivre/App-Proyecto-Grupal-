@@ -4,6 +4,7 @@ const initialState = {
     details: [],
     users: [],
     cart: [],
+    filteredProducts: [],
 }
 
 const GET_PRODUCTS = "GET_PRODUCTS";
