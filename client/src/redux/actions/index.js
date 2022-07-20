@@ -43,14 +43,14 @@ export function sortRating(rating) {
 
 export function deleteProduct(id) {
   return async function (dispatch) {
-    let deleted = await axios.delete("http://localhost:3000/products/" + id);
+    let deleted = await axios.delete("http://localhost:3000/product/" + id);
   };
 }
 
 export function addToCart(id) {
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3000/products/" + id);
+      let json = await axios.get("http://localhost:3000/product/" + id);
       return dispatch({
         type: "ADD_TO_CART",
         payload: json.data,

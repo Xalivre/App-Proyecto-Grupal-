@@ -14,6 +14,9 @@ function NavBar() {
         <Link to='/help' style={{textDecoration: 'none'}} className={s.text}>
             <h1>Ayuda</h1>
         </Link>
+        <Link to='/cart' style={{textDecoration: 'none'}} className={s.text}>
+            <h1>Carrito</h1>
+        </Link>
     </div>
   )
 }
