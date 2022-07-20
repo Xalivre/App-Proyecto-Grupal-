@@ -1,6 +1,6 @@
 import Product from "../models/Product.js";
-import { uploadImage, deleteImage } from "../librarys/cloudinary.js"
-import fs from 'fs-extra'
+import { uploadImage, deleteImage } from "../librarys/cloudinary.js";
+import fs from "fs-extra";
 
 export const getProducts = async (req, res) => {
   try {
@@ -12,19 +12,20 @@ export const getProducts = async (req, res) => {
 };
 
 export const postProduct = async (req, res) => {
-  const { name, price, stock, image, category, brands, description, views} = req.body
-  let imageUploaded
+  const { name, price, stock, image, category, brands, description, views } =
+    req.body;
+  let imageUploaded;
 
   try {
-    if(req.files){
-      const result = await uploadImage(req.files.image.tempFilePath)
-      await fs.remove(req.files.image.tempFilePath)
+    if (req.files) {
+      const result = await uploadImage(req.files.image.tempFilePath);
+      await fs.remove(req.files.image.tempFilePath);
       imageUploaded = {
         url: result.secure_url,
-        public_id: result.public_id
-      }
+        public_id: result.public_id,
+      };
     }
-   
+
     const newProduct = new Product({
       name,
       price,
@@ -33,9 +34,9 @@ export const postProduct = async (req, res) => {
       category,
       brands,
       description,
-      views
+      views,
     });
-    
+
     await newProduct.save();
     return res.json(newProduct);
   } catch (e) {
@@ -48,11 +49,9 @@ export const deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(id);
     if (!deletedProduct) return res.send("Product not found");
-    if (deletedProduct.image.public_id){
-      await deleteImage(deletedProduct.image.public_id)
+    if (deletedProduct.image.public_id) {
+      await deleteImage(deletedProduct.image.public_id);
     }
-    
-
 
     return res.send("Product Deleted");
   } catch (e) {
@@ -61,15 +60,17 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(id, req.body, { new: true });
-    if(!updatedProduct) return res.send("Product not found"); 
-    return res.send('Product Updated');
+    const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!updatedProduct) return res.send("Product not found");
+    return res.send("Product Updated");
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const getCarousel = async (req, res) => {
   try {
@@ -84,21 +85,20 @@ export const getCarousel = async (req, res) => {
         indexArray.push(numeroRandom);
         productosFiltrados.push(products[numeroRandom]);
         i++;
-      };
+      }
     }
     return res.json(productosFiltrados);
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const getDetails = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const productDetailed = await Product.findById(id)
+    const productDetailed = await Product.findById(id);
     return res.json(productDetailed);
-  }
-  catch (e) {
+  } catch (e) {
     console.log(e);
   }
-}
+};
