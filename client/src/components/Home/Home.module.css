@@ -1,16 +1,43 @@
 .axolot {
-    width: 100vw;
+    width: 70vw;
     height: 50vh;
+    border: 2px solid purple;
+    border-right: 0;
+    border-left: 0;
+}
+
+.controllerRight {
+    width: 15vw;
+    height: 50vh;
+    border: 2px solid green;
+    border-left: 0;
+}
+
+.controllerLeft {
+    width: 15vw;
+    height: 50vh;
+    border: 2px solid green;
+    border-right: 0;
+}
+
+.imagePositioning {
+    display: flex;
+    justify-content: center;
 }
 
 .carousel {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    
 }
 
 .title {
     font-size: 30px;
     justify-content: center;
     display: flex;
+}
+
+.carouselBackground {
+    background-color: lightblue;
 }

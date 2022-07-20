@@ -1,17 +1,19 @@
 import React from 'react'
 import { addToCart } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
+import Style from "./ProductCard.module.css"
 
-export default function ProductCard({id, name, price, image}) {
+export default function ProductCard({ id, name, price, image }) {
 
   const dispatch = useDispatch()
 
   return (
-    <div>
-        <div>{name}</div>
-        <img src={image}/>
-        <div>{price}</div>
-        <button onClick={() => dispatch(addToCart(id))}></button>
+    <div className={Style.carouselOrder}>
+      <div className={Style.cardContainer}>
+        <div className={Style.name}>{name}</div>
+        <img className={Style.image} src={image} />
+        <div className={Style.price}>${price}</div>
+      </div>
     </div>
   )
 }

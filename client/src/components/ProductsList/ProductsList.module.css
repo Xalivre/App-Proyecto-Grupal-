@@ -1,0 +1,51 @@
+.axolot {
+    width: 70vw;
+    height: 30vh;
+    border: 2px solid purple;
+    border-right: 0;
+    border-left: 0;
+}
+
+.controllerRight {
+    width: 15vw;
+    height: 30vh;
+    border: 2px solid green;
+    border-left: 0;
+}
+
+.controllerLeft {
+    width: 15vw;
+    height: 30vh;
+    border: 2px solid green;
+    border-right: 0;
+}
+
+.imagePositioning {
+    display: flex;
+    justify-content: center;
+}
+
+.categoriesBar {
+    display: flex;
+    justify-content: flex-start;
+    background-color: gray;
+    width: 20vw;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: row;
+    background-color: black;
+}
+
+.pagingContainer {
+    height: 7.5vh;
+    background-color: yellow;
+}
+
+.pagingOrder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
