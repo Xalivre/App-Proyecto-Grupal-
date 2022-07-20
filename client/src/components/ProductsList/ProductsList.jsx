@@ -49,7 +49,7 @@ export default function ProductsList() {
             {
               page1 >= 36 && <p onClick={() => {setPage1(0); setPage2(12)}}>1...</p>
             }
-
+{/* 
             {
               products && Array.from({ length: Math.ceil(products.length / 12)}, (v, i) => i + 1).slice(
                 (page1 / 12 - 2) >= 0 ? (page1 / 12 - 2) : 0, (page1 / 12 - 2) >= 0 ? (page2 / 12 + 2) : (page2 / 12 + 4)
@@ -60,7 +60,7 @@ export default function ProductsList() {
                 setPage1((Math.ceil(products.length / 12) - 1) * 12);
                 setPage2(Math.ceil(products.length / 12) * 12)
               }}>...{Math.ceil(products.length / 12)}</p>
-            }
+            } */}
           </div>
           <div>
             {
