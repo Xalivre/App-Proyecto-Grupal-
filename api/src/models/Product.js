@@ -17,8 +17,13 @@ const productSchema = new mongoose.Schema({
         trim: true
     },
     image: {
+        type: Object,
+        url: String,
+        public_id: String
     },
-    category: [String],
+    category: {
+        type: String,
+    },
     brands: {
         type: String,
         required: true,

@@ -1,4 +1,5 @@
 import express from 'express';
+import fileUpload from 'express-fileupload';
 import { connectDB } from './connection.js';
 import productRoutes from './src/routes/product-routes.js';
 import userRoutes from "./src/routes/user-routes.js";
@@ -11,6 +12,10 @@ export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:testd
 
 const app = express();
 app.use(express.json());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './upload'
+}))
 app.use(productRoutes);
 app.use(userRoutes);
 
