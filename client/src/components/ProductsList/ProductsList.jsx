@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsList.module.css"
 import ProductCard from '../ProductCard/ProductCard'
-import { sortPrice } from "../../redux/actions"
+import { sortPrice, getProducts } from "../../redux/actions"
+import AddCartButton from '../AddCartButton/AddCartButton'
 
 
 export default function ProductsList() {
@@ -19,6 +20,11 @@ export default function ProductsList() {
     e.preventDefault()
     dispatch(sortPrice(e.target.value))
   }
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch])
+
 
   return (
     <div>
@@ -101,6 +107,7 @@ export default function ProductsList() {
                       price={e.price}
                       key={e._id} />
                   </Link>
+                  <AddCartButton id={e._id} />
                 </div>
               )
             })

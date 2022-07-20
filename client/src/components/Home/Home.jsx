@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getProducts, sortPrice, sortRating, filterProducts, filterProductsByViews, filterProductsByDate } from "../../redux/actions"
 import ProductCard from '../ProductCard/ProductCard'
 import Style from "./Home.module.css"
+import AddCartButton from '../AddCartButton/AddCartButton'
 
 
 function Home() {
@@ -45,6 +46,7 @@ function Home() {
                       price={e.price}
                       key={e._id} />
                   </Link>
+                  <AddCartButton id={e._id} />
                 </div>
               )
             })
