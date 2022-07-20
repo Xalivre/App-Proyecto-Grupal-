@@ -1,0 +1,32 @@
+a {
+    text-decoration: none;
+}
+
+.carouselOrder {
+    display: flex;
+    flex-direction: row;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+}
+
+.name {
+    font-size: 25px;
+    font-weight: 900;
+    color: black
+}
+
+.image {
+    width: 10vw;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 600;
+    color: black
+}

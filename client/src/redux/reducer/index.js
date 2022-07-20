@@ -5,6 +5,8 @@ const initialState = {
     users: [],
     cart: [],
     carousel: [],
+    mostViewed: [],
+    recentlyAdded: [],
 }
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -14,6 +16,8 @@ const SORT_RATING = "SORT_RATING";
 const FILTER_CATEGORY = "FILTER_CATEGORY";
 const ADD_TO_CART = "ADD_TO_CART"; 
 const CAROUSEL = "CAROUSEL"
+const MOST_VIEWED = "MOST_VIEWED"
+const RECENTLY_ADDED = "RECENTLY_ADDED"
 
 const rootReducer = (state = initialState, action) =>{
     switch(action.type){
@@ -78,6 +82,18 @@ const rootReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 carousel:action.payload
+            }
+
+        case MOST_VIEWED:
+            return {
+                ...state,
+                mostViewed:action.payload
+            }
+
+        case RECENTLY_ADDED:
+            return {
+                ...state,
+                recentlyAdded:action.payload
             }
 
         default:

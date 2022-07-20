@@ -76,6 +76,36 @@ export function filterProducts() {
     }
 }
 
+export function filterProductsByViews() {
+    return async function (dispatch) {
+        try {
+            let json = await axios.get("http://localhost:3000/mostViewed")
+            return dispatch({
+                type: "MOST_VIEWED",
+                payload: json.data
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
+    }
+}
+
+export function filterProductsByDate() {
+    return async function (dispatch) {
+        try {
+            let json = await axios.get("http://localhost:3000/recentlyAdded")
+            return dispatch({
+                type: "RECENTLY_ADDED",
+                payload: json.data
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
+    }
+}
+
 export function filterPerCategory(category) {
     return {
         type: "FILTER_CATEGORY",
