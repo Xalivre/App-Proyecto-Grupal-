@@ -15,7 +15,8 @@ export const postProduct = async (req, res) => {
   const { name, price, stock, image, category, brands, description, views } =
     req.body;
   let imageUploaded;
-
+  
+  console.log(imageUploaded)
   try {
     if (req.files) {
       const result = await uploadImage(req.files.image.tempFilePath);
