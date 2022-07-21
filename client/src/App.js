@@ -5,7 +5,7 @@ import Help from "./components/Help/Help";
 import Details from "./components/Details/Details";
 import ProductsList from "./components/ProductsList/ProductsList";
 import Cart from "./components/Cart/Cart";
-
+import './global.css'
 export default function App() {
   return (
     <>

@@ -17,6 +17,9 @@ function AddCartButton({ id }) {
   return <button className={Style.cartButton} onClick={(e) => addCart(e)}>
     <div className={Style.karting}><AddShoppingCartIcon style={{fontSize:"40px"}}/></div>
     <div>Add to cart</div>
+
+    {/* <i class="fa-solid fa-cart-plus"></i> */}
+    {/* <p>Add to cart</p> */}
   </button>;
 }
 

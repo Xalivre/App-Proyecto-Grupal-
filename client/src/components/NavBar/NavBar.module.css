@@ -5,19 +5,23 @@ body {
 .container {
   display: flex;
   justify-content: space-around;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #156DBF;
   font-size: 12px;
   text-decoration: none;
   padding: 10px;
-  color: black;
   border-bottom: 1px solid black;
+  text-decoration: none;
 }
 
 .text {
-  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+.text:hover{
+  color: #a8dadc;
 }
 
-.text:visited {
+/* .text:visited {
   color: black;
   text-decoration: none;
-}
+} */

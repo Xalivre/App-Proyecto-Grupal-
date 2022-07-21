@@ -118,7 +118,7 @@ export function searchName(word) {
     // realizamos el filtrado
 
     console.log(`estas buscando: ${word}`);
-    const res = allProducts.filter((element) => element.name.includes(word));
+    const res = allProducts.filter((element) => element.name.toLowerCase().includes(word));
     dispatch({
       type: "SEARCH_BAR",
       payload: res,
