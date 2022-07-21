@@ -12,26 +12,41 @@ export const getProducts = async (req, res) => {
 };
 
 export const postProduct = async (req, res) => {
-  const { name, price, stock, image, category, brands, description, views } =
-    req.body;
+  const { name, price, stock, image, category, brands, description, views } = req.body;
   let imageUploaded;
-  
-  // console.log(imageUploaded)
+  let resultImages;
+  let arrayURLS
+
   try {
     if (req.files) {
-      const result = await uploadImage(req.files.image.tempFilePath);
-      await fs.remove(req.files.image.tempFilePath);
-      imageUploaded = {
-        url: result.secure_url,
-        public_id: result.public_id,
-      };
+      if(req.files.image.length > 0) {
+        resultImages = req.files.image.map(image => uploadImage(image.tempFilePath))
+        req.files.image.map(image => fs.remove(image.tempFilePath))
+        
+        const arrayPromiseURLS = await Promise.all(resultImages)
+        arrayURLS = arrayPromiseURLS.map(image => {
+          return imageUploaded = {
+            url: image.secure_url,
+            public_id: image.public_id
+          }
+        })    
+      }
+    
+      else {
+        const result = await uploadImage(req.files.image.tempFilePath);
+        await fs.remove(req.files.image.tempFilePath);
+        imageUploaded = {
+          url: result.secure_url,
+          public_id: result.public_id,
+        };
+      }
     }
 
     const newProduct = new Product({
       name,
       price,
       stock,
-      image: imageUploaded ? imageUploaded : image,
+      image: arrayURLS ? arrayURLS : imageUploaded ? imageUploaded : {url: image}, 
       category,
       brands,
       description,
@@ -41,7 +56,7 @@ export const postProduct = async (req, res) => {
     await newProduct.save();
     return res.json(newProduct);
   } catch (e) {
-    return res.json({msg: `Error 404 - ${e}`});
+    console.log(e);
   }
 };
 
@@ -50,12 +65,15 @@ export const deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(id);
     if (!deletedProduct) return res.send("Product not found");
+    if (deletedProduct.image.length > 0) {
+      deletedProduct.image?.map(product => deleteImage(product.public_id))
+    }
     if (deletedProduct.image.public_id) {
       await deleteImage(deletedProduct.image.public_id);
     }
     return res.send("Product Deleted");
   } catch (e) {
-    return res.json({msg: `Error 404 - ${e}`});
+    console.log(e);
   }
 };
 
