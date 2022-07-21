@@ -90,6 +90,16 @@ export const updateProduct = async (req, res) => {
   }
 };
 
+export const getDetails = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const productDetailed = await Product.findById(id);
+    return res.json(productDetailed);
+  } catch (e) {
+    return res.json({msg: `Error 404 - ${e}`});
+  }
+};
+
 export const getCarousel = async (req, res) => {
   try {
     const products = await Product.find();
@@ -110,12 +120,32 @@ export const getCarousel = async (req, res) => {
   }
 };
 
-export const getDetails = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const productDetailed = await Product.findById(id);
-    return res.json(productDetailed);
+
+export const insertionSort = async (req, res) => {
+  
+  try{
+    const products = await Product.find();
+    for (let i = 1; i < products.length; i++) {
+        let j = i - 1;
+        let aux = products[i];
+        while (j >= 0 && aux.views < products[j].views) {
+          products[j + 1] = products[j];
+          j--;
+        }
+        products[j + 1] = aux;
+      }
+  
+      return res.json(products.slice(products.length -5, products.length))
   } catch (e) {
     return res.json({msg: `Error 404 - ${e}`});
+    }
   }
-};
+
+  export const lastAdded= async (req, res) => {
+    try{
+      const products = await Product.find();
+      return res.json(products.slice(products.length - 5, products.length));
+    }catch(e){
+      return res.json({msg: `Error 404 - ${e}`});
+    }
+  }
