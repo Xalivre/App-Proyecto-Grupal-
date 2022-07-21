@@ -12,6 +12,7 @@ export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:testd
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: './upload'
