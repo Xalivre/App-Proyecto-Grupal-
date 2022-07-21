@@ -6,6 +6,7 @@ import Details from "./components/Details/Details";
 import ProductsList from "./components/ProductsList/ProductsList";
 import Cart from "./components/Cart/Cart";
 import './global.css'
+import CreateProduct from "./components/CreateProduct/CreateProduct";
 export default function App() {
   return (
     <>
@@ -16,6 +17,7 @@ export default function App() {
         <Route exact path="/product/:id" element={<Details />} />
         <Route exact path="/products" element={<ProductsList />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/create" element={<CreateProduct />} />
       </Routes>
     </>
   );
