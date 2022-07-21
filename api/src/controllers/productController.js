@@ -7,7 +7,7 @@ export const getProducts = async (req, res) => {
     const products = await Product.find();
     return res.json(products);
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -16,7 +16,7 @@ export const postProduct = async (req, res) => {
     req.body;
   let imageUploaded;
   
-  console.log(imageUploaded)
+  // console.log(imageUploaded)
   try {
     if (req.files) {
       const result = await uploadImage(req.files.image.tempFilePath);
@@ -41,7 +41,7 @@ export const postProduct = async (req, res) => {
     await newProduct.save();
     return res.json(newProduct);
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -53,10 +53,9 @@ export const deleteProduct = async (req, res) => {
     if (deletedProduct.image.public_id) {
       await deleteImage(deletedProduct.image.public_id);
     }
-
     return res.send("Product Deleted");
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -69,7 +68,7 @@ export const updateProduct = async (req, res) => {
     if (!updatedProduct) return res.send("Product not found");
     return res.send("Product Updated");
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -81,7 +80,6 @@ export const getCarousel = async (req, res) => {
 
     for (let i = 0; i < 5; i) {
       let numeroRandom = Math.floor(Math.random() * products.length);
-
       if (!indexArray.includes(numeroRandom)) {
         indexArray.push(numeroRandom);
         productosFiltrados.push(products[numeroRandom]);
@@ -90,7 +88,7 @@ export const getCarousel = async (req, res) => {
     }
     return res.json(productosFiltrados);
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -100,6 +98,6 @@ export const getDetails = async (req, res) => {
     const productDetailed = await Product.findById(id);
     return res.json(productDetailed);
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
