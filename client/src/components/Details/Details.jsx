@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, viewsUpdate } from "../../redux/actions";
 import AddCartButton from "../AddCartButton/AddCartButton";
+import Style from "./Details.module.css"
 
 export default function Details(props) {
   const dispatch = useDispatch();
@@ -17,18 +18,18 @@ export default function Details(props) {
     <div>
       {product && (
         <div>
-          <div>
+          <div className={Style.container}>
             <img src={product.image} />
-            <div>
+            <div className={Style.namePositioning}>
               <h1>{product.name}</h1>
-              <h1>{product.price}</h1>
+              <h1>Precio: ${product.price}</h1>
+              <AddCartButton id={product._id} />
             </div>
           </div>
           <div>
             <div>{product.description}</div>
             <div>{product.views}</div>
           </div>
-          <AddCartButton id={product._id} />
         </div>
       )}
     </div>

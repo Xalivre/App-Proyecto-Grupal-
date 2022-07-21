@@ -7,6 +7,7 @@ const initialState = {
   carousel: [],
   mostViewed: [],
   recentlyAdded: [],
+  filteredProducts: [],
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -60,16 +61,11 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_CATEGORY:
-      const allProducts = state.allProducts;
-      const filteredProducts =
-        action.payload === "All"
-          ? allProducts
-          : allProducts.filter(
-              (product) => product.category === action.payload
-            );
+      const categoryFilter = state.allProducts.filter((e) => e.category === action.payload)
+      console.log(categoryFilter)
       return {
         ...state,
-        products: filteredProducts,
+        filteredProducts:categoryFilter
       };
 
     case ADD_TO_CART:
