@@ -29,7 +29,9 @@ const productSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    description: {},
+    description: {
+        type: String
+    },
     views: {
         type: Number,
         default: 0

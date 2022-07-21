@@ -1,4 +1,4 @@
-a {
+/* a {
     text-decoration: none;
 }
 
@@ -33,4 +33,66 @@ a {
     font-size: 22px;
     font-weight: 600;
     color: black
+} */
+/* 
+a {
+    text-decoration: none;
+}
+
+.carouselOrder {
+    display: flex;
+    flex-direction: row;
+}
+
+.cardContainer {
+    display: flex;
+    text-align: center;
+    border: 0px solid grey;
+    border-radius: 5px;
+    gap: .5rem;
+    height: 300px;
+    width: 350px;
+    color: black;
+    font-size: 12px;
+    justify-content: space-around;
+    align-items: center;
+    -webkit-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
+    box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.46);
+    padding: .2rem;
+}
+
+.image{
+    height: 80%;
+}    */
+
+
+.cardContainer{
+    display: flex;
+    gap: .5rem;
+    border: 1px solid gray;
+    /* width: 200px; */
+    height: 250px;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: .5rem;
+    -webkit-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
+    box-shadow: 1px 4px 4px 1px #156dbfb7;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.image{
+    width: 70%;
+    height: 70%;
 }

@@ -19,7 +19,7 @@ export default function Details(props) {
       {product && (
         <div>
           <div className={Style.container}>
-            <img src={product.image} />
+            <img src={product.image} alt="img" />
             <div className={Style.namePositioning}>
               <h1>{product.name}</h1>
               <h1>Precio: ${product.price}</h1>
@@ -28,7 +28,7 @@ export default function Details(props) {
           </div>
           <div>
             <div>{product.description}</div>
-            <div>{product.views}</div>
+            {/* <div>{product.views}</div> */}
           </div>
         </div>
       )}
