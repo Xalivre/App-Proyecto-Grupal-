@@ -20,6 +20,7 @@ const CAROUSEL = "CAROUSEL";
 const MOST_VIEWED = "MOST_VIEWED";
 const RECENTLY_ADDED = "RECENTLY_ADDED";
 const SEARCH_BAR = "SEARCH_BAR";
+const REMOVE_CART = "REMOVE_CART";
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -73,6 +74,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
+
+    case REMOVE_CART:
+      return{
+        ...state,
+        cart: state.cart.filter((e) => e._id !== action.payload)
+      }
 
     case CAROUSEL:
       return {

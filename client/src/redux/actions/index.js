@@ -61,6 +61,13 @@ export function addToCart(id) {
   };
 }
 
+export function deleteFromCart(id){
+  return {
+    type: 'REMOVE_CART',
+    payload: id
+  }
+}
+
 export function filterProducts() {
   return async function (dispatch) {
     try {
