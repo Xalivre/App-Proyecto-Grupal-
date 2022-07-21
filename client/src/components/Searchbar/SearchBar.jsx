@@ -39,7 +39,9 @@ function SearchBar() {
       </form>
       <div className={styles.login}>
         <button className="button" >Sign In</button>
-        <i class="fa-solid fa-cart-shopping"></i>
+        <Link to='/cart'>
+          <i class="fa-solid fa-cart-shopping"></i>
+        </Link>
       </div>
     </div>
   );
