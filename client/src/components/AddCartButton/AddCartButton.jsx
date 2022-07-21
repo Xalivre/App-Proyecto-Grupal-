@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from '../../redux/actions/index'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Style from "./AddCartButton.module.css"
 
 function AddCartButton({ id }) {
 
@@ -12,7 +14,10 @@ function AddCartButton({ id }) {
         console.log(id)
     }
 
-  return <button onClick={(e) => addCart(e)}>Add to cart</button>;
+  return <button className={Style.cartButton} onClick={(e) => addCart(e)}>
+    <div className={Style.karting}><AddShoppingCartIcon style={{fontSize:"40px"}}/></div>
+    <div>Add to cart</div>
+  </button>;
 }
 
 export default AddCartButton;

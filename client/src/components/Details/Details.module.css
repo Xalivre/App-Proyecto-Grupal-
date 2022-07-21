@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 250px;
+}
+
+.namePositioning {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    gap: 50px;
+}
