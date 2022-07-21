@@ -11,7 +11,7 @@ cloudinary.config({
 export const uploadImage = async (filePath) => {
 return await cloudinary.uploader.upload(filePath, {
     folder: 'products'
-})
+    })
 }
 
 export const deleteImage = async (id) => {
