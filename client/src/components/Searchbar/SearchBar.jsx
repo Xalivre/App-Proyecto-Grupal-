@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux"
 import { searchName } from "../../redux/actions";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function SearchBar() {
 
@@ -41,6 +43,16 @@ function SearchBar() {
         <button className="button" >Sign In</button>
         <Link to='/cart'>
           <i class="fa-solid fa-cart-shopping"></i>
+        </Link>
+        <Link to="/wishlist">
+          <div>
+            <FavoriteIcon />
+          </div>
+        </Link>
+        <Link to="/create">
+          <div>
+            <AddCircleIcon />
+          </div>
         </Link>
       </div>
     </div>
