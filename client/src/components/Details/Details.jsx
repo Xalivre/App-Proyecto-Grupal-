@@ -28,7 +28,7 @@ export default function Details(props) {
           </div>
           <div>
             <div>{product.description}</div>
-            {/* <div>{product.views}</div> */}
+            <div>{product.views}</div>
           </div>
         </div>
       )}
