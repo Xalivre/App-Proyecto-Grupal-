@@ -68,3 +68,12 @@
     width: 80vw;
     padding: 0.5vw
 }
+
+
+.pagingHighlight {
+    color: green
+}
+
+.normalHighlight {
+    color: purple
+}

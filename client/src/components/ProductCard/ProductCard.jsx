@@ -10,7 +10,7 @@ export default function ProductCard({ id, name, price, image }) {
   return (
     <div className={Style.carouselOrder}>
       <div className={Style.cardContainer}>
-        <img className={Style.image} src={image} alt="img" />
+        <img className={Style.image} src={Array.isArray(image) && image[0]?.url} alt="img" />
         <div className={Style.text}>
           <div className={Style.name}>
             {name.length >= 45 ? (
