@@ -112,4 +112,4 @@ export const getCategories = async (req, res) => {
   }catch(e){
     return res.json({msg: `Error 404 - ${e}`});
   }
-}
+} 
