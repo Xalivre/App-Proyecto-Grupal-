@@ -1,16 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from '../../redux/actions/index'
+import { addToCart,removeFromWishList } from '../../redux/actions/index'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Style from "./AddCartButton.module.css"
 
 function AddCartButton({ id }) {
-
-    const dispatch = useDispatch();
+  
+  const dispatch = useDispatch();
 
     function addCart(e){
         e.preventDefault()
         dispatch(addToCart(id));
+        dispatch(removeFromWishList(id))
         console.log(id)
     }
 
