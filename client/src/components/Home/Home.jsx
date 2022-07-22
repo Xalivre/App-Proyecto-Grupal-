@@ -71,7 +71,7 @@ function Home() {
                     <Link className={Style.link} to={"/product/" + e._id}>
                       <ProductCard
                         name={e.name}
-                        image={e.image?.url}
+                        image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
@@ -92,7 +92,7 @@ function Home() {
                     <Link className={Style.link} to={"/product/" + e._id}>
                       <ProductCard
                         name={e.name}
-                        image={e.image?.url}
+                        image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
@@ -113,7 +113,7 @@ function Home() {
                     <Link className={Style.link} to={"/product/" + e._id}>
                       <ProductCard
                         name={e.name}
-                        image={e.image?.url}
+                        image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
