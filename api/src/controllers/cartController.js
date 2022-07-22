@@ -11,6 +11,7 @@ export const addProductToCart = async (req, res) => {
 
         if(idCart){
             const cart = await Cart.findById(idCart);
+            if(cart.items.some(e => e._id.toString() === id))  return res.json({msg: "Product already exists"});
             if(!cart) return res.json({msg: "Cart not found"});
             cart.items.push(product);
             cart.save();
