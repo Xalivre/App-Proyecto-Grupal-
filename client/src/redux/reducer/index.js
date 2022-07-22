@@ -8,6 +8,7 @@ const initialState = {
   mostViewed: [],
   recentlyAdded: [],
   filteredProducts: [],
+  wishList:[],
   operation: "",
 };
 
@@ -21,6 +22,9 @@ const CAROUSEL = "CAROUSEL";
 const MOST_VIEWED = "MOST_VIEWED";
 const RECENTLY_ADDED = "RECENTLY_ADDED";
 const SEARCH_BAR = "SEARCH_BAR";
+const REMOVE_CART = "REMOVE_CART";
+const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+const REMOVE_WISHLIST = "REMOVE_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
 
 const rootReducer = (state = initialState, action) => {
@@ -68,6 +72,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
+
+    case REMOVE_CART:
+      return{
+        ...state,
+        cart: state.cart.filter((e) => e._id !== action.payload)
+      }
+
+    case ADD_TO_WISHLIST:
+      return{
+        ...state,
+        wishList:[...state.wishList, action.payload]
+      }
+
+    case REMOVE_WISHLIST:
+      return{
+        ...state,
+        wishList: state.wishList.filter((e) => e._id !== action.payload)
+      }
 
     case CAROUSEL:
       return {
