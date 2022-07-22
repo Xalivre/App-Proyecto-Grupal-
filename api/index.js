@@ -3,6 +3,9 @@ import fileUpload from 'express-fileupload';
 import { connectDB } from './connection.js';
 import productRoutes from './src/routes/product-routes.js';
 import userRoutes from "./src/routes/user-routes.js";
+import cartRoutes from "./src/routes/cart-routes.js";
+import filtersRoutes from "./src/routes/filters-routes.js";
+import cors from 'cors';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,8 +20,12 @@ app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: './upload'
 }))
+app.use(cors());
+
 app.use(productRoutes);
 app.use(userRoutes);
+app.use(cartRoutes);
+app.use(filtersRoutes);
 
 connectDB();
 app.listen(PORT);

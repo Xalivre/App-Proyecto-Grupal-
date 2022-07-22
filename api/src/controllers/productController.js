@@ -3,10 +3,10 @@ import { uploadImage, deleteImage } from "../librarys/cloudinary.js";
 import fs from "fs-extra";
 
 export const getProducts = async (req, res) => {
-  try {
+  try{
     const products = await Product.find();
     return res.json(products);
-  } catch (e) {
+  }catch (e){
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
@@ -17,7 +17,7 @@ export const postProduct = async (req, res) => {
   let resultImages;
   let arrayURLS
 
-  try {
+  try{
     if (req.files) {
       if(req.files.image.length > 0) {
         resultImages = req.files.image.map(image => uploadImage(image.tempFilePath))
@@ -31,7 +31,6 @@ export const postProduct = async (req, res) => {
           }
         })    
       }
-    
       else {
         const result = await uploadImage(req.files.image.tempFilePath);
         await fs.remove(req.files.image.tempFilePath);
@@ -55,98 +54,50 @@ export const postProduct = async (req, res) => {
 
     await newProduct.save();
     return res.json(newProduct);
-  } catch (e) {
+  }catch (e){
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  try {
+
+  try{
     const deletedProduct = await Product.findByIdAndDelete(id);
-    if (!deletedProduct) return res.send("Product not found");
+    if (!deletedProduct) return res.json({msg: "Product not found"});
     if (deletedProduct.image[0].public_id) {
       await deleteImage(deletedProduct.image[0].public_id);
     }
     if (deletedProduct.image.length > 1) {
       deletedProduct.image.map(img => deleteImage(img.public_id))
     }
-    return res.send("Product Deleted");
-  } catch (e) {
+    return res.json({msg: "Product Deleted"});
+  } catch (e){
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  try {
+
+  try{
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    if (!updatedProduct) return res.send("Product not found");
-    return res.send("Product Updated");
-  } catch (e) {
+    if (!updatedProduct) return res.json({msg: "Product not found"});
+    return res.json({msg: "Product Updated"});
+  }catch (e){
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
 export const getDetails = async (req, res) => {
   const { id } = req.params;
-  try {
+
+  try{
     const productDetailed = await Product.findById(id);
     return res.json(productDetailed);
   } catch (e) {
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
-
-export const getCarousel = async (req, res) => {
-  try {
-    const products = await Product.find();
-    var productosFiltrados = [];
-    var indexArray = [];
-
-    for (let i = 0; i < 5; i) {
-      let numeroRandom = Math.floor(Math.random() * products.length);
-      if (!indexArray.includes(numeroRandom)) {
-        indexArray.push(numeroRandom);
-        productosFiltrados.push(products[numeroRandom]);
-        i++;
-      }
-    }
-    return res.json(productosFiltrados);
-  } catch (e) {
-    return res.json({msg: `Error 404 - ${e}`});
-  }
-};
-
-
-export const insertionSort = async (req, res) => {
-  
-  try{
-    const products = await Product.find();
-    for (let i = 1; i < products.length; i++) {
-        let j = i - 1;
-        let aux = products[i];
-        while (j >= 0 && aux.views < products[j].views) {
-          products[j + 1] = products[j];
-          j--;
-        }
-        products[j + 1] = aux;
-      }
-  
-      return res.json(products.slice(products.length -5, products.length).reverse())
-  } catch (e) {
-    return res.json({msg: `Error 404 - ${e}`});
-    }
-  } 
-
-  export const lastAdded= async (req, res) => {
-    try{
-      const products = await Product.find();
-      const lastAdded = products.slice(products.length - 5, products.length).reverse()
-      return res.json(lastAdded);
-    }catch(e){
-      return res.json({msg: `Error 404 - ${e}`});
-    }
-  }

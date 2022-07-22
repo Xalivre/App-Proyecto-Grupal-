@@ -4,8 +4,9 @@ import {encrypt, compare} from "./helpers/handleBCrypt.js";
 export const getUsers = async (req, res) => {
     try{
         const users = await User.find();
+        if(!users) return res.json({msg: "Users not found"})
         return res.json(users)
-    } catch (e) {
+    }catch (e){
         return res.json({msg: `Error 404 - ${e}`});
     }
 }
@@ -14,17 +15,11 @@ export const loginUser = async (req, res) => {
     try{
         const {username, password} = req.body
         const user = await User.findOne({username})
-        if(!user){
-            res.status(404).send({error: "User not found"})
-        }
+        if(!user) return res.json({msg: "User not found"});
+
         const checkPassword = await compare(password, user.password)
-        if(checkPassword){
-            res.send({msg: "Welcome"})
-        }
-        if(!checkPassword){
-            res.status(404).send({error: 'Invalid password'})
-        }
-    }catch(e){
+        checkPassword? res.json({msg: "Welcome"}) : res.json({msg: "Invalid password"});
+    }catch (e){
         return res.json({msg: `Error 404 - ${e}`});
     }
 }
@@ -37,29 +32,31 @@ export const postUsers = async (req, res) => {
             username,
             password: passwordHash
         })
-        res.json(registerUser)
-    } catch (e) {
+        return res.json(registerUser)
+    }catch (e){
         return res.json({msg: `Error 404 - ${e}`});
     }
 }
 
 export const deleteUser = async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
+
     try {
         const deletedUser = await User.findByIdAndDelete(id);
-        if(!deletedUser) return res.send("Username does not exist");
-        return res.send("User Deleted");
-    } catch (e) {
+        if(!deletedUser) return res.json({msg: "Username does not exist"});
+        return res.json({msg: "User Deleted"});
+    }catch (e){
         return res.json({msg: `Error 404 - ${e}`});
     }
 };
 
 export const updateUser = async (req, res) => {
     const { id } = req.params
+
      try{
         const updatedUser = await User.findByIdAndUpdate(id, req.body, {new: true});
-        if(!updatedUser) return res.send("The user was not found");
-        return res.send('User Updated');
+        if(!updatedUser) return res.json({msg: "The user was not found"});
+        return res.json({msg: 'User Updated'});
      } catch(e){
         return res.json({msg: `Error 404 - ${e}`});
      }
