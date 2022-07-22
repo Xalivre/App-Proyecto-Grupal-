@@ -160,3 +160,13 @@ export function postProduct(payload) {
     return response
   }
 }
+
+export function getCategories() {
+  return async function (dispatch) {
+    let json = await axios.get("http://localhost:3000/categories", {});
+    return dispatch({
+      type: "GET_CATEGORIES",
+      payload: json.data,
+    });
+  };
+}

@@ -10,6 +10,7 @@ const initialState = {
   filteredProducts: [],
   wishList:[],
   operation: "",
+  categories: [],
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -26,6 +27,7 @@ const REMOVE_CART = "REMOVE_CART";
 const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 const REMOVE_WISHLIST = "REMOVE_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
+const GET_CATEGORIES = "GET_CATEGORIES"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -144,6 +146,12 @@ const rootReducer = (state = initialState, action) => {
         products: action.payload === "Default" ? [...state.products] : sortedArray,
         filteredProducts: action.payload === "Default" ? [...state.allProducts] : sortedArray,
         operation: "",
+      }
+
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
       }
 
 

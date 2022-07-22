@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsList.module.css"
 import ProductCard from '../ProductCard/ProductCard'
-import { sortPrice, getProducts } from "../../redux/actions"
+import { sortPrice, getProducts, getCategories } from "../../redux/actions"
 import AddCartButton from '../AddCartButton/AddCartButton'
 import PagingOficial from "../Paging/Paging.tsx"
 
@@ -38,6 +38,7 @@ export default function ProductsList() {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getCategories())
   }, [dispatch])
 
 

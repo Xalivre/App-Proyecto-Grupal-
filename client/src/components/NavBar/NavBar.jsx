@@ -10,6 +10,7 @@ function NavBar() {
 
   const products = useSelector((state) => state.products)
   const allProducts = useSelector((state) => state.allProducts)
+  const categories = useSelector((state) => state.categories)
   const [dropdown, setDropdown] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -32,8 +33,8 @@ function NavBar() {
         </DropdownToggle>
         <DropdownMenu >
           {
-            products?.map((e) => <DropdownItem value={e.category} onClick={(e) => handleDropdown(e)}
-            > {e.category}
+            categories?.map((e) => <DropdownItem value={e} onClick={(e) => handleDropdown(e)}
+            > {e}
             </DropdownItem>)
           }
         </DropdownMenu>
