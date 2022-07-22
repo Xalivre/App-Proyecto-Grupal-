@@ -6,6 +6,7 @@ import ProductCard from '../ProductCard/ProductCard'
 import { sortPrice, getProducts, getCategories } from "../../redux/actions"
 import AddCartButton from '../AddCartButton/AddCartButton'
 import PagingOficial from "../Paging/Paging.tsx"
+import DropdownComponent from '../Dropdown/DropdownToggle'
 
 
 export default function ProductsList() {
@@ -108,7 +109,7 @@ export default function ProductsList() {
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-
+          <DropdownComponent	/>
         </div>
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
