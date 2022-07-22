@@ -105,6 +105,7 @@ export const getDetails = async (req, res) => {
 export const getCategories = async (req, res) => {
   try{
     const products = await Product.find();
+    if(!products) return res.json({msg: "Categories not found"});
     const categories = products.map(e => e.category);
     let setCategories = new Set (categories);
     const allCategories = Array.from(setCategories);
@@ -113,3 +114,17 @@ export const getCategories = async (req, res) => {
     return res.json({msg: `Error 404 - ${e}`});
   }
 } 
+
+export const getBrands = async (req, res) => {
+  try{
+    const products = await Product.find();
+    if(!products) return res.json({msg: "Brands not found"});
+    const brands = products.map(e => e.brands);
+    let setBrands = new Set (brands);
+    const allBrands = Array.from(setBrands);
+    return res.json(allBrands); 
+  }catch(e){
+    return res.json({msg: `Error 404 - ${e}`});
+  }
+}
+

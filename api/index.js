@@ -5,6 +5,9 @@ import productRoutes from './src/routes/product-routes.js';
 import userRoutes from "./src/routes/user-routes.js";
 import cartRoutes from "./src/routes/cart-routes.js";
 import filtersRoutes from "./src/routes/filters-routes.js";
+import brandsRoutes from "./src/routes/brands-routes.js"; 
+import cagetoriesRoutes from "./src/routes/categories-routes.js";
+
 import cors from 'cors';
 import dotenv from "dotenv";
 
@@ -21,11 +24,14 @@ app.use(fileUpload({
     tempFileDir: './upload'
 }))
 app.use(cors());
-
 app.use(productRoutes);
 app.use(userRoutes);
 app.use(cartRoutes);
 app.use(filtersRoutes);
+app.use(brandsRoutes)
+app.use(cagetoriesRoutes)
+
+
 
 connectDB();
 app.listen(PORT);
