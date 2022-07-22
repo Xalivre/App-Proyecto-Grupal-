@@ -139,7 +139,7 @@ export const insertionSort = async (req, res) => {
   } catch (e) {
     return res.json({msg: `Error 404 - ${e}`});
     }
-  }
+  } 
 
   export const lastAdded= async (req, res) => {
     try{
