@@ -68,6 +68,27 @@ export function deleteFromCart(id){
   }
 }
 
+export function addToWishList(id){
+  return async function (dispatch){
+    try{
+      let json = await axios.get("http://localhost:3000/product/" + id);
+      return dispatch({
+        type:"ADD_TO_WISHLIST",
+        payload:json.data,
+      });
+    }catch(e){
+      console.log(e)
+    }
+  }
+}
+
+export function removeFromWishList(id){
+  return{
+    type:"REMOVE_WISHLIST",
+    payload:id
+  }
+}
+
 export function filterProducts() {
   return async function (dispatch) {
     try {
