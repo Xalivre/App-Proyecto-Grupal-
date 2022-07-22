@@ -1,4 +1,12 @@
 .formPositioning {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: 5rem auto;
+    gap: 1rem;
+}
+
+.label{
+    color: #156DBF;
+    font-weight: bold;
 }

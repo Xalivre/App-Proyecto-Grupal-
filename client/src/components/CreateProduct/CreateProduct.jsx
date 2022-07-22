@@ -94,33 +94,33 @@ export default function CreateProduct() {
   return (
     <div>
         <div className={Style.formPositioning}>
-            <label>Nombre:</label>
-            <input type="text" value={input.name} name="name" placeholder="Nombre del producto" onChange={(e) => handleChange(e)}></input>
+            {/* <label className={Style.label}>Nombre:</label> */}
+            <input className="input-form" type="text" value={input.name} name="name" placeholder="Nombre del producto" onChange={(e) => handleChange(e)}></input>
             {
                 errors.name && (
                     <p>{errors.name}</p>
                 )
             }
-            <label>Precio:</label>
-            <input type="number" value={input.price} name="price" placeholder="Precio" onChange={(e) => handleChange(e)}></input>
-            <label>Stock:</label>
-            <input type="number" value={input.stock} name="stock" placeholder="Stock" onChange={(e) => handleChange(e)}></input>
-            <label>Imagen Principal:</label>
-            <input type="file" name="mainImage" onChange={(e) => setInput({...input, mainImage: e.target.files[0]})}></input>
-            <label>Imagenes Secundarias:</label>
+            {/* <label>Precio:</label> */}
+            <input className="input-form" type="number" value={input.price} name="price" placeholder="Precio" onChange={(e) => handleChange(e)}></input>
+            {/* <label>Stock:</label> */}
+            <input className="input-form" type="number" value={input.stock} name="stock" placeholder="Stock" onChange={(e) => handleChange(e)}></input>
+            <label className={Style.label}>Imagen Principal:</label>
+            <input  type="file" name="mainImage" onChange={(e) => setInput({...input, mainImage: e.target.files[0]})}></input>
+            <label className={Style.label}>Imagenes Secundarias:</label>
             <input type="file" multiple name="secondaryImage" onChange={(e) => {setInput({...input, secondaryImage: e.target.files}); console.log(e.target.files[0])}}></input>
-            <label>Categoria:</label>
-            <input type="text" value={input.category} name="category" placeholder="Categoria" onChange={(e) => handleChange(e)}></input>
-            <label>Marca:</label>
-            <input type="text" value={input.brands} name="brands" placeholder="Marca" onChange={(e) => handleChange(e)}></input>
-            <label>Descripción:</label>
+            {/* <label>Categoria:</label> */}
+            <input className="input-form" type="text" value={input.category} name="category" placeholder="Categoria" onChange={(e) => handleChange(e)}></input>
+            {/* <label>Marca:</label> */}
+            <input className="input-form" type="text" value={input.brands} name="brands" placeholder="Marca" onChange={(e) => handleChange(e)}></input>
+            {/* <label>Descripción:</label> */}
             <textarea rows="20" type="text" value={input.description} name="description" aria-multiline="true" placeholder="Añade una descripción" onChange={(e) => handleChange(e)}></textarea>
             {
                 !input.name || !input.price || !input.stock || !input.mainImage || !input.category || !input.brands || !input.description 
                 ?           
-                <button onClick={() => alert("Debes completar todos los campos")}>Añadir producto</button>
+                <button className="button" onClick={() => alert("Debes completar todos los campos")}>Añadir producto</button>
                 :
-                <button onClick={(e) => handleSubmit(e)}>Añadir producto</button>
+                <button className="button" onClick={(e) => handleSubmit(e)}>Añadir producto</button>
             }
         </div>
     </div>
