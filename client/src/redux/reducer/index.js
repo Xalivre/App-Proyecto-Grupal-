@@ -8,16 +8,16 @@ const initialState = {
   mostViewed: [],
   recentlyAdded: [],
   filteredProducts: [],
-  wishList:[],
+  wishList: [],
   operation: "",
   categories: [],
+  brands: [],
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_DETAILS = "GET_DETAILS";
 const SORT_PRICE = "SORT_PRICE";
 const SORT_RATING = "SORT_RATING";
-const FILTER_CATEGORY = "FILTER_CATEGORY";
 const ADD_TO_CART = "ADD_TO_CART";
 const CAROUSEL = "CAROUSEL";
 const MOST_VIEWED = "MOST_VIEWED";
@@ -28,6 +28,7 @@ const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 const REMOVE_WISHLIST = "REMOVE_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
 const GET_CATEGORIES = "GET_CATEGORIES"
+const GET_BRANDS = "GET_BRANDS"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -60,15 +61,6 @@ const rootReducer = (state = initialState, action) => {
         operation: "DefaultRating",
       };
 
-    case FILTER_CATEGORY:
-      const categoryFilter = state.allProducts.filter((e) => e.category === action.payload)
-      console.log(categoryFilter)
-      return {
-        ...state,
-        filteredProducts: categoryFilter,
-        operation: "Default",
-      };
-
     case ADD_TO_CART:
       return {
         ...state,
@@ -76,19 +68,19 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case REMOVE_CART:
-      return{
+      return {
         ...state,
         cart: state.cart.filter((e) => e._id !== action.payload)
       }
 
     case ADD_TO_WISHLIST:
-      return{
+      return {
         ...state,
-        wishList:[...state.wishList, action.payload]
+        wishList: [...state.wishList, action.payload]
       }
 
     case REMOVE_WISHLIST:
-      return{
+      return {
         ...state,
         wishList: state.wishList.filter((e) => e._id !== action.payload)
       }
@@ -154,6 +146,11 @@ const rootReducer = (state = initialState, action) => {
         categories: action.payload
       }
 
+    case GET_BRANDS:
+      return {
+        ...state,
+        brands: action.payload
+      }
 
     default:
       return state;

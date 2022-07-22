@@ -138,6 +138,14 @@ export function filterPerCategory(category) {
   };
 }
 
+export function filterPerBrand(brand) {
+  return {
+    type: "FILTER_BRAND",
+    payload: brand,
+  };
+}
+
+
 export function searchName(word) {
   return function (dispatch, getState) {
     // primero hacemos el llamado a nuestra store, en donde tengamos todos los productos
@@ -166,6 +174,16 @@ export function getCategories() {
     let json = await axios.get("http://localhost:3000/categories", {});
     return dispatch({
       type: "GET_CATEGORIES",
+      payload: json.data,
+    });
+  };
+}
+
+export function getBrands() {
+  return async function (dispatch) {
+    let json = await axios.get("http://localhost:3000/brands", {});
+    return dispatch({
+      type: "GET_BRANDS",
       payload: json.data,
     });
   };

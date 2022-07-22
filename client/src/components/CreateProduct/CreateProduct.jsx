@@ -53,6 +53,7 @@ export default function CreateProduct() {
         data.append("brands", input.brands)
         data.append("description", input.description)
         dispatch(postProduct(data))
+        console.log(data)
         setInput({
             name: "",
             price: "",

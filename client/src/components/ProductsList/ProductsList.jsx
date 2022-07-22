@@ -3,10 +3,11 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsList.module.css"
 import ProductCard from '../ProductCard/ProductCard'
-import { sortPrice, getProducts, getCategories } from "../../redux/actions"
+import { sortPrice, getProducts, getCategories, getBrands } from "../../redux/actions"
 import AddCartButton from '../AddCartButton/AddCartButton'
 import PagingOficial from "../Paging/Paging.tsx"
 import DropdownComponent from '../Dropdown/DropdownToggle'
+import CategoriesBar from '../BrandsComponent/BrandsComponent'
 
 
 export default function ProductsList() {
@@ -16,6 +17,8 @@ export default function ProductsList() {
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
   const [page2, setPage2] = useState(12)
+  const [brandFilter, setBrandFilter] = useState("")
+  const [categoryFilter, setCategoryFilter] = useState("")
 
   const dispatch = useDispatch()
 
@@ -40,9 +43,10 @@ export default function ProductsList() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategories())
+    dispatch(getBrands())
   }, [dispatch])
 
-
+console.log(brandFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>
@@ -109,18 +113,20 @@ export default function ProductsList() {
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-          <DropdownComponent	/>
+          <DropdownComponent setCategoryFilter={setCategoryFilter}/>
+          <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter}/> 
         </div>
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {
-              filtereds.length > 0 ? filtereds.slice(page1, page2).map((e) => {
+              filtereds.length > 0 ? filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter)
+              .filter((b) => brandFilter? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
                 return (
                   <div key={e._id} >
                     <Link to={"/product/" + e._id}>
                       <ProductCard
                         name={e.name}
-                        image={e.image?.url}
+                        image={e.image[0]?.url}
                         price={e.price}
                         id={e._id}
                         key={e._id} />
@@ -136,7 +142,7 @@ export default function ProductsList() {
                     <Link to={"/product/" + e._id}>
                       <ProductCard
                         name={e.name}
-                        image={e.image?.url}
+                        image={e.image[0]?.url}
                         price={e.price}
                         id={e._id}
                         key={e._id} />
