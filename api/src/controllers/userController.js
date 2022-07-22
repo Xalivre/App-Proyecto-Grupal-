@@ -62,11 +62,16 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-
+  const {username, email} = req.body;
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+    const userBD = await User.findOne({ email });
+    if (userBD) return res.json({ msg: "The email already exists" });
+    const usernameBD = await User.findOne({ username });
+    if(usernameBD) return res.json({ msg: "The username already exists" });
+
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {new: true,}
+      
+      );
     if (!updatedUser) return res.json({ msg: "The user was not found" });
     return res.json({ msg: "User Updated" });
   } catch (e) {
