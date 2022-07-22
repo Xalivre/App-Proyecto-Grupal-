@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import {encrypt, compare} from "./helpers/handleBCrypt.js";
 
 export const getUsers = async (req, res) => {
     try{
@@ -9,15 +10,34 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const loginUser = async (req, res) => {
+    try{
+        const {username, password} = req.body
+        const user = await User.findOne({username})
+        if(!user){
+            res.status(404).send({error: "User not found"})
+        }
+        const checkPassword = await compare(password, user.password)
+        if(checkPassword){
+            res.send({msg: "Welcome"})
+        }
+        if(!checkPassword){
+            res.status(404).send({error: 'Invalid password'})
+        }
+    }catch(e){
+        return res.json({msg: `Error 404 - ${e}`});
+    }
+}
+
 export const postUsers = async (req, res) => {
     try{
         const {username, password} = req.body;
-        const nameRepeat = await User.findOne({username});
-        if(!username || !password) return res.send("Username and password is required");
-        if(nameRepeat.username === username) return res.send("The username already exists with that name");
-        const newUser = new User(req.body);
-        await newUser.save();
-        return res.json(newUser);
+        const passwordHash = await encrypt(password)
+        const registerUser = await User.create({
+            username,
+            password: passwordHash
+        })
+        res.json(registerUser)
     } catch (e) {
         return res.json({msg: `Error 404 - ${e}`});
     }
