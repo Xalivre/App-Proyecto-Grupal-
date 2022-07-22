@@ -101,3 +101,15 @@ export const getDetails = async (req, res) => {
     return res.json({msg: `Error 404 - ${e}`});
   }
 };
+
+export const getCategories = async (req, res) => {
+  try{
+    const products = await Product.find();
+    const categories = products.map(e => e.category);
+    let setCategories = new Set (categories);
+    const allCategories = Array.from(setCategories);
+    return res.json(allCategories);
+  }catch(e){
+    return res.json({msg: `Error 404 - ${e}`});
+  }
+}
