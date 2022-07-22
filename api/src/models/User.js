@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
     typeOfUser: {
         type: String,
         default: "Guest"
+    },
+    email: {
+    type: String,
+    required: true,
+    unique: true
     }
 })
 
