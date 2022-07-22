@@ -52,10 +52,10 @@ function Home() {
       <>
         <Splide aria-label="My Favorite Images">
           <SplideSlide>
-            <img src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220427115450_qzlOt70B.jpg" alt="Image 1" />
+            <img className={Style.imgCarousel} src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220427115450_qzlOt70B.jpg" alt="img" />
           </SplideSlide>
           <SplideSlide>
-            <img src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220427115450_qzlOt70B.jpg" alt="Image 2" />
+            <img className={Style.imgCarousel} src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220712152854_JasSKjqq.jpg" alt="img" />
           </SplideSlide>
         </Splide>
       </>

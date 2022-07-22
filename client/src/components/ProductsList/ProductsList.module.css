@@ -1,4 +1,4 @@
-.axolot {
+/* .axolot {
     width: 70vw;
     height: 30vh;
     border: 2px solid purple;
@@ -76,4 +76,105 @@
 
 .normalHighlight {
     color: purple
+} */
+
+
+.axolot {
+    width: 70vw;
+    height: 30vh;
+    border: 2px solid purple;
+    border-right: 0;
+    border-left: 0;
+}
+
+.controllerRight {
+    width: 15vw;
+    height: 30vh;
+    border: 2px solid green;
+    border-left: 0;
+}
+
+.controllerLeft {
+    width: 15vw;
+    height: 30vh;
+    border: 2px solid green;
+    border-right: 0;
+}
+
+.imagePositioning {
+    display: flex;
+    justify-content: center;
+}
+
+.categoriesBar {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #00386b;
+    width: 20vw;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.cardsBar {
+    display: flex;
+    width: 80vw;
+}
+
+.container {
+    display: flex;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); */
+    /* display: flex; */
+    /* justify-content: row; */
+    /* background-color: black; */
+    /* position: relative; */
+    /* height: max-content; */
+}
+
+.pagingContainer {
+    /* height: 7.5vh; */
+    background-color: #00386b;
+    color: white;
+}
+
+.pagingOrder {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #00386b;
+}
+
+.paginate {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.paginate div{
+    height: 100%;
+    cursor: pointer;
+}
+
+.pagineNumbers{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    width: 100%;
+    gap: .3rem;
+    border-radius: 15px;
+    padding: 1rem;
+    
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    padding: 0.5vw */
 }

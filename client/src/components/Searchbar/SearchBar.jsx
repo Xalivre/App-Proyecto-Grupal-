@@ -34,7 +34,7 @@ function SearchBar() {
         <input
           onChange={(e) => setSearchProduct(e.target.value)}
           value={searchProduct}
-          className={styles.input}
+          className={`${styles.input} input`}
           placeholder="Search product"
         />
         <button className="button">Search</button>
