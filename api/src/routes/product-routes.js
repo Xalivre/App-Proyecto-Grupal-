@@ -7,7 +7,7 @@ const router = Router()
 router.use(cors())
 
 router.get('/home', getProducts)
-router.post('/home', postProduct)
+router.post('/create', postProduct)
 router.delete('/home/:id', deleteProduct)
 router.put('/product/:id', updateProduct)
 router.get('/product/:id', getDetails)

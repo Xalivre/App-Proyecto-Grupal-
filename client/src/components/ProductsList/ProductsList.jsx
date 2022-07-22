@@ -5,12 +5,14 @@ import Style from "./ProductsList.module.css"
 import ProductCard from '../ProductCard/ProductCard'
 import { sortPrice, getProducts } from "../../redux/actions"
 import AddCartButton from '../AddCartButton/AddCartButton'
+import PagingOficial from "../Paging/Paging.tsx"
 
 
 export default function ProductsList() {
 
   const products = useSelector((state) => state.products)
   const filtereds = useSelector((state) => state.filteredProducts)
+  const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
   const [page2, setPage2] = useState(12)
 
@@ -21,6 +23,18 @@ export default function ProductsList() {
     e.preventDefault()
     dispatch(sortPrice(e.target.value))
   }
+
+  useEffect(() => {
+    if(operation === "Default") {
+      document.getElementById("orderByPrice").value = "Default"
+    }
+  }, [operation])
+
+  useEffect(() => {
+    setPage1(0);
+    setPage2(12);
+  }, [filtereds])
+
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,9 +51,10 @@ export default function ProductsList() {
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
           <h1>Categories</h1>
-          <div>
+          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 12)}/>
+          {/* <div>
             {
-              products && page1 - 12 >= 0 ? (
+              filtereds && page1 - 12 >= 0 ? (
                 <div onClick={() => { setPage1(page1 - 12); setPage2(page2 - 12) }}>
                   prev
                 </div>
@@ -57,20 +72,20 @@ export default function ProductsList() {
               page1 >= 36 && <p onClick={() => { setPage1(0); setPage2(12) }}>1...</p>
             }
             {
-              products && Array.isArray(products) && Array.from({ length: Math.ceil(products.length / 12) }, (v, i) => i + 1).slice(
+              filtereds && Array.isArray(filtereds) && Array.from({ length: Math.ceil(filtereds.length / 12) }, (v, i) => i + 1).slice(
                 (page1 / 12 - 2) >= 0 ? (page1 / 12 - 2) : 0, (page1 / 12 - 2) >= 0 ? (page2 / 12 + 2) : (page2 / 12 + 4)
-              ).map((e, i) => <p onClick={() => { setPage1((e - 1) * 12); setPage2((e) * 12) }}>{e}</p>)
+              ).map((e, i) => <p className={(page2 / 12) === e?Style.pagingHighlight : Style.normalHighlight} onClick={() => { setPage1((e - 1) * 12); setPage2((e) * 12) }}>{e}</p>)
             }
             {
-              page2 + 24 < products.length && <p onClick={() => {
-                setPage1((Math.ceil(products.length / 12) - 1) * 12);
-                setPage2(Math.ceil(products.length / 12) * 12)
-              }}>...{Math.ceil(products.length / 12)}</p>
+              page2 + 24 < filtereds.length && <p onClick={() => {
+                setPage1((Math.ceil(filtereds.length / 12) - 1) * 12);
+                setPage2(Math.ceil(filtereds.length / 12) * 12)
+              }}>...{Math.ceil(filtereds.length / 12)}</p>
             }
           </div>
           <div>
             {
-              products && page2 + 1 <= products.length ? (
+              filtereds && page2 + 1 <= filtereds.length ? (
                 <div onClick={() => { setPage1(page1 + 12); setPage2(page2 + 12) }}>
                   next
                 </div>
@@ -82,11 +97,11 @@ export default function ProductsList() {
                   </div>
                 )
             }
-          </div>
-          <select onChange={(e) => handleOrderByPrice(e)}>
+          </div> */}
+          <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
             <option value="Default">Default</option>
-            <option value="Descending">Menor precio</option>
-            <option value="Ascending">Mayor precio</option>
+            <option value="Ascending">Menor precio</option>
+            <option value="Descending">Mayor precio</option>
           </select>
         </div>
       </div>

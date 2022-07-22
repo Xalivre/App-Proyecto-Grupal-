@@ -1,8 +1,11 @@
 import React from 'react'
+import HelpComponent from "./HelpCode.tsx"
 
 function Help() {
   return (
-    <div>Help</div>
+    <div>
+      <HelpComponent />
+    </div>
   )
 }
 

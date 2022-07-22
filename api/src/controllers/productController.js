@@ -135,7 +135,7 @@ export const insertionSort = async (req, res) => {
         products[j + 1] = aux;
       }
   
-      return res.json(products.slice(products.length -5, products.length))
+      return res.json(products.slice(products.length -5, products.length).reverse())
   } catch (e) {
     return res.json({msg: `Error 404 - ${e}`});
     }
@@ -144,7 +144,8 @@ export const insertionSort = async (req, res) => {
   export const lastAdded= async (req, res) => {
     try{
       const products = await Product.find();
-      return res.json(products.slice(products.length - 5, products.length));
+      const lastAdded = products.slice(products.length - 5, products.length).reverse()
+      return res.json(lastAdded);
     }catch(e){
       return res.json({msg: `Error 404 - ${e}`});
     }

@@ -125,3 +125,10 @@ export function searchName(word) {
     });
   };
 }
+
+export function postProduct(payload) {
+  return async function (dispatch) {
+    const response = await axios.post("http://localhost:3000/create", payload) 
+    return response
+  }
+}

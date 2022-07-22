@@ -4,11 +4,12 @@ import Style from "./NavBar.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import { useDispatch, useSelector } from 'react-redux';
-import { filterPerCategory } from "../../redux/actions/"
+import { filterPerCategory, getProducts } from "../../redux/actions/"
 
 function NavBar() {
 
   const products = useSelector((state) => state.products)
+  const allProducts = useSelector((state) => state.allProducts)
   const [dropdown, setDropdown] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -38,7 +39,7 @@ function NavBar() {
         </DropdownMenu>
       </Dropdown>
       <Link to='/products' style={{ textDecoration: 'none' }} className={Style.text}>
-        <h1>Productos</h1>
+        <h1 onClick={(e) => dispatch(getProducts(e))}>Productos</h1>
       </Link>
       <Link to='/create' style={{ textDecoration: 'none' }} className={Style.text}>
         <h1>Arma tu PC</h1>

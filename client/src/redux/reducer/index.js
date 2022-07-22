@@ -8,6 +8,7 @@ const initialState = {
   mostViewed: [],
   recentlyAdded: [],
   filteredProducts: [],
+  operation: "",
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -20,6 +21,7 @@ const CAROUSEL = "CAROUSEL";
 const MOST_VIEWED = "MOST_VIEWED";
 const RECENTLY_ADDED = "RECENTLY_ADDED";
 const SEARCH_BAR = "SEARCH_BAR";
+const POST_PRODUCT = "POST_PRODUCT"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -28,24 +30,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
         allProducts: action.payload,
+        filteredProducts: action.payload,
+        operation: "Default"
       };
 
     case GET_DETAILS:
       return {
         ...state,
         details: action.payload,
-      };
-
-    case SORT_PRICE:
-      const sortPrices =
-        action.payload === "Ascending"
-          ? state.products.sort((a, b) => a.price - b.price)
-          : action.payload === "Descending"
-          ? state.products.sort((a, b) => b.price - a.price)
-          : state.products;
-      return {
-        ...state,
-        products: sortPrices,
+        operation: "Details",
       };
 
     case SORT_RATING:
@@ -53,11 +46,12 @@ const rootReducer = (state = initialState, action) => {
         action.payload === "Ascending"
           ? state.products.sort((a, b) => a.rating - b.rating)
           : action.payload === "Descending"
-          ? state.products.sort((a, b) => b.price - a.price)
-          : state.products;
+            ? state.products.sort((a, b) => b.price - a.price)
+            : state.products;
       return {
         ...state,
         products: sortRating,
+        operation: "DefaultRating",
       };
 
     case FILTER_CATEGORY:
@@ -65,7 +59,8 @@ const rootReducer = (state = initialState, action) => {
       console.log(categoryFilter)
       return {
         ...state,
-        filteredProducts:categoryFilter
+        filteredProducts: categoryFilter,
+        operation: "Default",
       };
 
     case ADD_TO_CART:
@@ -95,7 +90,40 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+        operation: "Default",
       };
+
+    case POST_PRODUCT:
+      return {
+        ...state,
+      }
+
+    case SORT_PRICE:
+      const sortedArray = action.payload === "Ascending" ? [...state.products].sort(function (a, b) {
+        if (a.price > b.price) {
+          return 1
+        }
+        if (b.price > a.price) {
+          return -1
+        }
+        return 0
+      })
+        :
+        [...state.products].sort(function (a, b) {
+          if (a.price > b.price) {
+            return -1
+          }
+          if (b.price > a.price) {
+            return 1
+          }
+        })
+      return {
+        ...state,
+        products: action.payload === "Default" ? [...state.products] : sortedArray,
+        filteredProducts: action.payload === "Default" ? [...state.allProducts] : sortedArray,
+        operation: "",
+      }
+
 
     default:
       return state;
