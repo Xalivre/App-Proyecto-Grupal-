@@ -35,10 +35,10 @@ export const postProduct = async (req, res) => {
       else {
         const result = await uploadImage(req.files.image.tempFilePath);
         await fs.remove(req.files.image.tempFilePath);
-        imageUploaded = {
+        imageUploaded = [{
           url: result.secure_url,
           public_id: result.public_id,
-        };
+        }];
       }
     }
 
@@ -46,7 +46,7 @@ export const postProduct = async (req, res) => {
       name,
       price,
       stock,
-      image: arrayURLS ? arrayURLS : imageUploaded ? imageUploaded : {url: image}, 
+      image: arrayURLS ? arrayURLS : imageUploaded ? imageUploaded : [{url: image}], 
       category,
       brands,
       description,
@@ -56,7 +56,7 @@ export const postProduct = async (req, res) => {
     await newProduct.save();
     return res.json(newProduct);
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
@@ -65,15 +65,15 @@ export const deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(id);
     if (!deletedProduct) return res.send("Product not found");
-    if (deletedProduct.image.length > 0) {
-      deletedProduct.image?.map(product => deleteImage(product.public_id))
+    if (deletedProduct.image[0].public_id) {
+      await deleteImage(deletedProduct.image[0].public_id);
     }
-    if (deletedProduct.image.public_id) {
-      await deleteImage(deletedProduct.image.public_id);
+    if (deletedProduct.image.length > 1) {
+      deletedProduct.image.map(img => deleteImage(img.public_id))
     }
     return res.send("Product Deleted");
   } catch (e) {
-    console.log(e);
+    return res.json({msg: `Error 404 - ${e}`});
   }
 };
 
