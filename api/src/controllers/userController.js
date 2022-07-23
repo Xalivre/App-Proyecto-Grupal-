@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import { encrypt, compare } from "./helpers/handleBCrypt.js";
+import { tokenSign } from "./helpers/generateToken.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -15,12 +16,20 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    
     if (!user) return res.json({ msg: "User not found" });
 
     const checkPassword = await compare(password, user.password);
-    checkPassword
-      ? res.json({ msg: "Welcome" })
-      : res.json({ msg: "Invalid password" });
+    const tokenSession = await tokenSign(user)
+    if(checkPassword){
+      res.send({
+        data: user,
+        tokenSession
+       })
+    }
+    if(!checkPassword){
+      res.status(409).send("Invalid password");
+    }
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }

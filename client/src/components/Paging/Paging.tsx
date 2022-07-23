@@ -13,7 +13,7 @@ export default function PaginationOutlined(props) {
 
     return (
         <Stack spacing={2}>
-            <Pagination onChange={handleChange} count={props.filtereds} variant="outlined" color="primary" />
+            <Pagination onChange={handleChange} count={props.filtereds} color="primary" />
         </Stack>
     );
 }
