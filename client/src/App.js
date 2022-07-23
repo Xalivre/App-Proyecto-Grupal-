@@ -8,6 +8,9 @@ import Cart from "./components/Cart/Cart";
 import './global.css'
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import WishList from "./components/WishList/WishList";
+import RegisterPage from "./components/RegisterPage/RegisterPage"
+
+
 export default function App() {
   return (
     <>
@@ -20,6 +23,7 @@ export default function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/create" element={<CreateProduct />} />
         <Route exact path="/wishlist" element={<WishList/>} />
+        <Route exact path="/register" element={<RegisterPage />} />
       </Routes>
     </>
   );

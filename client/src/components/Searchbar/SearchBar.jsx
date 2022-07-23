@@ -40,7 +40,9 @@ function SearchBar(props) {
         <button className="button">Search</button>
       </form>
       <div className={styles.login}>
+        <Link to="/register">
         <button className="button" >Sign In</button>
+        </Link>
         <Link to='/cart'>
           <i class="fa-solid fa-cart-shopping"></i>
         </Link>
