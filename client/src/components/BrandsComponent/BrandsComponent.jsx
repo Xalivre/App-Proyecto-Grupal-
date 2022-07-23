@@ -12,7 +12,6 @@ export default function CategoriesBar(props) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    console.log(props.products)
 
     const openDropdown = () => {
         setDropdown(!dropdown)

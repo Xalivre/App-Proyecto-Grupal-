@@ -35,6 +35,8 @@ export default function ProductsList() {
   }, [operation])
 
   useEffect(() => {
+    setBrandFilter("")
+    setCategoryFilter("")
     setPage1(0);
     setPage2(12);
   }, [filtereds])
@@ -113,7 +115,7 @@ console.log(brandFilter)
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-          <DropdownComponent setCategoryFilter={setCategoryFilter}/>
+          <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter}/>
           <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter}/> 
         </div>
         <div className={Style.cardsBar}>
@@ -135,21 +137,7 @@ console.log(brandFilter)
                 )
               })
               :
-              products.slice(page1, page2).map((e) => {
-
-                return (
-                  <div key={e._id} >
-                    <Link to={"/product/" + e._id}>
-                      <ProductCard
-                        name={e.name}
-                        image={e.image[0]?.url}
-                        price={e.price}
-                        id={e._id}
-                        key={e._id} />
-                    </Link>
-                  </div>
-                )
-              })
+              <div>BUSCASTE MAL VIEJO</div>
             }
           </div>
         </div>

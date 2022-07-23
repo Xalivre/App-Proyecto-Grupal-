@@ -25,7 +25,7 @@ export default function DropdownComponent(props) {
                 </DropdownToggle>
                 <DropdownMenu >
                     {
-                        categories?.map((e) => <DropdownItem value={e} onClick={(e) => props.setCategoryFilter(e.target.value)}
+                        props.products && categories?.filter((j) => props.products.includes(j)).map((e) => <DropdownItem value={e} onClick={(e) => {props.setCategoryFilter(e.target.value); props.setBrandFilter("")}}
                         > {e}
                         </DropdownItem>)
                     }

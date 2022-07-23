@@ -10,3 +10,7 @@
     color: #156DBF;
     font-weight: bold;
 }
+
+.errors {
+    color: orangered
+}

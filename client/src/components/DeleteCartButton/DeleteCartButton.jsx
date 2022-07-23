@@ -10,7 +10,6 @@ function DeleteCartButton({ id }) {
     function deleteCart(e){
         e.preventDefault()
         dispatch(deleteFromCart(id));
-        console.log(id)
       }
 
   return (

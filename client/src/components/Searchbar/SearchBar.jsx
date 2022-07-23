@@ -7,7 +7,7 @@ import { searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-function SearchBar() {
+function SearchBar(props) {
 
   let navigate = useNavigate();
   const dispatch = useDispatch()

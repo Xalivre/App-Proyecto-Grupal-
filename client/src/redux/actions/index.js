@@ -154,11 +154,12 @@ export function searchName(word) {
     // realizamos el filtrado
 
     console.log(`estas buscando: ${word}`);
-    const res = allProducts.filter((element) => element.name.toLowerCase().includes(word));
+    const res = allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
     dispatch({
       type: "SEARCH_BAR",
-      payload: res,
+      payload: word,
     });
+    console.log(res)
   };
 }
 
@@ -188,3 +189,4 @@ export function getBrands() {
     });
   };
 }
+

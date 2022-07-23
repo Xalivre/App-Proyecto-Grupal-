@@ -12,6 +12,7 @@ const initialState = {
   operation: "",
   categories: [],
   brands: [],
+  nameSearched: "",
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -37,7 +38,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
         allProducts: action.payload,
-        filteredProducts: action.payload,
+        filteredProducts: action.payload.filter((e) => state.nameSearched?e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
         operation: "Default"
       };
 
@@ -105,8 +106,9 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_BAR:
       return {
         ...state,
-        products: action.payload,
-        operation: "Default",
+        filteredProducts: [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase())),
+        nameSearched: action.payload,
+        operation: "SearchBar",
       };
 
     case POST_PRODUCT:

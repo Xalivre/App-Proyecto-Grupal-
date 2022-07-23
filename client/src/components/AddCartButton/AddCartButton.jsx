@@ -12,7 +12,6 @@ function AddCartButton({ id }) {
         e.preventDefault()
         dispatch(addToCart(id));
         dispatch(removeFromWishList(id))
-        console.log(id)
     }
 
   return <button className={Style.cartButton} onClick={(e) => addCart(e)}>
