@@ -17,8 +17,8 @@ function Cart() {
         <div>
           <DeleteCartButton id={e._id} />
           <p>{e.name}</p>
-          <p>{e.price}</p>
-          <p>{e.description}</p>
+          <p>Precio: {e.price}</p>
+          <p>Caracteristicas: {e.description}</p>
           <img src={e.image[0].url} />
         </div>
       ))

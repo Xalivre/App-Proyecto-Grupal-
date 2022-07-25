@@ -133,7 +133,7 @@ console.log(categoryFilter)
                 )
               })
               :
-              <div>BUSCASTE MAL VIEJO</div>
+              <div>Producto inexistente!</div>
             }
           </div>
         </div>
