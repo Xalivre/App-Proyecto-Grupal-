@@ -41,9 +41,15 @@ function SearchBar(props) {
         <button className="button">Search</button>
       </form>
       <div className={styles.login}>
-        <Link to="/register">
+        { !localStorage.getItem("usuario") && <><Link to="/register">
         <button className="button" >Sign In</button>
         </Link>
+        <Link to="/login">
+        <button className="button" >Log in</button>
+        </Link></>}
+       { localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
+        <button className="button" >Log out</button>
+        </Link>}
         <Link to='/cart'>
           <i class="fa-solid fa-cart-shopping"></i>
         </Link>

@@ -50,6 +50,7 @@ export const postUsers = async (req, res) => {
       username: username,
       password: passwordHash,
       email: email,
+      role: "admin"
     });
     return res.json({ msg: `${username} create succesfully` });
   } catch (e) {

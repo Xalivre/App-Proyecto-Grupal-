@@ -14,6 +14,11 @@ import Style from "./Home.module.css";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import '@splidejs/react-splide/css/skyblue';
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { useJwt } from "react-jwt";
+
+
+
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -21,6 +26,9 @@ function Home() {
   const carousel = useSelector((state) => state.carousel);
   const mostViewed = useSelector((state) => state.mostViewed);
   const recentlyAdded = useSelector((state) => state.recentlyAdded);
+
+  const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
+  console.log(decodedToken)
 
   useEffect(() => {
     dispatch(getProducts());

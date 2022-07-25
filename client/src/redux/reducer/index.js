@@ -31,6 +31,8 @@ const POST_PRODUCT = "POST_PRODUCT"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const GET_BRANDS = "GET_BRANDS"
 const CLEAR_PAGE = "CLEAR_PAGE"
+const POST_USER = "POST_USER"
+const LOGIN = "LOGIN"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -104,6 +106,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       }
+
+    case POST_USER:
+      return {
+        ...state,
+      }
+    
+    case LOGIN:
+      return {
+        ...state,
+      }  
 
     case SORT_PRICE:
       const sortedArray = action.payload === "Ascending" ? [...state.filteredProducts].sort(function (a, b) {
