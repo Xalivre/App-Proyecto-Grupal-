@@ -92,11 +92,12 @@ const rootReducer = (state = initialState, action) => {
         recentlyAdded: action.payload,
       };
     case SEARCH_BAR:
+      let a = action.payload === "aklsjdhlaksjdaskldazzzz" ? state.allProducts : [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase()))
       return {
         ...state,
-        filteredProducts: [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase())),
+        filteredProducts: a.length > 0 ? a : state.allProducts,
         nameSearched: action.payload,
-        operation: "SearchBar",
+        operation: a.length < 1 ? "Error SearchBar" : action.payload === "aklsjdhlaksjdaskldazzzz" ? "No hacer nada" : "SearchBar"
       };
 
     case POST_PRODUCT:
@@ -105,7 +106,7 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case SORT_PRICE:
-      const sortedArray = action.payload === "Ascending" ? [...state.products].sort(function (a, b) {
+      const sortedArray = action.payload === "Ascending" ? [...state.filteredProducts].sort(function (a, b) {
         if (a.price > b.price) {
           return 1
         }
@@ -115,7 +116,7 @@ const rootReducer = (state = initialState, action) => {
         return 0
       })
         :
-        [...state.products].sort(function (a, b) {
+        [...state.filteredProducts].sort(function (a, b) {
           if (a.price > b.price) {
             return -1
           }
@@ -126,8 +127,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload === "Default" ? [...state.products] : sortedArray,
-        filteredProducts: action.payload === "Default" ? [...state.allProducts] : sortedArray,
-        operation: "",
+        filteredProducts: action.payload === "Default" ? [...state.filteredProducts] : sortedArray,
+        operation: "No hacer nada",
       }
 
     case GET_CATEGORIES:

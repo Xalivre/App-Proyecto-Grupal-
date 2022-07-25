@@ -22,13 +22,14 @@ function SearchBar(props) {
     if (searchProduct.length > 0) {
       navigate('/products')
       dispatch(searchName(searchProduct));
+      setSearchProduct("")
     } 
   }
 
   return (
     <div className={styles.containerAll}>
       <Link to="/">
-        <img src="https://compragamer.net/assets/img/logo-fix.png" alt="img" />
+        <img className={styles.logo} src="https://images2.alphacoders.com/105/thumb-1920-1052293.jpg" alt="img" />
       </Link>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <input

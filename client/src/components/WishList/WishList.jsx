@@ -15,8 +15,8 @@ function WishList() {
           <div key={p._id} className={s.card}>
                 <RemoveWishButton id={p._id}/>
                 <p>{p.name}</p>
-                <p>{p.price}</p>
-                <p>{p.description}</p>
+                <p>Precio: {p.price}</p>
+                <p>Caracteristicas: {p.description}</p>
                 <img src={p.image[0].url} />
                 <AddCartButton id={p._id}/>
             </div>

@@ -52,11 +52,12 @@ function Home() {
       <>
         <Splide aria-label="My Favorite Images">
           <SplideSlide>
-            <img className={Style.imgCarousel} src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220427115450_qzlOt70B.jpg" alt="img" />
+            <img className={Style.imgCarousel} src="https://p4.wallpaperbetter.com/wallpaper/778/594/499/gtx-nvidia-geforce-video-card-wallpaper-preview.jpg" alt="img" />
           </SplideSlide>
           <SplideSlide>
-            <img className={Style.imgCarousel} src="https://imagenes.compragamer.com/bannerPrincipal/DC_20220712152854_JasSKjqq.jpg" alt="img" />
+            <img className={Style.imgCarousel} src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/05/ramdisk-ddr4.jpg?itok=M0443WBf" alt="img" />
           </SplideSlide>
+     
         </Splide>
       </>
 
