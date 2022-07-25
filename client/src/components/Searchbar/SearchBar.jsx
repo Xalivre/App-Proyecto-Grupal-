@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import logo from "../../img/favicon.png";
 
 function SearchBar(props) {
 
@@ -29,7 +30,7 @@ function SearchBar(props) {
   return (
     <div className={styles.containerAll}>
       <Link to="/">
-        <img className={styles.logo} src="https://images2.alphacoders.com/105/thumb-1920-1052293.jpg" alt="img" />
+        <img className={styles.logo} src={logo} alt="img" />
       </Link>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <input

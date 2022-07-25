@@ -10,6 +10,7 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import WishList from "./components/WishList/WishList";
 import RegisterPage from "./components/RegisterPage/RegisterPage"
 import ArmaTuPC from "./components/ArmaTuPc/ArmaTuPC";
+import Footer from "./components/Footer/Footer";
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
         <Route exact path="/register" element={<RegisterPage />} />
         <Route exact path="/ArmaTuPc" element={<ArmaTuPC />} />
       </Routes>
+      <Footer />
     </>
   );
 }
