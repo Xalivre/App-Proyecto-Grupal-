@@ -12,17 +12,17 @@ function Cart() {
 
   return (
     <div>
-      <h1>MI CARRITO</h1>
+      <h1>Carrito</h1>
       {cart.length>0 ? cart.map((e) =>(
         <div>
           <DeleteCartButton id={e._id} />
           <p>{e.name}</p>
           <p>{e.price}</p>
           <p>{e.description}</p>
-          <img src={e.image} />
+          <img src={e.image[0].url} />
         </div>
       ))
-       : <div>NO TENGO NADA</div>}
+       : <div>Aun no tienes productos en el Carrito!</div>}
     </div>
   );
 }
