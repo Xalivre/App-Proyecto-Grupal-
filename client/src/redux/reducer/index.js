@@ -30,6 +30,7 @@ const REMOVE_WISHLIST = "REMOVE_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const GET_BRANDS = "GET_BRANDS"
+const CLEAR_PAGE = "CLEAR_PAGE"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -139,6 +140,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         brands: action.payload
+      }
+
+    case CLEAR_PAGE:
+      return{
+          ...state,
+          details:[]
       }
 
     default:

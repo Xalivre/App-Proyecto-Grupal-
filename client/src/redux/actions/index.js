@@ -175,3 +175,9 @@ export function getBrands() {
   };
 }
 
+export function clearPage(){
+  return {
+      type:"CLEAR_PAGE"
+  }
+}
+
