@@ -20,7 +20,7 @@ function NavBar() {
       <Link to='/products' style={{ textDecoration: 'none' }} className={Style.text}>
         <h1 onClick={(e) => dispatch(getProducts(e))}>Productos</h1>
       </Link>
-      <Link to='/create' style={{ textDecoration: 'none' }} className={Style.text}>
+      <Link to='/ArmaTuPC' style={{ textDecoration: 'none' }} className={Style.text}>
         <h1>Arma tu PC</h1>
       </Link>
       <Link to='/help' style={{ textDecoration: 'none' }} className={Style.text}>

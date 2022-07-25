@@ -21,7 +21,7 @@ export default function App() {
         <Route exact path="/product/:id" element={<Details />} />
         <Route exact path="/products" element={<ProductsList />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/create" element={<CreateProduct />} />
+        <Route exact path="/createProduct" element={<CreateProduct />} />
         <Route exact path="/wishlist" element={<WishList/>} />
         <Route exact path="/register" element={<RegisterPage />} />
       </Routes>

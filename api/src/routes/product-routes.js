@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/home', getProducts)
 router.get('/product/:id', getDetails)
-router.post('/create', postProduct)
+router.post('/createProduct', postProduct)
 router.put('/product/:id', updateProduct)
 router.delete('/product/:id', deleteProduct)
 
