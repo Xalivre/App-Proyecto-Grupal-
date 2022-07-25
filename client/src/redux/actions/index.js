@@ -131,21 +131,6 @@ export function filterProductsByDate() {
   };
 }
 
-export function filterPerCategory(category) {
-  return {
-    type: "FILTER_CATEGORY",
-    payload: category,
-  };
-}
-
-export function filterPerBrand(brand) {
-  return {
-    type: "FILTER_BRAND",
-    payload: brand,
-  };
-}
-
-
 export function searchName(word) {
   return function (dispatch, getState) {
     // primero hacemos el llamado a nuestra store, en donde tengamos todos los productos

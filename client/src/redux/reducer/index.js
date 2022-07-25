@@ -48,20 +48,7 @@ const rootReducer = (state = initialState, action) => {
         details: action.payload,
         operation: "Details",
       };
-
-    case SORT_RATING:
-      const sortRating =
-        action.payload === "Ascending"
-          ? state.products.sort((a, b) => a.rating - b.rating)
-          : action.payload === "Descending"
-            ? state.products.sort((a, b) => b.price - a.price)
-            : state.products;
-      return {
-        ...state,
-        products: sortRating,
-        operation: "DefaultRating",
-      };
-
+    
     case ADD_TO_CART:
       return {
         ...state,

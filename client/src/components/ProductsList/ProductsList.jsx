@@ -58,7 +58,6 @@ console.log(brandFilter)
       </div> */}
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
-          <h1>Categories</h1>
           <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 12)}/>
           {/* <div>
             {
