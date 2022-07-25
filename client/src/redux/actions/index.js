@@ -175,10 +175,10 @@ export function getBrands() {
   };
 }
 
-export function clearPage(){
-  return {
-      type:"CLEAR_PAGE"
-  }
+// export function clearPage(){
+//   return {
+//       type:"CLEAR_PAGE"
+// }
 
 export function recategorization(){
   
