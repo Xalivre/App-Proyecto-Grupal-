@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, viewsUpdate, deleteProduct , } from "../../redux/actions";
+import { getProductDetails, viewsUpdate, deleteProduct, clearPage } from "../../redux/actions";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import AddWishButton from "../WishList/AddWIshButton/AddWishButton";
 import Style from "./Details.module.css"
@@ -13,6 +13,7 @@ export default function Details(props) {
 
   useEffect(() => {
     dispatch(getProductDetails(id));
+    return () => {dispatch(clearPage())}
   }, [dispatch, id]);
 
   return (
