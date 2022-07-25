@@ -175,3 +175,7 @@ export function getBrands() {
   };
 }
 
+export function recategorization(){
+  
+}
+

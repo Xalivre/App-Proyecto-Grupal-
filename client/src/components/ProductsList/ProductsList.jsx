@@ -8,6 +8,7 @@ import AddCartButton from '../AddCartButton/AddCartButton'
 import PagingOficial from "../Paging/Paging.tsx"
 import DropdownComponent from '../Dropdown/DropdownToggle'
 import CategoriesBar from '../BrandsComponent/BrandsComponent'
+import DropdownPrecio from '../DropdownPrecio/DropdownPrecio'
 
 
 export default function ProductsList() {
@@ -29,14 +30,10 @@ export default function ProductsList() {
   }
 
   useEffect(() => {
-    if(operation === "Default") {
-      document.getElementById("orderByPrice").value = "Default"
-    }
-  }, [operation])
-
-  useEffect(() => {
-    setBrandFilter("")
+    if(operation !== "No hacer nada"){
+      setBrandFilter("")
     setCategoryFilter("")
+    }
     setPage1(0);
     setPage2(12);
   }, [filtereds])
@@ -48,7 +45,7 @@ export default function ProductsList() {
     dispatch(getBrands())
   }, [dispatch])
 
-console.log(brandFilter)
+console.log(categoryFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>
@@ -105,11 +102,11 @@ console.log(brandFilter)
                 )
             }
           </div> */}
-          <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
-            <option value="Default">Default</option>
+      {/*     <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
             <option value="Ascending">Menor precio</option>
             <option value="Descending">Mayor precio</option>
-          </select>
+          </select> */}
+          <DropdownPrecio></DropdownPrecio>
         </div>
       </div>
       <div className={Style.container}>
@@ -120,7 +117,7 @@ console.log(brandFilter)
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {
-              filtereds.length > 0 ? filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter)
+              operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter)
               .filter((b) => brandFilter? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
                 return (
                   <div key={e._id} >

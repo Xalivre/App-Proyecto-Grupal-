@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import Style from "./NavBar.module.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from "../../redux/actions/"
+import { getProducts, searchName } from "../../redux/actions/"
 
 function NavBar() {
 
@@ -18,7 +18,7 @@ function NavBar() {
         <h1>Home</h1>
       </Link>
       <Link to='/products' style={{ textDecoration: 'none' }} className={Style.text}>
-        <h1 onClick={(e) => dispatch(getProducts(e))}>Productos</h1>
+        <h1 onClick={() => dispatch(searchName(""))}>Productos</h1>
       </Link>
       <Link to='/ArmaTuPC' style={{ textDecoration: 'none' }} className={Style.text}>
         <h1>Arma tu PC</h1>
