@@ -20,7 +20,7 @@ function AddWishButton({id}) {
         });
         if(!flag){
             dispatch(addToWishList(id))
-            console.log(id)
+            alert("El Producto fue añadido a la lista")
         }
     }
 

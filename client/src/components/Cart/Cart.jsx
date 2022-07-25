@@ -14,7 +14,7 @@ function Cart() {
     <div>
       <h1>Carrito</h1>
       {cart.length>0 ? cart.map((e) =>(
-        <div>
+        <div key={e._id}>
           <DeleteCartButton id={e._id} />
           <p>{e.name}</p>
           <p>Precio: {e.price}</p>
