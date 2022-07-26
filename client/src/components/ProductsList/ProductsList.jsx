@@ -30,9 +30,9 @@ export default function ProductsList() {
   }
 
   useEffect(() => {
-    if(operation !== "No hacer nada"){
+    if (operation !== "No hacer nada") {
       setBrandFilter("")
-    setCategoryFilter("")
+      setCategoryFilter("")
     }
     setPage1(0);
     setPage2(12);
@@ -45,7 +45,7 @@ export default function ProductsList() {
     dispatch(getBrands())
   }, [dispatch])
 
-console.log(categoryFilter)
+  console.log(categoryFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>
@@ -55,7 +55,7 @@ console.log(categoryFilter)
       </div> */}
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
-          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 12)}/>
+          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 12)} />
           {/* <div>
             {
               filtereds && page1 - 12 >= 0 ? (
@@ -102,7 +102,7 @@ console.log(categoryFilter)
                 )
             }
           </div> */}
-      {/*     <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
+          {/*     <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
             <option value="Ascending">Menor precio</option>
             <option value="Descending">Mayor precio</option>
           </select> */}
@@ -111,29 +111,29 @@ console.log(categoryFilter)
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-          <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter}/>
-          <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter}/> 
+          <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />
+          <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter} />
         </div>
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {
-              operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter)
-              .filter((b) => brandFilter? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
-                return (
-                  <div key={e._id} >
-                    <Link to={"/product/" + e._id}>
-                      <ProductCard
-                        name={e.name}
-                        image={e.image[0]?.url}
-                        price={e.price}
-                        id={e._id}
-                        key={e._id} />
-                    </Link>
-                  </div>
-                )
-              })
-              :
-              <div>Producto inexistente!</div>
+              operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
+                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
+                  return (
+                    <div key={e._id} >
+                      <Link to={"/product/" + e._id}>
+                        <ProductCard
+                          name={e.name}
+                          image={e.image[0]?.url}
+                          price={e.price}
+                          id={e._id}
+                          key={e._id} />
+                      </Link>
+                    </div>
+                  )
+                })
+                :
+                <div>Producto inexistente!</div>
             }
           </div>
         </div>

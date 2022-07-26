@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Style from "./ProductCardAdmin.module.css";
 import AddCartButton from "../../AddCartButton/AddCartButton";
 import { deleteProduct } from "../../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCardAdmin({ id, name, price, image }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className={Style.carouselOrder}>
@@ -27,6 +29,7 @@ export default function ProductCardAdmin({ id, name, price, image }) {
             onClick={()=>{
               dispatch(deleteProduct(id));
               alert("Deleted")
+              navigate(0)
             }}
             >
               {" "}

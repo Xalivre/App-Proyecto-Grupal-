@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postProduct, getProducts } from "../../redux/actions";
 import Style from "./CreateProduct.module.css"
@@ -8,6 +8,7 @@ import { State } from "@splidejs/splide";
 export default function CreateProduct() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [input, setInput] = useState({
         name: "",
@@ -43,9 +44,9 @@ export default function CreateProduct() {
         const data = new FormData()
         const images = []
         data.append("image", input.mainImage)
-        for(let index=0;index<input.secondaryImage.length;index ++){
-            data.append("image",input.secondaryImage[index]);
-          }
+        for (let index = 0; index < input.secondaryImage.length; index++) {
+            data.append("image", input.secondaryImage[index]);
+        }
         data.append("name", input.name)
         data.append("price", input.price)
         data.append("stock", input.stock)
@@ -63,85 +64,87 @@ export default function CreateProduct() {
             description: "",
         })
         dispatch(getProducts())
+        alert("Producto agregado con éxito")
+        navigate(0)
     }
 
     const validate = (input) => {
         let errors = {}
-        if(!input.name) {
+        if (!input.name) {
             errors.name = "El producto no tiene nombre"
         }
-        if(!input.price) {
+        if (!input.price) {
             errors.price = "El producto no tiene precio"
         }
-        if(!input.stock) {
+        if (!input.stock) {
             errors.stock = "No se puede publicar un producto sin Stock"
         }
-        if(!input.image) {
+        if (!input.image) {
             errors.image = "Se requiere una imagen"
         }
-        if(!input.category) {
+        if (!input.category) {
             errors.category = "El producto no pertenece a ninguna categoria"
         }
-        if(!input.brands) {
+        if (!input.brands) {
             errors.brands = "El producto debe tener marca"
         }
-        if(!input.description) {
+        if (!input.description) {
             errors.description = "Agrega una descripción para el producto"
         }
         return errors
     }
 
-  return (
-    <div>
-        <div className={Style.formPositioning}>
-            <input className="input-form" type="text" value={input.name} name="name" placeholder="Nombre del producto" onChange={(e) => handleChange(e)}></input>
-            {
-                errors.name && errorTrue && (
-                    <p className={Style.errors}>*{errors.name}</p>
-                )
-            }
-            <input className="input-form" type="number" value={input.price} name="price" placeholder="Precio" onChange={(e) => handleChange(e)}></input>
-            {
-                errors.price && errorTrue && (
-                    <p className={Style.errors}>*{errors.price}</p>
-                )
-            }
-            <input className="input-form" type="number" value={input.stock} name="stock" placeholder="Stock" onChange={(e) => handleChange(e)}></input>
-            {
-                errors.stock && errorTrue && (
-                    <p className={Style.errors}>*{errors.stock}</p>
-                )
-            }
-            <label className={Style.label}>Imagen Principal:</label>
-            <input  type="file" name="mainImage" onChange={(e) => setInput({...input, mainImage: e.target.files[0]})}></input>
-            <label className={Style.label}>Imagenes Secundarias:</label>
-            <input type="file" multiple name="secondaryImage" onChange={(e) => {setInput({...input, secondaryImage: e.target.files}); console.log(e.target.files[0])}}></input>
-            <input className="input-form" type="text" value={input.category} name="category" placeholder="Categoria" onChange={(e) => handleChange(e)}></input>
-            {
-                errors.category && errorTrue && (
-                    <p className={Style.errors}>*{errors.category}</p>
-                )
-            }
-            <input className="input-form" type="text" value={input.brands} name="brands" placeholder="Marca" onChange={(e) => handleChange(e)}></input>
-            {
-                errors.brands && errorTrue && (
-                    <p className={Style.errors}>*{errors.brands}</p>
-                )
-            }
-            <textarea rows="20" type="text" value={input.description} style={{resize:"none"}} name="description" aria-multiline="true" placeholder="Añade una descripción" onChange={(e) => handleChange(e)}></textarea>
-            {
-                errors.description && errorTrue && (
-                    <p className={Style.errors}>*{errors.description}</p>
-                )
-            }
-            {
-                !input.name || !input.price || !input.stock || !input.mainImage || !input.category || !input.brands || !input.description 
-                ?           
-                <button className="button" onClick={() => {alert("Debes completar todos los campos"); setErrorTrue(!false)}}>Añadir producto</button>
-                :
-                <button className="button" onClick={(e) => handleSubmit(e)}>Añadir producto</button>
-            }
+    return (
+        <div>
+            <div className={Style.formPositioning}>
+                <input className="input-form" type="text" value={input.name} name="name" placeholder="Nombre del producto" onChange={(e) => handleChange(e)}></input>
+                {
+                    errors.name && errorTrue && (
+                        <p className={Style.errors}>*{errors.name}</p>
+                    )
+                }
+                <input className="input-form" type="number" value={input.price} name="price" placeholder="Precio" onChange={(e) => handleChange(e)}></input>
+                {
+                    errors.price && errorTrue && (
+                        <p className={Style.errors}>*{errors.price}</p>
+                    )
+                }
+                <input className="input-form" type="number" value={input.stock} name="stock" placeholder="Stock" onChange={(e) => handleChange(e)}></input>
+                {
+                    errors.stock && errorTrue && (
+                        <p className={Style.errors}>*{errors.stock}</p>
+                    )
+                }
+                <label className={Style.label}>Imagen Principal:</label>
+                <input type="file" name="mainImage" onChange={(e) => setInput({ ...input, mainImage: e.target.files[0] })}></input>
+                <label className={Style.label}>Imagenes Secundarias:</label>
+                <input type="file" multiple name="secondaryImage" onChange={(e) => { setInput({ ...input, secondaryImage: e.target.files }); console.log(e.target.files[0]) }}></input>
+                <input className="input-form" type="text" value={input.category} name="category" placeholder="Categoria" onChange={(e) => handleChange(e)}></input>
+                {
+                    errors.category && errorTrue && (
+                        <p className={Style.errors}>*{errors.category}</p>
+                    )
+                }
+                <input className="input-form" type="text" value={input.brands} name="brands" placeholder="Marca" onChange={(e) => handleChange(e)}></input>
+                {
+                    errors.brands && errorTrue && (
+                        <p className={Style.errors}>*{errors.brands}</p>
+                    )
+                }
+                <textarea rows="20" type="text" value={input.description} style={{ resize: "none" }} name="description" aria-multiline="true" placeholder="Añade una descripción" onChange={(e) => handleChange(e)}></textarea>
+                {
+                    errors.description && errorTrue && (
+                        <p className={Style.errors}>*{errors.description}</p>
+                    )
+                }
+                {
+                    !input.name || !input.price || !input.stock || !input.mainImage || !input.category || !input.brands || !input.description
+                        ?
+                        <button className="button" onClick={() => { alert("Debes completar todos los campos"); setErrorTrue(!false) }}>Añadir producto</button>
+                        :
+                        <button className="button" onClick={(e) => handleSubmit(e)}>Añadir producto</button>
+                }
+            </div>
         </div>
-    </div>
-  )
+    )
 }
