@@ -9,5 +9,9 @@
     color: white;
     background-color: rgb(21, 109, 191);
     border-radius: 30px;
+    transition: .3s;
 }
 
+.cartButton:active{
+    background-color: rgb(102, 154, 202);
+}
