@@ -33,7 +33,6 @@ app.use(brandsRoutes)
 app.use(cagetoriesRoutes)
 
 
-
 connectDB();
 app.listen(port, host, () => {
     console.log('Server listening on port', port);
