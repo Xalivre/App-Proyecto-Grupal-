@@ -13,7 +13,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000
+const port = process.env.PORT || 3000
+const host = process.env.HOST || "0.0.0.0"
 export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:testdb"
 
 const app = express();
@@ -34,8 +35,8 @@ app.use(cagetoriesRoutes)
 
 
 connectDB();
-app.listen(PORT);
-
-console.log('Server listening on port', PORT);
+app.listen(port, host, () => {
+    console.log('Server listening on port', port);
+});
 
 

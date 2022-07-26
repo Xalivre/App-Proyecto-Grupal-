@@ -6,7 +6,7 @@ const URI = `mongodb+srv://pf-grupal:${process.env.PW}@cluster0.kvgcdue.mongodb.
 
 export async function connectDB() {
   try {
-    const db = await mongoose.connect(URI, {
+    const db = await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
