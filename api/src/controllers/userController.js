@@ -37,7 +37,7 @@ export const loginUser = async (req, res) => {
 
 export const postUsers = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email, role } = req.body;
     if (!username || !password || !email)
       return res.json({ msg: "Missing required fields" });
     const userBD = await User.findOne({ email });
@@ -50,7 +50,7 @@ export const postUsers = async (req, res) => {
       username: username,
       password: passwordHash,
       email: email,
-      role: "admin"
+      role: role || "user"
     });
     return res.json({ msg: `${username} create succesfully` });
   } catch (e) {
