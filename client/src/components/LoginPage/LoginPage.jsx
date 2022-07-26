@@ -15,6 +15,8 @@ function LoginPage() {
         password: ""
     })
 
+    const [errorLogin, setErrorLogin] = useState("")
+
     const handleChange = (e) => {
         setInfo({
             ...info,
@@ -25,14 +27,27 @@ function LoginPage() {
     const navigate = useNavigate()
 
     const LoginUser = async (payload) => {
-          const response = await axios.post("http://localhost:3000/login", payload).then(r => {localStorage.setItem("usuario", r.data.tokenSession); r.data.data.role === "admin" ? navigate("/ArmaTuPc") : navigate("/")}) 
+          const response = await axios.post("http://localhost:3000/login", payload)
+          .then(r => {localStorage.setItem("usuario", r.data.tokenSession); r.data.data.role === "admin" ? navigate("/ArmaTuPc") : navigate("/")})
+          .catch(e => e.response.status === 404 ? alert("Error al cargar la página") 
+          : 
+          e.response.status === 409 ? setErrorLogin("Contraseña inválida")
+          :
+          setErrorLogin("Email no encontrado"))
+          console.log(response) 
       }
 
     return (
         <div className={style.container}>
             <div className={style.inputs}>
                 <input className="input-form" type="text" placeholder="Correo" name="email" onChange={handleChange}></input>
-                <input className="input-form" type="text" placeholder="Contraseña" name="password" onChange={handleChange}></input>
+                {
+                errorLogin === "Email no encontrado" && <p>{errorLogin}</p>
+                }
+                <input className="input-form" type="password" placeholder="Contraseña" name="password" onChange={handleChange}></input>
+                {
+                errorLogin === "Contraseña inválida" && <p>{errorLogin}</p>
+                }
                 <button className="button" onClick={()=> LoginUser(info)}>Iniciar Sesion</button>
             </div>
         </div>

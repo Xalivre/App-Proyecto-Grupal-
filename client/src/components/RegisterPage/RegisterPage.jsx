@@ -30,21 +30,21 @@ function RegisterPage(){
             mail.style.color = "green"
         }
         if(input.password.match(/[0-9]/)){
-            errors.password = "Debe contener al menos un número"
             number.style.color = "green"
         } else {
+            errors.password = "Debe contener al menos un número"
             number.style.color = "red"
         }
         if(input.password.match(/[a-z]/)){
-            errors.password = "Debe contener al menos una letra minúscula"
             lower.style.color = "green"
         } else {
+            errors.password = "Debe contener al menos una letra minúscula"
             lower.style.color = "red"
         }
         if(input.password.match(/[A-Z]/)){
-            errors.password = "Debe contener al menos una letra mayúscula"
             upper.style.color = "green"
         } else {
+            errors.password = "Debe contener al menos una letra mayúscula"
             upper.style.color = "red"
         }
         if(input.password.length < 8 || input.password.length > 30){
@@ -104,9 +104,9 @@ function RegisterPage(){
                     </ul>
                 </div>
                 {
-                    !errors.username && !errors.email && errors.password?.length === 0 ? <button className="button" onClick={()=> dispatch(postUser(info))}>Registrarse</button>
+                    !errors.username && !errors.email && !errors.password ? <button className="button" onClick={()=> dispatch(postUser(info))}>Registrarse</button>
                     : 
-                    <button className="button" disabled >tonto</button>
+                    <button className="button" disabled >Registrarse</button>
                 }
                 
             </div>
