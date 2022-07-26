@@ -1,6 +1,6 @@
 import React from "react";
 // import {useSelector} from "react-redux";
-import {loadStripe} from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import Style from "./Stripe.module.css"
 
