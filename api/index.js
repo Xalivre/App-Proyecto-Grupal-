@@ -15,7 +15,7 @@ dotenv.config();
 
 const port = process.env.PORT || 3000
 const host = process.env.HOST || "0.0.0.0"
-export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:testdb"
+export const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://pf-grupal:rrNefjzLOj9kxQh2@cluster0.kvgcdue.mongodb.net/?retryWrites=true&w=majority"
 
 const app = express();
 app.use(express.json());

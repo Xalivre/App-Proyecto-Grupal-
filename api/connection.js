@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const URI = `mongodb+srv://pf-grupal:${process.env.PW}@cluster0.kvgcdue.mongodb.net/${process.env.BD}?retryWrites=true&w=majority`
+const URI = `mongodb+srv://pf-grupal:rrNefjzLOj9kxQh2@cluster0.kvgcdue.mongodb.net/?retryWrites=true&w=majority`
 
 export async function connectDB() {
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI, {
+    const db = await mongoose.connect("mongodb+srv://pf-grupal:rrNefjzLOj9kxQh2@cluster0.kvgcdue.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
