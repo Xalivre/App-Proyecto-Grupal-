@@ -395,6 +395,7 @@ template {
   border: none;
   color: black;
   border-bottom: 2px solid #156DBF;
+  outline: none;
 }
 
 .input-form{
@@ -409,5 +410,13 @@ template {
   border: none;
   border-bottom: 2px solid #156DBF;
   outline: none;
-  width: 40vh;
+  width: 15vw;
+}
+
+.input-login{
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #156DBF;
+  outline: none;
+  width: 12vw;
 }

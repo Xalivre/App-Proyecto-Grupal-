@@ -8,6 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import logo from "../../img/favicon.png";
 import CartDrawer from "../Cart/CartDrawer.tsx"
+import { useJwt } from "react-jwt";
+
 
 function SearchBar(props) {
 
@@ -28,7 +30,7 @@ function SearchBar(props) {
       navigate('/products')
       dispatch(searchName(searchProduct));
       setSearchProduct("")
-    } 
+    }
   }
 
   return (
@@ -46,16 +48,20 @@ function SearchBar(props) {
         <button className="button">Search</button>
       </form>
       <div className={styles.login}>
-        { !localStorage.getItem("usuario") && <><Link to="/register">
-        <button className="button" >Sign In</button>
+        {!localStorage.getItem("usuario") && <><Link to="/register">
+          <button className="button" >Sign In</button>
         </Link>
-        <Link to="/login">
-        <button className="button" >Log in</button>
-        </Link></>}
-       { localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
-        <button className="button" >Log out</button>
+          <Link to="/login">
+            <button className="button" >Log in</button>
+          </Link></>}
+        {localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
+          <button className="button" >Log out</button>
         </Link>}
-       <CartDrawer cart={cart} />
+        {
+          <div>
+            <CartDrawer cart={cart} />
+          </div>
+        }
         <Link to="/wishlist">
           <div>
             <FavoriteIcon />

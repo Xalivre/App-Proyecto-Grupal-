@@ -12,6 +12,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -59,7 +61,9 @@ export default function SwipeableTemporaryDrawer(props) {
         ))}
       </List>
       <Divider />
+      <Link to="/paymentCheckout">
       <button>Comprar</button>
+      </Link>
     </Box>
   );
 

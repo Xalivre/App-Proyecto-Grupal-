@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {postUser} from "../../redux/actions"
 import Style from "./RegisterPage.module.css"
 function RegisterPage(){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const validate = (input) => {
         let errors = {};
@@ -104,9 +106,9 @@ function RegisterPage(){
                     </ul>
                 </div>
                 {
-                    !errors.username && !errors.email && !errors.password ? <button className="button" onClick={()=> dispatch(postUser(info))}>Registrarse</button>
+                    !errors.username && !errors.email && !errors.password ? <button className="button" onClick={()=> {dispatch(postUser(info)); alert("Cuenta creada con éxito"); navigate("/Login")}}>Registrarse</button>
                     : 
-                    <button className="button" disabled >Registrarse</button>
+                    <button className="button" disabled>Registrarse</button>
                 }
                 
             </div>

@@ -1,9 +1,10 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from "../../redux/actions"
+import Style from "./BrandsComponent.module.css"
 
 export default function CategoriesBar(props) {
 
@@ -17,20 +18,21 @@ export default function CategoriesBar(props) {
         setDropdown(!dropdown)
     }
 
-  return (
-    <div>
-         <Dropdown isOpen={dropdown} toggle={openDropdown} size="lr" >
-                <DropdownToggle caret>
+    return (
+        <div className={Style.container}>
+            <div className={Style.list}>
+                <div className={Style.title}>
                     Marcas
-                </DropdownToggle>
-                <DropdownMenu >
+                </div>
+                <br /> 
+                <div className={Style.info}>
                     {
-                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <DropdownItem value={e} onClick={(e) => props.setBrandFilter(e.target.value)}
-                        > {e}
-                        </DropdownItem>)
+                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div value={e} onClick={(e) => props.setBrandFilter(e.target.value)}
+                        >🔹{e}
+                        </div>)
                     }
-                </DropdownMenu>
-            </Dropdown>
-    </div>
-  )
+                </div>
+            </div>
+        </div>
+    )
 }
