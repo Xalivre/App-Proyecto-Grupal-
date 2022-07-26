@@ -28,18 +28,18 @@ export default function SwipeableTemporaryDrawer(props) {
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event &&
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event &&
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return;
+        }
 
-      setState({ ...state, [anchor]: open });
-    };
+        setState({ ...state, [anchor]: open });
+      };
 
   const list = (anchor: Anchor) => (
     <Box
@@ -47,23 +47,25 @@ export default function SwipeableTemporaryDrawer(props) {
       role="presentation"
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {props.cart?.map((text, index) => (
-          <ListItem key={text.name} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {<img width="50px" src={text.image[0].url} />}
-              </ListItemIcon>
-              <ListItemText primary={text.name} secondary={`$${text.price}`} />
-              <DeleteCartButton id={text._id}/>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <Link to="/paymentCheckout">
-      <button>Comprar</button>
-      </Link>
+      <div style={{alignItems:"center", display:"flex", flexDirection:"column"}}>
+        <List>
+          {props.cart?.map((text, index) => (
+            <ListItem key={text.name} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {<img width="50px" src={text.image[0].url} />}
+                </ListItemIcon>
+                <ListItemText primary={text.name} secondary={`$${text.price}`} />
+                <DeleteCartButton id={text._id} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <Link to="/paymentCheckout">
+          <button className='button'>Comprar</button>
+        </Link>
+      </div>
     </Box>
   );
 
@@ -71,7 +73,7 @@ export default function SwipeableTemporaryDrawer(props) {
     <div>
       {(['Cart'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon/></Button>
+          <Button onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon /></Button>
           <SwipeableDrawer
             anchor={"right"}
             open={state[anchor]}

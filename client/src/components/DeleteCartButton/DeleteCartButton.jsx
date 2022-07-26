@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteFromCart } from '../../redux/actions/index';
+import Style from "./DeleteCartButton.module.css"
 
 
 function DeleteCartButton({ id }) {
@@ -13,7 +14,7 @@ function DeleteCartButton({ id }) {
       }
 
   return (
-    <button onClick={(e) => deleteCart(e)}>Delete</button>
+    <button className={Style.equis} onClick={(e) => deleteCart(e)}>X</button>
   )
 }
 

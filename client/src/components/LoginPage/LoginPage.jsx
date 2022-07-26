@@ -47,7 +47,9 @@ function LoginPage() {
                 {
                 errorLogin === "Contraseña inválida" && <p>{errorLogin}</p>
                 }
+                <br /> 
                 <button className="button" onClick={()=> LoginUser(info)}>Iniciar Sesion</button>
+                <br /> 
             </div>
         </div>
     )
