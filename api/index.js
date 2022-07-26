@@ -1,5 +1,6 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
+import Stripe from 'stripe';
 import { connectDB } from './connection.js';
 import productRoutes from './src/routes/product-routes.js';
 import userRoutes from "./src/routes/user-routes.js";
