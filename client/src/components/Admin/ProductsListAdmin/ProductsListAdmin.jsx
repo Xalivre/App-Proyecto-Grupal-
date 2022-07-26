@@ -112,6 +112,10 @@ console.log(categoryFilter)
         <div className={Style.categoriesBar}>
           <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter}/>
           <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter}/> 
+          <button onClick={() => {
+                setBrandFilter("")
+                setCategoryFilter("")
+          }}>Reloag</button>
         </div>
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
