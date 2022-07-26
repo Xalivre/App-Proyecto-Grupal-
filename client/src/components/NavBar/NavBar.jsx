@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import Style from "./NavBar.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, searchName } from "../../redux/actions/"
@@ -14,18 +14,18 @@ function NavBar() {
 
   return (
     <div className={Style.container}>
-      <Link to="/" style={{ textDecoration: 'none' }} className={Style.text}>
+      <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)}>
         <h1>Home</h1>
-      </Link>
-      <Link to='/products' style={{ textDecoration: 'none' }} className={Style.text}>
+      </NavLink>
+      <NavLink to='/products' style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
         <h1 onClick={() => dispatch(searchName(""))}>Productos</h1>
-      </Link>
-      <Link to='/ArmaTuPC' style={{ textDecoration: 'none' }} className={Style.text}>
+      </NavLink>
+      <NavLink to='/ArmaTuPC' style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
         <h1>Arma tu PC</h1>
-      </Link>
-      <Link to='/help' style={{ textDecoration: 'none' }} className={Style.text}>
+      </NavLink>
+      <NavLink to='/help' style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
         <h1>Ayuda</h1>
-      </Link>
+      </NavLink>
     </div>
   )
 }

@@ -16,9 +16,56 @@ body {
 .text {
   color: white;
   text-transform: uppercase;
+  transition: .4s ease-in-out;
 }
-.text:hover{
-  color: #a8dadc;
+.navbar_link:hover{
+  color: #44c0fa;
+  /* border-bottom: 1px solid #44c0fa; */
+  /* transition: border-bottom .5s ease-in-out; */
+  
+}
+
+.navbar_link{
+  color: white;
+  text-transform: uppercase;
+  transition: color .3s ease-in-out ;
+
+/*-------------------------------*/
+
+  display: block;
+  position: relative;
+  padding: 0.2em 0;
+}
+/*-------------------------------*/
+.navbar_link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: #44c0fa;
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.navbar_link:hover::after,
+.navbar_link:focus::after {
+  opacity: 1;
+  transform: translate3d(0, 0.2em, 0);
+}
+/*-------------------------------*/
+.navbar_link_active{
+  /* border-bottom: 1px solid #29b6f6; */
+  color: #44c0fa;
+  border-bottom: 1px solid #44c0fa;
+  /* transition: border-bottom .3s ease-in-out; */
+  transition: border-bottom 5s ;
+  text-transform: uppercase;
+
+}
+.navbar_link_active:hover{
+  color: #44c0fa;
 }
 
 /* .text:visited {
