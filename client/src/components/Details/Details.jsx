@@ -33,6 +33,7 @@ export default function Details(props) {
             <h1>Caracteristicas</h1>
             <div>{product.description}</div>
           </div>
+          <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         </div>
       )}
     </div>

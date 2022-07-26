@@ -7,8 +7,8 @@ export default function PaginationOutlined(props) {
     const [page, setPage] = React.useState(1);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        props.setPage1((value - 1) * 12);
-        props.setPage2(value * 12);
+        props.setPage1((value - 1) * 18);
+        props.setPage2(value * 18);
     };
 
     return (

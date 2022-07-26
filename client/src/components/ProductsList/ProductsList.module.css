@@ -111,7 +111,7 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: #00386b;
-    width: 20vw;
+    width: 15vw;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -122,7 +122,7 @@
 
 .cardsBar {
     display: flex;
-    width: 80vw;
+    width: 85vw;
 }
 
 .container {
@@ -170,7 +170,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
     width: 100%;
-    gap: .3rem;
+    gap: 1rem;
     border-radius: 15px;
     padding: 1rem;
     
