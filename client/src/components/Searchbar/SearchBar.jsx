@@ -2,16 +2,20 @@ import React from "react";
 import styles from "./SearchBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import logo from "../../img/favicon.png";
+import CartDrawer from "../Cart/CartDrawer.tsx"
 
 function SearchBar(props) {
 
   let navigate = useNavigate();
   const dispatch = useDispatch()
+
+  const cart = useSelector((state) => state.cart);
+
 
   // Vamos a manejar los productos a buscar por estados
 
@@ -51,9 +55,7 @@ function SearchBar(props) {
        { localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
         <button className="button" >Log out</button>
         </Link>}
-        <Link to='/cart'>
-          <i class="fa-solid fa-cart-shopping"></i>
-        </Link>
+       <CartDrawer cart={cart} />
         <Link to="/wishlist">
           <div>
             <FavoriteIcon />
