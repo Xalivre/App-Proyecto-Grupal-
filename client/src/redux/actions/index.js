@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export function getProducts() {
   return async function (dispatch) {
     let json = await axios.get("http://localhost:3000/home", {});
@@ -179,6 +180,13 @@ export function clearPage(){
    return {
       type:"CLEAR_PAGE"
  }
+}
+
+export function postUser(payload) {
+  return async function (dispatch) {
+    const response = await axios.post("http://localhost:3000/register", payload) 
+    return response
+  }
 }
 
 

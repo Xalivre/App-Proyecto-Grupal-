@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteCartButton from "../DeleteCartButton/DeleteCartButton";
+import styles from "./Cart.module.css"
 
 function Cart() {
   const dispatch = useDispatch();
@@ -11,10 +12,10 @@ function Cart() {
   console.log(cart);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Carrito</h1>
       {cart.length>0 ? cart.map((e) =>(
-        <div key={e._id}>
+        <div key={e._id} className={styles.card}>
           <DeleteCartButton id={e._id} />
           <p>{e.name}</p>
           <p>Precio: {e.price}</p>

@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #156DBF;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    text-decoration: none;
+
+  }
+
+.text {
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+  }
