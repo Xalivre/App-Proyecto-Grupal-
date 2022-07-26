@@ -9,6 +9,7 @@ import PagingOficial from "../../Paging/Paging.tsx"
 import DropdownComponent from '../../Dropdown/DropdownToggle'
 import CategoriesBar from '../../BrandsComponent/BrandsComponent'
 import DropdownPrecio from '../../DropdownPrecio/DropdownPrecio'
+import CachedIcon from '@mui/icons-material/Cached';
 
 
 export default function ProductsListAdmin() {
@@ -17,7 +18,7 @@ export default function ProductsListAdmin() {
   const filtereds = useSelector((state) => state.filteredProducts)
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
-  const [page2, setPage2] = useState(12)
+  const [page2, setPage2] = useState(18)
   const [brandFilter, setBrandFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
 
@@ -30,12 +31,12 @@ export default function ProductsListAdmin() {
   }
 
   useEffect(() => {
-    if(operation !== "No hacer nada"){
+    if (operation !== "No hacer nada") {
       setBrandFilter("")
-    setCategoryFilter("")
+      setCategoryFilter("")
     }
     setPage1(0);
-    setPage2(12);
+    setPage2(18);
   }, [filtereds])
 
 
@@ -45,7 +46,7 @@ export default function ProductsListAdmin() {
     dispatch(getBrands())
   }, [dispatch])
 
-console.log(categoryFilter)
+  console.log(categoryFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>
@@ -55,7 +56,7 @@ console.log(categoryFilter)
       </div> */}
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
-          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 12)}/>
+          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 18)} />
           {/* <div>
             {
               filtereds && page1 - 12 >= 0 ? (
@@ -78,31 +79,31 @@ console.log(categoryFilter)
             {
               filtereds && Array.isArray(filtereds) && Array.from({ length: Math.ceil(filtereds.length / 12) }, (v, i) => i + 1).slice(
                 (page1 / 12 - 2) >= 0 ? (page1 / 12 - 2) : 0, (page1 / 12 - 2) >= 0 ? (page2 / 12 + 2) : (page2 / 12 + 4)
-              ).map((e, i) => <p className={(page2 / 12) === e?Style.pagingHighlight : Style.normalHighlight} onClick={() => { setPage1((e - 1) * 12); setPage2((e) * 12) }}>{e}</p>)
-            }
-            {
-              page2 + 24 < filtereds.length && <p onClick={() => {
-                setPage1((Math.ceil(filtereds.length / 12) - 1) * 12);
-                setPage2(Math.ceil(filtereds.length / 12) * 12)
-              }}>...{Math.ceil(filtereds.length / 12)}</p>
-            }
-          </div>
-          <div>
-            {
-              filtereds && page2 + 1 <= filtereds.length ? (
-                <div onClick={() => { setPage1(page1 + 12); setPage2(page2 + 12) }}>
+                ).map((e, i) => <p className={(page2 / 12) === e?Style.pagingHighlight : Style.normalHighlight} onClick={() => { setPage1((e - 1) * 12); setPage2((e) * 12) }}>{e}</p>)
+              }
+              {
+                page2 + 24 < filtereds.length && <p onClick={() => {
+                  setPage1((Math.ceil(filtereds.length / 12) - 1) * 12);
+                  setPage2(Math.ceil(filtereds.length / 12) * 12)
+                }}>...{Math.ceil(filtereds.length / 12)}</p>
+              }
+              </div>
+              <div>
+              {
+                filtereds && page2 + 1 <= filtereds.length ? (
+                  <div onClick={() => { setPage1(page1 + 12); setPage2(page2 + 12) }}>
                   next
-                </div>
-              )
-                :
-                (
-                  <div>
-                    next
                   </div>
-                )
-            }
-          </div> */}
-      {/*     <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
+                  )
+                  :
+                  (
+                    <div>
+                    next
+                    </div>
+                    )
+                  }
+                </div> */}
+          {/*     <select id="orderByPrice" onChange={(e) => handleOrderByPrice(e)}>
             <option value="Ascending">Menor precio</option>
             <option value="Descending">Mayor precio</option>
           </select> */}
@@ -110,31 +111,35 @@ console.log(categoryFilter)
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-          <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter}/>
-          <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter}/> 
-          <button onClick={() => {
-                setBrandFilter("")
-                setCategoryFilter("")
-          }}>Reloag</button>
+            <button className={Style.reloadButton} onClick={() => {
+              setBrandFilter("")
+              setCategoryFilter("")
+            }}>Recargar</button>
+          <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />
+          <DropdownPrecio></DropdownPrecio>
+          <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter} />
         </div>
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {
-              operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter? x.category === categoryFilter : x.category !== categoryFilter)
-              .filter((b) => brandFilter? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
-                return (
-                  <div key={e._id} >
-                      <ProductCardAdmin
-                        name={e.name}
-                        image={e.image[0]?.url}
-                        price={e.price}
-                        id={e._id}
-                        key={e._id} />
-                  </div>
-                )
-              })
-              :
-              <div>Producto inexistente!</div>
+              operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
+                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
+                  return (
+                    <div key={e._id} >
+                      <div>
+                        <ProductCardAdmin
+                          name={e.name}
+                          image={e.image[0]?.url}
+                          price={e.price}
+                          id={e._id}
+                          key={e._id} />
+                      </div>
+                      <br />
+                    </div>
+                  )
+                })
+                :
+                <div>Producto inexistente!</div>
             }
           </div>
         </div>

@@ -27,27 +27,21 @@
 
 .categoriesBar {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: flex-start;
     background-color: #00386b;
-    width: 20vw;
+    width: 15vw;
     height: 100vh;
     position: sticky;
     top: 0;
-}
-
-.categoriesBar2 {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #00386b;
-    width: 20vw;
-    height: 100vh;
-    position: sticky;
-    top: 0;
+    gap: 50px;
+    align-items: center;
+    color: aliceblue;
 }
 
 .cardsBar {
     display: flex;
-    width: 80vw;
+    width: 85vw;
 }
 
 .container {
@@ -95,7 +89,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
     width: 100%;
-    gap: .3rem;
+    gap: 1rem;
     border-radius: 15px;
     padding: 1rem;
     
@@ -106,4 +100,22 @@
     right: 0;
     width: 80vw;
     padding: 0.5vw */
+}
+
+.reloadButton {
+    display: flex;
+    border-radius: 10%;
+    width: 7vw;
+    height: 5vh;
+    font-size: 17.5px;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    background-color: #6c757d;
+    border: none;
+}
+
+.reloadButton:hover {
+    background-color: #5c636a;
+    transition: 0.2s;
 }

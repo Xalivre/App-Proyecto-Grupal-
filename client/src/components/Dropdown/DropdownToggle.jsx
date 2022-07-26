@@ -19,7 +19,6 @@ export default function DropdownComponent(props) {
 
     return (
         <div>
-            <br />  <br /> 
             <Dropdown isOpen={dropdown} toggle={openDropdown} size="lr" >
                 <DropdownToggle caret>
                     Categorias

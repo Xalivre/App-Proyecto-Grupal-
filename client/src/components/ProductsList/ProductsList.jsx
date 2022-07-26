@@ -118,24 +118,24 @@ export default function ProductsList() {
           <div className={Style.cardsContainer}>
             {
               operation !== "Error SearchBar" && filtereds.length > 0 ? filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
-              .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
-                return (
-                  <div key={e._id} >
-                      <Link to={"/product/" + e._id}>
+                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
+                  return (
+                    <div key={e._id} >
+                      <div>
                         <ProductCard
                           name={e.name}
                           image={e.image[0]?.url}
                           price={e.price}
                           id={e._id}
                           key={e._id} />
-                      </Link>
+                      </div>
                       <br />
                     </div>
                   )
                 })
                 :
                 <div>Producto inexistente!</div>
-              }
+            }
           </div>
         </div>
       </div>
