@@ -110,7 +110,7 @@ function RegisterPage(){
                     : 
                     <button className="button" disabled>Registrarse</button>
                 }
-                
+                <br /> 
             </div>
         </div>
     )

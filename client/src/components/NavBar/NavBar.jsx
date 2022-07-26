@@ -17,8 +17,8 @@ function NavBar() {
       <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)}>
         <h1>Home</h1>
       </NavLink>
-      <NavLink to='/products' style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
-        <h1 onClick={() => dispatch(searchName(""))}>Productos</h1>
+      <NavLink to='/products' onClick={() => dispatch(searchName(""))} style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
+        <h1 >Productos</h1>
       </NavLink>
       <NavLink to='/ArmaTuPC' style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? Style.navbar_link_active : Style.navbar_link)} >
         <h1>Arma tu PC</h1>

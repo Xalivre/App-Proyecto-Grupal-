@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from "../../redux/actions"
 import Style from "./BrandsComponent.module.css"
 
+
 export default function CategoriesBar(props) {
 
     const brands = useSelector((state) => state.brands)
@@ -28,7 +29,7 @@ export default function CategoriesBar(props) {
                 <br /> 
                 <div className={Style.info}>
                     {
-                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div value={e} onClick={(e) => props.setBrandFilter(e.target.value)}
+                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div style={{cursor:"pointer"}} id={e} onClick={(e) => props.setBrandFilter(e.target.id)}
                         >🔹 {e}
                         </div>)
                     }
