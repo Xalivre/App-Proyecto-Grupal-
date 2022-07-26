@@ -33,6 +33,7 @@ const GET_BRANDS = "GET_BRANDS"
 const CLEAR_PAGE = "CLEAR_PAGE"
 const POST_USER = "POST_USER"
 const LOGIN = "LOGIN"
+const EDIT_PRODUCT = "EDIT_PRODUCT"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -41,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
         allProducts: action.payload,
-        filteredProducts: action.payload.filter((e) => state.nameSearched?e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
+        filteredProducts: action.payload.filter((e) => state.nameSearched ? e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
         operation: "Default"
       };
 
@@ -51,7 +52,7 @@ const rootReducer = (state = initialState, action) => {
         details: action.payload,
         operation: "Details",
       };
-    
+
     case ADD_TO_CART:
       return {
         ...state,
@@ -111,11 +112,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       }
-    
+
     case LOGIN:
       return {
         ...state,
-      }  
+      }
 
     case SORT_PRICE:
       const sortedArray = action.payload === "Ascending" ? [...state.filteredProducts].sort(function (a, b) {
@@ -156,9 +157,14 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case CLEAR_PAGE:
-      return{
-          ...state,
-          details:[]
+      return {
+        ...state,
+        details: []
+      }
+
+    case EDIT_PRODUCT:
+      return {
+        ...state,
       }
 
     default:

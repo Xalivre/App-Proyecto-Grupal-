@@ -413,6 +413,36 @@ template {
   transition: 0.15s
 }
 
+.buttonDelete {
+  background-color: #870020;
+  color: white;
+  border-radius: .2rem;
+  border: none;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 4px 4px 0px #c44c68;
+  padding: .3rem .7rem;
+}
+
+.buttonDelete:hover {
+  background-color: #be1f44e7;
+}
+
+.buttonEdit {
+  background-color: #156DBF;
+  color: white;
+  border-radius: .2rem;
+  border: none;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 4px 4px 0px #156DBF;
+  padding: .3rem 1.2rem;
+}
+
+.buttonEdit:hover {
+  background-color: #2589e6;
+}
+
 .input{
   border: none;
   color: black;
@@ -441,4 +471,12 @@ template {
   border-bottom: 2px solid #156DBF;
   outline: none;
   width: 12vw;
+}
+
+.inputPrice{
+  border: none;
+  color: black;
+  border-bottom: 2px solid #156DBF;
+  outline: none;
+  height: 50%;
 }

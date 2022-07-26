@@ -26,9 +26,7 @@ export default function ProductCard({ id, name, price, image }) {
                 )}
               </div>
             </div >
-
             <p className={Style.price}>${price}</p>
-            {/* <AddCartButton id={id} /> */}
           </Link>
         </div>
         <br />

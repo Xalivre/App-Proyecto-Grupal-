@@ -29,7 +29,7 @@ export default function CategoriesBar(props) {
                 <br /> 
                 <div className={Style.info}>
                     {
-                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div style={{cursor:"pointer"}} id={e} onClick={(e) => props.setBrandFilter(e.target.id)}
+                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div className={Style.brands} id={e} onClick={(e) => props.setBrandFilter(e.target.id)}
                         >🔹 {e}
                         </div>)
                     }

@@ -189,4 +189,11 @@ export function postUser(payload) {
   }
 }
 
+export function editProduct(payload, id) {
+  return async function (dispatch) {
+    const edit = await axios.put("http://localhost:3000/product/" + id, payload)
+    return edit
+  }
+}
+
 

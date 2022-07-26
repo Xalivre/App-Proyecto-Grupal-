@@ -13,6 +13,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
 import { Link, useNavigate } from "react-router-dom";
+import Style from "./Cart.module.css"
 
 
 
@@ -43,7 +44,7 @@ export default function SwipeableTemporaryDrawer(props) {
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 400 }}
       role="presentation"
       onKeyDown={toggleDrawer(anchor, false)}
     >
@@ -53,18 +54,23 @@ export default function SwipeableTemporaryDrawer(props) {
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {<img width="50px" src={text.image[0].url} />}
+                  {<img width="75px" src={text.image[0].url} />}
                 </ListItemIcon>
-                <ListItemText primary={text.name} secondary={`$${text.price}`} />
+                <ListItemText className={Style.text} primary={text.name.length > 20 ? text.name.slice(0, 20) + "..." : text.name} secondary={`$${text.price}`} />
                 <DeleteCartButton id={text._id} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
         <Divider />
-        <Link to="/paymentCheckout">
+        {
+          props.cart.length > 0 ? <Link to="/paymentCheckout">
           <button className='button'>Comprar</button>
         </Link>
+        :
+        <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
+        }
+        
       </div>
     </Box>
   );

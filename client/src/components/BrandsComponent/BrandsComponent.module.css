@@ -11,3 +11,12 @@
 .info {
     font-size: 15px;
 }
+
+.brands {
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.brands:hover {
+    color: aqua;
+}
