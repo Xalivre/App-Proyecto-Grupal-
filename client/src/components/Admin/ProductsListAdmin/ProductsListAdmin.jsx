@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsListAdmin.module.css"
-import ProductCard from '../../ProductCard/ProductCard'
+import ProductCardAdmin from '../ProductCardAdmin/ProductCardAdmin'
 import { sortPrice, getProducts, getCategories, getBrands } from "../../../redux/actions"
 import AddCartButton from '../../AddCartButton/AddCartButton'
 import PagingOficial from "../../Paging/Paging.tsx"
@@ -120,14 +120,12 @@ console.log(categoryFilter)
               .filter((b) => brandFilter? b.brands === brandFilter : b.brands !== brandFilter).slice(page1, page2).map((e) => {
                 return (
                   <div key={e._id} >
-                    <Link to={"/product/" + e._id}>
-                      <ProductCard
+                      <ProductCardAdmin
                         name={e.name}
                         image={e.image[0]?.url}
                         price={e.price}
                         id={e._id}
                         key={e._id} />
-                    </Link>
                   </div>
                 )
               })

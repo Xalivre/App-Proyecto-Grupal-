@@ -27,18 +27,6 @@ export default function Details(props) {
               <h1>Precio: ${product.price}</h1>
               <AddCartButton id={product._id} />
               <AddWishButton id={product._id} />
-            <a
-            className={Style.deleteButton}
-            type="button"
-            href="/products"
-            onClick={()=>{
-              dispatch(deleteProduct(id));
-              alert("Deleted")
-            }}
-            >
-              {" "}
-              Eliminar Producto
-            </a>
             </div>
           </div>
           <div>

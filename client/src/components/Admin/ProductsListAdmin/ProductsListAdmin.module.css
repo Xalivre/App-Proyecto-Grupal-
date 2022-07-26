@@ -27,7 +27,17 @@
 
 .categoriesBar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+    background-color: #00386b;
+    width: 20vw;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.categoriesBar2 {
+    display: flex;
+    justify-content: space-evenly;
     background-color: #00386b;
     width: 20vw;
     height: 100vh;

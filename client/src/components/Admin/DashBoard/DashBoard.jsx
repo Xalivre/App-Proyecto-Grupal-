@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch} from 'react-redux'
 import CreateProduct from '../../CreateProduct/CreateProduct'
+import SearchBar from '../../Searchbar/SearchBar'
 import ProductsListAdmin from '../ProductsListAdmin/ProductsListAdmin'
 import styles from "./DashBoard.module.css"
 
@@ -8,7 +9,7 @@ export default function DashBoard() {
 
 const dispatch = useDispatch()
 
-const [first, setfirst] = useState("")
+const [first, setfirst] = useState("list")
 
 function handleState(e) {
     e.preventDefault();
