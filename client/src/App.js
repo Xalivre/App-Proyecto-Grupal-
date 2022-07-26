@@ -12,6 +12,7 @@ import RegisterPage from "./components/RegisterPage/RegisterPage"
 import ArmaTuPC from "./components/ArmaTuPc/ArmaTuPC";
 import LoginPage from "./components/LoginPage/LoginPage";
 import DashBoard from "./components/Admin/DashBoard/DashBoard";
+import Footer from "./components/Footer/Footer";
 
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
         <Route exact path="/Login" element={<LoginPage />} />
         <Route exact path="/Dashboard" element={<DashBoard/>} />
       </Routes>
+      <Footer />
     </>
   );
 }

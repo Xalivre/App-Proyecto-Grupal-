@@ -388,7 +388,7 @@ template {
   -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
   -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 0px 4px 4px 0px #156DBF;
-  padding: .3rem;
+  padding: .3rem .7rem;
 }
 
 .input{

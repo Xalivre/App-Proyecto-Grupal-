@@ -60,10 +60,16 @@ function Home() {
       <>
         <Splide aria-label="My Favorite Images">
           <SplideSlide>
-            <img className={Style.imgCarousel} src="https://p4.wallpaperbetter.com/wallpaper/778/594/499/gtx-nvidia-geforce-video-card-wallpaper-preview.jpg" alt="img" />
+            <img className={Style.imgCarousel} src="http://www.karlosperu.com/wp-content/uploads/2019/07/S1920x1080_VGA_GeForce-RTX-20-Super-Series_Banner_2000x720.jpg" alt="img" />
           </SplideSlide>
           <SplideSlide>
-            <img className={Style.imgCarousel} src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/05/ramdisk-ddr4.jpg?itok=M0443WBf" alt="img" />
+            <img className={Style.imgCarousel} src="https://www.asus.com/microsite/Graphics-Cards/GeForce-RTX-30-Series/img/bg-header.jpg" alt="img" />
+          </SplideSlide>
+          <SplideSlide>
+            <img className={Style.imgCarousel} src="https://media.flixcar.com/f360cdn/msi-75930670-TechAdvisor_Monitor_3600x1260-master.jpg" alt="img" />
+          </SplideSlide>
+          <SplideSlide>
+            <img className={Style.imgCarousel} src="https://www.lg.com/pe/images/plp-b2c/b2c-2/MNT-27GN950-Hero-Banner-thin-D.jpg" alt="img" />
           </SplideSlide>
      
         </Splide>

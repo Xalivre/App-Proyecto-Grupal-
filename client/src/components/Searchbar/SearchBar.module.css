@@ -1,14 +1,14 @@
 .containerAll {
     display: flex;
     justify-content: space-evenly;
-    padding: 1rem;
+    padding: .2rem;
     align-items: center;
 }
 
 .login {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .form {
@@ -17,7 +17,7 @@
 }
 
 .logo{
-    height: 12vh;
-    width: 30vh;
+    height: 8rem;
+    /* width: 30vh; */
     display: flex;
 }
