@@ -21,6 +21,7 @@ export default function CategoriesBar(props) {
     return (
         <div className={Style.container}>
             <div className={Style.list}>
+            <br /> 
                 <div className={Style.title}>
                     Marcas
                 </div>
@@ -28,7 +29,7 @@ export default function CategoriesBar(props) {
                 <div className={Style.info}>
                     {
                         props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div value={e} onClick={(e) => props.setBrandFilter(e.target.value)}
-                        >🔹{e}
+                        >🔹 {e}
                         </div>)
                     }
                 </div>

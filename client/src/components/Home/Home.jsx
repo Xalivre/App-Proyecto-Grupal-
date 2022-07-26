@@ -83,14 +83,15 @@ function Home() {
               {carousel?.map((e) => {
                 return (
                   <div key={e._id}>
-                    <Link className={Style.link} to={"/product/" + e._id}>
+                    <div className={Style.link} to={"/product/" + e._id}>
                       <ProductCard
+                        id={e._id}
                         name={e.name}
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
-                    </Link>
+                    </div>
                   </div>
                 );
               })}
@@ -104,14 +105,15 @@ function Home() {
               {mostViewed?.map((e) => {
                 return (
                   <div key={e._id}>
-                    <Link className={Style.link} to={"/product/" + e._id}>
+                    <div className={Style.link}>
                       <ProductCard
+                        id={e._id}
                         name={e.name}
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
-                    </Link>
+                    </div>
                   </div>
                 );
               })}
@@ -125,14 +127,15 @@ function Home() {
               {recentlyAdded?.map((e) => {
                 return (
                   <div key={e._id}>
-                    <Link className={Style.link} to={"/product/" + e._id}>
+                    <div className={Style.link} to={"/product/" + e._id}>
                       <ProductCard
+                        id={e._id}
                         name={e.name}
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
                       />
-                    </Link>
+                    </div>
                   </div>
                 );
               })}
