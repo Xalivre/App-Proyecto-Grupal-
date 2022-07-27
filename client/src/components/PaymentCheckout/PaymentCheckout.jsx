@@ -19,29 +19,35 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-   console.log(emailUser + "CHAHU")
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
+
     if (!error) {
       const { id } = paymentMethod;
       try {
-        await axios.post("http://localhost:3000/api/checkout", {
+        const {data} = await axios.post("http://localhost:3000/api/checkout", {
           id,
           amount,
           cart,
+          email: emailUser
         });
 
+        const searchUserForEmail = await axios.get("http://localhost:3000/api/checkoutEmail", {
+          email: emailUser
+        })
+
+        console.log(data)
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);
       }
     }
   };
+
   return (
     <div className={Style.container}>
       <br />
@@ -65,19 +71,16 @@ export default function PaymentCard() {
       total = total + cart[i].price;
     }
   }
-
-     const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
-     let emailUser  
-     if(decodedToken) {
-       emailUser = decodedToken.email
-     }
-     console.log(emailUser + "HOLA")
-     emailUser={emailUser}
+  const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
+  let emailUser
+  if (decodedToken) {
+    emailUser = decodedToken.email
+  }
 
   return (
     <Elements stripe={stripePromise} className={Style.inputs}>
       {cart.length > 0 ? (
-        <CheckoutForm key={cart.id} cart={cart} amount={total} emailUser={emailUser}/>
+        <CheckoutForm key={cart.id} cart={cart} amount={total} emailUser={emailUser} />
       ) : (
         <div> Aun no hay productos</div>
       )}

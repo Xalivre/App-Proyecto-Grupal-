@@ -9,13 +9,10 @@ import brandsRoutes from "./src/routes/brands-routes.js";
 import cagetoriesRoutes from "./src/routes/categories-routes.js";
 import paymentsRoutes from "./src/routes/payment-routes.js"
 
-
-
 import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "0.0.0.0";
@@ -40,8 +37,6 @@ app.use(filtersRoutes);
 app.use(brandsRoutes);
 app.use(cagetoriesRoutes);
 app.use(paymentsRoutes)
-
-
 
 connectDB();
 app.listen(port, host, () => {
