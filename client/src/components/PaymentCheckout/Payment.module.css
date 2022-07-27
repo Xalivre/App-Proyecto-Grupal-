@@ -1,0 +1,25 @@
+
+.container{
+    width: 60%;
+    height: 300px;
+    margin: auto;
+}
+
+.container button{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.inputs{
+    border-color: black;
+    border-width: 5px;
+}
+
+/* .paymentCard::placeholder{
+    color: black;
+} /
+
+/ .paymentCard button{
+    margin: auto;
+} */
