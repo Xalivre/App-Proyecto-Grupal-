@@ -67,11 +67,11 @@ function SearchBar(props) {
             <FavoriteIcon />
           </div>
         </Link>
-        <Link to="/createProduct">
+        {/* <Link to="/createProduct">
           <div>
             <AddCircleIcon />
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
