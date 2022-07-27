@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, viewsUpdate, deleteProduct, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function DetailsAdmin(props) {
   const dispatch = useDispatch();
@@ -16,20 +17,25 @@ export default function DetailsAdmin(props) {
     description: "",
   })
 
+  const [showInputs, setShowInputs] = useState("")
 
   useEffect(() => {
     dispatch(getProductDetails(id));
     return () => { dispatch(clearPage()) }
   }, [dispatch, id]);
 
-  setTimeout(() => {
+  /* useEffect(() => {
     setEdit({
       price: product.price,
       stock: product.stock,
       description: product.description
     })
-  }, 0);
+  }, [product]) */
 
+  const handleInputState = (e) => {
+    e.preventDefault()
+    dispatch(setShowInputs(e.target.value))
+  }
 
   const handleChange = (e) => {
     setEdit({
@@ -40,7 +46,16 @@ export default function DetailsAdmin(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(editProduct(edit))
+    if (!edit.price) {
+      edit.price = product.price
+    }
+    if (!edit.stock) {
+      edit.stock = product.stock
+    } if (!edit.description) {
+      edit.description = product.description
+    }
+    dispatch(editProduct(edit, id))
+    console.log(edit)
     alert("Producto modificado correctamente")
     navigate(-1)
   }
@@ -50,32 +65,45 @@ export default function DetailsAdmin(props) {
     <div>
       {product && (
         <div>
+          <br />
           <div className={Style.container}>
             <img src={product.image && product.image[0].url} alt="img" />
             <div className={Style.namePositioning}>
               <h1>{product.name}</h1>
               <br />
-              <h1>Precio: ${product.price}</h1>
+              <h1>Precio: ${product.price} <button onClick={(e) => handleInputState(e)}
+                value={"price"}>EDIT</button></h1>
               <br />
-              <h1>Stock: {product.stock}</h1>
+              <h1>Stock: {product.stock} <button onClick={(e) => handleInputState(e)}
+                value={"stock"}>EDIT</button></h1>
               <br />
             </div>
             <div className={Style.inputsAdminPositioning}>
-              <button>Guardar Cambios</button>
-              <input className="inputPrice" placeholder="Modificar precio" value={edit.price} type="number"
+              <button onClick={(e) => handleSubmit(e)}>Guardar Cambios</button>
+              {
+                showInputs === "price" &&
+              <input className="inputPrice" placeholder="Modificar precio" name="price" value={edit.price} type="number"
                 onChange={(e) => handleChange(e)} ></input>
-              <input className="inputPrice" placeholder="Modificar stock" value={edit.stock} type="number"
+              }
+              {
+                showInputs === "stock" &&
+              <input className="inputPrice" placeholder="Modificar stock" name="stock" value={edit.stock} type="number"
                 onChange={(e) => handleChange(e)} ></input>
+              }
             </div>
           </div>
           <div className={Style.lowerPositioning}>
             <div className={Style.descriptionPositioning}>
-              <h1 className={Style.descriptionTitle} >Descripción</h1>
+              <h1 className={Style.descriptionTitle} >Descripción <button onClick={(e) => handleInputState(e)}
+                value={"description"}>EDIT</button></h1>
               <div className={Style.descriptionBody} >{product.description}</div>
             </div>
             <div className={Style.textarea}>
-              <textarea rows="20" type="text" value={edit.description} style={{ resize: "none", width: "45vw" }} aria-multiline="true"
+              {
+                showInputs === "description" &&
+              <textarea rows="20" type="text" name="description" value={edit.description} style={{ resize: "none", width: "45vw" }} aria-multiline="true"
                 placeholder="Modifique la descripción" onChange={(e) => handleChange(e)}></textarea>
+              }
             </div>
           </div>
           <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
