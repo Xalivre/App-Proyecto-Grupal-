@@ -14,6 +14,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const stripe = new Stripe("sk_test_51LPtrNLlcvSwUKGvA46HsDBeocgeeQRHsWSLTAQeyTzHzZrTk18ml4stPalgNse5zyOObM5fLFc3yNsnmSgHnbcl00y02QLl7l")
 const port = process.env.PORT || 3000
 const host = process.env.HOST || "0.0.0.0"
 export const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://pf-grupal:rrNefjzLOj9kxQh2@cluster0.kvgcdue.mongodb.net/?retryWrites=true&w=majority"
@@ -33,6 +34,25 @@ app.use(filtersRoutes);
 app.use(brandsRoutes)
 app.use(cagetoriesRoutes)
 
+app.post("/api/checkout", async (req, res) => {
+    try {
+        const {id, amount} = req.body
+
+    const payment = await stripe.paymentIntents.create({
+        amount, 
+        currency: "USD",
+        description: "Gaming buyy",
+        payment_method: id,
+        confirm: true
+    })
+
+    console.log(payment)
+    res.send({message: "Succesfull payment"})
+    } catch (error) {
+        console.log(error)
+        res.json({message: error.raw.message})
+    }
+})
 
 connectDB();
 app.listen(port, host, () => {
