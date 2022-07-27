@@ -4,7 +4,7 @@ import { tokenSign } from "./helpers/generateToken.js";
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({});
     if (!users) return res.json({ msg: "Users not found" });
     return res.json(users);
   } catch (e) {

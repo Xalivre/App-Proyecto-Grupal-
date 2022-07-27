@@ -11,9 +11,9 @@ export const postPayments = async (req, res) => {
     const { id, amount, cart, email} = req.body;
 
     if(!id || !email || !amount || !cart) return res.json({ message: "Mandatory data missing" });
-
-    // const userDB = await User.findOne({email})
-    //if (!userDB) return res.json({ msg: "User not found" });
+    
+    const userDB = await User.findOne({email})
+    if (!userDB) return res.json({ msg: "User not found" });
     
     const paymentDB = await Payment.create({
       idPayment: id,
@@ -21,24 +21,25 @@ export const postPayments = async (req, res) => {
       amount: amount,
     });
     paymentDB.save();
-
-    // userDB.paymentHistory.push(paymentDB);
-
-    // userDB.save();
+    
+    userDB.paymentHistory.push(paymentDB);
+    userDB.save();
     
     const payment = await stripe.paymentIntents.create({
       amount,
-      currency: "ARS",
+      currency: "USD",
+      description: "gaming", // sacarla
       payment_method: id,
       confirm: true,
     });
-    return res.json({ message: "Succesfull payment" });
+
+    return res.send({ message: "Successful payment" });
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e.raw.message}` });
   }
 };
 
-export const getPayments = async (req, res) => {
+export const getPayments = async (req, res) => { //admin
   try {
     const allPayment = await Payment.find({});
     if(!allPayment) return res.json({msg: "No payments found"});
@@ -48,11 +49,10 @@ export const getPayments = async (req, res) => {
   }
 };
 
-export const getPaymentsID = async (req, res) => {
-  const { id } = req.params; 
-
+export const getPaymentsEmail = async (req, res) => { //usuarios
+  const { email } = req.query; 
   try{
-    const userDB = await User.findOne({id}) 
+    const userDB = await User.findOne({email}) 
     if(!userDB) return res.json({ message: "User not found" });
     const history = userDB.paymentHistory;
     return res.json(history);
