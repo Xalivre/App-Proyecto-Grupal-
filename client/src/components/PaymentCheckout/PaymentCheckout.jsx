@@ -9,14 +9,17 @@ import {
 } from "@stripe/react-stripe-js";
 import Style from "./Payment.module.css";
 import axios from "axios";
+import { useJwt } from "react-jwt";
 
 const stripePromise = loadStripe(
   "pk_test_51LPtrNLlcvSwUKGvyubeafRmZUaNcn4r13BgxwBAO14mkc6lTj07peI4Grt3jfVc0KEuEzT4MMxJwn2dCkaCab4e00DyrfqFX3"
 );
 
-const CheckoutForm = ({ cart, amount }) => {
+const CheckoutForm = ({ cart, amount, emailUser }) => {
   const stripe = useStripe();
   const elements = useElements();
+
+   console.log(emailUser + "CHAHU")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,18 +65,19 @@ export default function PaymentCard() {
       total = total + cart[i].price;
     }
   }
-  // OPCION PARA OBTENER LOS DATOS A RENDERIZAR DEL CARRITO
-  /*     const cartFiltered = cart.map(e => {
-        return {
-            name: e.name,
-            price: e.price
-        }
-    }) */
+
+     const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
+     let emailUser  
+     if(decodedToken) {
+       emailUser = decodedToken.email
+     }
+     console.log(emailUser + "HOLA")
+     emailUser={emailUser}
 
   return (
     <Elements stripe={stripePromise} className={Style.inputs}>
       {cart.length > 0 ? (
-        <CheckoutForm key={cart.id} cart={cart} amount={total} />
+        <CheckoutForm key={cart.id} cart={cart} amount={total} emailUser={emailUser}/>
       ) : (
         <div> Aun no hay productos</div>
       )}

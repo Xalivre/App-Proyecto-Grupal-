@@ -17,7 +17,7 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     
-    if (!user) return res.status(400).send({ msg: "User not found" });
+    if (!user) return res.json({ msg: "User not found" });
 
     const checkPassword = await compare(password, user.password);
     const tokenSession = await tokenSign(user)
@@ -28,10 +28,10 @@ export const loginUser = async (req, res) => {
        })
     }
     if(!checkPassword){
-      res.status(409).send("Invalid password");
+      return res.json({ msg: "Invalid password" });
     }
   } catch (e) {
-    return res.status(404).send({ msg: `Error 404 - ${e}` });
+    return res.json({ msg: `Error 404 - ${e}` });
   }
 };
 

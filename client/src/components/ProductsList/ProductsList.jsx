@@ -10,6 +10,9 @@ import DropdownComponent from '../Dropdown/DropdownToggle'
 import CategoriesBar from '../BrandsComponent/BrandsComponent'
 import DropdownPrecio from '../DropdownPrecio/DropdownPrecio'
 
+const a = localStorage.getItem("usuario")
+
+export const getInfo = a
 
 export default function ProductsList() {
 
@@ -20,6 +23,8 @@ export default function ProductsList() {
   const [page2, setPage2] = useState(18)
   const [brandFilter, setBrandFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
+
+
 
   const dispatch = useDispatch()
 
@@ -45,7 +50,6 @@ export default function ProductsList() {
     dispatch(getBrands())
   }, [dispatch])
 
-  console.log(categoryFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>
