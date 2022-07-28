@@ -22,12 +22,11 @@
     display: flex;
 }
 
-.profilePositioning {
+.profilePositioning{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
 }
 
 .profile_img {

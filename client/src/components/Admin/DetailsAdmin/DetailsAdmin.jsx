@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getProductDetails,
-//   viewsUpdate,
-//   deleteProduct,
-//   clearPage,
-//   editProduct,
-// } from "../../../redux/actions";
-// import Style from "./DetailsAdmin.module.css";
-// import EditIcon from "@mui/icons-material/Edit";
-
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
 
