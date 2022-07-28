@@ -5,7 +5,10 @@ import AddCartButton from '../AddCartButton/AddCartButton';
 import s from "./WishList.module.css";
 
 function WishList() {
+
   const wishList = useSelector((state) => state.wishList)
+
+
 
   return (
     <div className={s.container} >

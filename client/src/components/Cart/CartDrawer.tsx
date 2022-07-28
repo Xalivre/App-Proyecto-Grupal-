@@ -65,7 +65,7 @@ export default function SwipeableTemporaryDrawer(props) {
         <Divider />
         {
           props.cart.length > 0 ? <Link to="/paymentCheckout">
-          <button className='button'>Comprar</button>
+          <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
         </Link>
         :
         <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
