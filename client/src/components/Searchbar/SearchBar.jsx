@@ -9,6 +9,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import logo from "../../img/favicon.png";
 import CartDrawer from "../Cart/CartDrawer.tsx"
 import { useJwt } from "react-jwt";
+import Profile from "../Profile/Profile";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 
 function SearchBar(props) {
@@ -50,13 +52,14 @@ function SearchBar(props) {
       <div className={styles.login}>
         {!localStorage.getItem("usuario") && <><Link to="/register">
           <button className="button" >Sign In</button>
-        </Link>
+        </Link> 
           <Link to="/login">
             <button className="button" >Log in</button>
           </Link></>}
-        {localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
-          <button className="button" >Log out</button>
-        </Link>}
+          {
+            localStorage.getItem("usuario") && <Link to="/" onClick={() => localStorage.removeItem("usuario")}>
+          <button className="button" >Log out</button></Link>
+          }
         {
           <div>
             <CartDrawer cart={cart} />
@@ -67,11 +70,11 @@ function SearchBar(props) {
             <FavoriteIcon />
           </div>
         </Link>
-        {/* <Link to="/createProduct">
-          <div>
-            <AddCircleIcon />
-          </div>
-        </Link> */}
+        {localStorage.getItem("usuario") && <div>
+        <Link to= "/MyProfile">
+            <div className={styles.profile_img}><AccountCircleSharpIcon/></div>
+          </Link>
+          </div>}
       </div>
     </div>
   );

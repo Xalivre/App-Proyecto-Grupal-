@@ -16,7 +16,6 @@ export const getInfo = a
 
 export default function ProductsList() {
 
-  const products = useSelector((state) => state.products)
   const filtereds = useSelector((state) => state.filteredProducts)
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
@@ -28,11 +27,6 @@ export default function ProductsList() {
 
   const dispatch = useDispatch()
 
-
-  function handleOrderByPrice(e) {
-    e.preventDefault()
-    dispatch(sortPrice(e.target.value))
-  }
 
   useEffect(() => {
     if (operation !== "No hacer nada") {
@@ -118,6 +112,7 @@ export default function ProductsList() {
           <DropdownPrecio></DropdownPrecio>
           <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter} />
         </div>
+        {/* <button onClick={console.log()}>AJLKSHDA</button> */}
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {

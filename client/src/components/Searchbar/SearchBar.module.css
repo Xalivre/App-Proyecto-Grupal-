@@ -29,9 +29,6 @@
     align-items: center;
 }
 
-.profile_img {
-    width: 5%
-}
 
 @media screen and (max-width: 768px) {
     .containerAll {
@@ -59,4 +56,7 @@
     .login {
         margin-bottom: 10px;
     }
+
+.profile_img{
+    width: 5%;
 }

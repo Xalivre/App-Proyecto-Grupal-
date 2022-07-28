@@ -13,6 +13,7 @@ const initialState = {
   categories: [],
   brands: [],
   nameSearched: "",
+  userPayments: []
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -34,6 +35,7 @@ const CLEAR_PAGE = "CLEAR_PAGE"
 const POST_USER = "POST_USER"
 const LOGIN = "LOGIN"
 const EDIT_PRODUCT = "EDIT_PRODUCT"
+const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -45,6 +47,12 @@ const rootReducer = (state = initialState, action) => {
         filteredProducts: action.payload.filter((e) => state.nameSearched ? e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
         operation: "Default"
       };
+
+    case GET_USER_PAYMENTS:
+      return {
+        ...state,
+        userPayments: action.payload
+      }  
 
     case GET_DETAILS:
       return {

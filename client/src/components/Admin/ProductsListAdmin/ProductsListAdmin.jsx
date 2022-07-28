@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsListAdmin.module.css"
 import ProductCardAdmin from '../ProductCardAdmin/ProductCardAdmin'
-import { sortPrice, getProducts, getCategories, getBrands } from "../../../redux/actions"
-import AddCartButton from '../../AddCartButton/AddCartButton'
+import {getProducts, getCategories, getBrands } from "../../../redux/actions"
 import PagingOficial from "../../Paging/Paging.tsx"
 import DropdownComponent from '../../Dropdown/DropdownToggle'
 import CategoriesBar from '../../BrandsComponent/BrandsComponent'
 import DropdownPrecio from '../../DropdownPrecio/DropdownPrecio'
-import CachedIcon from '@mui/icons-material/Cached';
 
 
 export default function ProductsListAdmin() {
 
-  const products = useSelector((state) => state.products)
   const filtereds = useSelector((state) => state.filteredProducts)
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
@@ -23,12 +19,6 @@ export default function ProductsListAdmin() {
   const [categoryFilter, setCategoryFilter] = useState("")
 
   const dispatch = useDispatch()
-
-
-  function handleOrderByPrice(e) {
-    e.preventDefault()
-    dispatch(sortPrice(e.target.value))
-  }
 
   useEffect(() => {
     if (operation !== "No hacer nada") {

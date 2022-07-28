@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
 import CreateProduct from '../../CreateProduct/CreateProduct'
-import SearchBar from '../../Searchbar/SearchBar'
 import ProductsListAdmin from '../ProductsListAdmin/ProductsListAdmin'
 import styles from "./DashBoard.module.css"
 

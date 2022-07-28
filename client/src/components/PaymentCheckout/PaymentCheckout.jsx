@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -18,6 +18,9 @@ const stripePromise = loadStripe(
 const CheckoutForm = ({ cart, amount, emailUser }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [loading, setLoading] = useState(false);
+
+  console.log(emailUser + "CHAHU")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
       type: "card",
       card: elements.getElement(CardElement),
     });
+    setLoading(true)
 
     if (!error) {
       const { id } = paymentMethod;
@@ -39,25 +43,52 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
         const searchUserForEmail = await axios.get("http://localhost:3000/api/checkoutEmail", {
           email: emailUser
         })
-
+        
         console.log(data)
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);
       }
+      setLoading(false)
     }
+    
   };
-
   return (
-    <div className={Style.container}>
-      <br />
-      <br /> <br />
-      <form onSubmit={handleSubmit} className={Style.paymentCard}>
-        <CardElement className={Style.inputs} />
-        {/* <img AGREGAR IMAGENES DEL CARRITO/> */}
-        <br />
-        <button disabled={!stripe}> Buy </button>
+    <div>
+      <br/><br/><br/>
+      <form onSubmit={handleSubmit} className={Style.formulario}>
+        <center><h1>Realizar pago</h1></center>
+        <div className={Style.contenedor}>
+          <label>First Name:</label>
+          <div className={Style.inputcontenedor}>
+          <input type="text" required/>
+          </div>
+          <label>Last Name:</label>
+          <div className={Style.inputcontenedor}>
+          <input type="text" required/>
+          </div>
+          <label>Email:</label>
+          <div className={Style.inputcontenedor}>
+          <input type="text" required/>
+          </div>
+          <label>Location:</label>
+          <div className={Style.inputcontenedor}>
+          <input type="text" required/>
+          </div>
+          <label>Card:</label>
+          <div className={Style.inputcontenedor}>
+          <CardElement className={Style.inputCard} />
+          </div>
+          <br />
+        </div>
+          <button disabled={!stripe} className={Style.button}>{loading ? (
+            <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          ): ("Buy")}
+          </button>
       </form>
+      <br/><br/><br/>
     </div>
   );
 };
@@ -71,16 +102,17 @@ export default function PaymentCard() {
       total = total + cart[i].price;
     }
   }
-  const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
-  let emailUser
-  if (decodedToken) {
-    emailUser = decodedToken.email
-  }
 
+const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
+     let emailUser  
+     if(decodedToken) {
+       emailUser = decodedToken.email
+     }
+     console.log(emailUser + "HOLA")
   return (
     <Elements stripe={stripePromise} className={Style.inputs}>
       {cart.length > 0 ? (
-        <CheckoutForm key={cart.id} cart={cart} amount={total} emailUser={emailUser} />
+        <CheckoutForm key={cart.id} cart={cart} amount={total} emailUser={emailUser}/>
       ) : (
         <div> Aun no hay productos</div>
       )}

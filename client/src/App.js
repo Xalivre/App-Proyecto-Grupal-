@@ -15,6 +15,7 @@ import DashBoard from "./components/Admin/DashBoard/DashBoard";
 import Footer from "./components/Footer/Footer";
 import PaymentCheckout from "./components/PaymentCheckout/PaymentCheckout";
 import DetailsAdmin from "./components/Admin/DetailsAdmin/DetailsAdmin";
+import Profile from "./components/Profile/Profile";
 
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
         <Route exact path="/Dashboard" element={<DashBoard/>} />
         <Route exact path="/paymentCheckout" element={<PaymentCheckout />} />
         <Route exact path="/detailsAdmin/:id" element={<DetailsAdmin />} />
+        <Route exact path="/MyProfile" element={<Profile />} />
       </Routes>
       <Footer />
     </>
