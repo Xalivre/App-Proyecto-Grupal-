@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import { encrypt, compare } from "./helpers/handleBCrypt.js";
 import { tokenSign } from "./helpers/generateToken.js";
-// import { transporter } from "../librarys/emailer.js";
+/* import { transporter} from "../librarys/emailer.js"; */
 
 export const getUsers = async (req, res) => {
   try {
@@ -54,12 +54,17 @@ export const postUsers = async (req, res) => {
       role: role || "user",
     });
 
-    // await transporter.sendMail({
-    //   from: '"Welcome to GameHUB!" <gaminggamehub0@gmail.com>', // sender address
-    //   to: `${email}`, // list of receivers
-    //   subject: "Thank you for registering", // Subject line
-    //   html: `<b>Hello ${username} welcome to GameHUB! Enjoy our products and our user experience.</b>`, // html body
-    // });
+    await transporter.sendMail({
+      from: '"Bienvenido/a a GameHUB!" <gaminggamehub1@gmail.com>', 
+      to: `${email}`,
+      subject: "Te has registrado en GameHUB",
+      html: `<p> Hola <b>${username}</b> bienvenido/a a <b>GameHUB</b>. Para realizar una compra, selecciona todos aquellos productos que
+      quieras añadir a tu carrito de compras. Esperamos que disfrutes de nuestros productos y servicios.
+      En caso de necesitar ayuda, dirigete a la sección <b>Ayuda</b> donde encontraras una guía.
+
+      Desde <b>GameHUB</b> te deseamos éxitos</p>
+      `,
+    }).then(console.log).catch(console.log);
 
     return res.json({ msg: `${username} create succesfully` });
   } catch (e) {
