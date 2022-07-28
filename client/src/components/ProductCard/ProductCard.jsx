@@ -18,6 +18,7 @@ export default function ProductCard({ id, name, price, image }) {
       <div className={Style.container}>
         <div className={Style.cardContainer}>
           <Link to={"/product/" + id}>
+          <br />
             <img className={Style.image} src={image} alt="img" />
             <br /> <br /> 
             <div className={Style.text}>
@@ -31,6 +32,7 @@ export default function ProductCard({ id, name, price, image }) {
             </div >
             <p className={Style.price}>${price}</p>
           </Link>
+
         </div>
         <br />
         <div className={Style.buttonsContainer}>
