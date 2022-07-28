@@ -1,25 +1,53 @@
-
-.container{
-    width: 60%;
-    height: 300px;
-    margin: auto;
+.contenedor{
+    width: 100%;
+    padding: 15px;
+    text-align: start;
+}
+.formulario{
+    background-color: #156DBF;
+    padding: 3px;
 }
 
-.container button{
-    margin: auto;
-    display: flex;
-    justify-content: center;
+.formulario label{
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
-.inputs{
-    border-color: black;
-    border-width: 5px;
+.formulario input[type="text"]{
+    font-size: 20px;
+    width: 100%;
+}
+.inputcontenedor{
+    border: 1px solid #aaa;
+    border-radius: 4px;
 }
 
-/* .paymentCard::placeholder{
-    color: black;
-} /
+.button{
+    margin-top: 15px;
+    border: none;
+    width: 100%;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px 20px;
+    cursor: pointer;
+    background: #00386B;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );  
+}
 
-/ .paymentCard button{
-    margin: auto;
-} */
+.inputCard{
+    background-color: white;
+    height: 18px;
+}
+
+@media(min-width:768px)
+{
+    .formulario{
+        margin: auto;
+        width: 500px;
+        margin-top: 20px;
+        border-radius: 2%;
+    }
+
+}
