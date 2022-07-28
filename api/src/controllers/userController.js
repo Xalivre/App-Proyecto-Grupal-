@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import { encrypt, compare } from "./helpers/handleBCrypt.js";
 import { tokenSign } from "./helpers/generateToken.js";
-import { transporter } from "../librarys/emailer.js";
+// import { transporter } from "../librarys/emailer.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -54,12 +54,12 @@ export const postUsers = async (req, res) => {
       role: role || "user",
     });
 
-    await transporter.sendMail({
-      from: '"Welcome to GameHUB!" <gaminggamehub0@gmail.com>', // sender address
-      to: `${email}`, // list of receivers
-      subject: "Thank you for registering", // Subject line
-      html: `<b>Hello ${username} welcome to GameHUB! Enjoy our products and our user experience.</b>`, // html body
-    });
+    // await transporter.sendMail({
+    //   from: '"Welcome to GameHUB!" <gaminggamehub0@gmail.com>', // sender address
+    //   to: `${email}`, // list of receivers
+    //   subject: "Thank you for registering", // Subject line
+    //   html: `<b>Hello ${username} welcome to GameHUB! Enjoy our products and our user experience.</b>`, // html body
+    // });
 
     return res.json({ msg: `${username} create succesfully` });
   } catch (e) {

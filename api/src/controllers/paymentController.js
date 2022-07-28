@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import Payment from "../models/Payments.js";
 import User from "../models/User.js";
-import { transporter } from "../librarys/emailer.js";
+// import { transporter } from "../librarys/emailer.js";
 
 const stripe = new Stripe(
   "sk_test_51LPtrNLlcvSwUKGvA46HsDBeocgeeQRHsWSLTAQeyTzHzZrTk18ml4stPalgNse5zyOObM5fLFc3yNsnmSgHnbcl00y02QLl7l"
