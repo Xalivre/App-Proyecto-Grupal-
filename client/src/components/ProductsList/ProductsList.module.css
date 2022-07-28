@@ -111,10 +111,10 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: #00386b;
-    width: 15vw;
-    height: 100vh;
+    width: 20vw;
     position: sticky;
     top: 0;
+    height: 100vh;
     gap: 50px;
     align-items: center;
     color: aliceblue;
@@ -181,4 +181,23 @@
     right: 0;
     width: 80vw;
     padding: 0.5vw */
+}
+
+@media screen and (max-width: 768px){
+    .containerAll{
+        display: flex;
+        flex-direction: column;
+    }
+    .container{
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .categoriesBar{
+        width: 100%;
+        top: auto;
+    }
+    .pagingOrder{
+        margin: 2rem 0;
+    }
 }

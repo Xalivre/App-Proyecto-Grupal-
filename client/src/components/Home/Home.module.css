@@ -1,48 +1,3 @@
-/* .axolot {
-    width: 70vw;
-    height: 50vh;
-    border: 2px solid purple;
-    border-right: 0;
-    border-left: 0;
-}
-
-.controllerRight {
-    width: 15vw;
-    height: 50vh;
-    border: 2px solid green;
-    border-left: 0;
-}
-
-.controllerLeft {
-    width: 15vw;
-    height: 50vh;
-    border: 2px solid green;
-    border-right: 0;
-}
-
-.imagePositioning {
-    display: flex;
-    justify-content: center;
-}
-
-.carousel {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    
-}
-
-.title {
-    font-size: 30px;
-    justify-content: center;
-    display: flex;
-}
-
-.carouselBackground {
-    background-color: lightblue;
-} */
-
-
 .axolot {
     width: 70vw;
     height: 50vh;
@@ -111,4 +66,15 @@
 .imgCarousel{
     width: 100%;
     height: 25rem;
+}
+
+@media screen and (max-width: 768px) {
+    .imgCarousel{
+        width: 100%;
+        height: 8rem;
+    }
+    .carousel{
+        width: 70%;
+        margin-bottom: 10px;
+    }
 }

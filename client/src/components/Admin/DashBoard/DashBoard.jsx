@@ -50,7 +50,6 @@ export default function DashBoard() {
           :
           <div>Acceso denegado</div>
       }
-
     </div>
   )
 }

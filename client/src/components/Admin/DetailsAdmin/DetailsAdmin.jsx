@@ -23,13 +23,15 @@ export default function DetailsAdmin(props) {
     price: "",
     stock: "",
     description: "",
-  })
+  });
 
-  const [showInputs, setShowInputs] = useState("")
+  const [showInputs, setShowInputs] = useState("");
 
   useEffect(() => {
     dispatch(getProductDetails(id));
-    return () => { dispatch(clearPage()) }
+    return () => {
+      dispatch(clearPage());
+    };
   }, [dispatch, id]);
 
   /* useEffect(() => {
@@ -41,33 +43,33 @@ export default function DetailsAdmin(props) {
   }, [product]) */
 
   const handleInputState = (e) => {
-    e.preventDefault()
-    dispatch(setShowInputs(e.target.value))
-  }
+    e.preventDefault();
+    dispatch(setShowInputs(e.target.value));
+  };
 
   const handleChange = (e) => {
     setEdit({
       ...edit,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!edit.price) {
-      edit.price = product.price
+      edit.price = product.price;
     }
     if (!edit.stock) {
-      edit.stock = product.stock
-    } if (!edit.description) {
-      edit.description = product.description
+      edit.stock = product.stock;
     }
-    dispatch(editProduct(edit, id))
-    console.log(edit)
-    alert("Producto modificado correctamente")
-    navigate(-1)
-  }
-
+    if (!edit.description) {
+      edit.description = product.description;
+    }
+    dispatch(editProduct(edit, id));
+    console.log(edit);
+    alert("Producto modificado correctamente");
+    navigate(-1);
+  };
 
   return (
     <div>

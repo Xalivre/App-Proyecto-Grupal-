@@ -2,17 +2,23 @@ body {
   margin: 0px;
 }
 
-.container {
+.containerLinks {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   background-color: #156DBF;
   font-size: 12px;
   text-decoration: none;
   padding: 10px;
   border-bottom: 1px solid black;
   text-decoration: none;
+  width: 100%;
 }
-
+.container{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #156DBF;
+  padding: 5px;
+}
 .text {
   color: white;
   text-transform: uppercase;
@@ -72,3 +78,72 @@ body {
   color: black;
   text-decoration: none;
 } */
+
+.iconBurguer{
+  color: white;
+}
+
+.container i{
+  color: white;
+  font-size: 50px;
+  display: none;
+}
+.logoResp{
+  display: none;
+}
+
+.containerLinksNull{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #156DBF;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 10px;
+  text-decoration: none;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .logoResp{
+    display: block;
+    height: 80px;
+  }
+  .container a{
+    display: block;
+  }
+  .container{
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 1rem; 
+  }
+
+  .containerLinks{
+    position: absolute;
+    display: block;
+    top: 85px;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    left: 0;
+    transition: ease-in-out 0.5s;
+    text-align: center;
+  }
+  .containerLinksNull{
+    position: absolute;
+    left: 250px;
+    top: 85px;
+    transition: ease-in-out 0.5s;
+    display: none;
+  }
+  .ocult{
+    cursor: pointer;
+    display: none;
+  }
+  .show{
+    cursor: pointer;
+    display: block !important; 
+  }
+}
