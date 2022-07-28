@@ -1,72 +1,3 @@
-/* a {
-    text-decoration: none;
-}
-
-.carouselOrder {
-    display: flex;
-    flex-direction: row;
-}
-
-.cardContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: gray;
-    width: 20vw;
-    margin-bottom: 20px;
-}
-
-.name {
-    font-size: 25px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    text-align: center;
-}
-
-.image {
-    width: 10vw;
-}
-
-.price {
-    font-size: 22px;
-    font-weight: 600;
-    color: black
-} */
-/* 
-a {
-    text-decoration: none;
-}
-
-.carouselOrder {
-    display: flex;
-    flex-direction: row;
-}
-
-.cardContainer {
-    display: flex;
-    text-align: center;
-    border: 0px solid grey;
-    border-radius: 5px;
-    gap: .5rem;
-    height: 300px;
-    width: 350px;
-    color: black;
-    font-size: 12px;
-    justify-content: space-around;
-    align-items: center;
-    -webkit-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
-    -moz-box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.46);
-    box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.46);
-    padding: .2rem;
-}
-
-.image{
-    height: 80%;
-}    */
-
-
 .cardContainer{
     display: flex;
     gap: .5rem;
@@ -114,4 +45,8 @@ a {
     display: flex;
     flex-direction: column;
     width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+    
 }

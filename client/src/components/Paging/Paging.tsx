@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import styles from './Paging.module.css'
 
 export default function PaginationOutlined(props) {
 
@@ -12,8 +13,10 @@ export default function PaginationOutlined(props) {
     };
 
     return (
+        <div className={styles.container}>
         <Stack spacing={2}>
             <Pagination onChange={handleChange} count={props.filtereds} color="primary" />
         </Stack>
+        </ div>
     );
 }

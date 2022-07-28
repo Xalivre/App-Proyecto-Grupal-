@@ -3,12 +3,16 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    text-align: center;
 }
 
 .namePositioning {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
+    font-size: 15px;
+    gap: .5rem;
 }
 
 .deleteButton {
@@ -35,21 +39,19 @@
     width: 50vw;
 }
 
-.descriptionPositioning {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: flex-start;
-}
-
-.descriptionTitle {
-    width: 50vw;
+.descriptionTitle{
+    /* width: 50vw; */
     font-weight: 900;
+}
+.descriptionsubtitle{
+    /* width: 50vw; */
+    font-weight: 600;
 }
 
 .descriptionBody {
     width: 50vw;
     font-size: 18px;
+    margin-top: 1rem;
 }
 
 .lowerPositioning {
@@ -58,3 +60,27 @@
 }
 
 
+.containerExist{
+    margin-bottom: 2rem;
+}
+.descriptionContainer{
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnDesc{
+    width: 150px;
+    text-align: center;
+}
+
+.descriptionPositioning {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
