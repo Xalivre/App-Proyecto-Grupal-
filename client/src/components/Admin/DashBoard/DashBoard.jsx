@@ -21,8 +21,8 @@ function handleState(e) {
   return (
     <div>
       <div className={styles.container}>
-        <button className={styles.text}value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
-        <button value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
+        <button className="btnMod" value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
+        <button className="btnMod" value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
         { localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
         <button className="button" >Log out</button>
         </Link>}

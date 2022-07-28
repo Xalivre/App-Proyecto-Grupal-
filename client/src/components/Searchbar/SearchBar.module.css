@@ -16,8 +16,35 @@
     gap: .5rem;
 }
 
-.logo{
+.logo {
     height: 8rem;
     /* width: 30vh; */
     display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .containerAll {
+        /* display: block; */
+        flex-direction: column;
+        font-size: 15px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .logo {
+        display: none;
+
+    }
+
+    .form {
+        background-color: rgba(128, 128, 128, 0.09);
+        margin: 0;
+        width: 100%;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+    }
+    .login{
+        margin-bottom: 10px;
+    }
 }

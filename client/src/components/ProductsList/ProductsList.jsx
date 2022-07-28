@@ -51,7 +51,7 @@ export default function ProductsList() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className={Style.containerAll}>
       {/* <div className={Style.imagePositioning}>
         <img className={Style.controllerLeft} src="https://www.solofondos.com/wp-content/uploads/2021/03/2ea2156ee2ce4989ea602d820db10fae.png" alt="img" />
         <img className={Style.axolot} src="https://puntociego.com.ar/download/multimedia.normal.91084a739de17b1c.67616d696e67207365747570206465736b5f6e6f726d616c2e6a7067.jpg" alt="img" />
