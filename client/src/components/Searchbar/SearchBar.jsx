@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SearchBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -19,6 +18,14 @@ function SearchBar(props) {
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart);
+  /* const [cart, setCart] = useState(localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : []) */
+
+  /* useEffect(() => {
+    if(JSON.parse(localStorage.getItem("Carrito"))){
+      setCart(...cartState, JSON.parse(localStorage.getItem("Carrito")))
+    }
+  }, [cartState]) */
+  
 
 
   // Vamos a manejar los productos a buscar por estados

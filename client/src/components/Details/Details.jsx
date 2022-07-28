@@ -5,15 +5,25 @@ import { getProductDetails, viewsUpdate, deleteProduct, clearPage } from "../../
 import AddCartButton from "../AddCartButton/AddCartButton";
 import AddWishButton from "../WishList/AddWIshButton/AddWishButton";
 import Style from "./Details.module.css"
+import { useJwt } from "react-jwt"
+
 
 export default function Details(props) {
   const dispatch = useDispatch();
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
+  let autho = decodedToken?.role
   const { id } = useParams();
   const product = useSelector((state) => state.details);
 
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    autho && autho === "user" && setLoading(false)
+  }, [decodedToken])
+
   useEffect(() => {
     dispatch(getProductDetails(id));
-    return () => {dispatch(clearPage())}
+    return () => { dispatch(clearPage()) }
   }, [dispatch, id]);
 
   return (
@@ -26,7 +36,9 @@ export default function Details(props) {
               <h1>{product.name}</h1>
               <h1>Precio: ${product.price}</h1>
               <h1>✔{product.stock} en Stock</h1>
-              <AddCartButton id={product._id} />
+              {
+                product.stock > 0 ? <AddCartButton id={product._id} /> : <div>NO</div>
+              }
               <AddWishButton id={product._id} />
             </div>
           </div>

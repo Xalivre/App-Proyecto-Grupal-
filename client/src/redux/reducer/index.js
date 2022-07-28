@@ -3,7 +3,7 @@ const initialState = {
   products: [],
   details: [],
   users: [],
-  cart: [],
+  cart: localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : [],
   carousel: [],
   mostViewed: [],
   recentlyAdded: [],
@@ -68,6 +68,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case REMOVE_CART:
+      localStorage.setItem("Carrito", JSON.stringify(state.cart.filter((e) => e._id !== action.payload)))
       return {
         ...state,
         cart: state.cart.filter((e) => e._id !== action.payload)

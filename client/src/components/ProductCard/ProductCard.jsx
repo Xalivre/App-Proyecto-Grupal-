@@ -5,6 +5,8 @@ import Style from "./ProductCard.module.css";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import { Link } from "react-router-dom";
 import { useJwt } from "react-jwt";
+import axios from "axios"
+import WishListButton from "../CardButtons/WishListButton";
 
 
 
@@ -17,8 +19,11 @@ export default function ProductCard({ id, name, price, image }) {
   const { decodedToken } = useJwt(localStorage.getItem("Carrito"));
   console.log(decodedToken)
 
-  const cartStorage = () => {
-    localStorage.setItem("Carrito", karting)
+  const cartStorage = async (id) => {
+    let json = await axios.get("http://localhost:3000/product/" + id);
+    const a = localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : []
+    a.push(json.data)
+    localStorage.setItem("Carrito", JSON.stringify(a))
   }
 
   return (
@@ -44,7 +49,7 @@ export default function ProductCard({ id, name, price, image }) {
         </div>
         <br />
         <div className={Style.buttonsContainer}>
-          <button onClick={() => {!karting.map((a) => a._id).includes(id)?dispatch(addToCart(id)) && cartStorage() &&
+          <button onClick={() => {!karting.map((a) => a._id).includes(id)?dispatch(addToCart(id)) && cartStorage(id) &&
           alert("El producto fue agregado a tu carrito") : alert("Este producto ya se encuentra en tu carrito")}}
           className="button">Añadir al carrito</button>
           <br />
