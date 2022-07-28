@@ -1,8 +1,6 @@
 import React from "react";
-import { addToCart } from "../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Style from "./ProductCardAdmin.module.css";
-import AddCartButton from "../../AddCartButton/AddCartButton";
 import { deleteProduct } from "../../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 

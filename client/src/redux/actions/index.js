@@ -11,6 +11,16 @@ export function getProducts() {
   };
 }
 
+export function getUserPayments(email) {
+  return async function (dispatch) {
+    let r = await axios.get("http://localhost:3000/api/checkoutEmail?email=" + email)
+    return dispatch({
+      type: "GET_USER_PAYMENTS",
+      payload: r.data
+    })
+  }
+}
+
 export function getProductDetails(id) {
   return async function (dispatch) {
     try {
@@ -139,13 +149,11 @@ export function searchName(word) {
     const allProducts = getState().allProducts; //suponiendo que el arr del store se llame products
     // realizamos el filtrado
 
-    console.log(`estas buscando: ${word}`);
     const res = allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
     dispatch({
       type: "SEARCH_BAR",
       payload: word,
     });
-    console.log(res)
   };
 }
 

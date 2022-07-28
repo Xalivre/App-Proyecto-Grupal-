@@ -1,11 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DeleteCartButton from "../DeleteCartButton/DeleteCartButton";
 import styles from "./Cart.module.css"
 
 function Cart() {
-  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
 

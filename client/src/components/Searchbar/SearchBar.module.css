@@ -21,3 +21,14 @@
     /* width: 30vh; */
     display: flex;
 }
+
+.profilePositioning{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile_img{
+    width: 5%;
+}
