@@ -46,7 +46,8 @@ export default function ProductsListAdmin() {
       </div> */}
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
-          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.length / 18)} />
+          <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
+                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).length / 18)} />
           {/* <div>
             {
               filtereds && page1 - 12 >= 0 ? (

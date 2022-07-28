@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
+import { useJwt } from "react-jwt"
 
 export default function DetailsAdmin(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
+  let autho = decodedToken?.role
   const { id } = useParams();
   const product = useSelector((state) => state.details);
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    autho && autho === "admin" && setLoading(false)
+  }, [decodedToken])
 
   const [edit, setEdit] = useState({
     price: "",
@@ -64,83 +73,58 @@ export default function DetailsAdmin(props) {
 
   return (
     <div>
-      {product && (
-        <div>
-          <br />
-          <div className={Style.container}>
-            <img src={product.image && product.image[0].url} alt="img" />
-            <div className={Style.namePositioning}>
-              <h1 className={Style.descriptionTitle}>{product.name}</h1>
-              <br />
-              <h1>
-                Precio: ${product.price}{" "}
-              </h1>
-                <button className="btnDash" onClick={(e) => handleInputState(e)} value={"price"}>
-                  EDIT
-                </button>
-              <br />
-              {showInputs === "price" && (
-                <input
-                  className="inputPrice"
-                  placeholder="Modificar precio"
-                  name="price"
-                  value={edit.price}
-                  type="number"
-                  onChange={(e) => handleChange(e)}
-                />
-              )}
-              <h1 className={Style.descriptionsubtitle}>
-                Stock: {product.stock}{" "}
-              </h1>
-                <button className="btnDash" onClick={(e) => handleInputState(e)} value={"stock"}>
-                  EDIT
-                </button>
-              <br />
-              {showInputs === "stock" && (
-                <input
-                  className="inputPrice"
-                  placeholder="Modificar stock"
-                  name="stock"
-                  value={edit.stock}
-                  type="number"
-                  onChange={(e) => handleChange(e)}
-                />
-              )}
-              <br />
-              <button className="btnDash" onClick={(e) => handleSubmit(e)}>Guardar Cambios</button>
+      {
+        loading === false ? <div>
+        {product && (
+          <div>
+            <br />
+            <div className={Style.container}>
+              <img src={product.image && product.image[0].url} alt="img" />
+              <div className={Style.namePositioning}>
+                <h1>{product.name}</h1>
+                <br />
+                <h1>Precio: ${product.price} <button onClick={(e) => handleInputState(e)}
+                  value={"price"}>EDIT</button></h1>
+                <br />
+                <h1>Stock: {product.stock} <button onClick={(e) => handleInputState(e)}
+                  value={"stock"}>EDIT</button></h1>
+                <br />
+              </div>
+              <div className={Style.inputsAdminPositioning}>
+                <button onClick={(e) => handleSubmit(e)}>Guardar Cambios</button>
+                {
+                  showInputs === "price" &&
+                  <input className="inputPrice" placeholder="Modificar precio" name="price" value={edit.price} type="number"
+                    onChange={(e) => handleChange(e)} ></input>
+                }
+                {
+                  showInputs === "stock" &&
+                  <input className="inputPrice" placeholder="Modificar stock" name="stock" value={edit.stock} type="number"
+                    onChange={(e) => handleChange(e)} ></input>
+                }
+              </div>
             </div>
+            <div className={Style.lowerPositioning}>
+              <div className={Style.descriptionPositioning}>
+                <h1 className={Style.descriptionTitle} >Descripción <button onClick={(e) => handleInputState(e)}
+                  value={"description"}>EDIT</button></h1>
+                <div className={Style.descriptionBody} >{product.description}</div>
+              </div>
+              <div className={Style.textarea}>
+                {
+                  showInputs === "description" &&
+                  <textarea rows="20" type="text" name="description" value={edit.description} style={{ resize: "none", width: "45vw" }} aria-multiline="true"
+                    placeholder="Modifique la descripción" onChange={(e) => handleChange(e)}></textarea>
+                }
+              </div>
+            </div>
+            <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
           </div>
-          <div className={Style.lowerPositioning}>
-            <div className={Style.descriptionPositioning}>
-              <h1 className={Style.descriptionTitle}>
-                Descripción
-              </h1>
-                <button className={`btnDash ${Style.btnDesc}`}
-                  onClick={(e) => handleInputState(e)}
-                  value={"description"}
-                >
-                  EDIT
-                </button>
-              <div className={Style.descriptionBody}>{product.description}</div>
-            <div className={Style.textarea}>
-              {showInputs === "description" && (
-                <textarea
-                  rows="20"
-                  type="text"
-                  name="description"
-                  value={edit.description}
-                  style={{ resize: "none", width: "45vw" }}
-                  aria-multiline="true"
-                  placeholder="Modifique la descripción"
-                  onChange={(e) => handleChange(e)}
-                ></textarea>
-              )}
-            </div>
-            </div>
-          </div>
-          <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        </div>
-      )}
+        )}
+      </div>
+      :
+      <div>Acceso denegado</div>
+      }
     </div>
   );
 }

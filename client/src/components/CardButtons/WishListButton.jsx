@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addToWishList } from "../../../redux/actions"
-import Style from "./AddWishButton.module.css"
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { addToWishList } from "../../redux/actions";
 import { useJwt } from "react-jwt"
 
-function AddWishButton({ id }) {
+export default function WishListButton({ id }) {
 
-    const [inList, setInList] = useState(0)
     const dispatch = useDispatch()
     const { decodedToken } = useJwt(localStorage.getItem("usuario"))
     let autho = decodedToken?.role
@@ -34,14 +31,9 @@ function AddWishButton({ id }) {
         }
     }
 
-
-    return (
-        <button className={Style.cartButton} onClick={(e) => addToWish(e)}>
-            <div className={Style.karting}><FavoriteIcon style={{ fontSize: "40px" }} /></div>
-            {!inList ? (<div>Añadir a lista de deseados</div>) : (<div>En lista de deseados</div>)}
-
-        </button>
-    )
+  return (
+    <div>
+        <button onClick={(e) => addToWish(e)} className="buttonWishlist">Añadir a lista de deseados</button>
+    </div>
+  )
 }
-
-export default AddWishButton
