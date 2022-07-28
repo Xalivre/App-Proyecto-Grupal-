@@ -13,9 +13,10 @@ import ArmaTuPC from "./components/ArmaTuPc/ArmaTuPC";
 import LoginPage from "./components/LoginPage/LoginPage";
 import DashBoard from "./components/Admin/DashBoard/DashBoard";
 import Footer from "./components/Footer/Footer";
-import PaymentCheckout from "./components/PaymentCheckout/PaymentCheckout";
+import Payment from "./components/Payment/Payment";
 import DetailsAdmin from "./components/Admin/DetailsAdmin/DetailsAdmin";
 import Profile from "./components/Profile/Profile";
+import PaymentCheckout from "./components/PaymentCheckout/PaymentCheckout"
 
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
         <Route exact path="/ArmaTuPc" element={<ArmaTuPC />} />
         <Route exact path="/Login" element={<LoginPage />} />
         <Route exact path="/Dashboard" element={<DashBoard/>} />
+        <Route exact path="/payment" element={<Payment />} />
         <Route exact path="/paymentCheckout" element={<PaymentCheckout />} />
         <Route exact path="/detailsAdmin/:id" element={<DetailsAdmin />} />
         <Route exact path="/MyProfile" element={<Profile />} />

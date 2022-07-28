@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: "user"
-    }
+    },
+    cart: [],
 })
 
 export default mongoose.model('User', userSchema)

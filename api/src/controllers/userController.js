@@ -38,7 +38,7 @@ export const loginUser = async (req, res) => {
 
 export const postUsers = async (req, res) => {
   try {
-    const { username, password, email, role } = req.body;
+    const { username, password, email, role, cart } = req.body;
     if (!username || !password || !email)
       return res.json({ msg: "Missing required fields" });
     const userBD = await User.findOne({ email });
@@ -102,3 +102,23 @@ export const updateUser = async (req, res) => {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 };
+
+export const addItemToCart = async (req, res) => {
+  const { id } = req.params;
+  const { cart } = req.body;
+  try {
+
+    const userDB = await User.findById(id)
+    if(!userDB) return res.status(404).send("The user was not found")
+    while(cart.length > 0){
+      const products = []
+      const product = await Product.findById(cart[0])
+      cart.shift()
+      products.push(product)
+    }
+    userDB.cart.push(product)
+    userDB.save()
+  } catch(e) {
+
+  }
+}

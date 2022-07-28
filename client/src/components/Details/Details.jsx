@@ -25,6 +25,7 @@ export default function Details(props) {
             <div className={Style.namePositioning}>
               <h1>{product.name}</h1>
               <h1>Precio: ${product.price}</h1>
+              <h1>✔{product.stock} en Stock</h1>
               <AddCartButton id={product._id} />
               <AddWishButton id={product._id} />
             </div>
