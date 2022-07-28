@@ -7,8 +7,6 @@ function Cart() {
 
   const cart = useSelector((state) => state.cart);
 
-  console.log(cart);
-
   return (
     <div className={styles.container}>
       <h1>Carrito</h1>

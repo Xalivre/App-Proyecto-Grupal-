@@ -8,42 +8,18 @@ function AddWishButton({id}) {
 
     const [inList,setInList]=useState(0)
     const dispatch = useDispatch()
-    const wishList = useSelector((state)=>state.wishList);
+    const wishes = useSelector((state)=>state.wishList);
 
-    useEffect(()=>{
-        wishList.forEach(element => {
-            if(element._id === id){
-                setInList(1)
-            }
-        }); 
-    })
-    // function addToWish(e){
-    //     e.preventDefault()
-    //     let flag=0;
-    //     wishList.forEach(element => {
-    //         if(element._id === id){
-    //             alert("El producto ya se encuentra en la lista de deseados");
-    //             flag = 1;
-    //         }
-    //     });
-    //     if(!flag){
-    //         dispatch(addToWishList(id))
-    //         // alert("El Producto fue añadido a la lista")
-    //     }
-    // }
     function addToWish(e){
         e.preventDefault()
-        if (inList){
-            alert("El producto ya se encuentra en la lista de deseados")
-        }
-        if(!inList){
+        if(!wishes.map((a) => a._id).includes(id)) {
             dispatch(addToWishList(id))
-            setInList(1)
-            // alert("El Producto fue añadido a la lista")
+            alert("El producto fue agregado a tu lista de deseados")
+        } else {
+            alert("El producto ya se encuentra en tu lista de deseados")
         }
-        console.log(inList);
-        console.log("log de prueba 2")
     }
+    
 
   return (
     <button className={Style.cartButton} onClick={(e) => addToWish(e)}>

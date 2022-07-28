@@ -10,6 +10,8 @@
 
 .info {
     font-size: 15px;
+    overflow-y: auto;
+    height: 50vh;
 }
 
 .brands {

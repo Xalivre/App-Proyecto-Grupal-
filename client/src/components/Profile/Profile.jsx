@@ -14,6 +14,8 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
+  console.log(decodedToken)
+
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
   }, [decodedToken]);
@@ -22,8 +24,21 @@ export default function Profile() {
 
   return (
     <div>
-        <div>
-            
+        <div className={Style.title}>
+        <br/>
+            Información de la cuenta
+            <div className={Style.profileInfo}>
+              <br/><br/>
+              <div>Nombre de Usuario: {decodedToken?.username}</div>
+              <div>Correo Electrónico: {decodedToken?.email}</div>
+              <div>Dirección de Facturación: </div>
+              <div>Codigo postal: </div>
+              <div>Localidad: </div>
+              <div>Nro. de Teléfono: </div>
+              <br/><br/>
+            </div>
+            Historial de Compras
+            <br/><br/>
         </div>
       <div>
         {Payments &&

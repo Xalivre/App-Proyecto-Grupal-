@@ -56,8 +56,10 @@ function SearchBar(props) {
           <Link to="/login">
             <button className="button" >Log in</button>
           </Link></>}
-          <Link to="/" onClick={() => localStorage.removeItem("usuario")}>
+          {
+            localStorage.getItem("usuario") && <Link to="/" onClick={() => localStorage.removeItem("usuario")}>
           <button className="button" >Log out</button></Link>
+          }
         {
           <div>
             <CartDrawer cart={cart} />
