@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Style from "./ProductCard.module.css";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import { Link } from "react-router-dom";
+import { useJwt } from "react-jwt";
 
 
 
@@ -12,6 +13,13 @@ export default function ProductCard({ id, name, price, image }) {
 
   const karting = useSelector((state) => state.cart)
   const wishes = useSelector((state) => state.wishList)
+
+  const { decodedToken } = useJwt(localStorage.getItem("Carrito"));
+  console.log(decodedToken)
+
+  const cartStorage = () => {
+    localStorage.setItem("Carrito", karting)
+  }
 
   return (
     <div className={Style.carouselOrder}>
@@ -36,7 +44,7 @@ export default function ProductCard({ id, name, price, image }) {
         </div>
         <br />
         <div className={Style.buttonsContainer}>
-          <button onClick={() => {!karting.map((a) => a._id).includes(id)?dispatch(addToCart(id)) && 
+          <button onClick={() => {!karting.map((a) => a._id).includes(id)?dispatch(addToCart(id)) && cartStorage() &&
           alert("El producto fue agregado a tu carrito") : alert("Este producto ya se encuentra en tu carrito")}}
           className="button">Añadir al carrito</button>
           <br />
