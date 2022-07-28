@@ -1,8 +1,8 @@
 .container{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
+    justify-content: center;
+    /* align-items: center; */
     gap: 60px;
     /* background-color: yellowgreen; */
 }
@@ -10,9 +10,41 @@
 .card{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    margin-top: 15px;
     border: 2px solid gray;
+    align-items: center;
+    padding: 1rem;
+    gap: 1%;
+
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 7px 7px 2px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 2px 7px 7px 2px rgba(0, 0, 0, 0.46);
+    box-shadow: 2px 7px 7px 2px #156dbfb7;
+    border: none;
+
     /* background-color: red; */
     /* box-shadow: 1px 4px 4px 1px #156dbfb7; */
+    /* margin: 3%; */
 }
 
+.contains{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* gap: 5%; */
+    /* column-gap: 5%; */
+}
+
+.img{
+    width: 100%;
+    height: auto;
+    padding-bottom: 2px;
+}
+
+.btnContainer{
+    display: flex;
+    align-self: flex-end;
+}

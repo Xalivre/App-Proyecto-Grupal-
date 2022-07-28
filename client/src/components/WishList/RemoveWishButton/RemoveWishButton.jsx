@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { removeFromWishList } from '../../../redux/actions';
+import s from "./RemoveWishButton.module.css";
 
 function RemoveWishButton({id}) {
 
@@ -11,7 +12,7 @@ function RemoveWishButton({id}) {
     dispatch(removeFromWishList(id));
   }
   return (
-    <button onClick={(e) => removeWish(e)}>❌</button>
+    <button className={s.button} onClick={(e) => removeWish(e)}>X</button>
   )
 }
 
