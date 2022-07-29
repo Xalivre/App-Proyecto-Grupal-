@@ -10,6 +10,7 @@ import {
 import Style from "./Payment.module.css";
 import axios from "axios";
 import { useJwt } from "react-jwt";
+import {Link} from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51LPtrNLlcvSwUKGvyubeafRmZUaNcn4r13BgxwBAO14mkc6lTj07peI4Grt3jfVc0KEuEzT4MMxJwn2dCkaCab4e00DyrfqFX3"
@@ -55,6 +56,7 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
   };
   return (
     <div>
+      <Link to="/paymentMethod"><button>VOLVER</button></Link>
       <br/><br/><br/>
       <form onSubmit={handleSubmit} className={Style.formulario}>
         <center><h1>Realizar pago</h1></center>
