@@ -6,8 +6,8 @@ function Header() {
   return (
     <div>
       { !window.location.href.split("/").includes("Dashboard") && <div>
-      <NavBar />
       <SearchBar />
+      <NavBar />
       </div>}
     </div>
   );

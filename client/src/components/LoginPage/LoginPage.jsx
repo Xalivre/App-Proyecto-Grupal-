@@ -16,11 +16,33 @@ function LoginPage() {
 
   const [errorLogin, setErrorLogin] = useState("");
 
+  useEffect(() => {
+    setErrorLogin("")
+  }, [dispatch])
+
+  const validate = (info) => {
+    let errors = {}
+
+    if(!info.email){
+      errors.email = "Ingresar un email"
+    }
+    if(!info.password){
+      errors.password = "Ingresar la contraseña"
+    }
+    return errors
+  }
+
+  const [errors, setErrors] = useState("")
+
   const handleChange = (e) => {
     setInfo({
       ...info,
       [e.target.name]: e.target.value,
     });
+    setErrors(validate({
+      ...info,
+      [e.target.name]: e.target.value,
+    }))
   };
 
   const navigate = useNavigate();
@@ -42,7 +64,7 @@ function LoginPage() {
 
     }catch(e){
         if(e.response.data === "Email no encontrado"){
-            setErrorLogin("Email no encontrado")
+            setErrorLogin("Email inválido")
         }
         if(e.response.data === "Contraseña inválida"){
             setErrorLogin("Contraseña inválida")
@@ -62,7 +84,11 @@ function LoginPage() {
           name="email"
           onChange={handleChange}
         ></input>
-        {errorLogin === "Email no encontrado" && <p>{errorLogin}</p>}
+        { !errorLogin && !errors.email ? <p className={style.errors1}>soy un error</p> :
+        info.email.length > 0 && !errorLogin && !errors.email ? <p className={style.errors1}>soy un error</p> :
+        errorLogin === "Email inválido" ? <p className={style.errors}>{errorLogin}</p> : 
+        errorLogin === "Contraseña inválida" ? <p className={style.errors1}>soy un error</p> :
+        errors.email && <p className={style.errors}>{errors.email}</p>}
         <input
           className="input-login"
           type="password"
@@ -70,11 +96,17 @@ function LoginPage() {
           name="password"
           onChange={handleChange}
         ></input>
-        {errorLogin === "Contraseña inválida" && <p>{errorLogin}</p>}
+        { !errorLogin && !errors.password ? <p className={style.errors1}>soy un error</p> :
+        info.password.length > 0 && !errorLogin && !errors.password ? <p className={style.errors1}>soy un error</p> :
+        errorLogin === "Contraseña inválida" ? <p className={style.errors}>{errorLogin}</p> : 
+        errorLogin === "Email inválido" ? <p className={style.errors1}>soy un error</p> : 
+        errors.password && <p className={style.errors}>{errors.password}</p>}
         <br />
-        <button className="button" onClick={() => LoginUser(info)}>
+        {!errors.email && info.email.length > 0 && info.password.length > 0 && !errors.password ? <button className="button" onClick={() => LoginUser(info)}>
           Iniciar Sesion
-        </button>
+        </button> : <button className="button" onClick={() => alert("Completar los campos")}>
+          Iniciar Sesion
+        </button>}
         <br />
       </div>
     </div>
