@@ -20,6 +20,24 @@ const userSchema = new mongoose.Schema({
         default: "user"
     },
     cart: [],
+    phoneNumber: {
+        type: Number,
+    },
+    zipCode:{
+        type: Number,
+    },
+    address: {
+        type: String,
+    },
+    location:{
+        type: String,
+    },
+    accountState: {
+        type: String,
+        default: "active"
+    }
+
+
 })
 
 export default mongoose.model('User', userSchema)
