@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import { encrypt, compare } from "./helpers/handleBCrypt.js";
 import { tokenSign } from "./helpers/generateToken.js";
- import { sendMail } from "../librarys/emailer.js";
+import { sendMail } from "../librarys/emailer.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -54,7 +54,9 @@ export const postUsers = async (req, res) => {
       role: role || "user",
     });
 
-    sendMail(email, username).then(result => console.log("email sended")).catch(err => console.log(err));
+    sendMail(email, username)
+      .then((result) => console.log("email sended"))
+      .catch((err) => console.log(err));
 
     return res.json({ msg: `${username} create succesfully` });
   } catch (e) {
@@ -97,18 +99,15 @@ export const addItemToCart = async (req, res) => {
   const { id } = req.params;
   const { cart } = req.body;
   try {
-
-    const userDB = await User.findById(id)
-    if(!userDB) return res.status(404).send("The user was not found")
-    while(cart.length > 0){
-      const products = []
-      const product = await Product.findById(cart[0])
-      cart.shift()
-      products.push(product)
+    const userDB = await User.findById(id);
+    if (!userDB) return res.status(404).send("The user was not found");
+    while (cart.length > 0) {
+      const products = [];
+      const product = await Product.findById(cart[0]);
+      cart.shift();
+      products.push(product);
     }
-    userDB.cart.push(product)
-    userDB.save()
-  } catch(e) {
-
-  }
-}
+    userDB.cart.push(product);
+    userDB.save();
+  } catch (e) {}
+};
