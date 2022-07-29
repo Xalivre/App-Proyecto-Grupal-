@@ -1,28 +1,45 @@
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config()
+
+const CLIENT_ID ="814477837838-7q4addoiejdkrppc90tfphp1s251gkhn.apps.googleusercontent.com";
+const CLIENT_SECRET ="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";
+const REFRESH_TOKEN ="1//04g8_LXJTl1HmCgYIARAAGAQSNwF-L9IrbDydGLxszcu6rAxJJX6n0oSAanospoeUAqQQrllAVw13eUiY-5DxijKuKY1K89a2040";
 
 
-export const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth:{
-        type: "OAuth2",        
-        user: 'gaminggamehub1',
-        pass: 'lnixxsvibgmixouh',
-        clientId: "830954708046-ljadfm48r0mpm8c3s4upj8ct6n8lbv3k.apps.googleusercontent.com",
-        clientSecret: "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",
-        refreshToken: "1//04Mz8jyuQ3V9XCgYIARAAGAQSNwF-L9Irkx6l_hXJ_bkYq8uSzS4rmaYlgd0sOE3BmulHHKabv0L8f6cUQt8yLGyuRqmpFqYEQx4",
-        accessToken: "ya29.A0AVA9y1vDv62TgjPNjQfVtkMulXknSTegqOW0QgPvAXYl53HWtkWuhCW40iNnwwAIbebIAOzH1otcjwTl9lu4Tv48U5Z4VYfUAohjymkGA4UUKrkJvPSs2uBmmznUqLxTrEqT2Zeg8cdBbrQmgiCOammgi3tjYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4REtqdHMyRXhPcEhQQ3ViVGVEc0RVQQ0163"
 
-    },
-})
+export const sendMail = async (email, username) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        type: "OAuth2",
+        user: "gaminggamehub1@gmail.com",
+        pass: "tzcpnaetuumckfta",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+      }
+    });
+    const formatUsername = (username) => username.split("").map((l, index) => index === 0 ? l.toUpperCase() : l.toLowerCase()).join("") 
 
-/* transporter.verify(function (error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Server is ready to take our messages");
+    const mailOptions = {
+        from: '"Bienvenido/a a GameHUB!" <gaminggamehub1@gmail.com>', 
+        to: email,
+        subject: "Te has registrado en GameHUB",
+        html: `<p> Hola <b>${formatUsername(username)}</b> bienvenido/a a <b>GameHUB</b>. Para realizar una compra, selecciona todos aquellos productos que
+        quieras añadir a tu carrito de compras. Esperamos que disfrutes de nuestros productos y servicios.
+        En caso de necesitar ayuda, dirigete a la sección <b>Ayuda</b> donde encontraras una guía.
+  
+        Desde <b>GameHUB</b> te deseamos éxitos</p>
+        `,
     }
-  })
- */
+   const result = await transporter.sendMail(mailOptions)
+   return result
 
+  } catch (e) {
+    console.log(e);
+  }
+};
