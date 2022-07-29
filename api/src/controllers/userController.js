@@ -6,9 +6,7 @@ import { sendMail } from "../librarys/emailer.js";
 export const getUsers = async (req, res) => {
 const {email, password } = req.body
   try {
-    const users = await User.find({});
-    if (!users) return res.json({ msg: "Users not found" });
-    return res.json(users);
+    
     if(email){
       const user = await User.findOne({ email })
       if(!user) return res.status(405).send("Email no encontrado");
