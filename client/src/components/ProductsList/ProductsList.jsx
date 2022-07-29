@@ -113,7 +113,6 @@ export default function ProductsList() {
           <DropdownPrecio></DropdownPrecio>
           <CategoriesBar products={filtereds.length > 0 && filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter).map((e) => e.brands)} setBrandFilter={setBrandFilter} />
         </div>
-        {/* <button onClick={console.log()}>AJLKSHDA</button> */}
         <div className={Style.cardsBar}>
           <div className={Style.cardsContainer}>
             {

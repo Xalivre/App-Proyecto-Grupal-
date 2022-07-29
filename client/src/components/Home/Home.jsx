@@ -28,7 +28,6 @@ function Home() {
   const recentlyAdded = useSelector((state) => state.recentlyAdded);
 
   const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
-  console.log(decodedToken)
 
   useEffect(() => {
     dispatch(getProducts());

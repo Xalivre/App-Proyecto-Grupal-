@@ -36,7 +36,6 @@ export default function ProductsListAdmin() {
     dispatch(getBrands())
   }, [dispatch])
 
-  console.log(categoryFilter)
   return (
     <div>
       {/* <div className={Style.imagePositioning}>

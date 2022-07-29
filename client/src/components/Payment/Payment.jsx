@@ -21,7 +21,6 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
 
-  console.log(emailUser + "CHAHU")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +44,6 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
           email: emailUser
         })
         
-        console.log(data)
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);
@@ -110,7 +108,6 @@ const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
      if(decodedToken) {
        emailUser = decodedToken.email
      }
-     console.log(emailUser + "HOLA")
   return (
     <Elements stripe={stripePromise} className={Style.inputs}>
       {cart.length > 0 ? (

@@ -14,7 +14,6 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
-  console.log(decodedToken)
 
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
@@ -44,7 +43,6 @@ export default function Profile() {
         {Payments &&
           Payments.map((e) => e.container).map((p) =>
             p.map((x) => {
-              console.log(x.name);
               return (
                 <div className={Style.container}>
                   <div className={Style.positioning}>
