@@ -4,10 +4,29 @@ import { tokenSign } from "./helpers/generateToken.js";
 import { sendMail } from "../librarys/emailer.js";
 
 export const getUsers = async (req, res) => {
+<<<<<<< Updated upstream
   try {
     const users = await User.find({});
     if (!users) return res.json({ msg: "Users not found" });
     return res.json(users);
+=======
+  const {email, password } = req.body
+  console.log(req.body)
+  try {
+    if(email){
+      const user = await User.findOne({ email })
+      if(!user) return res.status(405).send("Email no encontrado");
+      const checkPassword = await compare(password, user.password)
+      
+      checkPassword ? res.status(201).send("Password is OK") : res.status(409).send("Contraseña inválida")
+
+    }else {
+      const users = await User.find({});
+      if (!users) return res.status(404).json({ msg: "Users not found" });
+      return res.json(users);
+    }
+
+>>>>>>> Stashed changes
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
