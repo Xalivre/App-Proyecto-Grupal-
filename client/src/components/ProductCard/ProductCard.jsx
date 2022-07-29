@@ -17,7 +17,6 @@ export default function ProductCard({ id, name, price, image }) {
   const wishes = useSelector((state) => state.wishList)
 
   const { decodedToken } = useJwt(localStorage.getItem("Carrito"));
-  console.log(decodedToken)
 
   const cartStorage = async (id) => {
     let json = await axios.get("http://localhost:3000/product/" + id);
