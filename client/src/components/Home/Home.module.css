@@ -65,7 +65,7 @@
 
 .imgCarousel{
     width: 100%;
-    height: 25rem;
+    height: 100%;
 }
 
 @media screen and (max-width: 768px) {

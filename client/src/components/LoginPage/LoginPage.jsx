@@ -17,66 +17,65 @@ function LoginPage() {
   const [errorLogin, setErrorLogin] = useState("");
 
   useEffect(() => {
-    setErrorLogin("")
-  }, [dispatch])
+    setErrorLogin("");
+  }, [dispatch]);
 
   const validate = (info) => {
-    let errors = {}
+    let errors = {};
 
-    if(!info.email){
-      errors.email = "Ingresar un email"
+    if (!info.email) {
+      errors.email = "Ingresar un email";
     }
-    if(!info.password){
-      errors.password = "Ingresar la contraseña"
+    if (!info.password) {
+      errors.password = "Ingresar la contraseña";
     }
-    return errors
-  }
+    return errors;
+  };
 
-  const [errors, setErrors] = useState("")
+  const [errors, setErrors] = useState("");
 
   const handleChange = (e) => {
     setInfo({
       ...info,
       [e.target.name]: e.target.value,
     });
-    setErrors(validate({
-      ...info,
-      [e.target.name]: e.target.value,
-    }))
+    setErrors(
+      validate({
+        ...info,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const navigate = useNavigate();
 
   const LoginUser = async (payload) => {
-    try{
-        const user = await axios.post(`http://localhost:3000/accounts`, payload);
-        if(user.status === 201) {
-            await axios
-            .post("http://localhost:3000/login", payload)
-            .then((r) => {
-              localStorage.setItem("usuario", r.data.tokenSession);
-              r.data.data.role === "admin"
-                ? navigate("/Dashboard")
-                : navigate("/");
-            })
-        }
-
-
-    }catch(e){
-        if(e.response.data === "Email no encontrado"){
-            setErrorLogin("Email inválido")
-        }
-        if(e.response.data === "Contraseña inválida"){
-            setErrorLogin("Contraseña inválida")
-        }
+    try {
+      const user = await axios.post(`http://localhost:3000/accounts`, payload);
+      if (user.status === 201) {
+        await axios.post("http://localhost:3000/login", payload).then((r) => {
+          localStorage.setItem("usuario", r.data.tokenSession);
+          r.data.data.role === "admin" ? navigate("/Dashboard") : navigate("/");
+        });
+      }
+    } catch (e) {
+      if (e.response.data === "Email no encontrado") {
+        setErrorLogin("Email inválido");
+      }
+      if (e.response.data === "Contraseña inválida") {
+        setErrorLogin("Contraseña inválida");
+      }
     }
-
-     
   };
 
   return (
     <div className={style.container}>
+      <i className={`${style.icon} fa-solid fa-user-large`}></i>
+      <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Login</h1>
+      <p>Please login with your account</p>
+
       <div className={style.inputs}>
+      <p>Enter your email address:</p>
         <input
           className="input-login"
           type="text"
@@ -84,29 +83,52 @@ function LoginPage() {
           name="email"
           onChange={handleChange}
         ></input>
-        { !errorLogin && !errors.email ? <p className={style.errors1}>soy un error</p> :
-        info.email.length > 0 && !errorLogin && !errors.email ? <p className={style.errors1}>soy un error</p> :
-        errorLogin === "Email inválido" ? <p className={style.errors}>{errorLogin}</p> : 
-        errorLogin === "Contraseña inválida" ? <p className={style.errors1}>soy un error</p> :
-        errors.email && <p className={style.errors}>{errors.email}</p>}
+        {!errorLogin && !errors.email ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : info.email.length > 0 && !errorLogin && !errors.email ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : errorLogin === "Email inválido" ? (
+          <p className={style.errors}>{errorLogin}</p>
+        ) : errorLogin === "Contraseña inválida" ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : (
+          errors.email && <p className={style.errors}>{errors.email}</p>
+        )}
+      <p>Enter your password:</p>
         <input
-          className="input-login"
+          className={`input-login ${style.input}`}
           type="password"
           placeholder="Contraseña"
           name="password"
           onChange={handleChange}
         ></input>
-        { !errorLogin && !errors.password ? <p className={style.errors1}>soy un error</p> :
-        info.password.length > 0 && !errorLogin && !errors.password ? <p className={style.errors1}>soy un error</p> :
-        errorLogin === "Contraseña inválida" ? <p className={style.errors}>{errorLogin}</p> : 
-        errorLogin === "Email inválido" ? <p className={style.errors1}>soy un error</p> : 
-        errors.password && <p className={style.errors}>{errors.password}</p>}
+        {!errorLogin && !errors.password ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : info.password.length > 0 && !errorLogin && !errors.password ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : errorLogin === "Contraseña inválida" ? (
+          <p className={style.errors}>{errorLogin}</p>
+        ) : errorLogin === "Email inválido" ? (
+          <p className={style.errors1}>soy un error</p>
+        ) : (
+          errors.password && <p className={style.errors}>{errors.password}</p>
+        )}
         <br />
-        {!errors.email && info.email.length > 0 && info.password.length > 0 && !errors.password ? <button className="button" onClick={() => LoginUser(info)}>
-          Iniciar Sesion
-        </button> : <button className="button" onClick={() => alert("Completar los campos")}>
-          Iniciar Sesion
-        </button>}
+        {!errors.email &&
+        info.email.length > 0 &&
+        info.password.length > 0 &&
+        !errors.password ? (
+          <button className="button" onClick={() => LoginUser(info)}>
+            Iniciar Sesion
+          </button>
+        ) : (
+          <button
+            className="button"
+            onClick={() => alert("Completar los campos")}
+          >
+            Iniciar Sesion
+          </button>
+        )}
         <br />
       </div>
     </div>
