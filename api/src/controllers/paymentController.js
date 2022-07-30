@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import Payment from "../models/Payments.js";
 import User from "../models/User.js";
-/* import { transporter } from "../librarys/emailer.js"; */
+import { sendMail } from "../librarys/emailer.js";
 
 const stripe = new Stripe(
   "sk_test_51LPtrNLlcvSwUKGvA46HsDBeocgeeQRHsWSLTAQeyTzHzZrTk18ml4stPalgNse5zyOObM5fLFc3yNsnmSgHnbcl00y02QLl7l"
@@ -27,8 +27,6 @@ export const postPayments = async (req, res) => {
     userDB.paymentHistory.push(paymentDB);
     userDB.save();
 
-
-
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
@@ -36,15 +34,8 @@ export const postPayments = async (req, res) => {
       payment_method: id,
       confirm: true,
     });
-/*     
-       await transporter.sendMail({
-      from: '"GameHUB purchase" <gaminggamehub1@gmail.com>',
-      to: `${email}`,
-      subject: "Thank you for purchase", // Subject line
-      html: `<b> Hello ${username}!, your purcharse id is: ${id} and the amount is ${amount}. </b>`, // html body
-    }).then(console.log).catch(console.log);  
- */
 
+    sendMail(email, userDB.username, amount).then(r => console.log("payment email sended")).catch((err) => console.log(err));
 
     return res.send({ message: "Successful payment" });
   } catch (e) {
