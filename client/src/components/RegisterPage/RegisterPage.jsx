@@ -83,32 +83,34 @@ function RegisterPage(){
 
     return (
         <div className={Style.container}>
+        <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Register</h1> 
+        <i className={`${Style.icon} fa-solid fa-user-astronaut`}></i>
             <div className={Style.inputs}>
                 <input className="input-register" value={info.username} type="text" placeholder="Nombre de Usuario" name="username" onChange={ (e) => handleChange(e)}></input>
                 <div>
                     <ul>
-                        <li id="user">El Nombre de Usuario debe tener entre 4 y 15 caracteres</li>
+                        <li className={Style.li} id="user">El Nombre de Usuario debe tener entre 4 y 15 caracteres</li>
                     </ul>
                 </div>
                 <input className="input-register" type="text" placeholder="Correo" name="email" onChange={handleChange}></input>
                 <div>
                     <ul>
-                        <li id="mail">Ingresa un correo válido</li>
+                        <li className={Style.li} id="mail">Ingresa un correo válido</li>
                     </ul>
                 </div>
                 <input className="input-register" type="text" placeholder="Contraseña" name="password" onChange={handleChange}></input>
                 <div>
                     <ul>
-                        <li id="number">Debe contener al menos un número</li>
-                        <li id="upper">Debe contener al menos una letra mayúscula</li>
-                        <li id="lower">Debe contener al menos una letra minúscula</li>
-                        <li id="length">Debe tener entre 8 y 30 caracteres</li>
+                        <li className={Style.li} id="number">Debe contener al menos un número</li>
+                        <li className={Style.li} id="upper">Debe contener al menos una letra mayúscula</li>
+                        <li className={Style.li} id="lower">Debe contener al menos una letra minúscula</li>
+                        <li className={Style.li} id="length">Debe tener entre 8 y 30 caracteres</li>
                     </ul>
                 </div>
                 {
                     !errors.username && !errors.email && !errors.password ? <button className="button" onClick={()=> {dispatch(postUser(info)); alert("Cuenta creada con éxito"); navigate("/Login")}}>Registrarse</button>
                     : 
-                    <button className="button" disabled>Registrarse</button>
+                    <button className={`${Style.btn} button`} disabled>Registrarse</button>
                 }
                 <br /> 
             </div>

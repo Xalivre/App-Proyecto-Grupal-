@@ -462,7 +462,7 @@ template {
   border: none;
   border-bottom: 2px solid #156DBF;
   outline: none;
-  width: 15vw;
+  /* width: 15vw; */
 }
 
 .input-login{
@@ -470,7 +470,7 @@ template {
   border: none;
   border-bottom: 2px solid #156DBF;
   outline: none;
-  width: 12vw;
+  /* width: 12vw; */
 }
 
 .inputPrice{
