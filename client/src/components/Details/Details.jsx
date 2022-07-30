@@ -18,8 +18,13 @@ export default function Details(props) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    autho && autho === "user" && setLoading(false)
+    autho && autho === "user" /* && setLoading(false) */
   }, [decodedToken])
+
+  useEffect(() => {
+    console.log(product)
+    product.name && setLoading(false)
+  }, [product])
 
   useEffect(() => {
     dispatch(getProductDetails(id));
@@ -28,7 +33,7 @@ export default function Details(props) {
 
   return (
     <div>
-      {product && (
+      {!loading ?
         <div>
           <div className={Style.container}>
             <img src={product.image && product.image[0].url} alt="img" />
@@ -47,8 +52,8 @@ export default function Details(props) {
             <div>{product.description}</div>
           </div>
           <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        </div>
-      )}
+        </div> : <div>loading...</div>
+      }
     </div>
   );
 }

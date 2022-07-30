@@ -27,8 +27,6 @@ function Home() {
   const mostViewed = useSelector((state) => state.mostViewed);
   const recentlyAdded = useSelector((state) => state.recentlyAdded);
 
-  const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
-
   useEffect(() => {
     dispatch(getProducts());
     dispatch(filterProducts());

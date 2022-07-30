@@ -10,18 +10,24 @@ import DropdownComponent from '../Dropdown/DropdownToggle'
 import CategoriesBar from '../BrandsComponent/BrandsComponent'
 import DropdownPrecio from '../DropdownPrecio/DropdownPrecio'
 
-const a = localStorage.getItem("usuario")
+/* const a = localStorage.getItem("usuario")
 
-export const getInfo = a
+export const getInfo = a */
 
 export default function ProductsList() {
-
+  const allProducts = useSelector((state) => state.allProducts)
   const filtereds = useSelector((state) => state.filteredProducts)
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
   const [page2, setPage2] = useState(18)
   const [brandFilter, setBrandFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    allProducts.length > 0 && setLoading(false)
+  }, [allProducts])
 
 
 
@@ -107,6 +113,7 @@ export default function ProductsList() {
           </select> */}
         </div>
       </div>
+      
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
           <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />
@@ -132,7 +139,7 @@ export default function ProductsList() {
                     </div>
                   )
                 })
-                :
+                :  loading? <div>Loading...</div> :
                 <div>Producto inexistente!</div>
             }
           </div>

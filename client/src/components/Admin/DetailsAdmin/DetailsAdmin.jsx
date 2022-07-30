@@ -16,8 +16,12 @@ export default function DetailsAdmin(props) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    autho && autho === "admin" && setLoading(false)
+    /* autho && autho === "admin" */
   }, [decodedToken])
+
+  useEffect(() => {
+    product[0].name && setLoading(false)
+  }, [product])
 
   const [edit, setEdit] = useState({
     price: "",
