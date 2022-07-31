@@ -6,7 +6,7 @@ import Style from "./BrandsComponent.module.css"
 
 export default function CategoriesBar(props) {
 
-    const brands = useSelector((state) => state.brands.slice(0,10))
+    const brands = useSelector((state) => state.brands)
 
     return (
         <div className={Style.container}>
