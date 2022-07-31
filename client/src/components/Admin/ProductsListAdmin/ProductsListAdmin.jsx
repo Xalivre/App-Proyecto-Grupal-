@@ -27,6 +27,7 @@ export default function ProductsListAdmin() {
     }
     setPage1(0);
     setPage2(18);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtereds])
 
 
