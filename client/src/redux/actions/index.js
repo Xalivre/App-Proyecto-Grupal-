@@ -62,10 +62,14 @@ export function addToCart(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3000/product/" + id);
-      return dispatch({
-        type: "ADD_TO_CART",
-        payload: json.data,
-      });
+      if(json.data.stock > 0) {
+        alert("El producto fue agregado a tu carrito")
+        return dispatch({
+          type: "ADD_TO_CART",
+          payload: json.data,
+        });
+      }
+      return alert("No hay stock disponible")
     } catch (e) {
       console.log(e);
     }
@@ -76,6 +80,13 @@ export function deleteFromCart(id){
   return {
     type: 'REMOVE_CART',
     payload: id
+  }
+}
+
+export function modifyCart(carrito){
+  return {
+    type: "MODIFY_CART",
+    payload: carrito
   }
 }
 
@@ -201,6 +212,14 @@ export function editProduct(payload, id) {
   return async function (dispatch) {
     const edit = await axios.put("http://localhost:3000/product/" + id, payload)
     return edit
+  }
+}
+
+export function loginRefresher() {
+  return function (dispatch) {
+    dispatch({
+      type: "LOGIN_REFRESHER"
+    })
   }
 }
 

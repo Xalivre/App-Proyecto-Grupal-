@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./LoginPage.module.css";
+import { loginRefresher } from "../../redux/actions";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ function LoginPage() {
           localStorage.setItem("usuario", r.data.tokenSession);
           r.data.data.role === "admin" ? navigate("/Dashboard") : navigate("/");
         });
+        dispatch(loginRefresher())
       }
     } catch (e) {
       if (e.response.data === "Email no encontrado") {

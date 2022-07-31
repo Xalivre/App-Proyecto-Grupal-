@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import styles from './Paging.module.css'
 
-export default function PaginationOutlined(props) {
+export default function PaginationOutlined(props: any) {
 
     const [page, setPage] = React.useState(1);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
