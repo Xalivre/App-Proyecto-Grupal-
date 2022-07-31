@@ -40,6 +40,7 @@ const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
 const MODIFY_CART = "MODIFY_CART"
 const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 const GET_USERS = "GET_USERS"
+const BAN_USER = "BAN_USER"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -183,6 +184,11 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case EDIT_PRODUCT:
+      return {
+        ...state,
+      }
+
+    case BAN_USER:
       return {
         ...state,
       }

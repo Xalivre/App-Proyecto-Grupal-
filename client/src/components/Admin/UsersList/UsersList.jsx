@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers } from '../../../redux/actions'
+import { getUsers, banUser} from '../../../redux/actions'
 
 export default function UsersList() {
 
@@ -12,7 +12,15 @@ export default function UsersList() {
         dispatch(getUsers())
     }, [])
 
-    console.log(Users)
+    const banUserFunction = (e) => {
+        let idUser = e.target.value
+        dispatch(banUser({
+            accountState : "Banned"
+        }, idUser))
+        alert("Usuario baneadon con exito")
+    }
+
+    
   return (
     <div>
         <div>
@@ -23,6 +31,7 @@ export default function UsersList() {
                     <h6>Nombre de Usuario: {e.username}</h6>
                     <h6>Correo: {e.email}</h6>
                     <h6>Estado de la cuenta: {e.accountState}</h6>
+                    <button value={e._id} onClick={(e) => banUserFunction(e)}>Banear</button>
                  </div>
                 </div>
             )
