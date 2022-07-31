@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import CreateProduct from '../../CreateProduct/CreateProduct'
 import ProductsListAdmin from '../ProductsListAdmin/ProductsListAdmin'
 import styles from "./DashBoard.module.css"
 import { useJwt } from "react-jwt"
+import UsersList from '../UsersList/UsersList'
 
 
 export default function DashBoard() {
-
-  const dispatch = useDispatch()
   const { decodedToken } = useJwt(localStorage.getItem("usuario"))
 
   let autho = decodedToken?.role
@@ -39,13 +36,12 @@ export default function DashBoard() {
             <div className={styles.container}>
               <button className={styles.text} value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
               <button value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
-              {localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
-                <button  >Lista de usuarios</button>
-              </Link>}
+              <button value="UsersList" onClick={(e) => handleState(e)}>Lista de usuarios</button>
             </div>
             <div>
               {first === "create" && <CreateProduct></CreateProduct>}
               {first === "list" && <ProductsListAdmin></ProductsListAdmin>}
+              {first === "UsersList" && <UsersList></UsersList>}
             </div>
           </div>
           :

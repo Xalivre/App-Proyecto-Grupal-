@@ -11,6 +11,16 @@ export function getProducts() {
   };
 }
 
+export function getUsers() {
+  return async function (dispatch) {
+    let json = await axios.get("http://localhost:3000/accounts", {})
+    return dispatch({
+      type: "GET_USERS",
+      payload: json.data
+    })
+  }
+}
+
 export function getUserPayments(email) {
   return async function (dispatch) {
     let r = await axios.get("http://localhost:3000/api/checkoutEmail?email=" + email)
