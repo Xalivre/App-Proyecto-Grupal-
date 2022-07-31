@@ -18,12 +18,12 @@ export default function DropdownComponent(props) {
     return (
         <div>
             <Dropdown isOpen={dropdown} toggle={openDropdown} size="lr" >
-                <DropdownToggle caret>
+                <DropdownToggle className="dropdown" caret>
                     Categorias
                 </DropdownToggle>
-                <DropdownMenu >
+                <DropdownMenu className="dropdownMenu">
                     {
-                        props.products && categories.map((e) => <DropdownItem value={e} onClick={async (e) => {dispatch(searchName("aklsjdhlaksjdaskldazzzz")); props.setCategoryFilter(e.target.value); props.setBrandFilter("")}}
+                        props.products && categories.map((e) => <DropdownItem className="dropdown" value={e} onClick={async (e) => {dispatch(searchName("aklsjdhlaksjdaskldazzzz")); props.setCategoryFilter(e.target.value); props.setBrandFilter("")}}
                         > {e}
                         </DropdownItem>)
                     }

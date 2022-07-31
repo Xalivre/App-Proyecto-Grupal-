@@ -52,7 +52,7 @@ function Home() {
 
       <div className={Style.containerSections}>
         <div className={Style.section}>
-          <h1 className={Style.title}> Hecha un vistazo!</h1>
+          <h1 className={Style.title}> Echa un vistazo !</h1>
           <div className={Style.carouselBackground}>
             <div className={Style.carousel}>
               {carousel?.map((e) => {
@@ -96,7 +96,7 @@ function Home() {
           </div>
         </div>
         <div className={Style.section}>
-          <h1 className={Style.title}>Novedades!</h1>
+          <h1 className={Style.title}>Novedades !</h1>
           <div className={Style.carouselBackground}>
             <div className={Style.carousel}>
               {recentlyAdded?.map((e) => {

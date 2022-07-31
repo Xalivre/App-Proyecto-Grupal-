@@ -507,3 +507,28 @@ template {
   box-shadow: 0px 4px 4px 0px #156DBF;
   padding: .3rem .7rem;
 }
+
+.dropdown{
+  background-color: white;
+  color: #156DBF;
+  font-size: 15px;
+  border-radius: 15px;
+  width: 10rem;
+}
+
+.dropdown:focus{
+  outline: none;
+  background-color: white;
+  color: #156DBF
+}
+
+.dropdown:hover{
+  background-color: #156DBF;
+  color: white;
+}
+
+
+
+.dropdownMenu{
+  background-color: white;
+}

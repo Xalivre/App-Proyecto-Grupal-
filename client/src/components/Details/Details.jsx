@@ -5,6 +5,7 @@ import { getProductDetails, clearPage } from "../../redux/actions";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import AddWishButton from "../WishList/AddWIshButton/AddWishButton";
 import Style from "./Details.module.css"
+import loader from "../../img/loader.gif"
 
 
 export default function Details(props) {
@@ -45,7 +46,7 @@ export default function Details(props) {
             <div>{product.description}</div>
           </div>
           <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        </div> : <div>loading...</div>
+        </div> : <div className={Style.loader}><img className={Style.gif} src={loader} alt='loading'></img></div>
       }
     </div>
   );

@@ -14,14 +14,14 @@ export default function DropdownPrecio() {
   return (
     <div>
         <Dropdown isOpen={dropdown} toggle={openDropdown} size="lr" >
-            <DropdownToggle caret>
+            <DropdownToggle className="dropdown" caret>
                 Precio
             </DropdownToggle>
-            <DropdownMenu >      
-                   <DropdownItem value="Ascending" onClick={(e) => dispatch(sortPrice(e.target.value))}>
+            <DropdownMenu className="dropdownMenu">      
+                   <DropdownItem className="dropdown" value="Ascending" onClick={(e) => dispatch(sortPrice(e.target.value))}>
                     Menor precio
                     </DropdownItem>
-                     <DropdownItem value="Descending" onClick={(e) => dispatch(sortPrice(e.target.value))}>
+                     <DropdownItem className="dropdown" value="Descending" onClick={(e) => dispatch(sortPrice(e.target.value))}>
                         Mayor precio
                      </DropdownItem>
             </DropdownMenu>

@@ -83,7 +83,7 @@ function RegisterPage(){
 
     return (
         <div className={Style.container}>
-        <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Register</h1> 
+        <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Registrarse</h1> 
         <i className={`${Style.icon} fa-solid fa-user-astronaut`}></i>
             <div className={Style.inputs}>
                 <input className="input-register" value={info.username} type="text" placeholder="Nombre de Usuario" name="username" onChange={ (e) => handleChange(e)}></input>

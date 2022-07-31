@@ -41,7 +41,7 @@ function NavBar() {
             isActive ? Style.navbar_link_active : Style.navbar_link
           }
         >
-          <h1>Home</h1>
+          <h1>Inicio</h1>
         </NavLink>
         <NavLink
           to="/products"

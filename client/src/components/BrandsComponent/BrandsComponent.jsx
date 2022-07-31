@@ -10,20 +10,17 @@ export default function CategoriesBar(props) {
 
     return (
         <div className={Style.container}>
-            <div className={Style.list}>
-            <br /> 
-                <div className={Style.title}>
+                <h1 className={Style.title}>
                     Marcas
-                </div>
+                </h1>
                 <br /> 
                 <div className={Style.info}>
                     {
-                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <div className={Style.brands} id={e} onClick={(e) => props.setBrandFilter(e.target.id)}
-                        >🔹 {e}
-                        </div>)
+                        props.products && brands?.filter((j) => props.products.includes(j)).map((e) => <li className={Style.brands} id={e} onClick={(e) => props.setBrandFilter(e.target.id)}
+                        >{e}
+                        </li>)
                     }
                 </div>
             </div>
-        </div>
     )
 }

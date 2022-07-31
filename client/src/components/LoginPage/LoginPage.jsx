@@ -72,11 +72,11 @@ function LoginPage() {
   return (
     <div className={style.container}>
       <i className={`${style.icon} fa-solid fa-user-large`}></i>
-      <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Login</h1>
-      <p>Please login with your account</p>
+      <h1 style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold"}}>Inicio de sesión</h1>
+      <p>Ingresa con tu cuenta</p>
 
       <div className={style.inputs}>
-      <p>Enter your email address:</p>
+      <p>Ingresa tu email :</p>
         <input
           className="input-login"
           type="text"
@@ -95,7 +95,7 @@ function LoginPage() {
         ) : (
           errors.email && <p className={style.errors}>{errors.email}</p>
         )}
-      <p>Enter your password:</p>
+      <p>Ingresa tu contraseña :</p>
         <input
           className={`input-login ${style.input}`}
           type="password"

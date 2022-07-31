@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
+import loader from "../../../img/loader.gif"
 /* import { useJwt } from "react-jwt" */
 
 export default function DetailsAdmin(props) {
@@ -74,6 +75,9 @@ export default function DetailsAdmin(props) {
 
   return (
     <div>
+      <Link to='/Dashboard'>
+     <button>Volver</button>
+     </Link>
       {
         loading === false ? <div>
           {product && (
@@ -125,7 +129,7 @@ export default function DetailsAdmin(props) {
             </div>
           )}
         </div>
-          : loading === true ? <div>loading</div> :
+          : loading === true ? <div className={Style.loader} ><img className={Style.gif} src={loader} alt="loading"></img></div> :
           <div>Acceso denegado</div>
       }
     </div>

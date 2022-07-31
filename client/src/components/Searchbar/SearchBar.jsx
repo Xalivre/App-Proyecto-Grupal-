@@ -51,28 +51,28 @@ function SearchBar(props) {
 
   return (
     <div className={styles.containerAll}>
-      <Link to="/">
+     { autho !== "admin" ? <Link to="/">
         <img className={styles.logo} src={logo} alt="img" />
-      </Link>
+      </Link> :  <img className={styles.logo} src={logo} alt="img" />}
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <input
           onChange={(e) => setSearchProduct(e.target.value)}
           value={searchProduct}
           className={`${styles.input} input`}
-          placeholder="Search product"
+          placeholder="Buscar un producto.."
         />
-        <button className="button">Search</button>
+        <button className="button">Buscar</button>
       </form>
       <div className={styles.login}>
         {!localStorage.getItem("usuario") && <><Link to="/register">
-          <button className="button" >Sign In</button>
+          <button className="button" >Registrarse</button>
         </Link> 
           <Link to="/login">
-            <button className="button" >Log in</button>
+            <button className="button" >Iniciar Sesión</button>
           </Link></>}
           {
             localStorage.getItem("usuario") && <Link to="/" onClick={() => {localStorage.removeItem("usuario"); dispatch(loginRefresher())}}>
-          <button className="button" >Log out</button></Link>
+          <button className="button" >Cerrar Sesión</button></Link>
           }
         {
           autho !== "admin" &&
