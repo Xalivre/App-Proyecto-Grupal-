@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {postUser} from "../../redux/actions"
 import Style from "./RegisterPage.module.css"

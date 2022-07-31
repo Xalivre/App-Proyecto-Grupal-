@@ -1,10 +1,8 @@
 import { sortPrice } from '../../redux/actions'
 import React, { useState} from 'react'
-import { useNavigate, Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, searchName } from "../../redux/actions/"
+import { useDispatch } from 'react-redux';
 
 export default function DropdownPrecio() {
     const [dropdown, setDropdown] = useState(false)

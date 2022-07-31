@@ -33,14 +33,14 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        const {data} = await axios.post("http://localhost:3000/api/checkout", {
+        /* const {data} = */ await axios.post("http://localhost:3000/api/checkout", {
           id,
           amount,
           cart,
           email: emailUser
         });
 
-        const searchUserForEmail = await axios.get("http://localhost:3000/api/checkoutEmail", {
+        /* const searchUserForEmail = */ await axios.get("http://localhost:3000/api/checkoutEmail", {
           email: emailUser
         })
         
@@ -103,7 +103,7 @@ export default function PaymentCard() {
     }
   }
 
-const { decodedToken, isExpired } = useJwt(localStorage.getItem("usuario"));
+const { decodedToken } = useJwt(localStorage.getItem("usuario"));
      let emailUser  
      if(decodedToken) {
        emailUser = decodedToken.email

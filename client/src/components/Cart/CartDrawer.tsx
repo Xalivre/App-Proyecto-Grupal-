@@ -8,12 +8,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+/* import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail'; */
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
-import { Link, useNavigate } from "react-router-dom";
-import Style from "./Cart.module.css"
+import { Link } from "react-router-dom";
+import Style from "./Cart.module.css";
+
+
 
 
 

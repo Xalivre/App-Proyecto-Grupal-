@@ -3,24 +3,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
-import { useJwt } from "react-jwt"
+/* import { useJwt } from "react-jwt" */
 
 export default function DetailsAdmin(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
-  let autho = decodedToken?.role
+  /* const { decodedToken } = useJwt(localStorage.getItem("usuario")) */
+  /* let autho = decodedToken?.role */
   const { id } = useParams();
   const product = useSelector((state) => state.details);
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    /* autho && autho === "admin" */
-  }, [decodedToken])
-
-  useEffect(() => {
-    product[0].name && setLoading(false)
+    console.log(product)
+    product.name && setLoading(false)
   }, [product])
 
   const [edit, setEdit] = useState({
@@ -128,7 +125,7 @@ export default function DetailsAdmin(props) {
             </div>
           )}
         </div>
-          :
+          : loading === true ? <div>loading</div> :
           <div>Acceso denegado</div>
       }
     </div>

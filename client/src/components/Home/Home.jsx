@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
-  sortPrice,
-  sortRating,
   filterProducts,
   filterProductsByViews,
   filterProductsByDate,
 } from "../../redux/actions";
 import ProductCard from "../ProductCard/ProductCard";
 import Style from "./Home.module.css";
-import AddCartButton from "../AddCartButton/AddCartButton";
 import '@splidejs/react-splide/css/skyblue';
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { useJwt } from "react-jwt";
+
 
 
 
@@ -22,7 +18,7 @@ import { useJwt } from "react-jwt";
 
 function Home() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  /* const products = useSelector((state) => state.products); */
   const carousel = useSelector((state) => state.carousel);
   const mostViewed = useSelector((state) => state.mostViewed);
   const recentlyAdded = useSelector((state) => state.recentlyAdded);

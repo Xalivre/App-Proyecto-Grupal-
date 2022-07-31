@@ -14,6 +14,7 @@ export default function PaginationOutlined(props) {
 
     return (
         <div className={styles.container}>
+            {page && null}
         <Stack spacing={2}>
             <Pagination onChange={handleChange} count={props.filtereds} color="primary" />
         </Stack>

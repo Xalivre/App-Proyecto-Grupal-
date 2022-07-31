@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { addToCart, addToWishList } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./ProductCard.module.css";
-import AddCartButton from "../AddCartButton/AddCartButton";
+/* import AddCartButton from "../AddCartButton/AddCartButton"; */
 import { Link } from "react-router-dom";
-import { useJwt } from "react-jwt";
 import axios from "axios"
-import WishListButton from "../CardButtons/WishListButton";
+/* import WishListButton from "../CardButtons/WishListButton"; */
+
+
+
+
 
 
 
@@ -15,16 +18,29 @@ export default function ProductCard({ id, name, price, image }) {
 
   const karting = useSelector((state) => state.cart)
   const wishes = useSelector((state) => state.wishList)
+  
 
-  const { decodedToken } = useJwt(localStorage.getItem("Carrito"));
+  const f = localStorage.getItem("Carrito") && JSON.parse(localStorage.getItem("Carrito"))
 
+
+  const refresh = (f) => {
+    const w = f.filter(e => e.stock > 0)
+    return localStorage.setItem("Carrito", JSON.stringify(w))
+  }
+
+  useEffect(() => {
+    refresh(f)
+  }, [f])
+
+  
   const cartStorage = async (id) => {
     let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : []
+    console.log(a)
     a.push(json.data)
     localStorage.setItem("Carrito", JSON.stringify(a))
   }
-
+  
   return (
     <div className={Style.carouselOrder}>
       <div className={Style.container}>
@@ -52,8 +68,9 @@ export default function ProductCard({ id, name, price, image }) {
           alert("El producto fue agregado a tu carrito") : alert("Este producto ya se encuentra en tu carrito")}}
           className="button">Añadir al carrito</button>
           <br />
-          <button onClick={() => {!wishes.map((a) => a._id).includes(id)?dispatch(addToWishList(id)) && 
-          alert("El producto fue agregado a tu lista de deseados") : alert("Este producto ya se encuentra en tu lista de deseados")}} className="buttonWishlist">Añadir a lista de deseados</button>
+         { localStorage.getItem("usuario") ? <button onClick={() => {!wishes.map((a) => a._id).includes(id)?dispatch(addToWishList(id)) && 
+          alert("El producto fue agregado a tu lista de deseados") : alert("Este producto ya se encuentra en tu lista de deseados")}} className="buttonWishlist">Añadir a lista de deseados</button> : 
+          <button onClick={() => alert("Debes estar logueado para usar esta función")} className="buttonWishlist">Añadir a lista de deseados</button>}
           <br />
         </div>
       </div>

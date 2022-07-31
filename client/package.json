@@ -24,7 +24,7 @@
     "react-jwt": "^1.1.6",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "reactstrap": "^9.1.2",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
@@ -41,7 +41,7 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "eslint:recommended", 
+      "eslint:recommended",
       "plugin:jest/recommended"
     ]
   },
@@ -56,5 +56,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "eslint-plugin-react": "^7.30.1"
   }
 }

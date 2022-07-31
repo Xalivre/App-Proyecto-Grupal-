@@ -19,7 +19,7 @@ const initialState = {
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_DETAILS = "GET_DETAILS";
 const SORT_PRICE = "SORT_PRICE";
-const SORT_RATING = "SORT_RATING";
+/* const SORT_RATING = "SORT_RATING"; */
 const ADD_TO_CART = "ADD_TO_CART";
 const CAROUSEL = "CAROUSEL";
 const MOST_VIEWED = "MOST_VIEWED";
@@ -103,14 +103,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recentlyAdded: action.payload,
       };
-    case SEARCH_BAR:
-      let a = action.payload === "aklsjdhlaksjdaskldazzzz" ? state.allProducts : [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase()))
+    case SEARCH_BAR:{
+      let a = action.payload === "aklsjdhlaksjdaskldazzzz" ?
+      state.allProducts : [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase()))
       return {
         ...state,
         filteredProducts: a.length > 0 ? a : state.allProducts,
         nameSearched: action.payload,
         operation: a.length < 1 ? "Error SearchBar" : action.payload === "aklsjdhlaksjdaskldazzzz" ? "No hacer nada" : "SearchBar"
-      };
+      };}
 
     case POST_PRODUCT:
       return {
@@ -127,7 +128,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       }
 
-    case SORT_PRICE:
+    case SORT_PRICE:{
       const sortedArray = action.payload === "Ascending" ? [...state.filteredProducts].sort(function (a, b) {
         if (a.price > b.price) {
           return 1
@@ -151,7 +152,7 @@ const rootReducer = (state = initialState, action) => {
         products: action.payload === "Default" ? [...state.products] : sortedArray,
         filteredProducts: action.payload === "Default" ? [...state.filteredProducts] : sortedArray,
         operation: "No hacer nada",
-      }
+      }}
 
     case GET_CATEGORIES:
       return {

@@ -25,7 +25,7 @@ export function getProductDetails(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3000/product/" + id);
-      let counter = await axios.put("http://localhost:3000/product/" + id, {
+      await axios.put("http://localhost:3000/product/" + id, {
         views: json.data.views + 1,
       });
       return dispatch({
@@ -54,7 +54,7 @@ export function sortRating(rating) {
 
 export function deleteProduct(id) {
   return async function (dispatch) {
-    let deleted = await axios.delete("http://localhost:3000/product/" + id);
+    await axios.delete("http://localhost:3000/product/" + id);
   };
 }
 
@@ -149,7 +149,7 @@ export function searchName(word) {
     const allProducts = getState().allProducts; //suponiendo que el arr del store se llame products
     // realizamos el filtrado
 
-    const res = allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
+    allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
     dispatch({
       type: "SEARCH_BAR",
       payload: word,

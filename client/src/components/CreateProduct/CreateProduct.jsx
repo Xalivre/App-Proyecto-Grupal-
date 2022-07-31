@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { postProduct, getProducts } from "../../redux/actions";
 import Style from "./CreateProduct.module.css"
-import { State } from "@splidejs/splide";
+/* import { State } from "@splidejs/splide"; */
 
 export default function CreateProduct() {
 
@@ -42,7 +42,6 @@ export default function CreateProduct() {
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData()
-        const images = []
         data.append("image", input.mainImage)
         for (let index = 0; index < input.secondaryImage.length; index++) {
             data.append("image", input.secondaryImage[index]);

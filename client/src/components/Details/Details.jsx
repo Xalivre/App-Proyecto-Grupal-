@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, viewsUpdate, deleteProduct, clearPage } from "../../redux/actions";
+import { getProductDetails, clearPage } from "../../redux/actions";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import AddWishButton from "../WishList/AddWIshButton/AddWishButton";
 import Style from "./Details.module.css"
-import { useJwt } from "react-jwt"
 
 
 export default function Details(props) {
   const dispatch = useDispatch();
-  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
-  let autho = decodedToken?.role
   const { id } = useParams();
   const product = useSelector((state) => state.details);
 
   const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    autho && autho === "user" /* && setLoading(false) */
-  }, [decodedToken])
 
   useEffect(() => {
     console.log(product)

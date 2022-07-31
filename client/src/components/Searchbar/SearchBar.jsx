@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+/* import AddCircleIcon from '@mui/icons-material/AddCircle'; */
 import logo from "../../img/favicon.png";
 import CartDrawer from "../Cart/CartDrawer.tsx"
 import { useJwt } from "react-jwt";
-import Profile from "../Profile/Profile";
+/* import Profile from "../Profile/Profile"; */
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 
@@ -16,6 +16,11 @@ function SearchBar(props) {
 
   let navigate = useNavigate();
   const dispatch = useDispatch()
+
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
+  let autho = decodedToken?.role
+
+
 
   const cart = useSelector((state) => state.cart);
   /* const [cart, setCart] = useState(localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : []) */
@@ -36,7 +41,7 @@ function SearchBar(props) {
     // searchName(searchProduct)
     e.preventDefault();
     if (searchProduct.length > 0) {
-      navigate('/products')
+      autho === "user" ? navigate('/products') : navigate("/Dashboard")
       dispatch(searchName(searchProduct));
       setSearchProduct("")
     }
@@ -68,16 +73,19 @@ function SearchBar(props) {
           <button className="button" >Log out</button></Link>
           }
         {
+          autho !== "admin" &&
           <div>
             <CartDrawer cart={cart} />
           </div>
         }
-        <Link to="/wishlist">
+        {
+          localStorage.getItem("usuario") && autho !== "admin" &&
+          <Link to="/wishlist">
           <div>
             <FavoriteIcon />
           </div>
-        </Link>
-        {localStorage.getItem("usuario") && <div>
+        </Link>}
+        {localStorage.getItem("usuario") && autho !== "admin" && <div>
         <Link to= "/MyProfile">
             <div className={styles.profile_img}><AccountCircleSharpIcon/></div>
           </Link>

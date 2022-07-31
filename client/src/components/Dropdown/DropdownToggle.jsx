@@ -1,9 +1,8 @@
 import React, { useState} from 'react'
-import { useNavigate, Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, searchName } from "../../redux/actions/"
+import { searchName } from "../../redux/actions/"
 
 
 export default function DropdownComponent(props) {
@@ -11,7 +10,6 @@ export default function DropdownComponent(props) {
     const categories = useSelector((state) => state.categories)
     const [dropdown, setDropdown] = useState(false)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const openDropdown = () => {
         setDropdown(!dropdown)

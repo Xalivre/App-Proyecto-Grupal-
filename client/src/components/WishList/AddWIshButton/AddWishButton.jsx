@@ -7,7 +7,7 @@ import { useJwt } from "react-jwt"
 
 function AddWishButton({ id }) {
 
-    const [inList, setInList] = useState(0)
+    const [inList] = useState(0)
     const dispatch = useDispatch()
     const { decodedToken } = useJwt(localStorage.getItem("usuario"))
     let autho = decodedToken?.role

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LoginUser } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./LoginPage.module.css";

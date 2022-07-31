@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsList.module.css"
 import ProductCard from '../ProductCard/ProductCard'
-import { sortPrice, getProducts, getCategories, getBrands } from "../../redux/actions"
-import AddCartButton from '../AddCartButton/AddCartButton'
+import { getProducts, getCategories, getBrands } from "../../redux/actions"
+/* import AddCartButton from '../AddCartButton/AddCartButton' */
 import PagingOficial from "../Paging/Paging.tsx"
 import DropdownComponent from '../Dropdown/DropdownToggle'
 import CategoriesBar from '../BrandsComponent/BrandsComponent'
@@ -113,7 +112,7 @@ export default function ProductsList() {
           </select> */}
         </div>
       </div>
-      
+
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
           <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />

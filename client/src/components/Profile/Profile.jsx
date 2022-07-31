@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import { getUserPayments } from "../../redux/actions";
