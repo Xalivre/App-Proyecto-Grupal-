@@ -41,6 +41,7 @@ const MODIFY_CART = "MODIFY_CART"
 const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 const GET_USERS = "GET_USERS"
 const BAN_USER = "BAN_USER"
+const UNBAN_USER = "UNBAN_USER"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -192,6 +193,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       }
+
+    case UNBAN_USER:
+      return {
+        ...state,
+      }  
 
     case MODIFY_CART:
       return {

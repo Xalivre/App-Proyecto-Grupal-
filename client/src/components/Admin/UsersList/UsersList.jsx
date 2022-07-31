@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers, banUser} from '../../../redux/actions'
+import { getUsers, banUser, UnbanUser} from '../../../redux/actions'
 
 export default function UsersList() {
 
     const dispatch = useDispatch()
 
-    const Users = useSelector((state) => state.users.slice(0,5))
+    const Users = useSelector((state) => state.users)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -17,9 +17,17 @@ export default function UsersList() {
     const banUserFunction = (e) => {
         let idUser = e.target.value
         dispatch(banUser({
-            accountState : "Banned"
+            accountState : "banned"
         }, idUser))
-        alert("Usuario baneadon con exito")
+        alert("Usuario baneado con exito")
+    }
+
+    const unbanUserFunction = (e) => {
+        let idUser = e.target.value
+        dispatch(UnbanUser({
+            accountState : "active"
+        }, idUser))
+        alert("Usuario desbaneado con exito")
     }
 
 
@@ -35,7 +43,8 @@ export default function UsersList() {
                     <h6>Nombre de Usuario: {e.username}</h6>
                     <h6>Correo: {e.email}</h6>
                     <h6>Estado de la cuenta: {e.accountState}</h6>
-                    <button value={e._id} onClick={(e) => banUserFunction(e)}>Banear</button>
+                    {e.accountState === "active" ? <button value={e._id} onClick={(e) => banUserFunction(e)}>Banear</button> :
+                     <button value={e._id} onClick={(e) => unbanUserFunction(e)}>Desbanear</button>}
                  </div>
                 </div>
             )

@@ -232,6 +232,13 @@ export function banUser(payload, id) {
   }
 }
 
+export function UnbanUser(payload, id) {
+  return async function (dispatch) {
+    const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
+    return ban
+  }
+}
+
 export function loginRefresher() {
   return function (dispatch) {
     dispatch({
