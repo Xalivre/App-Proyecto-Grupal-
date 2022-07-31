@@ -6,6 +6,7 @@ import ProductsListAdmin from '../ProductsListAdmin/ProductsListAdmin'
 import styles from "./DashBoard.module.css"
 import { useJwt } from "react-jwt"
 
+
 export default function DashBoard() {
 
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ export default function DashBoard() {
   
   function handleState(e) {
     e.preventDefault();
-    dispatch(setfirst(e.target.value))
+    setfirst(e.target.value)
   }
   
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function DashBoard() {
               <button className={styles.text} value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
               <button value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
               {localStorage.getItem("usuario") && <Link to="/home" onClick={() => localStorage.removeItem("usuario")}>
-                <button className="button" >Log out</button>
+                <button  >Lista de usuarios</button>
               </Link>}
             </div>
             <div>

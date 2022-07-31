@@ -15,7 +15,6 @@ function AddCartButton({ id }) {
         e.preventDefault()
         if(!karting.map((a) => a._id).includes(id)){
           dispatch(addToCart(id));
-          alert("El producto fue agregado a tu carrito")
         } else {
           alert("Este producto ya se encuentra en tu carrito")
         }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { searchName } from "../../redux/actions";
+import { loginRefresher, searchName } from "../../redux/actions";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 /* import AddCircleIcon from '@mui/icons-material/AddCircle'; */
 import logo from "../../img/favicon.png";
@@ -40,10 +40,12 @@ function SearchBar(props) {
   function handleSubmit(e) {
     // searchName(searchProduct)
     e.preventDefault();
-    if (searchProduct.length > 0) {
-      autho === "user" ? navigate('/products') : navigate("/Dashboard")
+    if (searchProduct.length > 0 && searchProduct[0] !== " ") {
+      autho !== "admin" ? navigate('/products') : navigate("/Dashboard")
       dispatch(searchName(searchProduct));
       setSearchProduct("")
+    } else if(searchProduct[0] === " "){
+      alert("No se permiten espacios en la primera posición")
     }
   }
 
@@ -69,7 +71,7 @@ function SearchBar(props) {
             <button className="button" >Log in</button>
           </Link></>}
           {
-            localStorage.getItem("usuario") && <Link to="/" onClick={() => localStorage.removeItem("usuario")}>
+            localStorage.getItem("usuario") && <Link to="/" onClick={() => {localStorage.removeItem("usuario"); dispatch(loginRefresher())}}>
           <button className="button" >Log out</button></Link>
           }
         {

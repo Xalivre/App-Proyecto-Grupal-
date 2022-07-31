@@ -13,7 +13,8 @@ const initialState = {
   categories: [],
   brands: [],
   nameSearched: "",
-  userPayments: []
+  userPayments: [],
+  loginRefresher: false
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -36,6 +37,8 @@ const POST_USER = "POST_USER"
 const LOGIN = "LOGIN"
 const EDIT_PRODUCT = "EDIT_PRODUCT"
 const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
+const MODIFY_CART = "MODIFY_CART"
+const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -44,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
         allProducts: action.payload,
-        filteredProducts: action.payload.filter((e) => state.nameSearched ? e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
+        filteredProducts: action.payload.filter((e) => state.nameSearched && state.nameSearched !== "aklsjdhlaksjdaskldazzzz" ? e.name.toLowerCase().includes(state.nameSearched.toLowerCase()) : e.name !== "uzk"),
         operation: "Default"
       };
 
@@ -177,6 +180,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       }
 
+    case MODIFY_CART:
+      return {
+        ...state,
+        cart: action.payload
+      }
+
+    case LOGIN_REFRESHER:
+      return {
+        ...state,
+        loginRefresher: !state.loginRefresher
+      }
     default:
       return state;
   }

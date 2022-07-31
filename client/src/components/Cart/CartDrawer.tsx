@@ -8,21 +8,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-/* import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail'; */
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
 import { Link } from "react-router-dom";
 import Style from "./Cart.module.css";
 
 
-
-
-
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function SwipeableTemporaryDrawer(props) {
-  const [state, setState] = React.useState({
+export default function SwipeableTemporaryDrawer(props: any) {
+  const [state, setState] = React.useState<any>({
     top: false,
     left: false,
     bottom: false,
@@ -52,7 +47,7 @@ export default function SwipeableTemporaryDrawer(props) {
     >
       <div style={{alignItems:"center", display:"flex", flexDirection:"column"}}>
         <List>
-          {props.cart?.map((text, index) => (
+          {props.cart?.map((text: any, index: any) => (
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -79,7 +74,7 @@ export default function SwipeableTemporaryDrawer(props) {
 
   return (
     <div>
-      {(['Cart'] as const).map((anchor) => (
+      {(['Cart'] as const).map((anchor: any) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon /></Button>
           <SwipeableDrawer

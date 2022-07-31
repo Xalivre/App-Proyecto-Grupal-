@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsListAdmin.module.css"
 import ProductCardAdmin from '../ProductCardAdmin/ProductCardAdmin'
-import {getProducts, getCategories, getBrands } from "../../../redux/actions"
+import {getProducts, getCategories, getBrands, searchName } from "../../../redux/actions"
 import PagingOficial from "../../Paging/Paging.tsx"
 import DropdownComponent from '../../Dropdown/DropdownToggle'
 import CategoriesBar from '../../BrandsComponent/BrandsComponent'
@@ -104,6 +104,7 @@ export default function ProductsListAdmin() {
             <button className={Style.reloadButton} onClick={() => {
               setBrandFilter("")
               setCategoryFilter("")
+              dispatch(searchName(""))
             }}>Recargar</button>
           <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />
           <DropdownPrecio></DropdownPrecio>
