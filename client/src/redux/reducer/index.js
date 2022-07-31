@@ -158,6 +158,7 @@ const rootReducer = (state = initialState, action) => {
           if (b.price > a.price) {
             return 1
           }
+          return 0
         })
       return {
         ...state,

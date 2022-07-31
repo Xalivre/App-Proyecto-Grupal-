@@ -21,6 +21,7 @@ export default function DashBoard() {
   
   useEffect(() => {
     autho && autho === "admin" && setLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken])
 
     
@@ -34,9 +35,9 @@ export default function DashBoard() {
         loading === false ?
           <div>
             <div className={styles.container}>
-              <button className={styles.text} value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
-              <button value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
-              <button value="UsersList" onClick={(e) => handleState(e)}>Lista de usuarios</button>
+              <button className="buttonDashboard" value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
+              <button className="buttonDashboard" value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
+              <button className="buttonDashboard" value="UsersList" onClick={(e) => handleState(e)}>Lista de usuarios</button>
             </div>
             <div>
               {first === "create" && <CreateProduct></CreateProduct>}

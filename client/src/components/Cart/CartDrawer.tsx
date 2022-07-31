@@ -51,7 +51,7 @@ export default function SwipeableTemporaryDrawer(props: any) {
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {<img width="75px" src={text.image[0].url} />}
+                  {<img width="75px" src={text.image[0].url} alt="HDP" />}
                 </ListItemIcon>
                 <ListItemText className={Style.text} primary={text.name.length > 20 ? text.name.slice(0, 20) + "..." : text.name} secondary={`$${text.price}`} />
                 <DeleteCartButton id={text._id} />

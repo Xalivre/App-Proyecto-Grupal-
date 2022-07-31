@@ -12,6 +12,7 @@ export default function UsersList() {
     useEffect(() => {
         dispatch(getUsers())
         Users.length > 0 && setLoading(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Users])
 
     const banUserFunction = (e) => {

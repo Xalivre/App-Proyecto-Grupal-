@@ -22,6 +22,7 @@ function NavBar() {
   useEffect(() => {
     autho && autho === "admin" && setLoading(false)
     autho !== "admin" && setLoading(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
 

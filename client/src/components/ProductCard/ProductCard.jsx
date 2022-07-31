@@ -31,6 +31,7 @@ export default function ProductCard({ id, name, price, image }) {
 
   useEffect(() => {
     refresh(f)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   

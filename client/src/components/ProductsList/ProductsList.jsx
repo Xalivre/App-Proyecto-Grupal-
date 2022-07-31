@@ -14,7 +14,7 @@ export default function ProductsList() {
   const filtereds = useSelector((state) => state.filteredProducts)
   const operation = useSelector((state) => state.operation)
   const [page1, setPage1] = useState(0)
-  const [page2, setPage2] = useState(18)
+  const [page2, setPage2] = useState(20)
   const [brandFilter, setBrandFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
 
@@ -35,7 +35,8 @@ export default function ProductsList() {
       setCategoryFilter("")
     }
     setPage1(0);
-    setPage2(18);
+    setPage2(20);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtereds])
 
 
@@ -50,7 +51,7 @@ export default function ProductsList() {
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
           <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
-                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).length / 18)} />
+                .filter((b) => brandFilter ? b.brands === brandFilter : b.brands !== brandFilter).length / 20)} />
                 <div className={Style.dropdownsContainer}>
           <DropdownComponent products={filtereds.length > 0 && filtereds.map((e) => e.category)} setCategoryFilter={setCategoryFilter} setBrandFilter={setBrandFilter} />
           <DropdownPrecio></DropdownPrecio>
