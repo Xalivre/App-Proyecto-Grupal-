@@ -6,7 +6,7 @@ export const forcePasswordAdmin = async (req, res) => {
   
     try {
       if(!email) return res.status(404).send("User not found");
-      let defaultPassword= password || "defaultPassword";
+      let defaultPassword = password || "defaultPassword";
   
       const passwordHash = await encrypt(defaultPassword);
   
