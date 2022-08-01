@@ -55,7 +55,7 @@ function LoginPage() {
       if (user.status === 201) {
         await axios.post("http://localhost:3000/login", payload).then((r) => {
           localStorage.setItem("usuario", r.data.tokenSession);
-          if(r.data.data.accountState !== "active") {
+          if(r.data.data.accountState === "banned") {
              return alert("Tu cuenta se encuentra en estado de suspensión")
           }
           r.data.data.role === "admin" ? navigate("/Dashboard") : navigate("/");
