@@ -51,9 +51,9 @@ function SearchBar(props) {
 
   return (
     <div className={styles.containerAll}>
-     { autho !== "admin" ? <Link to="/">
+     <Link to="/">
         <img className={styles.logo} src={logo} alt="img" />
-      </Link> :  <img className={styles.logo} src={logo} alt="img" />}
+      </Link>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <input
           onChange={(e) => setSearchProduct(e.target.value)}
@@ -75,7 +75,7 @@ function SearchBar(props) {
           <button className="button" >Cerrar Sesión</button></Link>
           }
         {
-          autho !== "admin" &&
+          (autho !== "admin" && autho !== "owner") &&
           <div>
             <CartDrawer cart={cart} />
           </div>

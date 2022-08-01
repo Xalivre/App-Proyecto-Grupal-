@@ -225,14 +225,15 @@ export function editProduct(payload, id) {
   }
 }
 
-export function banUser(payload, id) {
+export function updateUserState(payload, id) {
   return async function (dispatch) {
     const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
     return ban
   }
 }
 
-export function UnbanUser(payload, id) {
+
+export function adminUser(payload, id) {
   return async function (dispatch) {
     const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
     return ban

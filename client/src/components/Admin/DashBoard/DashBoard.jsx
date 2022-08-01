@@ -20,7 +20,7 @@ export default function DashBoard() {
   }
   
   useEffect(() => {
-    autho && autho === "admin" && setLoading(false)
+    autho && (autho === "admin" || autho === "owner") && setLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken])
 
