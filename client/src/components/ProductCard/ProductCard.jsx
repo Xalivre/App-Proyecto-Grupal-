@@ -20,11 +20,11 @@ export default function ProductCard({ id, name, price, image }) {
   const wishes = useSelector((state) => state.wishList)
 
 
-  const f = localStorage.getItem("Carrito") && JSON.parse(localStorage.getItem("Carrito"))
+  const f = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
 
 
   const refresh = (f) => {
-    const w = f.filter(e => e.stock > 0)
+    const w = f.filter(e => e?.stock > 0)
     localStorage.setItem("Carrito", JSON.stringify(w))
     dispatch(modifyCart(w))
   }
