@@ -66,3 +66,41 @@ export const getPaymentsEmail = async (req, res) => {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 };
+
+export const getPaymentHistory = async (req, res) => { //admin
+  try{
+  
+      const users = await User.find({});
+      if(!users) return res.status(404).send({ message: "Users not found" })
+      const arrayHistoryUser = users.map(e => {
+        return{
+          _id: e._id,
+          username: e.username,
+          email: e.email,
+          paymentHistory: e.paymentHistory
+        }
+      })
+      return res.json(arrayHistoryUser)
+  }catch(e){
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
+
+export const getPaymentHistoryUser = async (req, res) => { //admin
+  const { email, id } = req.body;
+
+  try{
+    if(email){
+      const userDB = await User.findOne({email});
+      if(!userDB) return res.status(404).send({ message: "User not found" });
+      if(userDB.paymentHistory.length > 0) {
+        const payment = userDB.paymentHistory.filter(e => e.idPayment === id);
+        if(payment.length === 0) return res.status(404).send({ message: "Payment not found or non-existent ID" }); 
+        return res.json(payment);
+        }
+      }
+      return res.status(404).send({ message: "User not found" });
+  } catch(e){
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
