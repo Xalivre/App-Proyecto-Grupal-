@@ -90,18 +90,39 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { username, email } = req.body;
+  const { username, email, password, phoneNumber, address, location} = req.body;
+
   try {
+
     const userBD = await User.findOne({ email });
     if (userBD) return res.json({ msg: "The email already exists" });
     const usernameBD = await User.findOne({ username });
     if (usernameBD) return res.json({ msg: "The username already exists" });
-
+    
+    if(!password) { 
     const updatedUser = await User.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!updatedUser) return res.json({ msg: "The user was not found" });
     return res.json({ msg: "User Updated" });
+
+  }else {
+
+    const passwordHash = await encrypt(password);
+
+    const updatedUser = await User.findByIdAndUpdate(id, {
+      username: username,
+      password: passwordHash,
+      email: email,
+      phoneNumber: phoneNumber,
+      address: address,
+      location: location,
+    }, {
+      new: true,
+    });
+
+    return res.json({ msg: "User Updated" });    
+  }
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
@@ -121,5 +142,8 @@ export const addItemToCart = async (req, res) => {
     }
     userDB.cart.push(product);
     userDB.save();
-  } catch (e) {}
+  } catch (e) {
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
 };
+
