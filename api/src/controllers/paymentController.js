@@ -69,7 +69,6 @@ export const getPaymentsEmail = async (req, res) => {
 
 export const getPaymentHistory = async (req, res) => { //admin
   try{
-  
       const users = await User.find({});
       if(!users) return res.status(404).send({ message: "Users not found" })
       const arrayHistoryUser = users.map(e => {
@@ -101,6 +100,20 @@ export const getPaymentHistoryUser = async (req, res) => { //admin
       }
       return res.status(404).send({ message: "User not found" });
   } catch(e){
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
+
+
+export const getPaymentHistoryById = async (req, res) => {
+  const { id } = req.params
+
+  try{
+      if(!id) return res.status(404).send({ message: "Need an ID" });
+      const userDB = await User.findById(id)
+      userDB ? res.status(200).json(userDB.paymentHistory) : res.status(404).send({ message: "User not found" })
+
+} catch(e){
     return res.json({ msg: `Error 404 - ${e}` });
   }
 }
