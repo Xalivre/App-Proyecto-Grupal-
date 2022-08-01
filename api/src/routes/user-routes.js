@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import {getUsers, postUsers, deleteUser, updateUser, loginUser } from "../controllers/userController.js";
+import {getUsers, postUsers, deleteUser, updateUser, loginUser} from "../controllers/userController.js";
 import { checkAuth } from '../middleware/auth.js';
 import { checkRoleAuth } from '../middleware/roleAuth.js';
 
