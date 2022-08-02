@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
-import { getUserPayments } from "../../redux/actions";
+import { getUserPayments, getUsers } from "../../redux/actions";
 import Style from "./Profile.module.css"
 
 export default function Profile() {
@@ -12,13 +12,24 @@ export default function Profile() {
   let email = decodedToken?.email;
 
   const dispatch = useDispatch();
-
-
+  
+  
+  
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
+    console.log(decodedToken)
   }, [decodedToken]);
 
+  useEffect(()=> {
+    dispatch(getUsers())
+  }, [dispatch])
+  
   const Payments = useSelector((state) => state.userPayments);
+  const users = useSelector((state)=> state.users)
+  const userExtraInfo = users.find(e => e.email === email)
+  
+
+
 
   return (
     <div>
@@ -29,9 +40,9 @@ export default function Profile() {
           <br /><br />
           <div>Nombre de Usuario: {decodedToken?.username}</div>
           <div>Correo Electrónico: {decodedToken?.email}</div>
-          <div>Dirección de Facturación: </div>
-          <div>Codigo postal: </div>
-          <div>Localidad: </div>
+          <div>Dirección de Facturación: {userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'} </div>
+          <div>Codigo postal: {userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</div>
+          <div>Localidad: {userExtraInfo?.location ? userExtraInfo.location : 'Sin definir'}</div>
           <div>Nro. de Teléfono: </div>
           <br /><br />
         </div>

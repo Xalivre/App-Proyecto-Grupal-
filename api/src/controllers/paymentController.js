@@ -35,7 +35,7 @@ export const postPayments = async (req, res) => {
       confirm: true,
     });
 
-    sendMail(email, userDB.username, amount).then(r => console.log("payment email sended")).catch((err) => console.log(err));
+    /* sendMail(email, userDB.username, amount).then(r => console.log("payment email sended")).catch((err) => console.log(err)); */
 
     return res.send({ message: "Successful payment" });
   } catch (e) {
@@ -56,7 +56,7 @@ export const getPayments = async (req, res) => {
 
 export const getPaymentsEmail = async (req, res) => {
   //usuarios
-  const { email } = req.query;
+  const { email } = req.query; // VER POR BODY!
   try {
     const userDB = await User.findOne({ email });
     if (!userDB) return res.json({ message: "User not found" });

@@ -8,7 +8,7 @@ const CLIENT_SECRET = "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";
 const REFRESH_TOKEN =
   "1//04g8_LXJTl1HmCgYIARAAGAQSNwF-L9IrbDydGLxszcu6rAxJJX6n0oSAanospoeUAqQQrllAVw13eUiY-5DxijKuKY1K89a2040";
 
-export const sendMail = async (email, username, amount) => {
+export const sendMail = async (email, username, amount, paymentObjectEmail ) => {
   let mailOptions
   try {
     const transporter = nodemailer.createTransport({
@@ -40,7 +40,19 @@ export const sendMail = async (email, username, amount) => {
   Desde <b>GameHUB</b> te deseamos éxitos.</p>
   `
       }
-    :  mailOptions = {
+    :  paymentObjectEmail ? mailOptions = {
+      from: '"GameHUB!" <gaminggamehub1@gmail.com>',
+      to: email,
+      subject: "Tu compra fue despachada desde GameHUB",
+      html: `<p> Hola <b>${formatUsername(
+        username 
+      )}</b>. La lista de productos que compraste fue: <b>${paymentObjectEmail.join(", ")}</b>. </br>
+       Tu compra fue despachada.  
+       </br> 
+      Desde <b>GameHUB</b> te deseamos éxitos.</p>`
+    }
+    :
+   mailOptions = {
         from: '"Bienvenido/a a GameHUB!" <gaminggamehub1@gmail.com>',
         to: email,
         subject: "Te has registrado en GameHUB",
