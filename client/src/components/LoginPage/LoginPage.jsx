@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import { loginRefresher } from "../../redux/actions";
+import jwt_decode from "jwt-decode"
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -13,12 +14,33 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  console.log(info)
+
 
   const [errorLogin, setErrorLogin] = useState("");
 
   useEffect(() => {
     setErrorLogin("");
   }, [dispatch]);
+
+
+  function HandleCallbackResponse(response){
+    console.log("Encoded JWT ID token: " + response.credential)
+    var userObject = jwt_decode(response.credential)
+    console.log(userObject)
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "256336172305-cdslorqnnmmohtst3pus9l3rshdfh6d7.apps.googleusercontent.com",
+      callback: HandleCallbackResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme: "outline", size: "large"}
+    );
+  }, []);
 
   const validate = (info) => {
     let errors = {};
@@ -54,7 +76,7 @@ function LoginPage() {
       const user = await axios.post(`http://localhost:3000/accounts`, payload);
       if (user.status === 201) {
         await axios.post("http://localhost:3000/login", payload).then((r) => {
-          localStorage.setItem("usuario", r.data.tokenSession);
+          {localStorage.setItem("usuario", r.data.tokenSession)}
           if(r.data.data.accountState === "banned") {
              return alert("Tu cuenta se encuentra en estado de suspensión")
           }
@@ -135,6 +157,9 @@ function LoginPage() {
         )}
         <br />
       </div>
+      <br/>
+      <div id="signInDiv"></div>
+      <br/>
     </div>
   );
 }
