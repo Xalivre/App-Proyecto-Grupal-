@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPaymentHistory, clearPage } from "../../../redux/actions";
@@ -25,6 +26,9 @@ export default function PaymentHistory(props) {
 
   return (
     <div>
+      <Link to="/Dashboard">
+        <button>Volver</button>
+      </Link>
       {!loading ? (
         paymentDetails?.map((e) => {
           return (
@@ -36,12 +40,13 @@ export default function PaymentHistory(props) {
                   return (
                     <div>
                       <h5>{f.name}</h5>
+                      <h5>${f.price}</h5>
                     </div>
                   );
                 })}
               </div>
               <h3>Monto Total: {e.amount}</h3>
-              <h3>Fecha: {e.date.slice(0,10)}</h3>
+              <h3>Fecha: {e.date.slice(0, 10)}</h3>
             </div>
           );
         })

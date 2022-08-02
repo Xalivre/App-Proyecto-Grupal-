@@ -92,6 +92,7 @@ function SearchBar(props) {
             <div className={styles.profile_img}><AccountCircleSharpIcon/></div>
           </Link>
           </div>}
+          {(autho === "admin" || autho === "owner") && <Link to="/Dashboard"><button className="button">Administración</button></Link>}
       </div>
     </div>
   );

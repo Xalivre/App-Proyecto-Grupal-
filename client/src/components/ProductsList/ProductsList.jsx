@@ -81,7 +81,7 @@ export default function ProductsList() {
                     </div>
                   )
                 })
-                :  loading? <div className={Style.loader}><img className={Style.gif} src={loader} alt="Loading"/></div> :
+                :  loading ? <div className={Style.loader}><img className={Style.gif} src={loader} alt="Loading"/></div> :
                 <div>Producto inexistente!</div>
             }
           </div>

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers, updateUserState, adminUser } from "../../../redux/actions";
 import { useJwt } from "react-jwt";
+import Style from "./UsersList.module.css"
+import loader from '../../../img/loader.gif'
 
 export default function UsersList() {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
@@ -13,8 +15,7 @@ export default function UsersList() {
 
   const Users = useSelector((state) => state.users);
   const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(false)
-
+  const [count, setCount] = useState(false);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -23,12 +24,11 @@ export default function UsersList() {
   }, [Users.length]);
 
   useEffect(() => {
-    dispatch(getUsers())
-  }, [count])
-
+    dispatch(getUsers());
+  }, [count]);
 
   const banUserFunction = (e) => {
-    setCount(!count)
+    setCount(!count);
     let idUser = e.target.value;
     dispatch(
       updateUserState(
@@ -42,7 +42,7 @@ export default function UsersList() {
   };
 
   const unbanUserFunction = (e) => {
-    setCount(!count)
+    setCount(!count);
     let idUser = e.target.value;
     dispatch(
       updateUserState(
@@ -56,7 +56,7 @@ export default function UsersList() {
   };
 
   const giveAdmin = (e) => {
-    setCount(!count)
+    setCount(!count);
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -70,7 +70,7 @@ export default function UsersList() {
   };
 
   const removeAdmin = (e) => {
-    setCount(!count)
+    setCount(!count);
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -98,10 +98,10 @@ export default function UsersList() {
                   {e.paymentHistory?.map((f) => console.log(f))}
                   {e.paymentHistory.length > 0 && (
                     <Link to={`/payments/${e._id}`}>
-                    <button>Historial de compras</button>
-                     </Link>
+                      <button>Historial de compras</button>
+                    </Link>
                   )}
-                  {e.accountState === "banned" ?(
+                  {e.accountState === "banned" ? (
                     <button value={e._id} onClick={(e) => unbanUserFunction(e)}>
                       Desbanear
                     </button>
@@ -111,7 +111,7 @@ export default function UsersList() {
                         Banear usuario
                       </button>
                       <button value={e._id} onClick={(e) => removeAdmin(e)}>
-                        remover admin
+                        Remover admin
                       </button>
                     </div>
                   ) : autho === "owner" && e.role === "user" ? (
@@ -142,7 +142,7 @@ export default function UsersList() {
           })}
         </div>
       ) : (
-        <div>Loading...</div>
+        <div className={Style.loader}><img className={Style.gif} src={loader} alt="Loading"/></div>
       )}
     </div>
   );
