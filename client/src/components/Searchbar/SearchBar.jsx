@@ -71,9 +71,6 @@ function SearchBar(props) {
             <button className="button" >Iniciar Sesión</button>
           </Link></>}
           {
-            localStorage.getItem("usuario") && (autho === "admin" || autho === "owner") && <Link to="/Dashboard"><button className="button" >Dashboard</button></Link>
-          }
-          {
             localStorage.getItem("usuario") && <Link to="/" onClick={() => {localStorage.removeItem("usuario"); dispatch(loginRefresher())}}>
           <button className="button" >Cerrar Sesión</button></Link>
           }
