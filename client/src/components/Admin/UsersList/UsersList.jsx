@@ -134,7 +134,7 @@ export default function UsersList() {
                         </button>
                         <button
                           className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
-                          Banear
+                          Banear usuario
                         </button>
                       </div>
                     ) : (
@@ -146,7 +146,7 @@ export default function UsersList() {
                             value={e._id}
                             onClick={(e) => banUserFunction(e)}
                           >
-                            Banear
+                            Banear usuario
                           </button>
                         </div>
                       )
