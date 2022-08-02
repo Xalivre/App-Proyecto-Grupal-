@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers, updateUserState, adminUser } from "../../../redux/actions";
 import { useJwt } from "react-jwt";
-import Style from "./UsersList.module.css"
-import loader from '../../../img/loader.gif'
+import Style from "./UsersList.module.css";
+import loader from "../../../img/loader.gif";
 
 export default function UsersList() {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
@@ -142,7 +142,9 @@ export default function UsersList() {
           })}
         </div>
       ) : (
-        <div className={Style.loader}><img className={Style.gif} src={loader} alt="Loading"/></div>
+        <div className={Style.loader}>
+          <img className={Style.gif} src={loader} alt="Loading" />
+        </div>
       )}
     </div>
   );
