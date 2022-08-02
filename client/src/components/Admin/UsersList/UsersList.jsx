@@ -127,7 +127,7 @@ export default function UsersList() {
                           Remover admin
                         </button>
                       </div>
-                    ) : autho === "owner" && e.role === "user" ? (
+                    ) : (autho === "owner" || autho === "admin") && e.role === "user" ? (
                       <div>
                         <button className="btnDash" value={e._id} onClick={(e) => giveAdmin(e)}>
                           Ascender a admin
