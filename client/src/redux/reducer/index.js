@@ -2,6 +2,7 @@ const initialState = {
   allProducts: [],
   products: [],
   details: [],
+  paymentHistory: [],
   users: [],
   cart: localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : [],
   carousel: [],
@@ -42,6 +43,7 @@ const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 const GET_USERS = "GET_USERS"
 const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 const ADMIN_USER = "ADMIN_USER"
+const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -72,6 +74,12 @@ const rootReducer = (state = initialState, action) => {
         details: action.payload,
         operation: "Details",
       };
+
+    case GET_PAYMENT_HISTORY:
+      return {
+        ...state,
+        paymentHistory: action.payload
+      }
 
     case ADD_TO_CART:
       return {

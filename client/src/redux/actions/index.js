@@ -48,6 +48,16 @@ export function getProductDetails(id) {
   };
 }
 
+export function getPaymentHistory(id) {
+  return async function (dispatch){ 
+    let json = await axios.get("http://localhost:3000/api/paymentHistory/" + id)
+    return dispatch({
+      type: "GET_PAYMENT_HISTORY",
+      payload: json.data
+    })
+  }
+}
+
 export function sortPrice(price) {
   return {
     type: "SORT_PRICE",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers, updateUserState, adminUser } from "../../../redux/actions";
 import { useJwt } from "react-jwt";
@@ -96,9 +97,9 @@ export default function UsersList() {
                   <h6>role: {e.role}</h6>
                   {e.paymentHistory?.map((f) => console.log(f))}
                   {e.paymentHistory.length > 0 && (
-                   /*  <Link to={`/payments/ + ${e._id}`}> */
+                    <Link to={`/payments/${e._id}`}>
                     <button>Historial de compras</button>
-                  /*   </Link> */
+                     </Link>
                   )}
                   {e.accountState === "banned" ?(
                     <button value={e._id} onClick={(e) => unbanUserFunction(e)}>
