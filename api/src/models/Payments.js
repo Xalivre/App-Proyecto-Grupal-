@@ -15,6 +15,10 @@ const paymentSchema = new mongoose.Schema({
     date: {
         type: Date, 
         default:  Date.now
+    },
+    state: {
+        type: String,
+        default: "pendiente"
     }
 })
 

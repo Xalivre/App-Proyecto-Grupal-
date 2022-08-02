@@ -1,0 +1,7 @@
+.transparent {
+    border: none;
+    outline: none;
+    color: transparent;
+    background-color: transparent;
+    user-select: none;
+}
