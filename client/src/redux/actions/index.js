@@ -247,4 +247,22 @@ export function loginRefresher() {
   }
 }
 
+export function modifyQuantityUp(id) {
+  return function (dispatch) {
+    dispatch({
+      type: "MODIFY_QUANTITY_UP",
+      payload: id
+    })
+  }
+}
+
+export function modifyQuantityDown(id) {
+  return function (dispatch) {
+    dispatch({
+      type: "MODIFY_QUANTITY_DOWN",
+      payload: id
+    })
+  }
+}
+
 

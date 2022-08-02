@@ -12,6 +12,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
 import { Link } from "react-router-dom";
 import Style from "./Cart.module.css";
+import { useJwt } from 'react-jwt'
 
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -23,6 +24,9 @@ export default function SwipeableTemporaryDrawer(props: any) {
     bottom: false,
     right: false,
   });
+
+  const { decodedToken } = useJwt<any>(localStorage.getItem("usuario") || "")
+  let autho = decodedToken?.role
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -61,9 +65,17 @@ export default function SwipeableTemporaryDrawer(props: any) {
         </List>
         <Divider />
         {
-          props.cart.length > 0 ? <Link to="/paymentMethod">
+          props.cart.length > 0 && autho ? <Link to="/paymentMethod">
           <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
-        </Link>
+        </Link> 
+        : props.cart.length > 0 && !autho ? <div>
+          <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
+          <div className={Style.buttonsCart}><Link to="/register">
+        <button className="button" >Registrarse</button>
+      </Link>
+      <Link to="/login">
+            <button className="button" >Iniciar Sesión</button>
+          </Link></div></div>
         :
         <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
         }

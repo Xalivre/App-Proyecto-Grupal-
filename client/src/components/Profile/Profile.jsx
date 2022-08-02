@@ -22,37 +22,45 @@ export default function Profile() {
 
   return (
     <div>
-        <div className={Style.title}>
-        <br/>
-            Información de la cuenta
-            <div className={Style.profileInfo}>
-              <br/><br/>
-              <div>Nombre de Usuario: {decodedToken?.username}</div>
-              <div>Correo Electrónico: {decodedToken?.email}</div>
-              <div>Dirección de Facturación: </div>
-              <div>Codigo postal: </div>
-              <div>Localidad: </div>
-              <div>Nro. de Teléfono: </div>
-              <br/><br/>
-            </div>
-            Historial de Compras
-            <br/><br/>
+      <div className={Style.title}>
+        <br />
+        Información de la cuenta
+        <div className={Style.profileInfo}>
+          <br /><br />
+          <div>Nombre de Usuario: {decodedToken?.username}</div>
+          <div>Correo Electrónico: {decodedToken?.email}</div>
+          <div>Dirección de Facturación: </div>
+          <div>Codigo postal: </div>
+          <div>Localidad: </div>
+          <div>Nro. de Teléfono: </div>
+          <br /><br />
         </div>
+        Historial de Compras
+        <br /><br />
+      </div>
       <div>
         {Payments &&
-          Payments.map((e) => e.container).map((p) =>
-            p.map((x) => {
-              return (
-                <div className={Style.container}>
-                  <div className={Style.positioning}>
-                    <img className={Style.Pimg} src={x.image[0]?.url}/>
-                    <div>{x.name}</div>
-                    <div>${x.price}</div>
-                  </div>
-                </div>
-              );
-            })
-          )}
+          Payments.map((e) => {
+            return (
+              <div className={Style.container}>
+                <div className={Style.centeredText}>Id de Compra: {e.idPayment}</div>
+                <br/>
+                <div className={Style.centeredText}>Total de la Compra: ${e.amount}</div>
+                <br/>
+                <div className={Style.centeredText}>Fecha: {e.date.slice(0, 4) + "/" + e.date.slice(5, 7) + "/" + e.date.slice(8, 10)} Hora: {e.date.slice(11, 16)}</div>
+                <div>{e.container.map(x => {
+                  return (
+                    <div className={Style.positioning}>
+                      <img className={Style.Pimg} src={x.image[0]?.url} />
+                      <div>{x.name}</div>
+                      <div>${x.price}</div>
+                    </div>
+                  )
+                })}</div>
+                <br/><br/><br/>
+              </div>
+            )
+          })}
       </div>
     </div>
   );

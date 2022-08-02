@@ -4,7 +4,7 @@ import Style from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { searchName } from "../../redux/actions/";
 import logo from '../../img/favicon.png'
-import {useJwt} from 'react-jwt'
+import { useJwt } from 'react-jwt'
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -28,8 +28,6 @@ function NavBar() {
 
   return (
     <div>
-    {
-      loading === true &&
       <div className={Style.container}>
       <Link to="/"><img className={Style.logoResp} src={logo} alt="logo" /></Link>
       <i onClick={() => setIsMobile(!isMobile) } className={`fa-solid fa-bars ${isMobile ? Style.ocult : Style.show}`}></i>
@@ -73,7 +71,7 @@ function NavBar() {
           <h1>Ayuda</h1>
         </NavLink>
       </div>
-    </div> }
+    </div>
   </div>
   );
 }

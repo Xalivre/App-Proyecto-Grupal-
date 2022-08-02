@@ -12,6 +12,11 @@
     text-align: center;
 }
 
+.centeredText {
+    display: flex;
+    justify-content: center;
+}
+
 .Pimg{
     display: flex;
     width: 10%;
