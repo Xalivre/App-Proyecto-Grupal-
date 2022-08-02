@@ -58,7 +58,7 @@ function LoginPage() {
           if(r.data.data.accountState === "banned") {
              return alert("Tu cuenta se encuentra en estado de suspensión")
           }
-          r.data.data.role === "admin" ? navigate("/Dashboard") : navigate("/");
+          r.data.data.role === "admin" || r.data.data.role === "owner" ? navigate("/Dashboard") : navigate("/");
         });
         dispatch(loginRefresher())
       }

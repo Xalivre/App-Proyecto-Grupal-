@@ -2,6 +2,7 @@ const initialState = {
   allProducts: [],
   products: [],
   details: [],
+  paymentHistory: [],
   users: [],
   cart: localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : [],
   carousel: [],
@@ -44,6 +45,10 @@ const BAN_USER = "BAN_USER"
 const UNBAN_USER = "UNBAN_USER"
 const MODIFY_QUANTITY_UP = "MODIFY_QUANTITY_UP"
 const MODIFY_QUANTITY_DOWN = "MODIFY_QUANTITY_DOWN"
+const UPDATE_USER_STATE = "UPDATE_USER_STATE"
+const ADMIN_USER = "ADMIN_USER"
+const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -74,6 +79,12 @@ const rootReducer = (state = initialState, action) => {
         details: action.payload,
         operation: "Details",
       };
+
+    case GET_PAYMENT_HISTORY:
+      return {
+        ...state,
+        paymentHistory: action.payload
+      }
 
     case ADD_TO_CART:
       return {
@@ -194,12 +205,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       }
 
-    case BAN_USER:
+    case UPDATE_USER_STATE:
       return {
         ...state,
       }
-
-    case UNBAN_USER:
+      
+    case ADMIN_USER:
       return {
         ...state,
       }

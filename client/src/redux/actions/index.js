@@ -48,6 +48,16 @@ export function getProductDetails(id) {
   };
 }
 
+export function getPaymentHistory(id) {
+  return async function (dispatch){ 
+    let json = await axios.get("http://localhost:3000/api/paymentHistory/" + id)
+    return dispatch({
+      type: "GET_PAYMENT_HISTORY",
+      payload: json.data
+    })
+  }
+}
+
 export function sortPrice(price) {
   return {
     type: "SORT_PRICE",
@@ -225,14 +235,15 @@ export function editProduct(payload, id) {
   }
 }
 
-export function banUser(payload, id) {
+export function updateUserState(payload, id) {
   return async function (dispatch) {
     const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
     return ban
   }
 }
 
-export function UnbanUser(payload, id) {
+
+export function adminUser(payload, id) {
   return async function (dispatch) {
     const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
     return ban

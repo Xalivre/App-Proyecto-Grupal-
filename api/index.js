@@ -7,7 +7,8 @@ import cartRoutes from "./src/routes/cart-routes.js";
 import filtersRoutes from "./src/routes/filters-routes.js";
 import brandsRoutes from "./src/routes/brands-routes.js";
 import cagetoriesRoutes from "./src/routes/categories-routes.js";
-import paymentsRoutes from "./src/routes/payment-routes.js"
+import paymentsRoutes from "./src/routes/payment-routes.js";
+import adminRoutes from "./src/routes/admin-routes.js";
 
 import cors from "cors";
 import dotenv from "dotenv";
@@ -37,6 +38,7 @@ app.use(filtersRoutes);
 app.use(brandsRoutes);
 app.use(cagetoriesRoutes);
 app.use(paymentsRoutes)
+app.use(adminRoutes);
 
 connectDB();
 app.listen(port, host, () => {

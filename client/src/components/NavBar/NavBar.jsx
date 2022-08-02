@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Style from "./NavBar.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchName } from "../../redux/actions/";
 import logo from '../../img/favicon.png'
 import { useJwt } from 'react-jwt'
@@ -13,17 +13,6 @@ function NavBar() {
   const navigate = useNavigate(); */
 
   const [isMobile, setIsMobile] = useState(false);
-  const [loading, setLoading] = useState(false)
-  const user = useSelector((state) => state.products)
-  
-  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
-  let autho = decodedToken?.role
-  
-  useEffect(() => {
-    autho && autho === "admin" && setLoading(false)
-    autho !== "admin" && setLoading(true)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
 
 
   return (

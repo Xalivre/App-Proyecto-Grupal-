@@ -78,7 +78,7 @@ function SearchBar(props) {
           <button className="button" >Cerrar Sesión</button></Link>
           }
         {
-          autho !== "admin" &&
+          (autho !== "admin" && autho !== "owner") &&
           <div>
             <CartDrawer cart={cart} />
           </div>
@@ -95,6 +95,7 @@ function SearchBar(props) {
             <div className={styles.profile_img}><AccountCircleSharpIcon/></div>
           </Link>
           </div>}
+          {(autho === "admin" || autho === "owner") && <Link to="/Dashboard"><button className="button">Administración</button></Link>}
       </div>
     </div>
   );
