@@ -10,6 +10,16 @@ import ProductCard from "../ProductCard/ProductCard";
 import Style from "./Home.module.css";
 import '@splidejs/react-splide/css/skyblue';
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import loader from "../../img/loader.gif"
+import logoBanner from "../../img/logo-banner.png"
+
+// Brands
+import samsung from "../../img/brands/samsung.png"
+import kingston from "../../img/brands/kingston.png"
+import asus from "../../img/brands/asus.png"
+import gigabyte from "../../img/brands/gigabyte.png"
+import amd from "../../img/brands/amd.png"
+
 
 
 
@@ -73,6 +83,65 @@ function Home() {
             </div>
           </div>
         </div>
+        <div className={Style.testContainer}>
+        {
+          carousel.length > 0 && mostViewed.length > 0 && recentlyAdded.length > 0
+          ?
+          <>
+          <div className={Style.bannerVertical}>
+            <div className={Style.bannerText}>
+                <div className={Style.logoBanner}>
+                  <div className={Style.absoluteLogoBanner}></div>
+                  <img src={logoBanner} alt="logo"/>
+                </div>
+                <p>Discover</p>
+                <p> the best products that we have for you!</p>
+            </div>
+            <div className={Style.bannerVerticalimg}></div>
+            <div className={Style.bannerVerticalimgDark}></div>
+          </div>
+
+          <div className={Style.alljuntos}>
+
+            <div className={Style.juntos}>
+              <div className={`${Style.link} ${Style.div}`} to={"/product/" + carousel[0]._id}>
+                        <ProductCard
+                          id={mostViewed[0]._id}
+                          name={mostViewed[0].name}
+                          image={mostViewed[0].image[0].url}
+                          price={mostViewed[0].price}
+                          key={mostViewed[0]._id}
+                        />
+              </div>
+              <div className={`${Style.link} ${Style.div}`}  to={"/product/" + carousel[1]._id}>
+                        <ProductCard
+                          id={carousel[1]._id}
+                          name={carousel[1].name}
+                          image={carousel[1].image[0].url}
+                          price={carousel[1].price}
+                          key={carousel[1]._id}
+                        />
+              </div>
+            </div>
+            <div className={Style.abajo}>
+              <div className={Style.link} to={"/product/" + carousel[2]._id}>
+                        <ProductCard
+                          id={recentlyAdded[2]._id}
+                          name={recentlyAdded[2].name}
+                          image={recentlyAdded[2].image[0].url}
+                          price={recentlyAdded[2].price}
+                          key={recentlyAdded[2]._id}
+                        />
+              </div>
+            </div>
+          </div>
+            </>
+          :
+          <div className={Style.loadingContainer}>
+            <img src={loader} alt="loader"/>
+          </div>
+        }
+      </div>
         <div className={Style.section}>
           <h1 className={Style.title}>Los más visitados</h1>
           <div className={Style.carouselBackground}>
@@ -95,6 +164,11 @@ function Home() {
             </div>
           </div>
         </div>
+        
+        <div className={Style.banner}>
+          <img src="https://m.media-amazon.com/images/S/aplus-media/vc/a8141547-44bf-4050-bb06-096851048176.__CR0,0,1464,600_PT0_SX1464_V1___.jpg" style={{margin: "2rem 0"}} alt="img"/>
+        </div>
+
         <div className={Style.section}>
           <h1 className={Style.title}>Novedades !</h1>
           <div className={Style.carouselBackground}>
@@ -117,6 +191,16 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div className={Style.brandsContainer}>
+          <p>Trabajamos con las mejores marcas</p>
+          <div className={Style.brands}>
+            <img src={asus} alt="brand-img"/>
+            <img src={samsung} alt="brand-img"/>
+            <img src={kingston} alt="brand-img"/>
+            <img src={gigabyte} alt="brand-img"/>
+            <img src={amd} alt="brand-img"/>
+          </div>
       </div>
     </div>
   );
