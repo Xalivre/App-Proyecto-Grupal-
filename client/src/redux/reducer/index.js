@@ -4,7 +4,7 @@ const initialState = {
   details: [],
   paymentHistory: [],
   users: [],
-  cart: localStorage.getItem("Carrito")?JSON.parse(localStorage.getItem("Carrito")) : [],
+  cart: localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : [],
   carousel: [],
   mostViewed: [],
   recentlyAdded: [],
@@ -41,9 +41,14 @@ const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
 const MODIFY_CART = "MODIFY_CART"
 const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 const GET_USERS = "GET_USERS"
+const BAN_USER = "BAN_USER"
+const UNBAN_USER = "UNBAN_USER"
+const MODIFY_QUANTITY_UP = "MODIFY_QUANTITY_UP"
+const MODIFY_QUANTITY_DOWN = "MODIFY_QUANTITY_DOWN"
 const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 const ADMIN_USER = "ADMIN_USER"
 const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userPayments: action.payload
-      }  
+      }
 
     case GET_DETAILS:
       return {
@@ -123,15 +128,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recentlyAdded: action.payload,
       };
-    case SEARCH_BAR:{
+    case SEARCH_BAR: {
       let a = action.payload === "aklsjdhlaksjdaskldazzzz" ?
-      state.allProducts : [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase()))
+        state.allProducts : [...state.allProducts].filter((x) => x.name.toLowerCase().includes(action.payload.toLowerCase()))
       return {
         ...state,
         filteredProducts: a.length > 0 ? a : state.allProducts,
         nameSearched: action.payload,
         operation: a.length < 1 ? "Error SearchBar" : action.payload === "aklsjdhlaksjdaskldazzzz" ? "No hacer nada" : "SearchBar"
-      };}
+      };
+    }
 
     case POST_PRODUCT:
       return {
@@ -148,7 +154,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       }
 
-    case SORT_PRICE:{
+    case SORT_PRICE: {
       const sortedArray = action.payload === "Ascending" ? [...state.filteredProducts].sort(function (a, b) {
         if (a.price > b.price) {
           return 1
@@ -173,7 +179,8 @@ const rootReducer = (state = initialState, action) => {
         products: action.payload === "Default" ? [...state.products] : sortedArray,
         filteredProducts: action.payload === "Default" ? [...state.filteredProducts] : sortedArray,
         operation: "No hacer nada",
-      }}
+      }
+    }
 
     case GET_CATEGORIES:
       return {
@@ -206,7 +213,7 @@ const rootReducer = (state = initialState, action) => {
     case ADMIN_USER:
       return {
         ...state,
-      }  
+      }
 
     case MODIFY_CART:
       return {
@@ -219,6 +226,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         loginRefresher: !state.loginRefresher
       }
+
+    case MODIFY_QUANTITY_UP:
+      let d = state.cart.findIndex(e => e._id === action.payload)
+      let f = { quantity: state.cart[d].quantity ? state.cart[d].quantity + 1 : 1 }
+      let g = Object.assign({}, state.cart[d], f)
+      console.log(g)
+      return {
+        ...state,
+        cart: state.cart.map(e => e._id === action.payload ? g : e)
+      }
+
+    case MODIFY_QUANTITY_DOWN:
+      let a = state.cart.findIndex(e => e._id === action.payload)
+      let b = { quantity: state.cart[a].quantity ? state.cart[a].quantity - 1 : 1 }
+      let c = Object.assign({}, state.cart[a], b)
+      console.log(c)
+      return {
+        ...state,
+        cart: state.cart.map(e => e._id === action.payload ? c : e)
+      }
+
+
     default:
       return state;
   }

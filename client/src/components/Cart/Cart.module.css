@@ -31,3 +31,15 @@
     padding-right: 15px;
     flex-direction: column;
 }
+
+.buttonsCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.cartText {
+    display: flex;
+    padding: 1rem;
+    text-align: center;
+}
