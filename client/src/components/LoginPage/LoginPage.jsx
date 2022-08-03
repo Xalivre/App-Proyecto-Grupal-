@@ -12,6 +12,8 @@ function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [count, setCount] = useState(false)
+
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -43,13 +45,16 @@ function LoginPage() {
     }).then((respuesta) => {
       if(respuesta){
         dispatch(postUsersGoogle(infoGoogle));
+        localStorage.setItem("usuario", variable)
         navigate("/")
       }
     })
   }
+  let variable
 
   function HandleCallbackResponse(response){
     console.log("Encoded JWT ID token: " + response.credential);
+    variable = response.credential
     var userObject = jwt_decode(response.credential);
     console.log(userObject)
     setInfoGoogle({
@@ -69,8 +74,13 @@ function LoginPage() {
     google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
       {theme: "outline", size: "large"},
+      setCount(!count)
     );
   }, []);
+
+  useEffect(() => {
+    dispatch(postUsersGoogle(infoGoogle));
+  },[count] )
 
   const validate = (info) => {
     let errors = {};
@@ -87,10 +97,12 @@ function LoginPage() {
   const [errors, setErrors] = useState("");
 
   const handleChange = (e) => {
-    setInfo({
+    setInfo(
+      e.target.name === "email" ? {
       ...info,
-      [e.target.name]: e.target.value,
-    });
+      [e.target.name]: e.target.value.toLowerCase(),
+    }: {...info,
+    [e.target.name]: e.target.value});
     setErrors(
       validate({
         ...info,

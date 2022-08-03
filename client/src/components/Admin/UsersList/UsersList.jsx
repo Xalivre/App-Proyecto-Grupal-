@@ -28,8 +28,7 @@ export default function UsersList() {
     dispatch(getUsers());
   }, [count]);
 
-  const banUserFunction = (e) => {
-    setCount(!count);
+  const banUserFunction = async (e) => {
     let idUser = e.target.value;
     dispatch(
       updateUserState(
@@ -37,13 +36,13 @@ export default function UsersList() {
           accountState: "banned",
         },
         idUser
-      )
-    );
-    swal("Baneado!","Usuario baneado con exito","success");
+        )
+        );
+        await swal("Baneado!","Usuario baneado con exito","success");
+        setCount(!count);
   };
 
-  const unbanUserFunction = (e) => {
-    setCount(!count);
+  const unbanUserFunction = async(e) => {
     let idUser = e.target.value;
     dispatch(
       updateUserState(
@@ -51,13 +50,13 @@ export default function UsersList() {
           accountState: "active",
         },
         idUser
-      )
-    );
-    swal("Desbaneado!","Usuario desbaneado con exito","success");
+        )
+        );
+       await swal("Desbaneado!","Usuario desbaneado con exito","success");
+        setCount(!count);
   };
 
-  const giveAdmin = (e) => {
-    setCount(!count);
+  const giveAdmin = async(e) => {
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -65,13 +64,13 @@ export default function UsersList() {
           role: "admin",
         },
         idUser
-      )
-    );
-    swal("Ascendido!","El usuario ahora tambien es admin","success")
+        )
+        );
+       await swal("Ascendido!","El usuario ahora tambien es admin","success")
+        setCount(!count);
   };
 
-  const removeAdmin = (e) => {
-    setCount(!count);
+  const removeAdmin = async(e) => {
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -79,9 +78,10 @@ export default function UsersList() {
           role: "user",
         },
         idUser
-      )
-    );
-    swal("Descendido!","El usuario ya no es admin","success")
+        )
+        );
+        await swal("Descendido!","El usuario ya no es admin","success")
+        setCount(!count);
   };
 
   return (
@@ -90,12 +90,12 @@ export default function UsersList() {
         <table className="table container">
           <thead className="table-dark">
             <tr>
-              <th scope="col">UserName</th>
+              <th scope="col">Usuario</th>
               <th scope="col">E-mail</th>
-              <th scope="col">State</th>
-              <th scope="col">Role</th>
-              <th scope="col">History Payment</th>
-              <th scope="col">Ban</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Historial de compras</th>
+              <th scope="col">Acciones posibles</th>
             </tr>
           </thead>
           <tbody>

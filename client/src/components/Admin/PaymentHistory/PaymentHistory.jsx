@@ -14,6 +14,8 @@ export default function PaymentHistory(props) {
 
   const [loading, setLoading] = useState(true);
 
+  const [count, setCount] = useState(false)
+
   useEffect(() => {
     paymentDetails.length > 0 && setLoading(false);
   }, [paymentDetails]);
@@ -26,6 +28,10 @@ export default function PaymentHistory(props) {
   }, [dispatch]);
 
   let counter = 1;
+
+  useEffect(() => {
+    dispatch(getPaymentHistory(id))
+  }, [count])
   
 
   const handleState =  async (e) => {
@@ -37,6 +43,7 @@ export default function PaymentHistory(props) {
     }
     await dispatch(changeState(objHistory))
     await dispatch(getPaymentHistory(id))
+    setCount(!count)
   }
 
   return (

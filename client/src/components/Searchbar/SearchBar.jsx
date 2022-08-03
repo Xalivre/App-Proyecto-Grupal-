@@ -44,7 +44,7 @@ function SearchBar(props) {
     // searchName(searchProduct)
     e.preventDefault();
     if (searchProduct.length > 0 && searchProduct[0] !== " ") {
-      autho !== "admin" ? navigate('/products') : navigate("/Dashboard")
+      (autho !== "admin" && autho !== "owner") ? navigate('/products') : navigate("/Dashboard")
       dispatch(searchName(searchProduct));
       setSearchProduct("")
     } else if(searchProduct[0] === " "){
@@ -77,8 +77,9 @@ function SearchBar(props) {
       <Link to="/">
         <img className={styles.logo} src={logo} alt="img" />
       </Link>
+       { /* (autho !== "admin" && autho !== "owner") && */
       <div style={{backgroundcolor:"red"}}>
-        <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
           <input
             onChange={(e) => onChangeHandler(e.target.value)}
             value={searchProduct}
@@ -102,7 +103,7 @@ function SearchBar(props) {
           </div> )
           }
         </div> 
-      </div>
+      </div>}
       <div className={styles.login}>
         {!localStorage.getItem("usuario") && <><Link to="/register">
           <button className="button" >Registrarse</button>
