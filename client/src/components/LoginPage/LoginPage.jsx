@@ -4,18 +4,24 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./LoginPage.module.css";
-import { loginRefresher } from "../../redux/actions";
+import { loginRefresher, postUsersGoogle } from "../../redux/actions";
 import jwt_decode from "jwt-decode"
+import swal from "sweetalert"
 
 function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
-  console.log(info)
 
+  const [infoGoogle, setInfoGoogle] = useState({
+    username: "",
+    email: "",
+    email_verified: ""
+  })
 
   const [errorLogin, setErrorLogin] = useState("");
 
@@ -23,11 +29,35 @@ function LoginPage() {
     setErrorLogin("");
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   console.log(infoGoogle)
+  // }, [infoGoogle])
+
+
+  const viewAlert = () => {
+    swal({
+      title: "Iniciar sesion con mi cuenta de Google",
+      text: "Al iniciar sesion das permiso a GameHub de acceder a tus datos como nombre, correo e imagen de perfil",
+      icon: "warning",
+      buttons: ["No", "Si"]
+    }).then((respuesta) => {
+      if(respuesta){
+        dispatch(postUsersGoogle(infoGoogle));
+        navigate("/")
+      }
+    })
+  }
 
   function HandleCallbackResponse(response){
-    console.log("Encoded JWT ID token: " + response.credential)
-    var userObject = jwt_decode(response.credential)
+    console.log("Encoded JWT ID token: " + response.credential);
+    var userObject = jwt_decode(response.credential);
     console.log(userObject)
+    setInfoGoogle({
+      username: userObject.name,
+      email: userObject.email,
+      email_verified: userObject.email_verified
+    })
+
   }
 
   useEffect(() => {
@@ -38,7 +68,7 @@ function LoginPage() {
     });
     google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
-      {theme: "outline", size: "large"}
+      {theme: "outline", size: "large"},
     );
   }, []);
 
@@ -69,7 +99,6 @@ function LoginPage() {
     );
   };
 
-  const navigate = useNavigate();
 
   const LoginUser = async (payload) => {
     try {
@@ -158,7 +187,11 @@ function LoginPage() {
         <br />
       </div>
       <br/>
-      <div id="signInDiv"></div>
+      { !infoGoogle.username && !infoGoogle.email && !infoGoogle.email_verified && <div id="signInDiv"></div>}
+      <br/>
+      {
+        infoGoogle.username && infoGoogle.email && infoGoogle.email_verified && <button onClick={() => viewAlert()}>Ingresar a GameHub</button>
+      }
       <br/>
     </div>
   );

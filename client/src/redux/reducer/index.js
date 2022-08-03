@@ -35,6 +35,7 @@ const GET_CATEGORIES = "GET_CATEGORIES"
 const GET_BRANDS = "GET_BRANDS"
 const CLEAR_PAGE = "CLEAR_PAGE"
 const POST_USER = "POST_USER"
+const POST_USER_GOOGLE = "POST_USER_GOOGLE"
 const LOGIN = "LOGIN"
 const EDIT_PRODUCT = "EDIT_PRODUCT"
 const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
@@ -145,6 +146,11 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case POST_USER:
+      return {
+        ...state,
+      }
+    
+    case POST_USER_GOOGLE:
       return {
         ...state,
       }

@@ -228,6 +228,13 @@ export function postUser(payload) {
   }
 }
 
+export function postUsersGoogle(payload){
+  return async function (dispatch){
+    const responseGoogle = await axios.post("http://localhost:3000/registerGoogle", payload)
+    return responseGoogle
+  }
+}
+
 export function editProduct(payload, id) {
   return async function (dispatch) {
     const edit = await axios.put("http://localhost:3000/product/" + id, payload)
