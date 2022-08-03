@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-case-declarations */
 const initialState = {
   allProducts: [],
   products: [],
