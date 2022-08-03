@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import swal from 'sweetalert';
 
 export function getProducts() {
   return async function (dispatch) {
@@ -83,13 +83,13 @@ export function addToCart(id) {
     try {
       let json = await axios.get("http://localhost:3000/product/" + id);
       if(json.data.stock > 0) {
-        alert("El producto fue agregado a tu carrito")
+        swal("Listo!","El producto fue agregado al carrito!","success")
         return dispatch({
           type: "ADD_TO_CART",
           payload: json.data,
         });
       }
-      return alert("No hay stock disponible")
+      return swal("Lo siento","No hay stock disponible de este producto","error")
     } catch (e) {
       console.log(e);
     }
@@ -284,9 +284,7 @@ export function modifyQuantityDown(id) {
 }
 
 export function changeState(payload) {
-  console.log(payload)
   return async function (dispatch){
-
     const updated = await axios.put("http://localhost:3000/updatestate", payload)
     return updated
   }

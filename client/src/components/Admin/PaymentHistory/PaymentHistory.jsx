@@ -29,15 +29,15 @@ export default function PaymentHistory(props) {
   let counter = 1;
   
 
-  const handleState =  (e) => {
+  const handleState =  async (e) => {
     e.preventDefault()
     const objHistory = {
       paymentId:  e.target.value,
       userId: id,
       state: 'despachado'
     }
-
-    dispatch(changeState(objHistory))
+    await dispatch(changeState(objHistory))
+    await dispatch(getPaymentHistory(id))
   }
 
   return (
@@ -47,7 +47,6 @@ export default function PaymentHistory(props) {
         <button className="btnMod">Volver</button>
       </Link>
       {!loading ? (
-
         <div className={styles.cardsContainer}>
           {paymentDetails?.map((e) => {
             return (

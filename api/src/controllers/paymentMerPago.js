@@ -12,9 +12,6 @@ export async function createPayment({email, items}) {
       success: `http://localhost:3001/successbuy`
     }
   };
-  console.log("PASEEEEEEEE BORJAAAA", body)
-  
-  
   //console.log(email,items, idUser, totalpurchase, idAddress, branchOfficeId);
   
   const payment = await axios.post(url, body, {
@@ -23,9 +20,7 @@ export async function createPayment({email, items}) {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
     }
   });
-  console.log("PASEEEEEEEE BORJAAAA")
 
-  console.log(payment)
   return payment.data.init_point;
 }
 

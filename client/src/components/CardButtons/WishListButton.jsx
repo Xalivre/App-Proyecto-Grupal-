@@ -21,13 +21,13 @@ export default function WishListButton({ id }) {
         if (loading === false) {
             if (!wishes.map((a) => a._id).includes(id)) {
                 dispatch(addToWishList(id))
-                alert("El producto fue agregado a tu lista de deseados")
+                swal("Listo!","El producto fue agregado a la lista de deseados","success")
             } else {
-                alert("El producto ya se encuentra en tu lista de deseados")
+                swal("Oops","Este producto ya se encuentra en tu lista","warning")
             }
         }
         if(loading === true){
-            alert("Debes estar logueado para usar esta función")
+            swal("Atencion!","Debes estar logueado para utilizar esta funcion","error")
         }
     }
 
