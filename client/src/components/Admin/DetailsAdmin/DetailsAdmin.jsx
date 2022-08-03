@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
 import loader from "../../../img/loader.gif"
+import swal from 'sweetalert';
 /* import { useJwt } from "react-jwt" */
 
 export default function DetailsAdmin(props) {
@@ -69,7 +70,7 @@ export default function DetailsAdmin(props) {
     }
     dispatch(editProduct(edit, id));
     console.log(edit);
-    alert("Producto modificado correctamente");
+    swal("Listo!","El producto fue modificado correctamente","success");
     navigate(-1);
   };
 

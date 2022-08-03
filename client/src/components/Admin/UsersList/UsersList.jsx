@@ -5,6 +5,7 @@ import { getUsers, updateUserState, adminUser } from "../../../redux/actions";
 import { useJwt } from "react-jwt";
 import Style from "./UsersList.module.css";
 import loader from "../../../img/loader.gif";
+import swal from 'sweetalert';
 
 export default function UsersList() {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
@@ -38,7 +39,7 @@ export default function UsersList() {
         idUser
       )
     );
-    alert("Usuario baneado con exito");
+    swal("Baneado!","Usuario baneado con exito","success");
   };
 
   const unbanUserFunction = (e) => {
@@ -52,7 +53,7 @@ export default function UsersList() {
         idUser
       )
     );
-    alert("Usuario desbaneado con exito");
+    swal("Desbaneado!","Usuario desbaneado con exito","success");
   };
 
   const giveAdmin = (e) => {
@@ -66,7 +67,7 @@ export default function UsersList() {
         idUser
       )
     );
-    alert("El usuario ha sido ascendido correctamente");
+    swal("Ascendido!","El usuario ahora tambien es admin","success")
   };
 
   const removeAdmin = (e) => {
@@ -80,7 +81,7 @@ export default function UsersList() {
         idUser
       )
     );
-    alert("El usuario ha sido descendido correctamente");
+    swal("Descendido!","El usuario ya no es admin","success")
   };
 
   return (
