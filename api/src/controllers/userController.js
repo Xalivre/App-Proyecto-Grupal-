@@ -100,7 +100,7 @@ export const postUsers = async (req, res) => {
     await User.create({
       username: username,
       password: passwordHash,
-      email: email,
+      email: email.toLowerCase(),
       role: role || "user",
     });
 

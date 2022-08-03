@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import Style from "./PaymentMethod.module.css"
@@ -10,8 +10,6 @@ export default function PaymentMethod() {
   const dispatch = useDispatch()
 
   const karting = useSelector((state) => state.cart)
-
-  const [subtotal] = useState(karting.map(e => (e.price * e.quantity)).reduce((a, b) => a + b, 0))
 
   useEffect(() => {
     localStorage.setItem("Carrito", JSON.stringify(karting))
@@ -46,13 +44,14 @@ export default function PaymentMethod() {
           )
         })
       }
-      <div className={Style.positioning}>${subtotal}</div>
+      <div className={Style.positioning}>Total: ${karting?.map(e => (e.price * e.quantity)).reduce((a, b) => a + b, 0)}</div>
       <br/><br/><br/>
       <div className={Style.paymentButtons}>
         <Link to="/paymentMethod/Checkout"><button>Stripe</button></Link>
         <p> o </p>
         <Link to="#"><button>Mercadopago</button></Link>
       </div>
+      <br/>
     </div>
   )
 }

@@ -100,7 +100,7 @@ function LoginPage() {
     setInfo(
       e.target.name === "email" ? {
       ...info,
-      [e.target.name]: e.target.value.toLowerCase(),
+      [e.target.name]: e.target.value,
     }: {...info,
     [e.target.name]: e.target.value});
     setErrors(

@@ -65,9 +65,15 @@ export default function SwipeableTemporaryDrawer(props: any) {
         </List>
         <Divider />
         {
-          props.cart.length > 0 && autho ? <Link to="/paymentMethod">
+          props.cart.length > 0 && autho ? 
+          <div style={{display: "flex", width:"90%", flexDirection:"column", alignItems:"center"}}>
+            <hr className={Style.hrTotal} />
+            <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
+            <br />
+            <Link to="/paymentMethod">
           <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
         </Link> 
+        </div>
         : props.cart.length > 0 && !autho ? <div>
           <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
           <div className={Style.buttonsCart}><Link to="/register">

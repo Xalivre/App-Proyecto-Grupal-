@@ -1,28 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import s from "./Reviews.module.css";
+import axios from "axios"
+import { useJwt } from "react-jwt"
 
-function Reviews() {
+function Reviews({ id }) {
   const [hover, setHover] = useState(null);
 
-  const [input, setInput] = useState({
-    rating: 1,
-    comment: "",
-  });
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"));
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(input);
+  console.log(decodedToken?.username)
+
+  /* let email = decodedToken?.email; */
+  let usernameTokened = decodedToken?.username;
+
+  /* useEffect(() => {
+    username && username.length && dispatch(getUserPayments(email));
+    console.log(decodedToken)
+  }, [decodedToken]); */
+  
+  const [input, setInput] = useState({
+    id: id,
+    comment: "",
+    commentRating: 1,
+    username: "",
+  });
+  
+  useEffect(() => {
     setInput({
-      rating: 1,
+      ...input,
+      username: usernameTokened
+    })
+  }, [decodedToken])
+
+  async function handleSubmit (e) {
+    e.preventDefault();
+    setInput({
       comment: "",
+      commentRating: 1,
     });
+    console.log(input);
+    await axios.put("http://localhost:3000/comments", input)
   }
 
   function onClickStar(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: Number(e.target.value),
     });
   }
 
@@ -46,14 +70,14 @@ function Reviews() {
                 <input
                   className={s.inputradio}
                   type="radio"
-                  name="rating"
+                  name="commentRating"
                   value={ratingValue}
                   onClick={(e) => onClickStar(e)}
                 />
                 <FaStar
                   className={s.star}
                   color={
-                    ratingValue <= (hover || input.rating)
+                    ratingValue <= (hover || input.commentRating)
                       ? "#ffc107"
                       : /* "#e4e5e9" */ ""
                   }

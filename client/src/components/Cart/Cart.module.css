@@ -43,3 +43,9 @@
     padding: 1rem;
     text-align: center;
 }
+
+.hrTotal {
+    border-top: 5px solid black;
+    border-radius: 10px;
+    width: 100%;
+}
