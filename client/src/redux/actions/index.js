@@ -284,9 +284,7 @@ export function modifyQuantityDown(id) {
 }
 
 export function changeState(payload) {
-  console.log(payload)
   return async function (dispatch){
-
     const updated = await axios.put("http://localhost:3000/updatestate", payload)
     return updated
   }

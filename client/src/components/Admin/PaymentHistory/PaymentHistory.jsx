@@ -28,15 +28,15 @@ export default function PaymentHistory(props) {
   let counter = 1;
   
 
-  const handleState =  (e) => {
+  const handleState =  async (e) => {
     e.preventDefault()
     const objHistory = {
       paymentId:  e.target.value,
       userId: id,
       state: 'despachado'
     }
-
-    dispatch(changeState(objHistory))
+    await dispatch(changeState(objHistory))
+    await dispatch(getPaymentHistory(id))
   }
 
   return (
@@ -52,7 +52,7 @@ export default function PaymentHistory(props) {
               
               <h1>Compra N°{counter++}</h1>
               <div>
-                <h1>Productos comprados: </h1>
+                <h2>Productos comprados: </h2>
                 {e.container.map((f) => {
                   return (
                     <div>
@@ -62,9 +62,11 @@ export default function PaymentHistory(props) {
                   );
                 })}
               </div>
-              <h3>Monto Total: {e.amount}</h3>
-              <h3>Fecha: {e.date.slice(0, 10)}</h3>
-              <h5>Estado de envio: {e.state}</h5>
+              <h4>Monto Total:</h4> <h6>{e.amount}</h6>
+              <h4>Fecha:</h4> <h6>{e.date.slice(0, 10)}</h6>
+              <h5>Estado de envio:</h5>{
+              e.state === 'despachado' ? <h6>✅ {e.state }</h6> : <h6>⌛ {e.state }</h6>  } 
+
               { 
                 e.state === 'pendiente' ?
                 <button value={e._id} onClick={(e) => handleState(e)}>Despachar</button> : <button className={styles.transparent} disabled value={e._id} onClick={(e) => handleState(e)}>Cancelar</button>
