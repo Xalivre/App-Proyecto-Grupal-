@@ -31,11 +31,6 @@ function LoginPage() {
     setErrorLogin("");
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log(infoGoogle)
-  // }, [infoGoogle])
-
-
   const viewAlert = () => {
     swal({
       title: "Iniciar sesion con mi cuenta de Google",
@@ -62,7 +57,7 @@ function LoginPage() {
       email: userObject.email,
       email_verified: userObject.email_verified
     })
-
+    localStorage.setItem("usuario", response.credential)
   }
 
   useEffect(() => {
@@ -202,7 +197,7 @@ function LoginPage() {
       { !infoGoogle.username && !infoGoogle.email && !infoGoogle.email_verified && <div id="signInDiv"></div>}
       <br/>
       {
-        infoGoogle.username && infoGoogle.email && infoGoogle.email_verified && <button onClick={() => viewAlert()}>Ingresar a GameHub</button>
+        infoGoogle.username && infoGoogle.email && infoGoogle.email_verified && <button className="button" onClick={() => viewAlert()}>Ingresar a GameHub</button>
       }
       <br/>
     </div>
