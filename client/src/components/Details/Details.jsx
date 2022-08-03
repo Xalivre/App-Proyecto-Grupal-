@@ -6,6 +6,7 @@ import AddCartButton from "../AddCartButton/AddCartButton";
 import AddWishButton from "../WishList/AddWIshButton/AddWishButton";
 import Style from "./Details.module.css"
 import loader from "../../img/loader.gif"
+import Reviews from "./Reviews/Reviews";
 
 
 export default function Details(props) {
@@ -45,7 +46,9 @@ export default function Details(props) {
             <h1>Caracteristicas</h1>
             <div>{product.description}</div>
           </div>
-          <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+          <br /> <br /> <br />
+          <Reviews/>
+          <br /> <br /> <br /> <br /> <br />
         </div> : <div className={Style.loader}><img className={Style.gif} src={loader} alt='loading'></img></div>
       }
     </div>
