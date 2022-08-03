@@ -59,7 +59,7 @@ function Footer() {
                 href="https://www.facebook.com"
                 target="_blank"
               >
-                <i class="fa-brands fa-facebook"></i>
+                <i className="fa-brands fa-facebook"></i>
               </a>
               <a
                 className={styles.icon}
@@ -67,7 +67,7 @@ function Footer() {
                 href="https://www.instagram.com"
                 target="_blank"
               >
-                <i class="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-instagram"></i>
               </a>
               <a
                 className={styles.icon}
@@ -75,7 +75,7 @@ function Footer() {
                 href="https://www.twitter.com"
                 target="_blank"
               >
-                <i class="fa-brands fa-twitter"></i>
+                <i className="fa-brands fa-twitter"></i>
               </a>
             </div>
           </div>
