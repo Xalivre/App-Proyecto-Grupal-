@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     padding: .2rem;
     align-items: center;
+    position: relative;
 }
 
 .login {
@@ -60,4 +61,33 @@
 .profile_img{
     width: 5%;
 }
+}
+
+
+.suggestions_container{
+    position: absolute;
+    border: 1px solid rgb(201, 201, 201);
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    max-width: 420px;
+    
+}
+
+.suggestions{
+    border: 1px solid rgb(201, 201, 201);
+    cursor: pointer;
+    transition: .2s;
+    display: flex;
+    justify-content: row;
+    height: 2rem;
+}
+
+.suggestion_img{
+    display: flex;
+    width: 8%;
+}
+
+.suggestions:hover{
+    background-color:#3d7fbd;
+    color: white;
 }
