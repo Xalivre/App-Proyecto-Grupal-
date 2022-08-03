@@ -25,6 +25,7 @@ const {email, password } = req.body
 };
 
 
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -47,6 +48,34 @@ export const loginUser = async (req, res) => {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 };
+
+export const postUsersGoogle = async (req, res) => {
+  try{
+    const {username, email_verified, email, role, cart} = req.body;
+    if (!username || !email || !email_verified)
+      return res.json({ msg: "Missing required fields" });
+    const userBDGoo = await User.findOne({email});
+    if(userBDGoo){
+      return res.json({ msg: "The email already exists" });
+    } 
+
+    await User.create({
+      username: username,
+      email_verified: email_verified,
+      email: email,
+      role: role || "user",
+    });
+
+    // sendMail(email, username)
+    //   .then((result) => console.log("email sended"))
+    //   .catch((err) => console.log(err));
+
+    return res.json({ msg: `${username} create succesfully` });
+  }catch(e){
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
+
 
 export const postUsers = async (req, res) => {
   try {
