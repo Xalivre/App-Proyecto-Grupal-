@@ -10,6 +10,7 @@ import CartDrawer from "../Cart/CartDrawer.tsx"
 import { useJwt } from "react-jwt";
 /* import Profile from "../Profile/Profile"; */
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import swal from 'sweetalert';
 
 
 function SearchBar(props) {
@@ -110,7 +111,7 @@ function SearchBar(props) {
             <button className="button" >Iniciar Sesión</button>
           </Link></>}
           {
-            localStorage.getItem("usuario") && <Link to="/" onClick={() => {localStorage.removeItem("usuario"); dispatch(loginRefresher())}}>
+            localStorage.getItem("usuario") && <Link to="/" onClick={() => {localStorage.removeItem("usuario");swal("Hasta Pronto!","Sesion cerrada correctamente","success");dispatch(loginRefresher())}}>
           <button className="button" >Cerrar Sesión</button></Link>
           }
         {

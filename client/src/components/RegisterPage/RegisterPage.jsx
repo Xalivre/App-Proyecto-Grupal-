@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import {getUsers, postUser} from "../../redux/actions"
 import Style from "./RegisterPage.module.css"
 function RegisterPage(){
@@ -133,7 +134,7 @@ function RegisterPage(){
                     </ul>
                 </div>
                 {
-                    !errors.username && !errors.email && !errors.password && !errors.password2 ? <button className="button" onClick={()=> {dispatch(postUser(info)); alert("Cuenta creada con éxito"); navigate("/Login")}}>Registrarse</button>
+                    !errors.username && !errors.email && !errors.password && !errors.password2 ? <button className="button" onClick={()=> {dispatch(postUser(info)); swal("Bienvenido/a!","Su cuenta fue creada con exito","success"); navigate("/Login")}}>Registrarse</button>
                     : 
                     <button className={`${Style.btn} button`} disabled>Registrarse</button>
                 }
