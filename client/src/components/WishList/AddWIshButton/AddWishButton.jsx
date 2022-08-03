@@ -4,6 +4,7 @@ import { addToWishList } from "../../../redux/actions"
 import Style from "./AddWishButton.module.css"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useJwt } from "react-jwt"
+import swal from "sweetalert"
 
 function AddWishButton({ id }) {
 
