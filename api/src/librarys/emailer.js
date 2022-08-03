@@ -46,7 +46,7 @@ export const sendMail = async (email, username, amount, paymentObjectEmail ) => 
       subject: "Tu compra fue despachada desde GameHUB",
       html: `<p> Hola <b>${formatUsername(
         username 
-      )}</b>. La lista de productos que compraste fue: <b>${paymentObjectEmail.join(", ")}</b>. </br>
+      )}</b>. Los productos que compraste fueron: <b>${paymentObjectEmail.join(", ")}</b>. </br>
        Tu compra fue despachada.  
        </br> 
       Desde <b>GameHUB</b> te deseamos éxitos.</p>`
