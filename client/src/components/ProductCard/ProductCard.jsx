@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { addToCart, addToWishList, modifyCart } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./ProductCard.module.css";
+import swal from 'sweetalert';
 /* import AddCartButton from "../AddCartButton/AddCartButton"; */
 import { Link } from "react-router-dom";
 import axios from "axios"
@@ -68,15 +69,15 @@ export default function ProductCard({ id, name, price, image }) {
         <div className={Style.buttonsContainer}>
           <button onClick={() => {
             !karting.map((a) => a._id).includes(id) ? dispatch(addToCart(id)) && cartStorage(id)
-             : alert("Este producto ya se encuentra en tu carrito")
+             : swal("Oops","Este producto ya se encuentra en tu carrito","warning")
           }}
             className="button">Añadir al carrito</button>
           <br />
           {localStorage.getItem("usuario") ? <button onClick={() => {
             !wishes.map((a) => a._id).includes(id) ? dispatch(addToWishList(id)) &&
-              alert("El producto fue agregado a tu lista de deseados") : alert("Este producto ya se encuentra en tu lista de deseados")
+              swal("Listo!","El producto fue agregado a la lista de deseados","success") : swal("Oops","Este producto ya se encuentra en tu lista","warning")
           }} className="buttonWishlist">Añadir a lista de deseados</button> :
-            <button onClick={() => alert("Debes estar logueado para usar esta función")} className="buttonWishlist">Añadir a lista de deseados</button>}
+            <button onClick={() => swal("Atencion!","Debes estar logueado para utilizar esta funcion","error")} className="buttonWishlist">Añadir a lista de deseados</button>}
           <br />
         </div>
       </div>

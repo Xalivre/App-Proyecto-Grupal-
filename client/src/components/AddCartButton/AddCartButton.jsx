@@ -4,6 +4,7 @@ import { addToCart, removeFromWishList } from '../../redux/actions/index'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Style from "./AddCartButton.module.css"
 import axios from "axios"
+import swal from 'sweetalert';
 
 function AddCartButton({ id }) {
 
@@ -24,7 +25,7 @@ function AddCartButton({ id }) {
     if (!karting.map((a) => a._id).includes(id)) {
       dispatch(addToCart(id));
     } else {
-      alert("Este producto ya se encuentra en tu carrito")
+      swal("Oops","Este producto ya se encuentra en tu carrito!","warning")
     }
     dispatch(removeFromWishList(id))
   }
