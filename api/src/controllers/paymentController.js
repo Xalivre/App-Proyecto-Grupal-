@@ -21,6 +21,9 @@ export const postPayments = async (req, res) => {
       idPayment: id,
       container: cart,
       amount: amount,
+      email: email,
+      username: userDB.username,
+      userId: userDB._id
     });
     paymentDB.save();
 
@@ -35,7 +38,7 @@ export const postPayments = async (req, res) => {
       confirm: true,
     });
 
-    sendMail(email, userDB.username, amount).then(r => console.log("payment email sended")).catch((err) => console.log(err)); 
+    // sendMail(email, userDB.username, amount).then(r => console.log("payment email sended")).catch((err) => console.log(err)); 
 
     return res.send({ message: "Successful payment" });
   } catch (e) {

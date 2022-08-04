@@ -57,3 +57,22 @@ export const changeState = async (req, res) => {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 };
+
+export const searchStatePayment = async (req, res) => {
+
+  try{
+    const despachado = [];
+    const pendiente = []; 
+    const finalizado = [];
+
+    const allPayment = await Payment.find({});
+    if (!allPayment) return res.json({ msg: "No payments found" });
+
+    allPayment.map(e => e.state === "despachado"? despachado.push(e) : e.state === "pendiente"? pendiente.push(e) : finalizado.push(e));
+
+    return res.json({despachado, pendiente, finalizado});
+  }catch (e){
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
+

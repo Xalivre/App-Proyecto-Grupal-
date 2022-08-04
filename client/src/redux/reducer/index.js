@@ -17,7 +17,8 @@ const initialState = {
   brands: [],
   nameSearched: "",
   userPayments: [],
-  loginRefresher: false
+  loginRefresher: false,
+  totalPayments: []
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -51,6 +52,7 @@ const MODIFY_QUANTITY_DOWN = "MODIFY_QUANTITY_DOWN"
 const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 const ADMIN_USER = "ADMIN_USER"
 const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
+const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
 
 
 const rootReducer = (state = initialState, action) => {
@@ -254,7 +256,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.map(e => e._id === action.payload ? c : e)
       }
-
+    case TOTAL_PAYMENTS:
+      return {
+        ...state,
+        totalPayments: action.payload
+      }
 
     default:
       return state;

@@ -75,6 +75,7 @@ function Home() {
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
+                        stock={e.stock}
                       />
                     </div>
                   </div>
@@ -111,6 +112,7 @@ function Home() {
                           image={mostViewed[0].image[0].url}
                           price={mostViewed[0].price}
                           key={mostViewed[0]._id}
+                          stock={mostViewed[0].stock}
                         />
               </div>
               <div className={`${Style.link} ${Style.div}`}  to={"/product/" + carousel[1]._id}>
@@ -120,6 +122,7 @@ function Home() {
                           image={carousel[1].image[0].url}
                           price={carousel[1].price}
                           key={carousel[1]._id}
+                          stock={carousel[1].stock}
                         />
               </div>
             </div>
@@ -131,6 +134,7 @@ function Home() {
                           image={recentlyAdded[2].image[0].url}
                           price={recentlyAdded[2].price}
                           key={recentlyAdded[2]._id}
+                          stock={recentlyAdded[2].stock}
                         />
               </div>
             </div>
@@ -156,6 +160,7 @@ function Home() {
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
+                        stock={e.stock}
                       />
                     </div>
                   </div>
@@ -183,6 +188,7 @@ function Home() {
                         image={e.image[0].url}
                         price={e.price}
                         key={e._id}
+                        stock={e.stock}
                       />
                     </div>
                   </div>

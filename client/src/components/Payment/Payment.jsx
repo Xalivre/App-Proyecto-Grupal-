@@ -159,7 +159,17 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
         cart,
         email: emailUser
       });
+
       if(data.message === "Successful payment"){
+        const array = cart.map(item => item._id)
+        const array2 = cart.map(e => e.quantity)
+
+        while(array.length > 0){
+        await axios.put(`http://localhost:3000/product/${array[0]}`,{ quantity: array2[0]});
+          array.shift()
+          array2.shift()
+        }
+
         localStorage.removeItem("Carrito")
         swal("Felicitaciones!","Operación completada exitosamente","success")
         navigate('/')
@@ -274,10 +284,8 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
           </div>
         ) : ("Buy")}
         </button>
-        : <div> boton trucho </div>
-
+        : <button type="button" disabled="true" className={Style.buttonError}>Rellenar los campos</button>
         }
-
       </form>
       <br /><br /><br />
     </div>

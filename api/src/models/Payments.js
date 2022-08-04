@@ -19,6 +19,15 @@ const paymentSchema = new mongoose.Schema({
     state: {
         type: String,
         default: "pendiente"
+    },
+    email: {
+        type: String
+    },
+    username: {
+        type: String
+    },
+    userId: {
+        type: String
     }
 })
 

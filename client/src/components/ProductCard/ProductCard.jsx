@@ -14,11 +14,12 @@ import axios from "axios"
 
 
 
-export default function ProductCard({ id, name, price, image }) {
+export default function ProductCard({ id, name, price, image, stock }) {
   const dispatch = useDispatch();
 
   const karting = useSelector((state) => state.cart)
   const wishes = useSelector((state) => state.wishList)
+  // const allProducts = useSelector((state) => state.wishList)
 
 
   const f = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
@@ -43,7 +44,7 @@ export default function ProductCard({ id, name, price, image }) {
     a.push(json.data)
     localStorage.setItem("Carrito", JSON.stringify(a))
   }
-
+  
   return (
     <div className={Style.carouselOrder}>
       <div className={Style.container}>
@@ -67,11 +68,13 @@ export default function ProductCard({ id, name, price, image }) {
         </div>
         <br />
         <div className={Style.buttonsContainer}>
-          <button onClick={() => {
+          {
+           stock > 0 ? <button onClick={() => {
             !karting.map((a) => a._id).includes(id) ? dispatch(addToCart(id)) && cartStorage(id)
              : swal("Oops","Este producto ya se encuentra en tu carrito","warning")
           }}
-            className="button">Añadir al carrito</button>
+            className="button">Añadir al carrito</button> : <button className="noStockButton" onClick={() => {swal("Sin Stock!","Este producto no tiene stock disponible","error"); console.log(stock)}}>Sin Stock</button>
+            }
           <br />
           {localStorage.getItem("usuario") ? <button onClick={() => {
             !wishes.map((a) => a._id).includes(id) ? dispatch(addToWishList(id)) &&
