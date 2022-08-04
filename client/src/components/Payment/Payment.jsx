@@ -39,6 +39,7 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
           cart,
           email: emailUser
         });
+        console.log(data)
 
         const searchUserForEmail = await axios.get("http://localhost:3000/api/checkoutEmail", {
           email: emailUser

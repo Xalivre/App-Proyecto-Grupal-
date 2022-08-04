@@ -13,7 +13,8 @@ const initialState = {
   categories: [],
   brands: [],
   nameSearched: "",
-  userPayments: []
+  userPayments: [],
+  finishOrder: {},
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -36,6 +37,7 @@ const POST_USER = "POST_USER"
 const LOGIN = "LOGIN"
 const EDIT_PRODUCT = "EDIT_PRODUCT"
 const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
+const FINISH_ORDER = "FINISH_ORDER"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -174,6 +176,12 @@ const rootReducer = (state = initialState, action) => {
     case EDIT_PRODUCT:
       return {
         ...state,
+      }
+    
+    case FINISH_ORDER:
+      return {
+        ...state,
+        finishOrder: action.payload
       }
 
     default:

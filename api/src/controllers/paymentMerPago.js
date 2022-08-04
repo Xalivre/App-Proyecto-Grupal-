@@ -1,10 +1,10 @@
 import axios from "axios"
-export async function createPayment({email, items}) {
+export async function createPayment({emailUser, items}) {
   
   const url = "https://api.mercadopago.com/checkout/preferences";
   
   const body = {
-    payer_email: email,
+    payer_email: emailUser,
     items,
     back_urls: {
       failure: `http://localhost:3001/canceledbuy`,
@@ -13,10 +13,7 @@ export async function createPayment({email, items}) {
     }
   };
   console.log("PASEEEEEEEE BORJAAAA", body)
-  
-  
-  //console.log(email,items, idUser, totalpurchase, idAddress, branchOfficeId);
-  
+    
   const payment = await axios.post(url, body, {
     headers: {
       "Content-Type": "application/json",
@@ -25,6 +22,6 @@ export async function createPayment({email, items}) {
   });
   console.log("PASEEEEEEEE BORJAAAA")
 
-  console.log(payment)
+  console.log(payment, "QUE ONDAAAAAAAAAA")
   return payment.data.init_point;
 }

@@ -7,7 +7,7 @@ export default function PaymentMethod() {
     <div>
       <Link to="/paymentMethod/Checkout"><button>Stripe</button></Link>
       <p> o </p>
-      <Link to="#"><button>Mercadopago</button></Link>
+      <Link to="/paymentMethod/MercadoPago"><button>Mercadopago</button></Link>
     </div>
   )
 }
