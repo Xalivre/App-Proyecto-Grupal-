@@ -27,6 +27,7 @@ export default function SwipeableTemporaryDrawer(props: any) {
 
   const { decodedToken } = useJwt<any>(localStorage.getItem("usuario") || "")
   let autho = decodedToken?.role
+  let googleUser = decodedToken?.email_verified
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -65,7 +66,7 @@ export default function SwipeableTemporaryDrawer(props: any) {
         </List>
         <Divider />
         {
-          props.cart.length > 0 && autho ? 
+          props.cart.length > 0 && (autho || googleUser) ? 
           <div style={{display: "flex", width:"90%", flexDirection:"column", alignItems:"center"}}>
             <hr className={Style.hrTotal} />
             <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>

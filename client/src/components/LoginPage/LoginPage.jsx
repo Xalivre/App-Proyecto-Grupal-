@@ -48,7 +48,7 @@ function LoginPage() {
   function HandleCallbackResponse(response){
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    console.log(userObject)
+    console.log(userObject.name)
     setInfoGoogle({
       username: userObject.name,
       email: userObject.email,

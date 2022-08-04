@@ -38,7 +38,7 @@ export default function Profile() {
         Información de la cuenta
         <div className={Style.profileInfo}>
           <br /><br />
-          <div>Nombre de Usuario: {decodedToken?.username}</div>
+          <div>Nombre de Usuario: {decodedToken?.name || decodedToken?.username}</div>
           <div>Correo Electrónico: {decodedToken?.email}</div>
           <div>Dirección de Facturación: {userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'} </div>
           <div>Codigo postal: {userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</div>

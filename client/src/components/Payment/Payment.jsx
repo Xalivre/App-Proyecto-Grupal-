@@ -10,8 +10,9 @@ import React, { useState, useEffect} from 'react'
 import Style from "./Payment.module.css";
 import axios from "axios";
 import { useJwt } from "react-jwt";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUserPayments, getUsers } from "../../redux/actions";
+import swal from "sweetalert"
 
 const stripePromise = loadStripe(
   "pk_test_51LPtrNLlcvSwUKGvyubeafRmZUaNcn4r13BgxwBAO14mkc6lTj07peI4Grt3jfVc0KEuEzT4MMxJwn2dCkaCab4e00DyrfqFX3"
@@ -22,6 +23,8 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({})
+
+  const navigate = useNavigate()
   
 
   const dispatch = useDispatch();
@@ -42,10 +45,8 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
   useEffect(()=> {
     dispatch(getUsers())
   }, [])
-  console.log(decodedToken)
   const users = useSelector((state)=> state.users)
   const userExtraInfo = users.find(e => e.email === email)
-  console.log(userExtraInfo)
 
   const [info, setInfo] = useState({
     name: '',
@@ -152,12 +153,18 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        await axios.post("http://localhost:3000/api/checkout", {
+        const {data} = await axios.post("http://localhost:3000/api/checkout", {
         id,
         amount,
         cart,
         email: emailUser
       });
+      console.log(data)
+      if(data.message === "Successful payment"){
+        localStorage.removeItem("Carrito")
+        swal("Felicitaciones!","Operación completada exitosamente","success")
+        navigate('/')
+      }
 
       await axios.get("http://localhost:3000/api/checkoutEmail", {
         email: emailUser
