@@ -140,11 +140,8 @@ export const productComments = async (req, res) => {
       commentRating,
       username
     })
-    let quantityOfComments = product.comments.length
-    let ratingPunctuation = 0
-    for (let i = 0; i < quantityOfComments; i++) {
-      ratingPunctuation += product.comments[i].commentRating
-    }
+    const quantityOfComments = product.comments.length
+    const ratingPunctuation = product.comments.reduce((acc, comment) => acc + comment.commentRating, 0)
     product.rating = ratingPunctuation / quantityOfComments
     product.save()
     return res.status(200).json(product)

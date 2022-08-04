@@ -40,16 +40,13 @@ function LoginPage() {
     }).then((respuesta) => {
       if(respuesta){
         dispatch(postUsersGoogle(infoGoogle));
-        localStorage.setItem("usuario", variable)
         navigate("/")
       }
     })
   }
-  let variable
 
   function HandleCallbackResponse(response){
     console.log("Encoded JWT ID token: " + response.credential);
-    variable = response.credential
     var userObject = jwt_decode(response.credential);
     console.log(userObject)
     setInfoGoogle({
