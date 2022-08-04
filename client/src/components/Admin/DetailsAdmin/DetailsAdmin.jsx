@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, editProduct } from "../../../redux/actions";
 import Style from "./DetailsAdmin.module.css"
-import { useJwt } from "react-jwt"
+import loader from "../../../img/loader.gif"
+import swal from 'sweetalert';
+/* import { useJwt } from "react-jwt" */
 
 export default function DetailsAdmin(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
-  let autho = decodedToken?.role
+  /* const { decodedToken } = useJwt(localStorage.getItem("usuario")) */
+  /* let autho = decodedToken?.role */
   const { id } = useParams();
   const product = useSelector((state) => state.details);
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    autho && autho === "admin" && setLoading(false)
-  }, [decodedToken])
+    console.log(product)
+    product.name && setLoading(false)
+  }, [product])
 
   const [edit, setEdit] = useState({
     price: "",
@@ -67,12 +70,15 @@ export default function DetailsAdmin(props) {
     }
     dispatch(editProduct(edit, id));
     console.log(edit);
-    alert("Producto modificado correctamente");
+    swal("Listo!","El producto fue modificado correctamente","success");
     navigate(-1);
   };
 
   return (
     <div>
+      <Link to='/Dashboard'>
+     <button>Volver</button>
+     </Link>
       {
         loading === false ? <div>
           {product && (
@@ -124,7 +130,7 @@ export default function DetailsAdmin(props) {
             </div>
           )}
         </div>
-          :
+          : loading === true ? <div className={Style.loader} ><img className={Style.gif} src={loader} alt="loading"></img></div> :
           <div>Acceso denegado</div>
       }
     </div>

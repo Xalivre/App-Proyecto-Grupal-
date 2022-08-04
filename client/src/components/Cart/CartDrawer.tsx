@@ -8,24 +8,26 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteCartButton from '../DeleteCartButton/DeleteCartButton';
-import { Link, useNavigate } from "react-router-dom";
-import Style from "./Cart.module.css"
-
+import { Link } from "react-router-dom";
+import Style from "./Cart.module.css";
+import { useJwt } from 'react-jwt'
 
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function SwipeableTemporaryDrawer(props) {
-  const [state, setState] = React.useState({
+export default function SwipeableTemporaryDrawer(props: any) {
+  const [state, setState] = React.useState<any>({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  const { decodedToken } = useJwt<any>(localStorage.getItem("usuario") || "")
+  let autho = decodedToken?.role
+  let googleUser = decodedToken?.email_verified
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -50,11 +52,11 @@ export default function SwipeableTemporaryDrawer(props) {
     >
       <div style={{alignItems:"center", display:"flex", flexDirection:"column"}}>
         <List>
-          {props.cart?.map((text, index) => (
+          {props.cart?.map((text: any, index: any) => (
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {<img width="75px" src={text.image[0].url} />}
+                  {<img width="75px" src={text.image[0].url} alt="HDP" />}
                 </ListItemIcon>
                 <ListItemText className={Style.text} primary={text.name.length > 20 ? text.name.slice(0, 20) + "..." : text.name} secondary={`$${text.price}`} />
                 <DeleteCartButton id={text._id} />
@@ -64,9 +66,23 @@ export default function SwipeableTemporaryDrawer(props) {
         </List>
         <Divider />
         {
-          props.cart.length > 0 ? <Link to="/paymentMethod">
+          props.cart.length > 0 && (autho || googleUser) ? 
+          <div style={{display: "flex", width:"90%", flexDirection:"column", alignItems:"center"}}>
+            <hr className={Style.hrTotal} />
+            <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
+            <br />
+            <Link to="/paymentMethod">
           <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
-        </Link>
+        </Link> 
+        </div>
+        : props.cart.length > 0 && !autho ? <div>
+          <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
+          <div className={Style.buttonsCart}><Link to="/register">
+        <button className="button" >Registrarse</button>
+      </Link>
+      <Link to="/login">
+            <button className="button" >Iniciar Sesión</button>
+          </Link></div></div>
         :
         <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
         }
@@ -77,7 +93,7 @@ export default function SwipeableTemporaryDrawer(props) {
 
   return (
     <div>
-      {(['Cart'] as const).map((anchor) => (
+      {(['Cart'] as const).map((anchor: any) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon /></Button>
           <SwipeableDrawer

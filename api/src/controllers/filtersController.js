@@ -2,7 +2,9 @@ import Product from "../models/Product.js";
 
 export const getCarousel = async (req, res) => {
   try {
-    const products = await Product.find();
+    const allproducts = await Product.find();
+    const products = allproducts.filter(e => e.stock > 0)
+
     if (products.length > 5) {
       var productsFiltered = [];
       var indexArray = [];
@@ -24,7 +26,9 @@ export const getCarousel = async (req, res) => {
 
 export const insertionSort = async (req, res) => {
   try {
-    const products = await Product.find();
+    const allproducts = await Product.find();
+    const products = allproducts.filter(e => e.stock > 0)
+
     if (products.length > 5) {
     for (let i = 1; i < products.length; i++) {
       let j = i - 1;
@@ -47,7 +51,9 @@ export const insertionSort = async (req, res) => {
 
 export const lastAdded = async (req, res) => {
   try {
-    const products = await Product.find();
+    const allproducts = await Product.find();
+    const products = allproducts.filter(e => e.stock > 0)
+    
     if (products.length > 5) {
     const lastAdded = products
       .slice(products.length - 5, products.length)

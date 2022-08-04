@@ -6,20 +6,21 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
+    email_verified: {
+        type: Boolean,
+        /*default: true*/
+    }, 
     paymentHistory: [],
     role: {
         type: String,
         default: "user"
     },
-    cart: [],
     phoneNumber: {
         type: Number,
     },
@@ -35,9 +36,7 @@ const userSchema = new mongoose.Schema({
     accountState: {
         type: String,
         default: "active"
-    }
-
-
+    },
 })
 
 export default mongoose.model('User', userSchema)

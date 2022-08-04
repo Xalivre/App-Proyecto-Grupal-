@@ -1,0 +1,150 @@
+.all{
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(6, 16, 158, 0.716);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.titles{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    color: rgb(107, 107, 107);
+    font-family: 'Anton', sans-serif !important;
+}
+.titleCar, .compra{
+    height: 10%;
+    font-size: 20px;
+    margin: 0;
+}
+.containerAll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: .7rem;
+}
+.containerAll h1{
+    font-size: 1rem;
+}
+.containerCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.cartProducts {
+    display: grid;
+    grid-template-areas: "image title quantity price button";
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+.image{
+    grid-area: image;
+    width: 80%;
+}
+.text{
+    grid-area: title;
+}
+.quantity{
+    grid-area: quantity;
+}
+.price{
+    font-weight: bold;
+    grid-area: price;
+}
+.btnX{
+    grid-area: button;
+}
+.paymentButtons{
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+}
+.paymentButtons button{
+    width: 7rem;
+}
+
+.positioning {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+.quantity{
+    display: flex;
+    gap: .5rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.quantity p{
+    border: #2589e646 2px solid;
+    margin: 0;
+    border-radius: 10px;
+    padding: .4rem;
+}
+.menos, .mas{
+    border: none;
+    background-color: transparent;
+    padding: .4rem;
+}
+
+.menos:hover, .mas:hover{
+    background-color: #2589e646;
+    transition: 0.2s ease-in-out;
+    border-radius: 10px;
+}
+.dos{
+    background-color: #F5F5F6;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 30%;
+}
+.uno{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 70%;
+}
+.uno, .dos{
+    padding: 1rem;
+}
+.uno hr, .dos hr{
+    margin: 0;
+}
+.titlep{
+    font-family: 'Anton', sans-serif !important;
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+@media screen and (max-width: 960px) {
+    .all{
+        flex-direction: column;
+    }
+    .uno, .dos{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 680px){
+    .cartProducts{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        padding: .5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.454);
+    }
+    .image{
+        width: 50%;
+    }
+    .containerCards{
+        gap: 2rem;
+    }
+}

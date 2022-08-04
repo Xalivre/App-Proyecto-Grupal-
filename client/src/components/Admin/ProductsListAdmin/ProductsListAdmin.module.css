@@ -119,3 +119,17 @@
     background-color: #5c636a;
     transition: 0.2s;
 }
+
+.loader{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.gif{
+    margin: auto;
+
+}

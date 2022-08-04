@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import swal from 'sweetalert';
 
 export function getProducts() {
   return async function (dispatch) {
@@ -9,6 +9,16 @@ export function getProducts() {
       payload: json.data,
     });
   };
+}
+
+export function getUsers() {
+  return async function (dispatch) {
+    let json = await axios.get("http://localhost:3000/accounts", {})
+    return dispatch({
+      type: "GET_USERS",
+      payload: json.data
+    })
+  }
 }
 
 export function getUserPayments(email) {
@@ -25,7 +35,7 @@ export function getProductDetails(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3000/product/" + id);
-      let counter = await axios.put("http://localhost:3000/product/" + id, {
+      await axios.put("http://localhost:3000/product/" + id, {
         views: json.data.views + 1,
       });
       return dispatch({
@@ -36,6 +46,16 @@ export function getProductDetails(id) {
       console.log(e);
     }
   };
+}
+
+export function getPaymentHistory(id) {
+  return async function (dispatch){ 
+    let json = await axios.get("http://localhost:3000/api/paymentHistory/" + id)
+    return dispatch({
+      type: "GET_PAYMENT_HISTORY",
+      payload: json.data
+    })
+  }
 }
 
 export function sortPrice(price) {
@@ -54,7 +74,7 @@ export function sortRating(rating) {
 
 export function deleteProduct(id) {
   return async function (dispatch) {
-    let deleted = await axios.delete("http://localhost:3000/product/" + id);
+    await axios.delete("http://localhost:3000/product/" + id);
   };
 }
 
@@ -62,10 +82,14 @@ export function addToCart(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3000/product/" + id);
-      return dispatch({
-        type: "ADD_TO_CART",
-        payload: json.data,
-      });
+      if(json.data.stock > 0) {
+        swal("Listo!","El producto fue agregado al carrito!","success")
+        return dispatch({
+          type: "ADD_TO_CART",
+          payload: json.data,
+        });
+      }
+      return swal("Lo siento","No hay stock disponible de este producto","error")
     } catch (e) {
       console.log(e);
     }
@@ -76,6 +100,13 @@ export function deleteFromCart(id){
   return {
     type: 'REMOVE_CART',
     payload: id
+  }
+}
+
+export function modifyCart(carrito){
+  return {
+    type: "MODIFY_CART",
+    payload: carrito
   }
 }
 
@@ -149,7 +180,7 @@ export function searchName(word) {
     const allProducts = getState().allProducts; //suponiendo que el arr del store se llame products
     // realizamos el filtrado
 
-    const res = allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
+    allProducts.filter((element) => element.name.toLowerCase().includes(word.toLowerCase())); 
     dispatch({
       type: "SEARCH_BAR",
       payload: word,
@@ -197,6 +228,13 @@ export function postUser(payload) {
   }
 }
 
+export function postUsersGoogle(payload){
+  return async function (dispatch){
+    const responseGoogle = await axios.post("http://localhost:3000/registerGoogle", payload)
+    return responseGoogle
+  }
+}
+
 export function editProduct(payload, id) {
   return async function (dispatch) {
     const edit = await axios.put("http://localhost:3000/product/" + id, payload)
@@ -204,13 +242,13 @@ export function editProduct(payload, id) {
   }
 }
 
+
 export function finishOrder(emailUser, items, total){
   return async function (dispatch){
     const responsePay = await axios.post("http://localhost:3000/api/paymentMerpago", {emailUser, items, total})
     return responsePay
   }
 }
-
 
 // export const finishOrder = function( emailUser, items, total) {
 //   return function(dispatch){
@@ -220,4 +258,68 @@ export function finishOrder(emailUser, items, total){
 //   }
 // };
 
+export function updateUserState(payload, id) {
+  return async function (dispatch) {
+    const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
+    return ban
+  }
+}
 
+export function adminUser(payload, id) {
+  return async function (dispatch) {
+    const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
+    return ban
+  }
+}
+
+export function loginRefresher() {
+  return function (dispatch) {
+    dispatch({
+      type: "LOGIN_REFRESHER"
+    })
+  }
+}
+
+export function modifyQuantityUp(id) {
+  return function (dispatch) {
+    dispatch({
+      type: "MODIFY_QUANTITY_UP",
+      payload: id
+    })
+  }
+}
+
+export function modifyQuantityDown(id) {
+  return function (dispatch) {
+    dispatch({
+      type: "MODIFY_QUANTITY_DOWN",
+      payload: id
+    })
+  }
+}
+
+export function changeState(payload) {
+  return async function (dispatch){
+    const updated = await axios.put("http://localhost:3000/updatestate", payload)
+    return updated
+  }
+}
+
+export function searchStatePayment() {
+  return async function (){
+    const data = await axios.get("http://localhost:3000/filterPaymentState")
+    return data
+
+  }
+}
+
+export function getTotalPayments() {
+  return async function (dispatch){
+    const json = await axios.get("http://localhost:3000/filterPaymentState")
+    return dispatch({
+      type:"TOTAL_PAYMENTS",
+      payload: json.data
+    })
+    
+  }
+}

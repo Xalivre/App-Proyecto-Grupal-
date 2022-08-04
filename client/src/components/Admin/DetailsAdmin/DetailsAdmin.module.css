@@ -84,3 +84,16 @@
     align-items: center;
     gap: .5rem;
 }
+
+.loader{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gif{
+    margin: auto;
+
+}

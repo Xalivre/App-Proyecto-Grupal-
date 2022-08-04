@@ -5,7 +5,7 @@ import SearchBar from "../Searchbar/SearchBar";
 function Header() {
   return (
     <div>
-      { !window.location.href.split("/").includes("Dashboard") && <div>
+      { /* !window.location.href.split("/").includes("Dashboard") && */ <div>
       <SearchBar />
       <NavBar />
       </div>}

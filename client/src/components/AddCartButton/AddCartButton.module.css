@@ -2,7 +2,7 @@
     display: flex;
     font-size: 15px;
     width: 15vw;
-    gap:30px;
+    gap:20px;
     justify-content: center;
     height: 7vh;
     align-items: center;
@@ -10,9 +10,29 @@
     background-color: rgb(21, 109, 191);
     border-radius: 30px;
     transition: .3s;
+    padding: .6rem;
 }
 
 .cartButton:active{
     background-color: rgb(102, 154, 202);
 }
+
+.cartNoStockButton {
+    display: flex;
+    font-size: 15px;
+    width: 15vw;
+    gap:30px;
+    justify-content: center;
+    height: 7vh;
+    align-items: center;
+    color: white;
+    background-color: rgb(121, 129, 135);
+    border-radius: 30px;
+    transition: .3s;
+}
+
+.cartNoStockButton:active{
+    background-color: rgb(102, 154, 202);
+}
+
 
