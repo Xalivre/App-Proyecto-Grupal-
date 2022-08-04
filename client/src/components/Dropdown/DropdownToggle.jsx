@@ -23,7 +23,7 @@ export default function DropdownComponent(props) {
                 </DropdownToggle>
                 <DropdownMenu className="dropdownMenu">
                     {
-                        props.products && categories.map((e) => <DropdownItem className="dropdown" value={e} onClick={async (e) => {dispatch(searchName("aklsjdhlaksjdaskldazzzz")); props.setCategoryFilter(e.target.value); props.setBrandFilter("")}}
+                        props.products && categories.map((e) => <DropdownItem key={e}className="dropdown" value={e} onClick={async (e) => {dispatch(searchName("aklsjdhlaksjdaskldazzzz")); props.setCategoryFilter(e.target.value); props.setBrandFilter("")}}
                         > {e}
                         </DropdownItem>)
                     }

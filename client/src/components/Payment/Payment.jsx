@@ -159,7 +159,6 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
         cart,
         email: emailUser
       });
-      console.log(data)
       if(data.message === "Successful payment"){
         localStorage.removeItem("Carrito")
         swal("Felicitaciones!","Operación completada exitosamente","success")

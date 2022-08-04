@@ -17,6 +17,8 @@ export default function Details(props) {
 
   const { decodedToken } = useJwt(localStorage.getItem("usuario"))
   let userIdFromToken = decodedToken?._id
+  let userInfoGoogle = decodedToken?.email
+  console.log(decodedToken)
 
   useEffect(() => {
     dispatch(getUsers())
@@ -24,8 +26,13 @@ export default function Details(props) {
 
   const users = useSelector((state) => state.users)
   const user = users.find(e => e._id === userIdFromToken)
+  const userGoogle = users.find(e => e.email === userInfoGoogle)
 
   const verifyPurchase = user?.paymentHistory.some(e => e.container.some(x => x._id === id))
+
+  const verifyPurchaseGoogle = userGoogle?.paymentHistory.some(e => e.container.some(x => x._id === id))
+
+  console.log(verifyPurchaseGoogle)
 
 
   const [loading, setLoading] = useState(true)
@@ -62,7 +69,7 @@ export default function Details(props) {
           </div>
           <br /> <br /> <br />
           {
-            verifyPurchase &&
+           ( verifyPurchase || verifyPurchaseGoogle) &&
             <Reviews id={id} />
           }
           <div>
