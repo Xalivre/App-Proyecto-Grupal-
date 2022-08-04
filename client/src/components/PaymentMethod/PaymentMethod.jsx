@@ -24,6 +24,11 @@ export default function PaymentMethod() {
   }
 
   return (
+
+    <div>
+      <Link to="/paymentMethod/Checkout"><button>Stripe</button></Link>
+      <p> o </p>
+      <Link to="/paymentMethod/MercadoPago"><button>Mercadopago</button></Link>
     <div className={Style.all}>
       <div className={Style.uno}>
         <div className={Style.titleCar}>

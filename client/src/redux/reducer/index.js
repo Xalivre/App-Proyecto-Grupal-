@@ -17,6 +17,7 @@ const initialState = {
   brands: [],
   nameSearched: "",
   userPayments: [],
+  finishOrder: {},
   loginRefresher: false,
   totalPayments: []
 };
@@ -42,6 +43,7 @@ const POST_USER_GOOGLE = "POST_USER_GOOGLE"
 const LOGIN = "LOGIN"
 const EDIT_PRODUCT = "EDIT_PRODUCT"
 const GET_USER_PAYMENTS = "GET_USER_PAYMENTS"
+const FINISH_ORDER = "FINISH_ORDER"
 const MODIFY_CART = "MODIFY_CART"
 const LOGIN_REFRESHER = "LOGIN_REFRESHER"
 const GET_USERS = "GET_USERS"
@@ -53,7 +55,6 @@ const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 const ADMIN_USER = "ADMIN_USER"
 const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
 const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
-
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -213,6 +214,12 @@ const rootReducer = (state = initialState, action) => {
     case EDIT_PRODUCT:
       return {
         ...state,
+      }
+    
+    case FINISH_ORDER:
+      return {
+        ...state,
+        finishOrder: action.payload
       }
 
     case UPDATE_USER_STATE:

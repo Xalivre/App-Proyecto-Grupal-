@@ -17,6 +17,9 @@ import DetailsAdmin from "./components/Admin/DetailsAdmin/DetailsAdmin";
 import Profile from "./components/Profile/Profile";
 import PaymentMethod from "./components/PaymentMethod/PaymentMethod.jsx";
 import Payment from "./components/Payment/Payment";
+
+import PaymentMercaPago from "./components/PaymentMethodMercaPago.jsx/PaymentMercaPago";
+
 import PaymentHistory from "./components/Admin/PaymentHistory/PaymentHistory";
 import PaymentList from "./components/Admin/PaymentList/PaymentList";
 
@@ -38,6 +41,7 @@ export default function App() {
         <Route exact path="/Dashboard" element={<DashBoard/>} />
         <Route exact path="/paymentMethod" element={<PaymentMethod />} />
         <Route exact path="/paymentMethod/Checkout" element={<Payment />} />
+        <Route exact path="/paymentMethod/MercadoPago" element={<PaymentMercaPago />} />
         <Route exact path="/detailsAdmin/:id" element={<DetailsAdmin />} />
         <Route exact path="/MyProfile" element={<Profile />} />
         <Route exact path="/payments/:id" element={<PaymentHistory></PaymentHistory>} />

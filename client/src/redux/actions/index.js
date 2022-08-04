@@ -242,13 +242,28 @@ export function editProduct(payload, id) {
   }
 }
 
+
+export function finishOrder(emailUser, items, total){
+  return async function (dispatch){
+    const responsePay = await axios.post("http://localhost:3000/api/paymentMerpago", {emailUser, items, total})
+    return responsePay
+  }
+}
+
+// export const finishOrder = function( emailUser, items, total) {
+//   return function(dispatch){
+//     return axios.post("http://localhost:3000/api/paymentMerpago", {emailUser, items, total})
+//     .then(payment => dispatch({ type: FINISH_ORDER, payload: payment}))
+//     .catch(error => console.log(error))
+//   }
+// };
+
 export function updateUserState(payload, id) {
   return async function (dispatch) {
     const ban = await axios.put("http://localhost:3000/accounts/" + id, payload)
     return ban
   }
 }
-
 
 export function adminUser(payload, id) {
   return async function (dispatch) {

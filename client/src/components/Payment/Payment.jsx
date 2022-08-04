@@ -154,11 +154,18 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
       const { id } = paymentMethod;
       try {
         const {data} = await axios.post("http://localhost:3000/api/checkout", {
-        id,
-        amount,
-        cart,
-        email: emailUser
-      });
+
+          id,
+          amount,
+          cart,
+          email: emailUser
+        });
+        console.log(data)
+
+        const searchUserForEmail = await axios.get("http://localhost:3000/api/checkoutEmail", {
+          email: emailUser
+        })
+        
 
       if(data.message === "Successful payment"){
         const array = cart.map(item => item._id)
@@ -178,6 +185,7 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
       await axios.get("http://localhost:3000/api/checkoutEmail", {
         email: emailUser
       })
+
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);
