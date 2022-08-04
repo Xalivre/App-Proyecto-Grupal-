@@ -48,36 +48,42 @@ export default function Details(props) {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className={Style.containerAll}>
       {!loading ?
-        <div>
+        <div className={Style.containerBlocks}>
           <div className={Style.container}>
-            <img src={product.image && product.image[0].url} alt="img" />
-            <div className={Style.namePositioning}>
-              <h1>{product.name}</h1>
-              <h1>Precio: ${product.price}</h1>
-              <h1>✔{product.stock} en Stock</h1>
+            <div className={Style.titleContainer}>
+              <div className={Style.namePositioning}>
+                <h1 className={Style.brandName}>Game<span className={Style.hubspan}>Hub</span></h1>
+                <h1 className={Style.productName}>{product.name}</h1>
+                <h1 className={Style.price}>${product.price}</h1>
+              </div>
+            </div>
+
+            <div className={Style.imageContainer}>
+              <img src={product.image && product.image[0].url} alt="img" />  
+            </div>
+
+            <div className={Style.descriptionContainer}>
+              {/* <h1>Caracteristicas</h1> */}
+              <p className={Style.description}>{product.description}</p>
+              <p>Stock: <span className={Style.stock}>{product.stock}</span></p>
               {
                 product.stock > 0 ? <AddCartButton id={product._id} /> : <div>NO</div>
               }
               <AddWishButton id={product._id} />
             </div>
           </div>
-          <div>
-            <h1>Caracteristicas</h1>
-            <div>{product.description}</div>
-          </div>
-          <br /> <br /> <br />
           {
            ( verifyPurchase || verifyPurchaseGoogle) &&
             <Reviews id={id} />
           }
-          <div>
+          <div className={Style.reseñas}>
             <h2>Últimas reseñas</h2>
             {
               product.comments.length > 0 ? product.comments.map(e => {
                 return (
-                  <div>
+                  <div className={Style.reseñasContainer}>
                     <div>Usuario: {e.username && e.username}</div>
                     <div>{e.comment && e.comment}</div>
                     <div>{e.commentRating && e.commentRating}</div>
@@ -88,7 +94,6 @@ export default function Details(props) {
               <h6>Este producto no tiene comentarios, recuerda dejarnos el tuyo cuando hagas una compra</h6>
             }
           </div>
-          <br /> <br /> <br /> <br /> <br />
         </div> : <div className={Style.loader}><img className={Style.gif} src={loader} alt='loading'></img></div>
       }
     </div>
