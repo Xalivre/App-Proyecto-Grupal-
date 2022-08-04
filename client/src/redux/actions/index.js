@@ -290,4 +290,21 @@ export function changeState(payload) {
   }
 }
 
+export function searchStatePayment() {
+  return async function (){
+    const data = await axios.get("http://localhost:3000/filterPaymentState")
+    return data
 
+  }
+}
+
+export function getTotalPayments() {
+  return async function (dispatch){
+    const json = await axios.get("http://localhost:3000/filterPaymentState")
+    return dispatch({
+      type:"TOTAL_PAYMENTS",
+      payload: json.data
+    })
+    
+  }
+}

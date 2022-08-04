@@ -75,7 +75,8 @@ export default function ProductsList() {
                           image={e.image[0]?.url}
                           price={e.price}
                           id={e._id}
-                          key={e._id} />
+                          key={e._id}
+                          stock={e.stock} />
                       </div>
                       <br />
                     </div>

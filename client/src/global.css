@@ -397,6 +397,22 @@ template {
   transition: 0.15s
 }
 
+.noStockButton {
+  background-color: rgb(121, 129, 135);
+  color: white;
+  border-radius: .2rem;
+  border: none;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 4px 4px 0px rgb(97, 103, 107);
+  padding: .3rem .7rem;
+}
+
+.noStockButton:hover {
+  background-color: rgb(97, 103, 107);
+  transition: 0.15s
+}
+
 .buttonDashboard {
   background-color: #ffffff;
   color: #004a90;

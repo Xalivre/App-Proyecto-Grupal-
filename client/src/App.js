@@ -18,6 +18,7 @@ import Profile from "./components/Profile/Profile";
 import PaymentMethod from "./components/PaymentMethod/PaymentMethod.jsx";
 import Payment from "./components/Payment/Payment";
 import PaymentHistory from "./components/Admin/PaymentHistory/PaymentHistory";
+import PaymentList from "./components/Admin/PaymentList/PaymentList";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         <Route exact path="/detailsAdmin/:id" element={<DetailsAdmin />} />
         <Route exact path="/MyProfile" element={<Profile />} />
         <Route exact path="/payments/:id" element={<PaymentHistory></PaymentHistory>} />
+        <Route exact path="/totalPayment" element={<PaymentList/>} />
       </Routes>
       <Footer />
     </>

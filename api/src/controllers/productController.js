@@ -79,8 +79,19 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  console.log(id)
+  const {quantity} = req.body;
+
   try {
+    if(quantity){
+
+      const producto = await Product.findById(id)
+
+      producto.stock = producto.stock - quantity;
+      producto.save();
+
+      return res.send({msg: "ok"})
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
       new: true,
     });
