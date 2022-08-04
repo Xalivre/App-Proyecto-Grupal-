@@ -5,8 +5,11 @@
     border-radius: 20%;
     font-weight: 600;
     transition: .25s;
+    background-color: rgba(189, 0, 0, 0.813);
+    color: white;
+    border: none;
 }
 
 .equis:hover{
-    background-color: rgba(189, 0, 0, 0.813);
+    background-color: rgba(237, 45, 45, 0.813);
 }
