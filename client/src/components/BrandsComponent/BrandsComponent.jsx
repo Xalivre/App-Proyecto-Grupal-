@@ -9,7 +9,7 @@ export default function CategoriesBar(props) {
   return (
     <div className={Style.container}>
       <h1 className={Style.title}>Marcas</h1>
-      <br />
+      <br /> 
       <div className={Style.info}>
         {props.products &&
           brands
