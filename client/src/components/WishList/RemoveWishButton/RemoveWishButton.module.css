@@ -5,6 +5,7 @@
     border-radius: 5px;
     border: 1px solid rgb(165, 9, 9);
     transition: .2s ease;
+    height: 2rem;
 }
 
 .button:hover{

@@ -29,49 +29,39 @@ export default function Profile() {
   const users = useSelector((state) => state.users)
   const userExtraInfo = users.find(e => e.email === email)
 
-
-
-
   return (
-    <div>
+    <div className={Style.containerAll}>
       <div className={Style.title}>
-        <br />
-        Información de la cuenta
+        <p className={Style.titlep}>Información de la cuenta</p>
         <div className={Style.profileInfo}>
-          <br /><br />
-          <div>Nombre de Usuario: {decodedToken?.name || decodedToken?.username}</div>
-          <div>Correo Electrónico: {decodedToken?.email}</div>
-          <div>Dirección de Facturación: {userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'} </div>
-          <div>Codigo postal: {userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</div>
-          <div>Localidad: {userExtraInfo?.location ? userExtraInfo.location : 'Sin definir'}</div>
-          <div>Nro. de Teléfono: </div>
-          <br /><br />
+          <p> Nombre de Usuario <br/> <span className={Style.span}> {decodedToken?.name || decodedToken?.username}</span></p>
+          <p>Correo Electrónico<br/> <span className={Style.span}>{decodedToken?.email}</span></p>
+          <p>Dirección de Facturación <br/> <span className={Style.span}>{userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'}</span> </p>
+          <p>Codigo postal <br/> <span className={Style.span}>{userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</span></p>
+          <p>Localidad <br/> <span className={Style.span}>{userExtraInfo?.location ? userExtraInfo.location : 'Sin definir'}</span></p>
+          <p>Nro. de Teléfono <br/></p>
         </div>
-        Historial de Compras
-        <br /><br />
       </div>
-      <div>
-        {Payments &&
+      <div className={Style.comprasHistory}>
+        <p className={Style.titlep}>Historial de Compras</p>
+        {Payments.length &&
           Payments.map((e) => {
             return (
               <div className={Style.container}>
-                <h6 className={Style.centeredText}>Id de Compra: {e.idPayment}</h6>
-                <br />
-                <h6 className={Style.centeredText}>Total de la Compra: ${e.amount}</h6>
-                <br />
-                <h6 className={Style.centeredText}>Fecha: {e.date.slice(0, 4) + "/" + e.date.slice(5, 7) + "/" + e.date.slice(8, 10)} Hora: {e.date.slice(11, 16)}</h6>
+                <p className={Style.centeredText}>Id de Compra: {e.idPayment}</p>
+                <p className={Style.centeredText}>Total de la Compra: ${e.amount}</p>
+                <p className={Style.centeredText}>Fecha: {e.date.slice(0, 4) + "/" + e.date.slice(5, 7) + "/" + e.date.slice(8, 10)} Hora: {e.date.slice(11, 16)}</p>
                 <div>{e.container.map(x => {
                   return (
                     <Link style={{ textDecoration: "none" }} to={`/product/${x._id}`}>
                       <div className={Style.positioning}>
-                        <img className={Style.Pimg} src={x.image[0]?.url} />
-                        <h6>{x.name}</h6>
-                        <h6>${x.price}</h6>
+                        <img alt="img" className={Style.Pimg} src={x.image[0]?.url} />
+                        <p>{x.name}</p>
+                        <p>${x.price}</p>
                       </div>
                     </Link>
                   )
                 })}</div>
-                <br /><br /><br />
               </div>
             )
           })}
