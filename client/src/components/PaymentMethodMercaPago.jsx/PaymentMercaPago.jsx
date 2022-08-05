@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
@@ -9,6 +9,7 @@ import { useJwt } from "react-jwt";
 export default function PaymentMercaPago() {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart)
+    const stateFinishOrder = useSelector((state) => state.finishOrder)
     const [items, setItems] = useState({})
     
     
@@ -37,14 +38,20 @@ export default function PaymentMercaPago() {
         emailUser = decodedToken.email
     }
 
+    useEffect(() => {
+        if(stateFinishOrder?.data){
+            window.location.href = stateFinishOrder?.data
+        }
+      }, [stateFinishOrder])
+
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formMercadoPago, "HOLAAAAAA AHREEEEE")
         if(cart.length > 0){
-            dispatch(finishOrder(emailUser, formMercadoPago, total))   
+            dispatch(finishOrder(emailUser, formMercadoPago/*, total*/))   
         }
     }
-    
+
     return (
         <div>
     <Link to="/paymentMethod"><button>VOLVER</button></Link>
@@ -73,7 +80,9 @@ export default function PaymentMercaPago() {
         </div>
         <br />
       </div>
-        <button>"Buy"</button>
+      <a href={stateFinishOrder?.data ? stateFinishOrder.data : null}>
+        <button type='submit'>Comprar</button>
+        </a>
     </form>
     <br/><br/><br/>
   </div>
