@@ -5,10 +5,10 @@ import { sendMail } from "../librarys/emailer.js";
 
 export const forcePasswordAdmin = async (req, res) => {
   const { email, password } = req.body;
-
+  
   try {
     if (!email) return res.status(404).send("User not found");
-    let defaultPassword = password || "defaultPassword";
+    let defaultPassword = password || "default";
 
     const passwordHash = await encrypt(defaultPassword);
 

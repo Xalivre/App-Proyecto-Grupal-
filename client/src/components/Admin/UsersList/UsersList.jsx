@@ -103,11 +103,11 @@ export default function UsersList() {
               return (
                 <>
                   <tr>
-                    <th className="table-secondary" scope="row">{e.username}</th>
+                    <Link to={`/userProfile/${e._id}`}><th className="table-secondary" scope="row">{e.username}</th></Link>
                     <td className="table-info" >{e.email}</td>
                     <td  className="table-light" >{e.accountState}</td>
                     <td  className="table-warning" >{e.role}</td>
-                    {e.paymentHistory?.map((f) => console.log(f))}
+                  {/*   {e.paymentHistory?.map((f) => console.log(f))} */}
                     <td>{e.paymentHistory.length > 0 && (
                       <Link to={`/payments/${e._id}`}>
                         <button className="btnDash">Historial de compras</button>
