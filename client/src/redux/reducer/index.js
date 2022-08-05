@@ -19,7 +19,8 @@ const initialState = {
   userPayments: [],
   finishOrder: {},
   loginRefresher: false,
-  totalPayments: []
+  totalPayments: [],
+  userDetails: {}
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -55,6 +56,7 @@ const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 const ADMIN_USER = "ADMIN_USER"
 const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
 const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
+const GET_USER_DETAILS = "GET_USER_DETAILS"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -208,8 +210,10 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_PAGE:
       return {
         ...state,
-        details: []
+        details: [],
+        userDetails: {}
       }
+    
 
     case EDIT_PRODUCT:
       return {
@@ -267,6 +271,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         totalPayments: action.payload
+      }
+    case GET_USER_DETAILS:
+      return {
+        ...state,
+        userDetails: action.payload
       }
 
     default:

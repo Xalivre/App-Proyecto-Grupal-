@@ -327,3 +327,19 @@ export function getTotalPayments() {
     
   }
 }
+
+export function getUserById(id) {
+  return async function (dispatch) {
+    try{
+      const {data} = await axios.get(`http://localhost:3000/accounts/${id}`)
+      return dispatch({
+        type: "GET_USER_DETAILS",
+        payload: data
+      })
+
+    }catch(e){
+      console.log(e)
+    }
+
+  }
+}
