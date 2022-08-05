@@ -125,12 +125,12 @@ function SearchBar(props) {
           localStorage.getItem("usuario") && autho !== "admin" &&
           <Link to="/wishlist">
           <div>
-            <FavoriteIcon />
+            <FavoriteIcon className={styles.profileButtons} sx={{fontSize:"30px"}}/>
           </div>
         </Link>}
         {localStorage.getItem("usuario") && autho !== "admin" && <div>
         <Link to= "/MyProfile">
-            <div className={styles.profile_img}><AccountCircleSharpIcon/></div>
+            <div className={styles.profile_img}><AccountCircleSharpIcon className={styles.profileButtons} sx={{fontSize:"30px"}}/></div>
           </Link>
           </div>}
           {(autho === "admin" || autho === "owner") && <Link to="/Dashboard"><button className="button">Administración</button></Link>}

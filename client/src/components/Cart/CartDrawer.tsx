@@ -50,7 +50,7 @@ export default function SwipeableTemporaryDrawer(props: any) {
       role="presentation"
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <div style={{alignItems:"center", display:"flex", flexDirection:"column"}}>
+      <div style={{ alignItems: "center", display: "flex", flexDirection: "column" }}>
         <List>
           {props.cart?.map((text: any, index: any) => (
             <ListItem key={text.name} disablePadding>
@@ -66,27 +66,27 @@ export default function SwipeableTemporaryDrawer(props: any) {
         </List>
         <Divider />
         {
-          props.cart.length > 0 && (autho || googleUser) ? 
-          <div style={{display: "flex", width:"90%", flexDirection:"column", alignItems:"center"}}>
-            <hr className={Style.hrTotal} />
-            <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
-            <br />
-            <Link to="/paymentMethod">
-          <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
-        </Link> 
-        </div>
-        : props.cart.length > 0 && !autho ? <div>
-          <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
-          <div className={Style.buttonsCart}><Link to="/register">
-        <button className="button" >Registrarse</button>
-      </Link>
-      <Link to="/login">
-            <button className="button" >Iniciar Sesión</button>
-          </Link></div></div>
-        :
-        <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
+          props.cart.length > 0 && (autho || googleUser) ?
+            <div style={{ display: "flex", width: "90%", flexDirection: "column", alignItems: "center" }}>
+              <hr className={Style.hrTotal} />
+              <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
+              <br />
+              <Link to="/paymentMethod">
+                <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
+              </Link>
+            </div>
+            : props.cart.length > 0 && !autho ? <div>
+              <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
+              <div className={Style.buttonsCart}><Link to="/register">
+                <button className="button" >Registrarse</button>
+              </Link>
+                <Link to="/login">
+                  <button className="button" >Iniciar Sesión</button>
+                </Link></div></div>
+              :
+              <div className={Style.emptyCartText}>No tienes productos en tu carro de compras, agregá alguno para verlo aquí</div>
         }
-        
+
       </div>
     </Box>
   );
@@ -95,7 +95,8 @@ export default function SwipeableTemporaryDrawer(props: any) {
     <div>
       {(['Cart'] as const).map((anchor: any) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon /></Button>
+          <Button sx={{ minWidth: "0", position: "relative", padding: "5px" }} onClick={toggleDrawer(anchor, true)}><ShoppingCartIcon sx={{ fontSize: '30px' }} />
+            <h6 className={Style.cartNumber}>+{props.cart.length}</h6></Button>
           <SwipeableDrawer
             anchor={"right"}
             open={state[anchor]}

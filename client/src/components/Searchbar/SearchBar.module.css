@@ -91,3 +91,11 @@
     background-color:#3d7fbd;
     color: white;
 }
+
+.profileButtons {
+    color: #156DBF;
+}
+
+.profileButtons:hover {
+    color: #2589e6;
+}

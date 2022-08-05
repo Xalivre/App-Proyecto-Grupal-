@@ -49,3 +49,13 @@
     border-radius: 10px;
     width: 100%;
 }
+
+.cartNumber {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    border-radius: 100%;
+    font-size: 13px;
+}

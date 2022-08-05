@@ -68,9 +68,7 @@ export default function Details(props) {
               {/* <h1>Caracteristicas</h1> */}
               <p className={Style.description}>{product.description}</p>
               <p>Stock: <span className={Style.stock}>{product.stock}</span></p>
-              {
-                product.stock > 0 ? <AddCartButton id={product._id} /> : <div>NO</div>
-              }
+              <AddCartButton id={product._id} />
               <AddWishButton id={product._id} />
             </div>
           </div>
