@@ -26,9 +26,9 @@ export default function PaymentMethod() {
   return (
 
     <div>
-      <Link to="/paymentMethod/Checkout"><button>Stripe</button></Link>
+      {/* <Link to="/paymentMethod/Checkout"><button>Stripe</button></Link>
       <p> o </p>
-      <Link to="/paymentMethod/MercadoPago"><button>Mercadopago</button></Link>
+      <Link to="/paymentMethod/MercadoPago"><button>Mercadopago</button></Link> */}
       <div className={Style.all}>
         <div className={Style.uno}>
           <div className={Style.titleCar}>
@@ -66,12 +66,11 @@ export default function PaymentMethod() {
             <p className={Style.positioning}>Total: ${karting?.map(e => (e.price * e.quantity)).reduce((a, b) => a + b, 0)}</p>
             <Link to="/paymentMethod/Checkout"><button className="button">Stripe</button></Link>
             <p> o </p>
-            <Link to="#"><button className="button">Mercadopago</button></Link>
+            <Link to="/paymentMethod/MercadoPago"><button className="button" style={{width: "8rem"}}>Mercadopago</button></Link>
           </div>
           <br />
         </div>
       </div>
-    </div>
     </div>
   )
 }
