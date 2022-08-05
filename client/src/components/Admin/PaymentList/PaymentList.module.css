@@ -1,0 +1,9 @@
+.invisibleButton {
+    outline: none;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    user-select: none;
+
+
+}

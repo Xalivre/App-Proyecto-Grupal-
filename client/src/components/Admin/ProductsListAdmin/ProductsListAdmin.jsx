@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import Style from "./ProductsListAdmin.module.css"
 import ProductCardAdmin from '../ProductCardAdmin/ProductCardAdmin'
-import {getProducts, getCategories, getBrands, searchName } from "../../../redux/actions"
+import {getProducts, getCategories, getBrands, searchName, getTotalPayments } from "../../../redux/actions"
 import PagingOficial from "../../Paging/Paging.tsx"
 import DropdownComponent from '../../Dropdown/DropdownToggle'
 import CategoriesBar from '../../BrandsComponent/BrandsComponent'
@@ -37,6 +37,7 @@ export default function ProductsListAdmin() {
     dispatch(getProducts());
     dispatch(getCategories())
     dispatch(getBrands())
+    dispatch(getTotalPayments())
     filtereds.length > 0 && setLoading(false)
   }, [dispatch])
 

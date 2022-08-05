@@ -4,6 +4,7 @@ import ProductsListAdmin from '../ProductsListAdmin/ProductsListAdmin'
 import styles from "./DashBoard.module.css"
 import { useJwt } from "react-jwt"
 import UsersList from '../UsersList/UsersList'
+import PaymentList from '../PaymentList/PaymentList'
 
 
 export default function DashBoard() {
@@ -38,11 +39,14 @@ export default function DashBoard() {
               <button className="buttonDashboard" value="create" onClick={(e) => handleState(e)}>Crear nuevo producto</button>
               <button className="buttonDashboard" value="list" onClick={(e) => handleState(e)}>Listado de productos</button>
               <button className="buttonDashboard" value="UsersList" onClick={(e) => handleState(e)}>Lista de usuarios</button>
+              <button className="buttonDashboard" value="paymentList" onClick={(e) => handleState(e)}>Lista de pedidos</button>
             </div>
             <div>
               {first === "create" && <CreateProduct></CreateProduct>}
               {first === "list" && <ProductsListAdmin></ProductsListAdmin>}
               {first === "UsersList" && <UsersList></UsersList>}
+              {first === "paymentList" && <PaymentList></PaymentList>}
+
             </div>
           </div>
           :
