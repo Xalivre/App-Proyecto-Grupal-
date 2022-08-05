@@ -72,5 +72,6 @@ export default function PaymentMethod() {
         </div>
       </div>
     </div>
+    </div>
   )
 }
