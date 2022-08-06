@@ -1,3 +1,11 @@
+.containerAll {
+    width: 90%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .invisibleButton {
     outline: none;
     color: transparent;
@@ -8,10 +16,112 @@
 
 .topPositioning {
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
 }
 
 .buttonsTab {
     display: flex;
+    gap: .5rem;
+}
+
+.select {
+    background-color: rgb(243, 243, 243);
+    padding: .5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 15px;
+}
+
+.select:hover {
+    cursor: pointer;
+    background-color: rgb(87, 87, 87);
+    color: white;
+    transition: all .2s ease-in-out;
+}
+
+.option {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+}
+
+.option:hover {
+    transition: all .2s ease-in-out;
+}
+
+.cardPendienteContainer{
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #ffb834bd;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    font-size: 15px;
+}
+.cardDespachadoContainer{
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #156DBF;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    padding: 1rem;
+    font-size: 15px;
+}
+.cardFinalizadoContainer{
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #aa1639d3;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    padding: 1rem;
+    font-size: 15px;
+}
+.container{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    gap: 1rem;
+}
+.iconText, .masContenido{
+    margin-top: .3rem;
+    display: flex;
+    gap: .2rem;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.iconText p{
+    margin: 0;
+}
+.span{
+    color: #156DBF;
+    text-transform: capitalize;
+}
+.flex{
+    display: flex;
+    gap: .2rem;
+}
+.vermas{
+    cursor: pointer;
+    font-weight: bold;
+}
+.vermas:hover{
+    color: #156DBF;
+}
+
+@media screen and (max-width: 950px){
+    .topPositioning{
+        flex-direction: column;
+        gap : 1rem;
+        justify-content: center;
+        align-items: center;
+    }   
 }
