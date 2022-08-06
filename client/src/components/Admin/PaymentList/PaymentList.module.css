@@ -4,6 +4,14 @@
     background-color: transparent;
     border: none;
     user-select: none;
+}
 
+.topPositioning {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
+.buttonsTab {
+    display: flex;
 }

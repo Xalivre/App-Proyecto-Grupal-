@@ -5,7 +5,7 @@ import { sendMail } from "../librarys/emailer.js";
 
 export const forcePasswordAdmin = async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     if (!email) return res.status(404).send("User not found");
     let defaultPassword = password || "default";
@@ -60,18 +60,31 @@ export const changeState = async (req, res) => {
 
 export const searchStatePayment = async (req, res) => {
 
-  try{
+  try {
     const despachado = [];
-    const pendiente = []; 
+    const pendiente = [];
     const finalizado = [];
 
     const allPayment = await Payment.find({});
     if (!allPayment) return res.json({ msg: "No payments found" });
 
-    allPayment.map(e => e.state === "despachado"? despachado.push(e) : e.state === "pendiente"? pendiente.push(e) : finalizado.push(e));
+    allPayment.map(e => e.state === "despachado" ? despachado.push(e) : e.state === "pendiente" ? pendiente.push(e) : finalizado.push(e));
 
-    return res.json({despachado, pendiente, finalizado});
-  }catch (e){
+    return res.json({ despachado, pendiente, finalizado });
+  } catch (e) {
+    return res.json({ msg: `Error 404 - ${e}` });
+  }
+}
+
+export const searchUserByUsername = async (req, res) => {
+  const { username } = req.body
+  try {
+    const users = await User.find({})
+    if(users){
+      const foundUser = users.filter(e => e.username.toLowerCase().includes(username))
+      return res.status(200).json(foundUser)
+    }
+  } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 }

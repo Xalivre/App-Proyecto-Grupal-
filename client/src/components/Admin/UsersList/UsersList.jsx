@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, updateUserState, adminUser } from "../../../redux/actions";
+import { getUsers, updateUserState, adminUser, searchUserByUsername } from "../../../redux/actions";
 import { useJwt } from "react-jwt";
 import Style from "./UsersList.module.css";
 import loader from "../../../img/loader.gif";
@@ -15,8 +15,10 @@ export default function UsersList() {
   const dispatch = useDispatch();
 
   const Users = useSelector((state) => state.users);
+  const userSearchedFor = useSelector((state) => state.userSearchedFor)
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(false);
+  const [input, setInput] = useState("")
 
   useEffect(() => {
     dispatch(getUsers());
@@ -36,13 +38,13 @@ export default function UsersList() {
           accountState: "banned",
         },
         idUser
-        )
-        );
-        await swal("Baneado!","Usuario baneado con exito","success");
-        setCount(!count);
+      )
+    );
+    await swal("Baneado!", "Usuario baneado con exito", "success");
+    setCount(!count);
   };
 
-  const unbanUserFunction = async(e) => {
+  const unbanUserFunction = async (e) => {
     let idUser = e.target.value;
     dispatch(
       updateUserState(
@@ -50,13 +52,13 @@ export default function UsersList() {
           accountState: "active",
         },
         idUser
-        )
-        );
-       await swal("Desbaneado!","Usuario desbaneado con exito","success");
-        setCount(!count);
+      )
+    );
+    await swal("Desbaneado!", "Usuario desbaneado con exito", "success");
+    setCount(!count);
   };
 
-  const giveAdmin = async(e) => {
+  const giveAdmin = async (e) => {
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -64,13 +66,13 @@ export default function UsersList() {
           role: "admin",
         },
         idUser
-        )
-        );
-       await swal("Ascendido!","El usuario ahora tambien es admin","success")
-        setCount(!count);
+      )
+    );
+    await swal("Ascendido!", "El usuario ahora tambien es admin", "success")
+    setCount(!count);
   };
 
-  const removeAdmin = async(e) => {
+  const removeAdmin = async (e) => {
     let idUser = e.target.value;
     dispatch(
       adminUser(
@@ -78,14 +80,41 @@ export default function UsersList() {
           role: "user",
         },
         idUser
-        )
-        );
-        await swal("Descendido!","El usuario ya no es admin","success")
-        setCount(!count);
+      )
+    );
+    await swal("Descendido!", "El usuario ya no es admin", "success")
+    setCount(!count);
   };
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    setInput(e.target.value)
+  }
+
+  async function handleSubmit(e) {
+    // searchName(searchProduct)
+    e.preventDefault();
+    console.log(input)
+    dispatch(searchUserByUsername(input));
+    setInput("")
+    /* if (input[0] === " ") {
+      alert("No se permiten espacios en la primera posición")
+    } */
+  }
+
 
   return (
     <div className={Style.containerAll}>
+      <div  className={Style.generalBarsPositioning}>
+        <div className={Style.searchBarPositioning}>
+          <input value={input} onChange={(e) => handleChange(e)}></input>
+          <button type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
+        </div>
+        <div className={Style.refreshButtonPositioning}>
+          <button onClick={() => dispatch(searchUserByUsername(""))}>Recargar Usuarios</button>
+        </div>
+      </div>
+      <br /> <br />
       {loading === false ? (
         <table className="table container">
           <thead className="table-dark">
@@ -99,15 +128,15 @@ export default function UsersList() {
             </tr>
           </thead>
           <tbody>
-            {Users?.map((e) => {
+            {userSearchedFor.length === 0 ? <>{Users?.map((e) => {
               return (
                 <>
                   <tr>
                     <Link to={`/userProfile/${e._id}`}><th className="table-secondary" scope="row">{e.username}</th></Link>
                     <td className="table-info" >{e.email}</td>
-                    <td  className="table-light" >{e.accountState}</td>
-                    <td  className="table-warning" >{e.role}</td>
-                  {/*   {e.paymentHistory?.map((f) => console.log(f))} */}
+                    <td className="table-light" >{e.accountState}</td>
+                    <td className="table-warning" >{e.role}</td>
+                    {/*   {e.paymentHistory?.map((f) => console.log(f))} */}
                     <td>{e.paymentHistory.length > 0 && (
                       <Link to={`/payments/${e._id}`}>
                         <button className="btnDash">Historial de compras</button>
@@ -155,7 +184,64 @@ export default function UsersList() {
                   </tr>
                 </>
               );
-            })}
+            })}</> :
+              <>{userSearchedFor?.map((e) => {
+                return (
+                  <>
+                    <tr>
+                      <Link to={`/userProfile/${e._id}`}><th className="table-secondary" scope="row">{e.username}</th></Link>
+                      <td className="table-info" >{e.email}</td>
+                      <td className="table-light" >{e.accountState}</td>
+                      <td className="table-warning" >{e.role}</td>
+                      {/*   {e.paymentHistory?.map((f) => console.log(f))} */}
+                      <td>{e.paymentHistory.length > 0 && (
+                        <Link to={`/payments/${e._id}`}>
+                          <button className="btnDash">Historial de compras</button>
+                        </Link>
+                      )}</td>
+                      <td> {e.accountState === "banned" ? (
+                        <button className="btnDash" value={e._id} onClick={(e) => unbanUserFunction(e)}>
+                          Desbanear
+                        </button>
+                      ) : autho === "owner" && e.role === "admin" ? (
+                        <div>
+                          <button
+                            className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
+                            Banear usuario
+                          </button>
+                          <button
+                            className="buttonDelete" value={e._id} onClick={(e) => removeAdmin(e)}>
+                            Remover admin
+                          </button>
+                        </div>
+                      ) : (autho === "owner" || autho === "admin") && e.role === "user" ? (
+                        <div>
+                          <button className="btnDash" value={e._id} onClick={(e) => giveAdmin(e)}>
+                            Ascender a admin
+                          </button>
+                          <button
+                            className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
+                            Banear usuario
+                          </button>
+                        </div>
+                      ) : (
+                        autho === "admin" &&
+                        e.role === "user" && (
+                          <div>
+                            <button
+                              className="buttonDelete"
+                              value={e._id}
+                              onClick={(e) => banUserFunction(e)}
+                            >
+                              Banear usuario
+                            </button>
+                          </div>
+                        )
+                      )} </td>
+                    </tr>
+                  </>
+                );
+              })}</>}
           </tbody>
         </table>
       ) : (

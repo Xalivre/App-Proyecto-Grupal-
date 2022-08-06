@@ -20,7 +20,8 @@ const initialState = {
   finishOrder: {},
   loginRefresher: false,
   totalPayments: [],
-  userDetails: {}
+  userDetails: {},
+  userSearchedFor: []
 };
 
 const GET_PRODUCTS = "GET_PRODUCTS";
@@ -57,6 +58,8 @@ const ADMIN_USER = "ADMIN_USER"
 const GET_PAYMENT_HISTORY = "GET_PAYMENT_HISTORY"
 const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
 const GET_USER_DETAILS = "GET_USER_DETAILS"
+const FIND_USER = "FIND_USER"
+const SORT_DATE = "SORT_DATE"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -195,6 +198,70 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case SORT_DATE:
+      const sortedByDate = action.payload === "Most Recent" ? 
+      {despachado: [state.totalPayments.despachado][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date > b.date) {
+          return -1;
+        }
+        return 1;
+      }),
+       pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date > b.date) {
+          return -1;
+        }
+        return 1;
+      }), 
+       finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date > b.date) {
+          return -1;
+        }
+        return 1;
+      })}
+      :
+      action.payload === "Oldest" ? 
+      {despachado: [state.totalPayments.despachado][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date < b.date) {
+          return -1;
+        }
+        return 1;
+      }),
+       pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date < b.date) {
+          return -1;
+        }
+        return 1;
+      }), 
+       finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
+        if(a.date == b.date) {
+          return 0; 
+        }
+        if(a.date < b.date) {
+          return -1;
+        }
+        return 1;
+      })}
+      : state.totalPayments
+      return {
+        ...state,
+        totalPayments: sortedByDate
+      }
+
     case GET_CATEGORIES:
       return {
         ...state,
@@ -276,6 +343,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userDetails: action.payload
+      }
+
+    case FIND_USER:
+      return {
+        ...state,
+        userSearchedFor: action.payload
       }
 
     default:

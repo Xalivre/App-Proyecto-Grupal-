@@ -65,6 +65,13 @@ export function sortPrice(price) {
   };
 }
 
+export function sortDate(date) {
+  return {
+    type: "SORT_DATE",
+    payload: date
+  }
+}
+
 export function sortRating(rating) {
   return {
     type: "SORT_RATING",
@@ -186,6 +193,16 @@ export function searchName(word) {
       payload: word,
     });
   };
+}
+
+export function searchUserByUsername(payload) {
+  return async function (dispatch) {
+    let r = await axios.post("http://localhost:3000/findUser", { username: payload })
+    return dispatch({
+      type: "FIND_USER",
+      payload: r.data
+    })
+  }
 }
 
 export function postProduct(payload) {
