@@ -11,8 +11,6 @@ export default function PaymentHistory(props) {
   const { id } = useParams();
   const paymentDetails = useSelector((state) => state.paymentHistory);
 
-
-
   const [loading, setLoading] = useState(true);
 
   const [count, setCount] = useState(false)
