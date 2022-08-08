@@ -34,6 +34,7 @@ export default function Profile() {
       <div className={Style.title}>
         <p className={Style.titlep}>Información de la cuenta</p>
         <div className={Style.profileInfo}>
+        <img src={decodedToken?.picture || "https://us.123rf.com/450wm/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg?ver=6"} alt="Imagen de perfil"/>
           <p> Nombre de Usuario <br/> <span className={Style.span}> {decodedToken?.name || decodedToken?.username}</span></p>
           <p>Correo Electrónico<br/> <span className={Style.span}>{decodedToken?.email}</span></p>
           <p>Dirección de Facturación <br/> <span className={Style.span}>{userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'}</span> </p>
