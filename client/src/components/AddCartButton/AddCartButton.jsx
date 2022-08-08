@@ -1,18 +1,31 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromWishList } from '../../redux/actions/index'
+import { addToCart, removeFromWishList, getUserById } from '../../redux/actions/index'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Style from "./AddCartButton.module.css"
 import axios from "axios"
 import swal from 'sweetalert';
+import {useJwt} from "react-jwt"
 
-function AddCartButton({ id, stock }) {
+function AddCartButton({ id, stock, setRefresh, refresh }) {
+
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
+
+  let autho = decodedToken?.role
+
+  let idUser = decodedToken?._id
+
+  console.log(autho)
 
   const dispatch = useDispatch();
 
   const karting = useSelector((state) => state.cart)
 
   const cartStorage = async (id) => {
+    if(autho === "admin" || autho === "owner"){
+      return
+    }
+
     let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
     console.log(a)
@@ -20,20 +33,27 @@ function AddCartButton({ id, stock }) {
     localStorage.setItem("Carrito", JSON.stringify(a))
   }
 
-  function addCart(e) {
+  async function addCart(e) {
     e.preventDefault()
+    if(autho === "admin" || autho === "owner"){
+      swal("Error", "No se puede hacer eso con ese tipo de cuenta", "error")
+    }
     if (!karting.map((a) => a._id).includes(id)) {
       dispatch(addToCart(id));
     } else {
-      swal("Oops", "Este producto ya se encuentra en tu carrito!", "warning")
+      await swal("Oops", "Este producto ya se encuentra en tu carrito!", "warning")
     }
-    dispatch(removeFromWishList(id))
+    idUser && dispatch(removeFromWishList(idUser, id))
+    idUser && await dispatch(getUserById(idUser))
+    setRefresh(!refresh)
   }
 
   return (
     <div>
       {
-       stock > 0 ? <button className={Style.cartButton} onClick={(e) => { addCart(e); cartStorage(id) }}>
+       stock > 0 ? <button className={Style.cartButton} onClick={(e) => {
+        (autho === "admin" || autho === "owner") ? swal("error", "error", "error") :
+         addCart(e); cartStorage(id) }}>
         <div className={Style.karting}><AddShoppingCartIcon style={{ fontSize: "40px" }} /></div>
         <div>Añadir al carrito</div>
       </button> : <button className={Style.cartNoStockButton} onClick={() => swal("Sin Stock!","Este producto no tiene stock disponible","error")}>

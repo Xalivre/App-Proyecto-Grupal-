@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
         /*default: true*/
     }, 
     paymentHistory: [],
+    wishList: [],
     role: {
         type: String,
         default: "user"

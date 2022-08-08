@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import { addToCart, addToWishList, modifyCart } from "../../redux/actions";
+import React, { useEffect, useState } from "react";
+import { addToCart, addToWishList, modifyCart, getUserById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./ProductCard.module.css";
 import swal from 'sweetalert';
 /* import AddCartButton from "../AddCartButton/AddCartButton"; */
 import { Link } from "react-router-dom";
 import axios from "axios"
+import {useJwt} from "react-jwt"
 /* import WishListButton from "../CardButtons/WishListButton"; */
 
 
@@ -15,11 +16,27 @@ import axios from "axios"
 
 
 export default function ProductCard({ id, name, price, image, stock }) {
+
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"))
+
+  let autho = decodedToken?.role
+  let idUser = decodedToken?._id
+
   const dispatch = useDispatch();
 
+  const userDetails = useSelector((state) => state.userDetails.wishList)
+
+  const [refresh2, setRefresh2] = useState(false)
+    
+    
+  useEffect(() => {
+    idUser && dispatch(getUserById(idUser))
+
+  },[idUser])
+
+
   const karting = useSelector((state) => state.cart)
-  const wishes = useSelector((state) => state.wishList)
-  // const allProducts = useSelector((state) => state.wishList)
+
 
 
   const f = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
@@ -38,6 +55,9 @@ export default function ProductCard({ id, name, price, image, stock }) {
   
   
   const cartStorage = async (id) => {
+    if(autho === "admin" || autho === "owner"){
+      return alert("borrenme algun dia")
+    }
     let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
     console.log(a)
@@ -70,6 +90,7 @@ export default function ProductCard({ id, name, price, image, stock }) {
         <div className={Style.buttonsContainer}>
           {
            stock > 0 ? <button onClick={() => {
+            (autho === "admin" || autho === "owner") ? swal("Error", "Un administrador no puede realizar esta acción", "error") :
             !karting.map((a) => a._id).includes(id) ? dispatch(addToCart(id)) && cartStorage(id)
              : swal("Oops","Este producto ya se encuentra en tu carrito","warning")
           }}
@@ -77,10 +98,12 @@ export default function ProductCard({ id, name, price, image, stock }) {
             }
           <br />
           {localStorage.getItem("usuario") ? <button onClick={() => {
-            !wishes.map((a) => a._id).includes(id) ? dispatch(addToWishList(id)) &&
+            setRefresh2(!refresh2) && 
+             (autho === "admin" || autho === "owner") ? swal("Error", "Un administrador no puede realizar esta acción", "error") :
+            !userDetails.map((a) => a._id).includes(id) ? dispatch(addToWishList(id, idUser)) &&
               swal("Listo!","El producto fue agregado a la lista de deseados","success") : swal("Oops","Este producto ya se encuentra en tu lista","warning")
           }} className="buttonWishlist">Añadir a lista de deseados</button> :
-            <button onClick={() => swal("Atencion!","Debes estar logueado para utilizar esta funcion","error")} className="buttonWishlist">Añadir a lista de deseados</button>}
+            <button onClick={() => swal("Atencion!","Debes logearte para hacer eso!","warning")} className="buttonWishlist">Añadir a lista de deseados</button>}
           <br />
         </div>
       </div>

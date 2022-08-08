@@ -49,20 +49,21 @@ export default function Profile() {
           Payments.map((e) => {
             return (
               <div className={Style.container}>
-                <p className={Style.centeredText}>Id de Compra: {e.idPayment}</p>
-                <p className={Style.centeredText}>Total de la Compra: ${e.amount}</p>
+                <p className={Style.centeredText}>Comprobante: {e._id}</p>
                 <p className={Style.centeredText}>Fecha: {e.date.slice(0, 4) + "/" + e.date.slice(5, 7) + "/" + e.date.slice(8, 10)} Hora: {e.date.slice(11, 16)}</p>
                 <div>{e.container.map(x => {
                   return (
                     <Link style={{ textDecoration: "none" }} to={`/product/${x._id}`}>
                       <div className={Style.positioning}>
-                        <img alt="img" className={Style.Pimg} src={x.image[0]?.url} />
                         <p>{x.name}</p>
                         <p>${x.price}</p>
+                        <img alt="img" className={Style.Pimg} src={x.image[0]?.url} />
                       </div>
                     </Link>
                   )
                 })}</div>
+                <p className={Style.centeredText}>Total de la Compra: ${e.amount}</p>
+                <hr/><hr/>
               </div>
             )
           })}
