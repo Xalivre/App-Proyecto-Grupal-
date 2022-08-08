@@ -124,7 +124,7 @@ export function addToWishList(id, idUser){
       await axios.put("http://localhost:3000/accounts/wishList/" + idUser, json.data)
       return dispatch({
         type:"ADD_TO_WISHLIST",
-        payload:json.data,
+        payload: json.data,
       });
     }catch(e){
       console.log(e)
@@ -135,8 +135,11 @@ export function addToWishList(id, idUser){
 export function removeFromWishList(idUser, id){
   return async function (dispatch){
     try{
-      let response = await axios.put("http://localhost:3000/accounts/removeFromWishList/" + idUser, {id})
-      console.log(response)
+    await axios.put("http://localhost:3000/accounts/removeFromWishList/" + idUser, {id})
+    return dispatch({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: id
+    })
     }catch(e){
       console.log(e)
     }
@@ -365,4 +368,3 @@ export function getUserById(id) {
 
   }
 }
-

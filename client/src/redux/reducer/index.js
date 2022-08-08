@@ -21,8 +21,8 @@ const initialState = {
   loginRefresher: false,
   totalPayments: [],
   userDetails: {},
-  userSearchedFor: []
-};
+  userSearchedFor: [],
+};  
 
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_DETAILS = "GET_DETAILS";
@@ -35,7 +35,7 @@ const RECENTLY_ADDED = "RECENTLY_ADDED";
 const SEARCH_BAR = "SEARCH_BAR";
 const REMOVE_CART = "REMOVE_CART";
 const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
-const REMOVE_WISHLIST = "REMOVE_WISHLIST";
+const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const GET_BRANDS = "GET_BRANDS"
@@ -60,6 +60,7 @@ const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
 const GET_USER_DETAILS = "GET_USER_DETAILS"
 const FIND_USER = "FIND_USER"
 const SORT_DATE = "SORT_DATE"
+// const FIND_USER_BY_EMAIL_ADMIN = "FIND_USER_BY_EMAIL_ADMIN"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,7 +78,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         users: action.payload
       }
+    case ADD_TO_WISHLIST:
+      state.userDetails.wishList.push(action.payload)
+      return {
+        ...state,
+      }
 
+    case REMOVE_FROM_WISHLIST:
+      state.userDetails.wishList.filter(e => e._id !== action.payload)
+      return{
+        ...state,
+
+      }
     case GET_USER_PAYMENTS:
       return {
         ...state,
@@ -338,6 +350,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userSearchedFor: action.payload
       }
+    // case FIND_USER_BY_EMAIL_ADMIN:
+    //   const copiaTotalPayments = state.totalPayments;
+    //   const searchFilter = copiaTotalPayments? copiaTotalPayments.filter(e => e.email !== action.payload) : null
+    //   return {
+    //     ...state,
+    //     totalPayments: searchFilter ? searchFilter : copiaTotalPayments
+    //   }
 
     default:
       return state;

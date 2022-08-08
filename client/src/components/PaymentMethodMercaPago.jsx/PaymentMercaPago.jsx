@@ -76,9 +76,6 @@ export default function PaymentMercaPago() {
         <div className={Style.inputcontenedor}>
         <input type="text" required/>
         </div>
-        <label>Card:</label>
-        <div className={Style.inputcontenedor}>
-        </div>
         <br />
       </div>
       <a href={stateFinishOrder?.data ? stateFinishOrder.data : null}>

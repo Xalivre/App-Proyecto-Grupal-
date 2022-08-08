@@ -24,15 +24,21 @@ export default function ProductCard({ id, name, price, image, stock }) {
 
   const dispatch = useDispatch();
 
-  const userDetails = useSelector((state) => state.userDetails.wishList)
-
   const [refresh2, setRefresh2] = useState(false)
+
+  const userDetails = useSelector((state) => state.userDetails)
+
     
     
   useEffect(() => {
     idUser && dispatch(getUserById(idUser))
-
+    
   },[idUser])
+
+  useEffect(() => {
+   idUser && dispatch(getUserById(idUser))
+   
+  }, [dispatch])
 
 
   const karting = useSelector((state) => state.cart)
@@ -98,9 +104,10 @@ export default function ProductCard({ id, name, price, image, stock }) {
             }
           <br />
           {localStorage.getItem("usuario") ? <button onClick={() => {
-            setRefresh2(!refresh2) && 
+          
              (autho === "admin" || autho === "owner") ? swal("Error", "Un administrador no puede realizar esta acción", "error") :
-            !userDetails.map((a) => a._id).includes(id) ? dispatch(addToWishList(id, idUser)) &&
+            !userDetails.wishList?.map((a) => a._id).includes(id) ? dispatch(addToWishList(id, idUser)) &&
+            
               swal("Listo!","El producto fue agregado a la lista de deseados","success") : swal("Oops","Este producto ya se encuentra en tu lista","warning")
           }} className="buttonWishlist">Añadir a lista de deseados</button> :
             <button onClick={() => swal("Atencion!","Debes logearte para hacer eso!","warning")} className="buttonWishlist">Añadir a lista de deseados</button>}

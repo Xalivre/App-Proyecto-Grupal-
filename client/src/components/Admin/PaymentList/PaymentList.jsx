@@ -2,7 +2,7 @@
 import { Style } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeState, getTotalPayments, sortDate } from "../../../redux/actions";
+import { changeState, getTotalPayments, sortDate, searchUserByEmailAdmin} from "../../../redux/actions";
 import styles from "./PaymentList.module.css"
 
 export default function PaymentList() {
@@ -10,6 +10,7 @@ export default function PaymentList() {
     const totalPayments = useSelector(state => state.totalPayments);
     const [purchaseState, setPurchaseState] = useState('pendiente')
     const dispatch = useDispatch()
+    const [input, setInput] = useState("")
 
     useEffect(() => {
         dispatch(getTotalPayments())
@@ -31,6 +32,7 @@ export default function PaymentList() {
             state: 'despachado',
             paymentId
         }
+        alert(userId)
         await dispatch(changeState(pendings))
     }
 
@@ -40,13 +42,25 @@ export default function PaymentList() {
         setView(id)
 
     }
+    const handleClickId = (e) => {
+        e.preventDefault();
+        dispatch(searchUserByEmailAdmin(input));
+        setInput("")
+    }
 
-
+    console.log(totalPayments)
+    const handleChange = (e) => {
+        setInput(e.target.value);
+        console.log(input)
+    }
 
     return (
         <div className={styles.containerAll}>
             <div className={styles.topPositioning}>
                 <div className={styles.buttonsTab}>
+                    <button type="submit" onClick={(e) => handleClickId(e)} >Buscar</button>
+                    <input onChange={(e) => handleChange(e)} value={input} placeholder="ID usuario" ></input>
+                    <button>Todos</button>
                     <button className="btnDash" value={'pendiente'} onClick={() => setPurchaseState('pendiente')}> Pendiente </button>
                     <button className="button" value={'despachado'} onClick={() => setPurchaseState('despachado')}> Despachado </button>
                     <button className="btnFinish" value={'finalizado'} onClick={() => setPurchaseState('finalizado')}> Finalizado </button>
@@ -60,7 +74,9 @@ export default function PaymentList() {
                 </div>
             </div>
             <div className={styles.container}>
+
                 {totalPayments && purchaseState === 'pendiente' && totalPayments.pendiente?.map(x => {
+                    console.log(x)
                     return (
                         <div className={styles.cardPendienteContainer}>
                             <div className={styles.iconText}>
@@ -85,7 +101,8 @@ export default function PaymentList() {
                                     <p>Correo electrónico:</p>
 
                                 </div>
-                                <p><span className={styles.span}>{x.email}</span></p>
+                                <p><span >{x.email}</span></p>  
+                                {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
 
                             </div>
 
@@ -205,7 +222,7 @@ export default function PaymentList() {
                                 <p className={styles.vermas} onClick={() => setView('')}>Ver menos</p> </div> : <p className={styles.vermas} onClick={(e) => handleClick(e, x.idPayment)}> Ver más...</p>}
                             {
                                 x.state === 'despachado' ?
-                                    <button className="button" onClick={(e) => handleAnotherOtherClick(x.userId, x._id)}>Marcar como finalizado</button>
+                                    <button className="button" onClick={(e) => handleAnotherClick(x.userId, x._id)}>Marcar como finalizado</button>
                                     :
                                     <button disabled='true' className={` button ${styles.invisibleButton}`}>Marcar como finalizado</button>}
                         </div>

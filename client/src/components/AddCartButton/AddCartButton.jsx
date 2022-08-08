@@ -25,12 +25,13 @@ function AddCartButton({ id, stock, setRefresh, refresh }) {
     if(autho === "admin" || autho === "owner"){
       return
     }
-
-    let json = await axios.get("http://localhost:3000/product/" + id);
+    if (!karting.map((a) => a._id).includes(id)) {
+        let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
     console.log(a)
     a.push(json.data)
     localStorage.setItem("Carrito", JSON.stringify(a))
+    }  
   }
 
   async function addCart(e) {
@@ -43,6 +44,7 @@ function AddCartButton({ id, stock, setRefresh, refresh }) {
     } else {
       await swal("Oops", "Este producto ya se encuentra en tu carrito!", "warning")
     }
+    
     idUser && dispatch(removeFromWishList(idUser, id))
     idUser && await dispatch(getUserById(idUser))
     setRefresh(!refresh)
