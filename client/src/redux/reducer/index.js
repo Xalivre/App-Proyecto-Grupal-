@@ -21,8 +21,8 @@ const initialState = {
   loginRefresher: false,
   totalPayments: [],
   userDetails: {},
-  userSearchedFor: []
-};
+  userSearchedFor: [],
+};  
 
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_DETAILS = "GET_DETAILS";
@@ -60,6 +60,7 @@ const TOTAL_PAYMENTS = "TOTAL_PAYMENTS"
 const GET_USER_DETAILS = "GET_USER_DETAILS"
 const FIND_USER = "FIND_USER"
 const SORT_DATE = "SORT_DATE"
+// const FIND_USER_BY_EMAIL_ADMIN = "FIND_USER_BY_EMAIL_ADMIN"
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -361,6 +362,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userSearchedFor: action.payload
       }
+    // case FIND_USER_BY_EMAIL_ADMIN:
+    //   const copiaTotalPayments = state.totalPayments;
+    //   const searchFilter = copiaTotalPayments? copiaTotalPayments.filter(e => e.email !== action.payload) : null
+    //   return {
+    //     ...state,
+    //     totalPayments: searchFilter ? searchFilter : copiaTotalPayments
+    //   }
 
     default:
       return state;
