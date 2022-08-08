@@ -42,24 +42,24 @@ export default function PaymentList() {
         setView(id)
 
     }
-    const handleClickId = (e) => {
-        e.preventDefault();
-        dispatch(searchUserByEmailAdmin(input));
-        setInput("")
-    }
+    // const handleClickId = (e) => {
+    //     e.preventDefault();
+    //     dispatch(searchUserByEmailAdmin(input));
+    //     setInput("")
+    // }
 
-    console.log(totalPayments)
-    const handleChange = (e) => {
-        setInput(e.target.value);
-        console.log(input)
-    }
+    // console.log(totalPayments)
+    // const handleChange = (e) => {
+    //     setInput(e.target.value);
+    //     console.log(input)
+    // }
 
     return (
         <div className={styles.containerAll}>
             <div className={styles.topPositioning}>
                 <div className={styles.buttonsTab}>
-                    <button type="submit" onClick={(e) => handleClickId(e)} >Buscar</button>
-                    <input onChange={(e) => handleChange(e)} value={input} placeholder="ID usuario" ></input>
+                    {/* <button type="submit" onClick={(e) => handleClickId(e)} >Buscar</button>
+                    <input onChange={(e) => handleChange(e)} value={input} placeholder="ID usuario" ></input> */}
                     <button>Todos</button>
                     <button className="btnDash" value={'pendiente'} onClick={() => setPurchaseState('pendiente')}> Pendiente </button>
                     <button className="button" value={'despachado'} onClick={() => setPurchaseState('despachado')}> Despachado </button>
@@ -189,7 +189,8 @@ export default function PaymentList() {
                                     <p>Correo electrónico:</p>
 
                                 </div>
-                                <p><span className={styles.span}>{x.email}</span></p>
+                                <p><span >{x.email}</span></p>
+                                {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
 
                             </div>
 
@@ -275,7 +276,8 @@ export default function PaymentList() {
                                     <p>Correo electrónico:</p>
 
                                 </div>
-                                <p><span className={styles.span}>{x.email}</span></p>
+                                <p><span >{x.email}</span></p>
+                                {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
 
                             </div>
 
