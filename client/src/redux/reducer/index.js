@@ -122,18 +122,6 @@ const rootReducer = (state = initialState, action) => {
         cart: state.cart.filter((e) => e._id !== action.payload)
       }
 
-    case ADD_TO_WISHLIST:
-      return {
-        ...state,
-        wishList: [...state.wishList, action.payload]
-      }
-
-    case REMOVE_WISHLIST:
-      return {
-        ...state,
-        wishList: state.wishList.filter((e) => e._id !== action.payload)
-      }
-
     case CAROUSEL:
       return {
         ...state,

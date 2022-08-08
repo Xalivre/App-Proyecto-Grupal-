@@ -117,10 +117,11 @@ export function modifyCart(carrito){
   }
 }
 
-export function addToWishList(id){
+export function addToWishList(id, idUser){
   return async function (dispatch){
     try{
       let json = await axios.get("http://localhost:3000/product/" + id);
+      await axios.put("http://localhost:3000/accounts/wishList/" + idUser, json.data)
       return dispatch({
         type:"ADD_TO_WISHLIST",
         payload: json.data,
@@ -367,14 +368,3 @@ export function getUserById(id) {
 
   }
 }
-
-
-// export function searchUserByEmailAdmin(email) {
-//   return async function (dispatch) {
-//     let r = await axios.post(`http://localhost:3000/api/paymentHistoryByEmail`, {email}) //FALTA RUTA
-//     return dispatch({
-//       type: "FIND_USER_BY_EMAIL_ADMIN",
-//       payload: r.data
-//     })
-//   }
-// }

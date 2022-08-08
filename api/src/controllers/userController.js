@@ -168,3 +168,33 @@ export const updateUser = async (req, res) => {
     return res.json({ msg: `Error 404 - ${e}` });
   }
 };
+
+export const updateWishList = async (req, res) => {
+  const {id} = req.params
+  try{
+    const user = await User.findById(id)
+    if(!user){
+      return res.status(400).send("User not found")
+    }
+    user.wishList.unshift(req.body)
+    user.save()
+    return res.json(user)
+  }catch(e){
+    return res.json({ msg: `Error 400 - ${e}` });
+  }
+}
+
+export const deleteWishList = async (req, res) => {
+  const {id} = req.params
+  try{
+    const user = await User.findById(id)
+    if(!user){
+      return res.status(400).send("User not found / deleteWishList")
+    }
+    user.wishList = user.wishList.filter((e) => e._id !== req.body.id)
+    user.save()
+    return res.json(user)
+  }catch(e){
+    return res.json({ msg: `Error 400 - ${e}` });
+  }
+}

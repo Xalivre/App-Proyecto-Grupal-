@@ -1,13 +1,29 @@
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import RemoveWishButton from './RemoveWishButton/RemoveWishButton';
 import AddCartButton from '../AddCartButton/AddCartButton';
 import s from "./WishList.module.css";
 import { Style } from '@mui/icons-material';
+import { getUserById } from '../../redux/actions';
+import {useJwt} from "react-jwt"
 
 function WishList() {
 
-  const wishList = useSelector((state) => state.wishList)
+  const { decodedToken } = useJwt(localStorage.getItem("usuario"));
+
+  let idUser = decodedToken?._id;
+
+  const dispatch = useDispatch()
+
+  const userDetails = useSelector((state) => state.userDetails)
+  const [refresh, setRefresh] = useState(false)
+
+  useEffect(() => {
+    idUser && dispatch(getUserById(idUser))
+    
+  },[idUser, refresh])
+
+
 
 
 
@@ -15,17 +31,17 @@ function WishList() {
     <div className={s.container} >
       <h1 style={{ display: "flex", alignSelf: "center", fontWeight: 700 }} >Lista de Deseados</h1>
       <div>
-        {wishList.length > 0 ?
+        {userDetails.wishList?.length > 0 ?
           <div className={s.contains}>
-           {wishList.map((p) => (
+           {userDetails.wishList?.map((p) => (
             <div key={p._id} className={s.card}>
               <div className={s.btnContainer} >
                 <p style={{ color: "#156dbfb7", textAlign: "left" }} >{p.name}</p>
-                <RemoveWishButton className={Style.button} id={p._id} />
+                <RemoveWishButton className={Style.button} id={p._id} setRefresh={setRefresh} refresh={refresh}/>
               </div>
               <p style={{ width: "100%", textAlign: "left" }}>Precio: ${p.price}</p>
               <img alt="img" className={s.img} src={p.image[0].url} />
-              <AddCartButton id={p._id} />
+              <AddCartButton id={p._id} stock={p.stock} setRefresh={setRefresh} refresh={refresh}/>
             </div>
             ))}
           </div>

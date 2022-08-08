@@ -68,8 +68,11 @@ export default function Details(props) {
               {/* <h1>Caracteristicas</h1> */}
               <p className={Style.description}>{product.description}</p>
               <p>Stock: <span className={Style.stock}>{product.stock}</span></p>
+              <>
               <AddCartButton id={product._id} stock={product.stock} />
               <AddWishButton id={product._id} />
+              </>
+
             </div>
           </div>
           {
