@@ -35,7 +35,7 @@ const RECENTLY_ADDED = "RECENTLY_ADDED";
 const SEARCH_BAR = "SEARCH_BAR";
 const REMOVE_CART = "REMOVE_CART";
 const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
-const REMOVE_WISHLIST = "REMOVE_WISHLIST";
+const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 const POST_PRODUCT = "POST_PRODUCT"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const GET_BRANDS = "GET_BRANDS"
@@ -77,7 +77,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         users: action.payload
       }
+    case ADD_TO_WISHLIST:
+      state.userDetails.wishList.push(action.payload)
+      return {
+        ...state,
+      }
 
+    case REMOVE_FROM_WISHLIST:
+      state.userDetails.wishList.filter(e => e._id !== action.payload)
+      return{
+        ...state,
+
+      }
     case GET_USER_PAYMENTS:
       return {
         ...state,

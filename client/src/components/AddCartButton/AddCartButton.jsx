@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromWishList } from '../../redux/actions/index'
+import { addToCart, removeFromWishList, getUserById } from '../../redux/actions/index'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Style from "./AddCartButton.module.css"
 import axios from "axios"
@@ -13,11 +13,17 @@ function AddCartButton({ id, stock }) {
   const karting = useSelector((state) => state.cart)
 
   const cartStorage = async (id) => {
-    let json = await axios.get("http://localhost:3000/product/" + id);
+
+    if(autho === "admin" || autho === "owner"){
+      return
+    }
+    if (!karting.map((a) => a._id).includes(id)) {
+        let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
     console.log(a)
     a.push(json.data)
     localStorage.setItem("Carrito", JSON.stringify(a))
+    }  
   }
 
   function addCart(e) {
@@ -27,7 +33,8 @@ function AddCartButton({ id, stock }) {
     } else {
       swal("Oops", "Este producto ya se encuentra en tu carrito!", "warning")
     }
-    dispatch(removeFromWishList(id))
+    idUser && await dispatch(getUserById(idUser))
+    setRefresh(!refresh)
   }
 
   return (

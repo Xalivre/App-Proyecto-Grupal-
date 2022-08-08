@@ -31,6 +31,7 @@ export default function PaymentList() {
             state: 'despachado',
             paymentId
         }
+        alert(userId)
         await dispatch(changeState(pendings))
     }
 
@@ -61,6 +62,7 @@ export default function PaymentList() {
             </div>
             <div className={styles.container}>
                 {totalPayments && purchaseState === 'pendiente' && totalPayments.pendiente?.map(x => {
+                    console.log(x)
                     return (
                         <div className={styles.cardPendienteContainer}>
                             <div className={styles.iconText}>

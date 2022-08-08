@@ -18,7 +18,6 @@ export default function Profile() {
 
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
-    console.log(decodedToken)
   }, [decodedToken]);
 
   useEffect(() => {
@@ -40,12 +39,12 @@ export default function Profile() {
           <p>Dirección de Facturación <br/> <span className={Style.span}>{userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'}</span> </p>
           <p>Codigo postal <br/> <span className={Style.span}>{userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</span></p>
           <p>Localidad <br/> <span className={Style.span}>{userExtraInfo?.location ? userExtraInfo.location : 'Sin definir'}</span></p>
-          <p>Nro. de Teléfono <br/></p>
+          <p>Nro. de Teléfono <br/> <span className={Style.span}>{userExtraInfo?.phoneNumber ? userExtraInfo.phoneNumber : 'Sin definir'}</span></p>
         </div>
       </div>
       <div className={Style.comprasHistory}>
         <p className={Style.titlep}>Historial de Compras</p>
-        {Payments.length &&
+        {Payments.length > 0 ?
           Payments.map((e) => {
             return (
               <div className={Style.container}>
@@ -65,7 +64,7 @@ export default function Profile() {
                 })}</div>
               </div>
             )
-          })}
+          }) : <h6>No has hecho compras aún</h6>}
       </div>
     </div>
   );

@@ -123,7 +123,7 @@ export function addToWishList(id){
       let json = await axios.get("http://localhost:3000/product/" + id);
       return dispatch({
         type:"ADD_TO_WISHLIST",
-        payload:json.data,
+        payload: json.data,
       });
     }catch(e){
       console.log(e)
@@ -131,10 +131,17 @@ export function addToWishList(id){
   }
 }
 
-export function removeFromWishList(id){
-  return{
-    type:"REMOVE_WISHLIST",
-    payload:id
+export function removeFromWishList(idUser, id){
+  return async function (dispatch){
+    try{
+    await axios.put("http://localhost:3000/accounts/removeFromWishList/" + idUser, {id})
+    return dispatch({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: id
+    })
+    }catch(e){
+      console.log(e)
+    }
   }
 }
 
