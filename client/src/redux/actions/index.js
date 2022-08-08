@@ -360,3 +360,14 @@ export function getUserById(id) {
 
   }
 }
+
+
+// export function searchUserByEmailAdmin(email) {
+//   return async function (dispatch) {
+//     let r = await axios.post(`http://localhost:3000/api/paymentHistoryByEmail`, {email}) //FALTA RUTA
+//     return dispatch({
+//       type: "FIND_USER_BY_EMAIL_ADMIN",
+//       payload: r.data
+//     })
+//   }
+// }
