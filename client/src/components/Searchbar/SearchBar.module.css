@@ -38,6 +38,8 @@
         font-size: 15px;
         margin: 0;
         padding: 0;
+        margin-bottom: 1rem;
+        gap: .5rem;
     }
 
     .logo {
