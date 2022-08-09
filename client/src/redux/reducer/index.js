@@ -254,6 +254,15 @@ const rootReducer = (state = initialState, action) => {
                 }
                 return 1;
               }),
+              cancelado: [state.totalPayments.cancelado][0].sort((a, b) => {
+                if (a.date === b.date) {
+                  return 0;
+                }
+                if (a.date > b.date) {
+                  return -1;
+                }
+                return 1;
+              }),
             }
           : action.payload === 'Oldest'
           ? {
@@ -276,6 +285,15 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
               finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
+                if (a.date === b.date) {
+                  return 0;
+                }
+                if (a.date < b.date) {
+                  return -1;
+                }
+                return 1;
+              }),
+              cancelado: [state.totalPayments.cancelado][0].sort((a, b) => {
                 if (a.date === b.date) {
                   return 0;
                 }
