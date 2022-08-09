@@ -56,7 +56,6 @@ export default function ProductCard({ id, name, price, image, stock }) {
     const a = localStorage.getItem('Carrito')
       ? JSON.parse(localStorage.getItem('Carrito'))
       : [];
-    console.log(a);
     a.push(json.data);
     localStorage.setItem('Carrito', JSON.stringify(a));
   };
@@ -113,7 +112,6 @@ export default function ProductCard({ id, name, price, image, stock }) {
                   'Este producto no tiene stock disponible',
                   'error'
                 );
-                console.log(stock);
               }}
             >
               Sin Stock
