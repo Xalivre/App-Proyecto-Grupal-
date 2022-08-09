@@ -1,7 +1,7 @@
 .button {
     margin-top: 15px;
     border: none;
-    width: 100%;
+    width: 80%;
     color: #fff;
     font-size: 20px;
     padding: 15px 20px;
@@ -11,7 +11,9 @@
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
+.button:hover{
+    background: #00376b98;
+}
 .buttonError {
     margin-top: 15px;
     border: none;
@@ -25,6 +27,9 @@
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     cursor: default;
+}
+.buttonError:hover{
+    background: rgba(121, 129, 135, 0.598);
 }
 
 .inputCard {
@@ -61,12 +66,39 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 2rem;
     font-size: .7rem;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .contenedor{
     padding: 1rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 1rem;
+    width: 90%;
+}
+.uno, .dos{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.containerInput{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+.containerInput label{
+    width: 30%;
+}
+.containerInput div{
+    width: 70%;
+}
+.containerInput div input{
+    width: 90%;
 }
 .contenedor input{
     border: 1px solid rgb(159, 159, 159) !important;
@@ -77,4 +109,7 @@
 }
 .inputCard div{
     border: 1px solid rgb(159, 159, 159) !important;
+}
+.containerVisa{
+    width: 70%;
 }

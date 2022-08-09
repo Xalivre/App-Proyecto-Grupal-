@@ -223,154 +223,160 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
           <h1>Realizar pago</h1>
         </center>
         <div className={Style.contenedor}>
-          <div>
-            <label>Nombre:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="text"
-                name="name"
-                value={info.name}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li className={Style.li} id="nameColor">
-                    Introducir un nombre
-                  </li>
-                </ul>
-              }
+          <div className={Style.uno}>
+
+            <div className={Style.containerInput}>
+              <label>Nombre:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="text"
+                  name="name"
+                  value={info.name}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li className={Style.li} id="nameColor">
+                      Introducir un nombre
+                    </li>
+                  </ul>
+                }
+              </div>
+            </div>
+            <div className={Style.containerInput}>
+              <label>Apellidos:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="text"
+                  name="lastname"
+                  value={info.lastname}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li className={Style.li} id="lastnameColor">
+                      Introducir un apellido
+                    </li>
+                  </ul>
+                }
+              </div>
+            </div>
+            <div className={Style.containerInput}>
+              <label>Email:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="text"
+                  name="email"
+                  required
+                  value={info.email}
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li className={Style.li} id="emailColor">
+                      Introducir un email válido
+                    </li>
+                  </ul>
+                }
+              </div>
+            </div>
+            <div className={Style.containerInput}>
+              <label>Localidad:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="text"
+                  name="location"
+                  value={info.location}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li className={Style.li} id="locationColor">
+                      Introducir una localidad
+                    </li>
+                  </ul>
+                }
+              </div>
             </div>
           </div>
-          <div>
-            <label>Apellidos:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="text"
-                name="lastname"
-                value={info.lastname}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li className={Style.li} id="lastnameColor">
-                    Introducir un apellido
-                  </li>
-                </ul>
-              }
+
+          <div className={Style.dos}>
+            <div className={Style.containerInput}>
+              <label>Dirección:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="text"
+                  name="address"
+                  value={info.address}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li id="addressColor" className={Style.li}>
+                      Introducir una dirección válida
+                    </li>
+                  </ul>
+                }
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Email:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="text"
-                name="email"
-                required
-                value={info.email}
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li className={Style.li} id="emailColor">
-                    Introducir un email válido
-                  </li>
-                </ul>
-              }
+            <div className={Style.containerInput}>
+              <label>Código Postal:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="number"
+                  name="zipCode"
+                  value={info.zipCode}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li id="zipCodeColor" className={Style.li}>
+                      Introducir código postal
+                    </li>
+                  </ul>
+                }
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Localidad:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="text"
-                name="location"
-                value={info.location}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li className={Style.li} id="locationColor">
-                    Introducir una localidad
-                  </li>
-                </ul>
-              }
+            <div className={Style.containerInput}>
+              <label>Nro. de Teléfono:</label>
+              <div className={Style.inputcontenedor}>
+                <input
+                  type="number"
+                  name="phoneNumber"
+                  value={info.phoneNumber}
+                  required
+                  onChange={handleChange}
+                />
+                {
+                  <ul>
+                    <li id="phoneNumberColor">
+                      Introducir un número de télefono válido
+                    </li>
+                  </ul>
+                }
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Dirección:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="text"
-                name="address"
-                value={info.address}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li id="addressColor" className={Style.li}>
-                    Introducir una dirección válida
-                  </li>
-                </ul>
-              }
-            </div>
-          </div>
-          <div>
-            <label>Código Postal:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="number"
-                name="zipCode"
-                value={info.zipCode}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li id="zipCodeColor" className={Style.li}>
-                    Introducir código postal
-                  </li>
-                </ul>
-              }
-            </div>
-          </div>
-          <div>
-            <label>Nro. de Teléfono:</label>
-            <div className={Style.inputcontenedor}>
-              <input
-                type="number"
-                name="phoneNumber"
-                value={info.phoneNumber}
-                required
-                onChange={handleChange}
-              />
-              {
-                <ul>
-                  <li id="phoneNumberColor">
-                    Introducir un número de télefono válido
-                  </li>
-                </ul>
-              }
-            </div>
-          </div>
-          <div>
-            <label>Tarjeta de Crédito/Débito:</label>
-            <div className={Style.inputcontenedor}>
-              <CardElement className={Style.inputCard} />
-            </div>
-            <br />
           </div>
         </div>
+        <div className={Style.containerVisa}>
+              <label>Tarjeta de Crédito/Débito:</label>
+              <div className={Style.inputcontenedor}>
+                <CardElement className={Style.inputCard} />
+              </div>
+              <br />
+        </div>
         {!errors.name &&
-        !errors.lastname &&
-        !errors.email &&
-        !errors.address &&
-        !errors.zipCode &&
-        !errors.location &&
-        !errors.phoneNumber ? (
+          !errors.lastname &&
+          !errors.email &&
+          !errors.address &&
+          !errors.zipCode &&
+          !errors.location &&
+          !errors.phoneNumber ? (
           <button disabled={!stripe} className={Style.button}>
             {loading ? (
               <div class="spinner-border text-light" role="status">
