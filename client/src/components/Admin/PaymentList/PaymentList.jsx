@@ -52,6 +52,7 @@ export default function PaymentList() {
       return dispatch(clearHistoryPage());
     }
     dispatch(getPaymentHistoryById(input));
+    setPurchaseState('');
 
     setInput('');
   };
@@ -72,7 +73,14 @@ export default function PaymentList() {
             value={input}
             placeholder="ID de compra"
           ></input>
-          <button>Todos</button>
+          <button
+            onClick={async () => {
+              await dispatch(clearHistoryPage());
+              setPurchaseState('pendiente');
+            }}
+          >
+            Todos
+          </button>
           <button
             className="btnDash"
             value={'pendiente'}
@@ -125,7 +133,7 @@ export default function PaymentList() {
         </div>
       </div>
       <div className={styles.container}>
-        {userPaymentId.username ? (
+        {userPaymentId.state === 'pendiente' ? (
           <div>
             {
               <div className={styles.cardPendienteContainer}>
@@ -356,13 +364,124 @@ export default function PaymentList() {
           })
         )}
 
-        {!userPaymentId.username
-          ? totalPayments &&
-            purchaseState === 'despachado' &&
-            totalPayments.despachado?.map((x) => {
-              return (
-                {
-                  /* <div className={styles.cardDespachadoContainer}>
+        {userPaymentId.state === 'despachado' ? (
+          <div className={styles.cardDespachadoContainer}>
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-calendar-day"></i>
+                <p>Fecha:</p>
+              </div>
+              <p>
+                <span className={styles.span}>
+                  {userPaymentId.date.slice(0, 4) +
+                    '/' +
+                    userPaymentId.date.slice(5, 7) +
+                    '/' +
+                    userPaymentId.date.slice(8, 10)}{' '}
+                  Hora: {userPaymentId.date.slice(11, 16)}
+                </span>
+              </p>
+            </div>
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-user"></i>
+                <p>Id de compra: </p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId._id}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-user"></i>
+                <p>Usuario: </p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId.username}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-envelope"></i>
+                <p>Correo electrónico:</p>
+              </div>
+              <p>
+                <span>{userPaymentId.email}</span>
+              </p>
+              {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-money-bill-1"></i>
+                <p>Precio total:</p>
+              </div>
+              <p>
+                <span className={styles.span}>${userPaymentId.amount}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-truck-ramp-box"></i>
+                <p>Estado:</p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId.state}</span>
+              </p>
+            </div>
+            {view === userPaymentId.idPayment ? (
+              <div className={styles.masContenido}>
+                {userPaymentId.container.map((item) => {
+                  return (
+                    <div id={item.idPayment}>
+                      <hr />
+                      <p>Nombre del producto: {item.name}</p>
+                      <p>Stock del producto: {item.stock}</p>
+                      <p>Precio del producto: ${item.price}</p>
+                    </div>
+                  );
+                })}
+                <p className={styles.vermas} onClick={() => setView('')}>
+                  Ver menos
+                </p>{' '}
+              </div>
+            ) : (
+              <p
+                className={styles.vermas}
+                onClick={(e) => handleClick(e, userPaymentId.idPayment)}
+              >
+                {' '}
+                Ver más...
+              </p>
+            )}
+            {userPaymentId.state === 'despachado' ? (
+              <button
+                className="button"
+                onClick={(e) =>
+                  handleAnotherClick(userPaymentId.userId, userPaymentId._id)
+                }
+              >
+                Marcar como finalizado
+              </button>
+            ) : (
+              <button
+                disabled="true"
+                className={` button ${styles.invisibleButton}`}
+              >
+                Marcar como finalizado
+              </button>
+            )}
+          </div>
+        ) : (
+          totalPayments &&
+          purchaseState === 'despachado' &&
+          totalPayments.despachado?.map((x) => {
+            return (
+              {
+                /* <div className={styles.cardDespachadoContainer}>
                             <h6>Fecha: {x.date.slice(0, 4) + "/" + x.date.slice(5, 7) + "/" + x.date.slice(8, 10)} Hora: {x.date.slice(11, 16)}</h6>
                             <h6>Usuario: {x.username}</h6>
                             <h6>Correo electrónico: {x.email}</h6>
@@ -384,130 +503,221 @@ export default function PaymentList() {
                             {x.state === 'despachado' ? <button className="button" onClick={(e) => handleAnotherClick(x.userId, x._id)}>Marcar como finalizado</button> : <button disabled='true' className={`button ${styles.invisibleButton}`}>Marcar como finalizado</button>}
                             <br />
                         </div> */
-                },
-                (
-                  <div className={styles.cardDespachadoContainer}>
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-calendar-day"></i>
-                        <p>Fecha:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>
-                          {x.date.slice(0, 4) +
-                            '/' +
-                            x.date.slice(5, 7) +
-                            '/' +
-                            x.date.slice(8, 10)}{' '}
-                          Hora: {x.date.slice(11, 16)}
-                        </span>
-                      </p>
+              },
+              (
+                <div className={styles.cardDespachadoContainer}>
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-calendar-day"></i>
+                      <p>Fecha:</p>
                     </div>
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-user"></i>
-                        <p>Id de compra: </p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>{x._id}</span>
-                      </p>
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-user"></i>
-                        <p>Usuario: </p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>{x.username}</span>
-                      </p>
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-envelope"></i>
-                        <p>Correo electrónico:</p>
-                      </div>
-                      <p>
-                        <span>{x.email}</span>
-                      </p>
-                      {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-money-bill-1"></i>
-                        <p>Precio total:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>${x.amount}</span>
-                      </p>
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-truck-ramp-box"></i>
-                        <p>Estado:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>{x.state}</span>
-                      </p>
-                    </div>
-                    {view === x.idPayment ? (
-                      <div className={styles.masContenido}>
-                        {x.container.map((item) => {
-                          return (
-                            <div id={item.idPayment}>
-                              <hr />
-                              <p>Nombre del producto: {item.name}</p>
-                              <p>Stock del producto: {item.stock}</p>
-                              <p>Precio del producto: ${item.price}</p>
-                            </div>
-                          );
-                        })}
-                        <p
-                          className={styles.vermas}
-                          onClick={() => setView('')}
-                        >
-                          Ver menos
-                        </p>{' '}
-                      </div>
-                    ) : (
-                      <p
-                        className={styles.vermas}
-                        onClick={(e) => handleClick(e, x.idPayment)}
-                      >
-                        {' '}
-                        Ver más...
-                      </p>
-                    )}
-                    {x.state === 'despachado' ? (
-                      <button
-                        className="button"
-                        onClick={(e) => handleAnotherClick(x.userId, x._id)}
-                      >
-                        Marcar como finalizado
-                      </button>
-                    ) : (
-                      <button
-                        disabled="true"
-                        className={` button ${styles.invisibleButton}`}
-                      >
-                        Marcar como finalizado
-                      </button>
-                    )}
+                    <p>
+                      <span className={styles.span}>
+                        {x.date.slice(0, 4) +
+                          '/' +
+                          x.date.slice(5, 7) +
+                          '/' +
+                          x.date.slice(8, 10)}{' '}
+                        Hora: {x.date.slice(11, 16)}
+                      </span>
+                    </p>
                   </div>
-                )
-              );
-            })
-          : null}
-        {!userPaymentId.username
-          ? totalPayments &&
-            purchaseState === 'finalizado' &&
-            totalPayments.finalizado?.map((x) => {
-              return (
-                {
-                  /* <div className={styles.cardFinalizadoContainer}>
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-user"></i>
+                      <p>Id de compra: </p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x._id}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-user"></i>
+                      <p>Usuario: </p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x.username}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-envelope"></i>
+                      <p>Correo electrónico:</p>
+                    </div>
+                    <p>
+                      <span>{x.email}</span>
+                    </p>
+                    {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-money-bill-1"></i>
+                      <p>Precio total:</p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>${x.amount}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-truck-ramp-box"></i>
+                      <p>Estado:</p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x.state}</span>
+                    </p>
+                  </div>
+                  {view === x.idPayment ? (
+                    <div className={styles.masContenido}>
+                      {x.container.map((item) => {
+                        return (
+                          <div id={item.idPayment}>
+                            <hr />
+                            <p>Nombre del producto: {item.name}</p>
+                            <p>Stock del producto: {item.stock}</p>
+                            <p>Precio del producto: ${item.price}</p>
+                          </div>
+                        );
+                      })}
+                      <p className={styles.vermas} onClick={() => setView('')}>
+                        Ver menos
+                      </p>{' '}
+                    </div>
+                  ) : (
+                    <p
+                      className={styles.vermas}
+                      onClick={(e) => handleClick(e, x.idPayment)}
+                    >
+                      {' '}
+                      Ver más...
+                    </p>
+                  )}
+                  {x.state === 'despachado' ? (
+                    <button
+                      className="button"
+                      onClick={(e) => handleAnotherClick(x.userId, x._id)}
+                    >
+                      Marcar como finalizado
+                    </button>
+                  ) : (
+                    <button
+                      disabled="true"
+                      className={` button ${styles.invisibleButton}`}
+                    >
+                      Marcar como finalizado
+                    </button>
+                  )}
+                </div>
+              )
+            );
+          })
+        )}
+        {userPaymentId.state === 'finalizado' ? (
+          <div className={styles.cardFinalizadoContainer}>
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-calendar-day"></i>
+                <p>Fecha:</p>
+              </div>
+              <p>
+                <span className={styles.span}>
+                  {userPaymentId.date.slice(0, 4) +
+                    '/' +
+                    userPaymentId.date.slice(5, 7) +
+                    '/' +
+                    userPaymentId.date.slice(8, 10)}{' '}
+                  Hora: {userPaymentId.date.slice(11, 16)}
+                </span>
+              </p>
+            </div>
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-user"></i>
+                <p>Id de compra: </p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId._id}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-user"></i>
+                <p>Usuario: </p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId.username}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-envelope"></i>
+                <p>Correo electrónico:</p>
+              </div>
+              <p>
+                <span>{userPaymentId.email}</span>
+              </p>
+              {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-money-bill-1"></i>
+                <p>Precio total:</p>
+              </div>
+              <p>
+                <span className={styles.span}>${userPaymentId.amount}</span>
+              </p>
+            </div>
+
+            <div className={styles.iconText}>
+              <div className={styles.flex}>
+                <i class="fa-solid fa-truck-ramp-box"></i>
+                <p>Estado:</p>
+              </div>
+              <p>
+                <span className={styles.span}>{userPaymentId.state}</span>
+              </p>
+            </div>
+            {view === userPaymentId.idPayment ? (
+              <div className={styles.masContenido}>
+                {userPaymentId.container.map((item) => {
+                  return (
+                    <div id={item.idPayment}>
+                      <hr />
+                      <p>Nombre del producto: {item.name}</p>
+                      <p>Stock del producto: {item.stock}</p>
+                      <p>Precio del producto: ${item.price}</p>
+                    </div>
+                  );
+                })}
+                <p className={styles.vermas} onClick={() => setView('')}>
+                  Ver menos
+                </p>{' '}
+              </div>
+            ) : (
+              <p
+                className={styles.vermas}
+                onClick={(e) => handleClick(e, userPaymentId.idPayment)}
+              >
+                {' '}
+                Ver más...
+              </p>
+            )}
+          </div>
+        ) : (
+          totalPayments &&
+          purchaseState === 'finalizado' &&
+          totalPayments.finalizado?.map((x) => {
+            return (
+              {
+                /* <div className={styles.cardFinalizadoContainer}>
                             <h6>Fecha: {x.date.slice(0, 4) + "/" + x.date.slice(5, 7) + "/" + x.date.slice(8, 10)} Hora: {x.date.slice(11, 16)}</h6>
                             <h6>Usuario: {x.username}</h6>
                             <h6>Correo electrónico: {x.email}</h6>
@@ -528,99 +738,105 @@ export default function PaymentList() {
                                 <h6 onClick={() => setView('')}>Ver menos</h6> </div> : <h6 onClick={(e) => handleClick(e, x.idPayment)}> Ver más...</h6>}
                             <br />
                         </div> */
-                },
-                (
-                  <div className={styles.cardFinalizadoContainer}>
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-calendar-day"></i>
-                        <p>Fecha:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>
-                          {x.date.slice(0, 4) +
-                            '/' +
-                            x.date.slice(5, 7) +
-                            '/' +
-                            x.date.slice(8, 10)}{' '}
-                          Hora: {x.date.slice(11, 16)}
-                        </span>
-                      </p>
+              },
+              (
+                <div className={styles.cardFinalizadoContainer}>
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-calendar-day"></i>
+                      <p>Fecha:</p>
                     </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-user"></i>
-                        <p>Usuario: </p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>{x.username}</span>
-                      </p>
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-envelope"></i>
-                        <p>Correo electrónico:</p>
-                      </div>
-                      <p>
-                        <span>{x.email}</span>
-                      </p>
-                      {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-money-bill-1"></i>
-                        <p>Precio total:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>${x.amount}</span>
-                      </p>
-                    </div>
-
-                    <div className={styles.iconText}>
-                      <div className={styles.flex}>
-                        <i class="fa-solid fa-truck-ramp-box"></i>
-                        <p>Estado:</p>
-                      </div>
-                      <p>
-                        <span className={styles.span}>{x.state}</span>
-                      </p>
-                    </div>
-                    {view === x.idPayment ? (
-                      <div className={styles.masContenido}>
-                        {x.container.map((item) => {
-                          return (
-                            <div id={item.idPayment}>
-                              <hr />
-                              <p>Nombre del producto: {item.name}</p>
-                              <p>Stock del producto: {item.stock}</p>
-                              <p>Precio del producto: ${item.price}</p>
-                            </div>
-                          );
-                        })}
-                        <p
-                          className={styles.vermas}
-                          onClick={() => setView('')}
-                        >
-                          Ver menos
-                        </p>{' '}
-                      </div>
-                    ) : (
-                      <p
-                        className={styles.vermas}
-                        onClick={(e) => handleClick(e, x.idPayment)}
-                      >
-                        {' '}
-                        Ver más...
-                      </p>
-                    )}
+                    <p>
+                      <span className={styles.span}>
+                        {x.date.slice(0, 4) +
+                          '/' +
+                          x.date.slice(5, 7) +
+                          '/' +
+                          x.date.slice(8, 10)}{' '}
+                        Hora: {x.date.slice(11, 16)}
+                      </span>
+                    </p>
                   </div>
-                )
-              );
-            })
-          : null}
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-user"></i>
+                      <p>Id de compra: </p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x._id}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-user"></i>
+                      <p>Usuario: </p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x.username}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-envelope"></i>
+                      <p>Correo electrónico:</p>
+                    </div>
+                    <p>
+                      <span>{x.email}</span>
+                    </p>
+                    {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-money-bill-1"></i>
+                      <p>Precio total:</p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>${x.amount}</span>
+                    </p>
+                  </div>
+
+                  <div className={styles.iconText}>
+                    <div className={styles.flex}>
+                      <i class="fa-solid fa-truck-ramp-box"></i>
+                      <p>Estado:</p>
+                    </div>
+                    <p>
+                      <span className={styles.span}>{x.state}</span>
+                    </p>
+                  </div>
+                  {view === x.idPayment ? (
+                    <div className={styles.masContenido}>
+                      {x.container.map((item) => {
+                        return (
+                          <div id={item.idPayment}>
+                            <hr />
+                            <p>Nombre del producto: {item.name}</p>
+                            <p>Stock del producto: {item.stock}</p>
+                            <p>Precio del producto: ${item.price}</p>
+                          </div>
+                        );
+                      })}
+                      <p className={styles.vermas} onClick={() => setView('')}>
+                        Ver menos
+                      </p>{' '}
+                    </div>
+                  ) : (
+                    <p
+                      className={styles.vermas}
+                      onClick={(e) => handleClick(e, x.idPayment)}
+                    >
+                      {' '}
+                      Ver más...
+                    </p>
+                  )}
+                </div>
+              )
+            );
+          })
+        )}
       </div>
     </div>
   );
