@@ -20,6 +20,8 @@ export default function Profile() {
     email && email.match(pattern) && dispatch(getUserPayments(email));
   }, [decodedToken]);
 
+  console.log(decodedToken)
+
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])

@@ -143,7 +143,7 @@ export default function UsersList() {
                       </Link>
                     )}</td>
                     <td> {e.accountState === "banned" ? (
-                      <button className="btnDash" value={e._id} onClick={(e) => unbanUserFunction(e)}>
+                      <button className="buttonDelete2" value={e._id} onClick={(e) => unbanUserFunction(e)}>
                         Desbanear
                       </button>
                     ) : autho === "owner" && e.role === "admin" ? (
@@ -159,7 +159,7 @@ export default function UsersList() {
                       </div>
                     ) : (autho === "owner" || autho === "admin") && e.role === "user" ? (
                       <div>
-                        <button className="btnDash" value={e._id} onClick={(e) => giveAdmin(e)}>
+                        <button className="buttonDelete2" value={e._id} onClick={(e) => giveAdmin(e)}>
                           Ascender a admin
                         </button>
                         <button
@@ -200,7 +200,7 @@ export default function UsersList() {
                         </Link>
                       )}</td>
                       <td> {e.accountState === "banned" ? (
-                        <button className="btnDash" value={e._id} onClick={(e) => unbanUserFunction(e)}>
+                        <button className="buttonDelete2" value={e._id} onClick={(e) => unbanUserFunction(e)}>
                           Desbanear
                         </button>
                       ) : autho === "owner" && e.role === "admin" ? (
@@ -216,7 +216,7 @@ export default function UsersList() {
                         </div>
                       ) : (autho === "owner" || autho === "admin") && e.role === "user" ? (
                         <div>
-                          <button className="btnDash" value={e._id} onClick={(e) => giveAdmin(e)}>
+                          <button className="buttonDelete2" value={e._id} onClick={(e) => giveAdmin(e)}>
                             Ascender a admin
                           </button>
                           <button
