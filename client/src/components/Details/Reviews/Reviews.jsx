@@ -9,13 +9,8 @@ function Reviews({ id }) {
 
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
 
-  /* let email = decodedToken?.email; */
   let usernameTokened = decodedToken?.username;
 
-  /* useEffect(() => {
-    username && username.length && dispatch(getUserPayments(email));
-    console.log(decodedToken)
-  }, [decodedToken]); */
   
   const [input, setInput] = useState({
     id: id,
@@ -38,7 +33,6 @@ function Reviews({ id }) {
       comment: "",
       commentRating: 1,
     });
-    console.log(input);
     await axios.put("http://localhost:3000/comments", input)
   }
 

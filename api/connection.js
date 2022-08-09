@@ -11,7 +11,6 @@ export async function connectDB() {
       useUnifiedTopology: true,
     });
     mongoose.connection.onOpen('open', _ => {
-      console.log("Connected to", db.connection.name)
     })
     
   } catch (e) {

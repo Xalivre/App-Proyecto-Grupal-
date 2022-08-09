@@ -12,8 +12,6 @@ export async function createPayment({emailUser, items}) {
       success: "http://localhost:3001/successbuy"
     }
   };
-
-  console.log("PASEEEEEEEE BORJAAAA", body)
   
   const payment = await axios.post(url, body, {
     headers: {

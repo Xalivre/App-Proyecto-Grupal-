@@ -11,10 +11,10 @@ function RegisterPage(){
     
     useEffect(() => {
         dispatch(getUsers())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     const users = useSelector((state) => state.users)
-    console.log(users)
     
     const validate = (input) => {
         let errors = {};
@@ -71,7 +71,7 @@ function RegisterPage(){
         } else {
             length.style.color = "green"
         }
-        if(input.password == input.password2) {
+        if(input.password === input.password2) {
             conform.style.color = "green"
         } else {
             conform.style.color = "red"
@@ -101,7 +101,6 @@ function RegisterPage(){
             [e.target.name] : e.target.value
         })
         )
-        console.log(errors)
     }
 
     return (

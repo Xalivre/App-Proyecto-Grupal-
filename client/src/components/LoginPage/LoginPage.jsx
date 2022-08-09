@@ -46,9 +46,7 @@ function LoginPage() {
   }
 
   function HandleCallbackResponse(response){
-    console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    console.log(userObject.name)
     setInfoGoogle({
       username: userObject.name,
       email: userObject.email,
@@ -68,10 +66,12 @@ function LoginPage() {
       {theme: "outline", size: "large"},
       setCount(!count)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(postUsersGoogle(infoGoogle));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[count] )
 
   const validate = (info) => {

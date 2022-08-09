@@ -23,7 +23,7 @@ export default function Details(props) {
     dispatch(getUsers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  
   const users = useSelector((state) => state.users)
   const user = users.find(e => e._id === userIdFromToken)
   const userGoogle = users.find(e => e.email === userInfoGoogle)

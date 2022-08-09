@@ -349,7 +349,6 @@ const rootReducer = (state = initialState, action) => {
         quantity: state.cart[d].quantity ? state.cart[d].quantity + 1 : 1,
       };
       let g = Object.assign({}, state.cart[d], f);
-      console.log(g);
       return {
         ...state,
         cart: state.cart.map((e) => (e._id === action.payload ? g : e)),
@@ -361,7 +360,6 @@ const rootReducer = (state = initialState, action) => {
         quantity: state.cart[a].quantity ? state.cart[a].quantity - 1 : 1,
       };
       let c = Object.assign({}, state.cart[a], b);
-      console.log(c);
       return {
         ...state,
         cart: state.cart.map((e) => (e._id === action.payload ? c : e)),

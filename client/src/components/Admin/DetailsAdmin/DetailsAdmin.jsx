@@ -18,7 +18,6 @@ export default function DetailsAdmin(props) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log(product)
     product.name && setLoading(false)
   }, [product])
 
@@ -69,7 +68,6 @@ export default function DetailsAdmin(props) {
       edit.description = product.description;
     }
     dispatch(editProduct(edit, id));
-    console.log(edit);
     swal("Listo!","El producto fue modificado correctamente","success");
     navigate(-1);
   };

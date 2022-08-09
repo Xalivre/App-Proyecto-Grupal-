@@ -28,6 +28,7 @@ export default function UsersList() {
 
   useEffect(() => {
     dispatch(getUsers());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   const banUserFunction = async (e) => {
@@ -94,7 +95,6 @@ export default function UsersList() {
   async function handleSubmit(e) {
     // searchName(searchProduct)
     e.preventDefault();
-    console.log(input)
     dispatch(searchUserByUsername(input));
     setInput("")
     /* if (input[0] === " ") {
