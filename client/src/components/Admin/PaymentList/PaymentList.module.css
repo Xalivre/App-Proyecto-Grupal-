@@ -74,9 +74,20 @@
     padding: 1rem;
     font-size: 15px;
 }
-.cardFinalizadoContainer{
+.cardCanceladoContainer{
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 8px 0 #aa1639d3;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    padding: 1rem;
+    font-size: 15px;
+}
+.cardFinalizadoContainer{
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #35ad25;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;

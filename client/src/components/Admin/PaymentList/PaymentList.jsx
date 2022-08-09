@@ -96,7 +96,7 @@ export default function PaymentList() {
             Pendiente{' '}
           </button>
           <button
-            className="button"
+            className="btnDispatched"
             value={'despachado'}
             onClick={async () => {
               await dispatch(clearHistoryPage());
@@ -107,7 +107,7 @@ export default function PaymentList() {
             Despachado{' '}
           </button>
           <button
-            className="btnFinish"
+            className="btnFinished"
             value={'finalizado'}
             onClick={async () => {
               await dispatch(clearHistoryPage());
@@ -116,6 +116,17 @@ export default function PaymentList() {
           >
             {' '}
             Finalizado{' '}
+          </button>
+          <button
+            className="btnCanceled"
+            value={'finalizado'}
+            onClick={async () => {
+              await dispatch(clearHistoryPage());
+              setPurchaseState('finalizado');
+            }}
+          >
+            {' '}
+            Cancelado{' '}
           </button>
         </div>
         <div>
