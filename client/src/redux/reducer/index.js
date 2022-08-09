@@ -391,7 +391,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userPaymentId: {},
       };
-
     default:
       return state;
   }
