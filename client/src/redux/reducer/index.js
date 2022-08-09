@@ -65,6 +65,7 @@ const FIND_USER = 'FIND_USER';
 const SORT_DATE = 'SORT_DATE';
 const GET_PAYMENT_BY_ID = 'GET_PAYMENT_BY_ID';
 const CLEAR_HISTORY_PAGE = 'CLEAR_HISTORY_PAGE';
+const EDIT_USER = 'EDIT_USER'
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -391,7 +392,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userPaymentId: {},
       };
-
+    case EDIT_USER: 
+    return {
+      ...state,
+    }
     default:
       return state;
   }
