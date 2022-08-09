@@ -51,7 +51,7 @@ export default function ProductsListAdmin() {
       </div>
       <div className={Style.container}>
         <div className={Style.categoriesBar}>
-            <button className={Style.reloadButton} onClick={() => {
+            <button className="buttonDashboard" onClick={() => {
               setBrandFilter("")
               setCategoryFilter("")
               dispatch(searchName(""))
