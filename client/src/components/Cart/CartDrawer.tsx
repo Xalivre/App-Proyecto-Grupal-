@@ -68,14 +68,16 @@ export default function SwipeableTemporaryDrawer(props: any) {
         {
           props.cart.length > 0 && (autho || googleUser) ?
             <div style={{ display: "flex", width: "90%", flexDirection: "column", alignItems: "center" }}>
-              <hr className={Style.hrTotal} />
               <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
+              <hr className={Style.hrTotal} />
               <br />
               <Link to="/paymentMethod">
                 <button className='button' onClick={toggleDrawer(anchor, false)}>Comprar</button>
               </Link>
             </div>
-            : props.cart.length > 0 && !autho ? <div>
+            : props.cart.length > 0 && !autho ? <div style={{ display: "flex", width: "90%", flexDirection: "column", alignItems: "center" }}>
+              <div>Total: ${props.cart.map((e: any) => (e.price * e.quantity)).reduce((a: any, b: any) => a + b, 0)}</div>
+              <hr className={Style.hrTotal} />
               <h6 className={Style.cartText}>Para completar tu compra debes estar logueado, puedes registrarte o si ya tienes una cuenta, puedes iniciar sesión</h6>
               <div className={Style.buttonsCart}><Link to="/register">
                 <button className="button" >Registrarse</button>
