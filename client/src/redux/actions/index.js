@@ -297,6 +297,14 @@ export function editProduct(payload, id) {
   };
 }
 
+export function editUser(payload, id) {
+  return async function (dispatch) {
+    const editUs = await axios.put('http://localhost:3000/accounts/' + id, payload
+    );
+    return editUs
+  };
+}
+
 // export function finishOrder(emailUser, items, total){
 //   return async function (dispatch){
 //     const responsePay = await axios.post("http://localhost:3000/api/paymentMerpago", {emailUser, items, total})

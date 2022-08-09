@@ -17,4 +17,6 @@ router.post('/registerGoogle', postUsersGoogle)
 router.post('/register', postUsers)
 router.post('/login', loginUser)
 
+// router.put('/updateInfoUser', )
+
 export default router

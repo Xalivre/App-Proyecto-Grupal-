@@ -1,25 +1,67 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
-import { getUserPayments, getUsers } from "../../redux/actions";
-import { Link } from "react-router-dom"
+import { editUser, getUserPayments, getUsers } from "../../redux/actions";
+import { Link} from "react-router-dom"
 import Style from "./Profile.module.css"
+import swal from 'sweetalert';
 
 export default function Profile() {
   let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
 
   let email = decodedToken?.email;
+  let id = decodedToken?._id
 
   const dispatch = useDispatch();
 
+  const [edit, setEdit] = useState({
+    phoneNumber: "",
+    address: "",
+    location: "",
+    zipCode: "",
+  });
 
+  const [showInputs, setShowInputs] = useState("");
+
+  const handleInputState = (e) => {
+    e.preventDefault();
+    dispatch(setShowInputs(e.target.value));
+  };
+
+  const handleChange = (e) => {
+    setEdit({
+      ...edit,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!edit.phoneNumber){
+      edit.phoneNumber = userExtraInfo.phoneNumber
+    }
+    if(!edit.address){
+      edit.address = userExtraInfo.address
+    }
+    if(!edit.location){
+      edit.location = userExtraInfo.location
+    }
+    if(!edit.zipCode){
+      edit.zipCode = userExtraInfo.zipCode
+    }
+    dispatch(editUser(edit, id));
+    console.log(edit)
+    swal("Listo!","Tu informacion fue modificada correctamente","success");
+  }
 
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
   }, [decodedToken]);
 
+  useEffect(() => {
+    console.log(edit)
+  }, [edit]);
   console.log(decodedToken)
 
   useEffect(() => {
@@ -39,9 +81,30 @@ export default function Profile() {
           <p> Nombre de Usuario <br/> <span className={Style.span}> {decodedToken?.name || decodedToken?.username}</span></p>
           <p>Correo Electrónico<br/> <span className={Style.span}>{decodedToken?.email}</span></p>
           <p>Dirección de Facturación <br/> <span className={Style.span}>{userExtraInfo?.address ? userExtraInfo.address : 'Sin definir'}</span> </p>
+          <button onClick={(e) => handleInputState(e)} value={"address"}>EDIT</button>
+          <br/>
+          {showInputs === "address" && 
+          <input onChange={(e) => handleChange(e)} name="address" value={edit.address} type="text" placeholder="Modificar"></input>
+          }
           <p>Codigo postal <br/> <span className={Style.span}>{userExtraInfo?.zipCode ? userExtraInfo.zipCode : 'Sin definir'}</span></p>
+          <button onClick={(e) => handleInputState(e)} value={"zipCode"}>EDIT</button>
+          <br/>
+          {showInputs === "zipCode" && 
+          <input onChange={(e) => handleChange(e)} name="zipCode" value={edit.zipCode} type="number" placeholder="Modificar"></input>
+          }
           <p>Localidad <br/> <span className={Style.span}>{userExtraInfo?.location ? userExtraInfo.location : 'Sin definir'}</span></p>
+          <button onClick={(e) => handleInputState(e)} value={"location"}>EDIT</button>
+          <br/>
+          {showInputs === "location" && 
+          <input onChange={(e) => handleChange(e)} name="location" value={edit.location} type="text" placeholder="Modificar"></input>
+          }
           <p>Nro. de Teléfono <br/> <span className={Style.span}>{userExtraInfo?.phoneNumber ? userExtraInfo.phoneNumber : 'Sin definir'}</span></p>
+          <button onClick={(e) => handleInputState(e)} value={"phoneNumber"}>EDIT</button>
+          <br/>
+          {showInputs === "phoneNumber" && 
+          <input onChange={(e) => handleChange(e)} name="phoneNumber" value={edit.phoneNumber} type="number" placeholder="Modificar"></input>
+          }
+          { edit.address || edit.location || edit.phoneNumber || edit.zipCode ? <button onClick={(e) => handleSubmit(e)}>Guardar Cambios</button> : null }
         </div>
       </div>
       <div className={Style.comprasHistory}>
