@@ -25,6 +25,7 @@ export default function PaymentList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   const handleAnotherClick = async (userId, paymentId) => {
     const delivereds = {
       userId,
@@ -45,13 +46,27 @@ export default function PaymentList() {
     dispatch(getTotalPayments())
   };
 
+  const handleAnotherOtherFinalClick = async (userId, paymentId) => {
+    const canceleds = {
+      userId,
+      state: 'cancelado',
+      paymentId,
+    };
+    await dispatch(changeState(canceleds));
+    dispatch(getTotalPayments())
+  }
+
   const handleClick = (e, id) => {
     e.preventDefault();
     setView(id);
   };
   const handleClickId = (e) => {
     e.preventDefault();
-    if (input.length === 0) {
+    if (!totalPayments.despachado.find(e => e._id === input) && !totalPayments.finalizado.find(e => e._id === input) &&
+    !totalPayments.cancelado.find(e => e._id === input) && !totalPayments.pendiente.find(e => e._id === input)
+      /* input.length === 0 || input.length < 23 */) {
+      setInput("")
+      setPurchaseState("pendiente")
       return dispatch(clearHistoryPage());
     }
     dispatch(getPaymentHistoryById(input));
@@ -119,10 +134,10 @@ export default function PaymentList() {
           </button>
           <button
             className="btnCanceled"
-            value={'finalizado'}
+            value={'cancelado'}
             onClick={async () => {
               await dispatch(clearHistoryPage());
-              setPurchaseState('finalizado');
+              setPurchaseState('cancelado');
             }}
           >
             {' '}
@@ -245,6 +260,7 @@ export default function PaymentList() {
                   </p>
                 )}
                 {userPaymentId.state === 'pendiente' ? (
+                  <div>
                   <button
                     className="btnDash"
                     onClick={(e) =>
@@ -256,10 +272,29 @@ export default function PaymentList() {
                   >
                     Marcar como despachado
                   </button>
+                  <br/><br/>
+                  <button
+                  className="btnDashCanceled"
+                  onClick={(e) =>
+                    handleAnotherOtherFinalClick(
+                      userPaymentId.userId,
+                      userPaymentId._id
+                    )
+                  }
+                >
+                  Marcar como cancelado
+                </button>
+                </div>
                 ) : (
+                  <div>
                   <button disabled="true" className={styles.invisibleButton}>
                     Marcar como despachado
                   </button>
+                  <br/>
+                  <button disabled="true" className={styles.invisibleButton}>
+                  Marcar como despachado
+                </button>
+                </div>
                 )}
               </div>
             }
@@ -362,16 +397,31 @@ export default function PaymentList() {
                   </p>
                 )}
                 {x.state === 'pendiente' ? (
+                  <div>
                   <button
                     className="btnDash"
                     onClick={(e) => handleAnotherOtherClick(x.userId, x._id)}
                   >
                     Marcar como despachado
                   </button>
+                  <br/><br/>
+                  <button
+                  className="btnDashCanceled"
+                  onClick={(e) => handleAnotherOtherFinalClick(x.userId, x._id)}
+                >
+                  Marcar como cancelado
+                </button>
+                </div>
                 ) : (
-                  <button disabled="true" className={styles.invisibleButton}>
+                  <div>
+                  <button disabled className={styles.invisibleButton}>
                     Marcar como despachado
                   </button>
+                  <br/><br/>
+                  <button disabled className={styles.invisibleButton}>
+                    Marcar como cancelado
+                  </button>
+                  </div>
                 )}
               </div>
             );
@@ -848,6 +898,207 @@ export default function PaymentList() {
                   )}
                 </div>
               )
+            );
+          })
+        )}
+        {userPaymentId.state === 'cancelado' ? (
+          <div>
+            {
+              <div className={styles.cardCanceladoContainer}>
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-calendar-day"></i>
+                    <p>Fecha:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>
+                      {userPaymentId.date.slice(0, 4) +
+                        '/' +
+                        userPaymentId.date.slice(5, 7) +
+                        '/' +
+                        userPaymentId.date.slice(8, 10)}{' '}
+                      Hora: {userPaymentId.date.slice(11, 16)}
+                    </span>
+                  </p>
+                </div>
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-user"></i>
+                    <p>Id de compra: </p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>{userPaymentId._id}</span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-user"></i>
+                    <p>Usuario: </p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>
+                      {userPaymentId.username}
+                    </span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-envelope"></i>
+                    <p>Correo electrónico:</p>
+                  </div>
+                  <p>
+                    <span>{userPaymentId.email}</span>
+                  </p>
+                  {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-money-bill-1"></i>
+                    <p>Precio total:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>${userPaymentId.amount}</span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <p>Estado:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>{userPaymentId.state}</span>
+                  </p>
+                </div>
+                {view === userPaymentId.idPayment ? (
+                  <div className={styles.masContenido}>
+                    {userPaymentId.container.map((item) => {
+                      return (
+                        <div id={item.idPayment}>
+                          <hr />
+                          <p>Nombre del producto: {item.name}</p>
+                          <p>Stock del producto: {item.stock}</p>
+                          <p>Precio del producto: ${item.price}</p>
+                        </div>
+                      );
+                    })}
+                    <p className={styles.vermas} onClick={() => setView('')}>
+                      Ver menos
+                    </p>{' '}
+                  </div>
+                ) : (
+                  <p
+                    className={styles.vermas}
+                    onClick={(e) => handleClick(e, userPaymentId.idPayment)}
+                  >
+                    {' '}
+                    Ver más...
+                  </p>
+                )}
+              </div>
+            }
+          </div>
+        ) : (
+          totalPayments &&
+          purchaseState === 'cancelado' &&
+          totalPayments.cancelado?.map((x) => {
+            return (
+              <div className={styles.cardCanceladoContainer}>
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-calendar-day"></i>
+                    <p>Fecha:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>
+                      {x.date.slice(0, 4) +
+                        '/' +
+                        x.date.slice(5, 7) +
+                        '/' +
+                        x.date.slice(8, 10)}{' '}
+                      Hora: {x.date.slice(11, 16)}
+                    </span>
+                  </p>
+                </div>
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-user"></i>
+                    <p>Id de compra: </p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>{x._id}</span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-user"></i>
+                    <p>Usuario: </p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>{x.username}</span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-envelope"></i>
+                    <p>Correo electrónico:</p>
+                  </div>
+                  <p>
+                    <span>{x.email}</span>
+                  </p>
+                  {/* {le sacamos el classname porque traia el mail con mayus que no iban} */}
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-money-bill-1"></i>
+                    <p>Precio total:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>${x.amount}</span>
+                  </p>
+                </div>
+
+                <div className={styles.iconText}>
+                  <div className={styles.flex}>
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <p>Estado:</p>
+                  </div>
+                  <p>
+                    <span className={styles.span}>{x.state}</span>
+                  </p>
+                </div>
+                {view === x.idPayment ? (
+                  <div className={styles.masContenido}>
+                    {x.container.map((item) => {
+                      return (
+                        <div id={item.idPayment}>
+                          <hr />
+                          <p>Nombre del producto: {item.name}</p>
+                          <p>Stock del producto: {item.stock}</p>
+                          <p>Precio del producto: ${item.price}</p>
+                        </div>
+                      );
+                    })}
+                    <p className={styles.vermas} onClick={() => setView('')}>
+                      Ver menos
+                    </p>{' '}
+                  </div>
+                ) : (
+                  <p
+                    className={styles.vermas}
+                    onClick={(e) => handleClick(e, x.idPayment)}
+                  >
+                    {' '}
+                    Ver más...
+                  </p>
+                )}
+              </div>
             );
           })
         )}
