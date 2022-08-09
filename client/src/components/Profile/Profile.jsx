@@ -5,6 +5,7 @@ import { editUser, getUserPayments, getUsers } from "../../redux/actions";
 import { Link} from "react-router-dom"
 import Style from "./Profile.module.css"
 import swal from 'sweetalert';
+import loader from '../../img/loader.gif'
 
 export default function Profile() {
   let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
@@ -12,6 +13,10 @@ export default function Profile() {
 
   let email = decodedToken?.email;
   let id = decodedToken?._id
+  
+  const Payments = useSelector((state) => state.userPayments);
+  const users = useSelector((state) => state.users)
+  const userExtraInfo = users.find(e => e.email === email)
 
   const dispatch = useDispatch();
 
@@ -23,6 +28,19 @@ export default function Profile() {
   });
 
   const [showInputs, setShowInputs] = useState("");
+  const [loading, setLoading] = useState(true)
+
+
+  useEffect(() => {
+    dispatch(getUsers()) 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch])
+
+  useEffect(() => {
+    email && setLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [users])
+
 
   const handleInputState = (e) => {
     e.preventDefault();
@@ -51,29 +69,23 @@ export default function Profile() {
       edit.zipCode = userExtraInfo.zipCode
     }
     dispatch(editUser(edit, id));
-    console.log(edit)
+    setShowInputs("")
     swal("Listo!","Tu informacion fue modificada correctamente","success");
+    dispatch(getUsers())
   }
 
   useEffect(() => {
     email && email.match(pattern) && dispatch(getUserPayments(email));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken]);
 
-  useEffect(() => {
-    console.log(edit)
-  }, [edit]);
-  console.log(decodedToken)
 
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
-
-  const Payments = useSelector((state) => state.userPayments);
-  const users = useSelector((state) => state.users)
-  const userExtraInfo = users.find(e => e.email === email)
 
   return (
-    <div className={Style.containerAll}>
+  <div className={Style.containerAll}>
+    {
+      loading === false ?
+      (<>
       <div className={Style.title}>
         <p className={Style.titlep}>Información de la cuenta</p>
         <div className={Style.profileInfo}>
@@ -112,12 +124,12 @@ export default function Profile() {
         {Payments.length > 0 ?
           Payments.map((e) => {
             return (
-              <div className={Style.container}>
+              <div key={e._id} className={Style.container}>
                 <p className={Style.centeredText}>Comprobante: {e._id}</p>
                 <p className={Style.centeredText}>Fecha: {e.date.slice(0, 4) + "/" + e.date.slice(5, 7) + "/" + e.date.slice(8, 10)} Hora: {e.date.slice(11, 16)}</p>
                 <div>{e.container.map(x => {
                   return (
-                    <Link style={{ textDecoration: "none" }} to={`/product/${x._id}`}>
+                    <Link key={x._id} style={{ textDecoration: "none" }} to={`/product/${x._id}`}>
                       <div className={Style.positioning}>
                         <p>{x.name}</p>
                         <p>${x.price}</p>
@@ -132,6 +144,7 @@ export default function Profile() {
             )
           }) : <h6>No has hecho compras aún</h6>}
       </div>
-    </div>
+    </>) : (<div className={Style.loader}><img className={Style.gif} src={loader} alt="Loading"/></div>)}
+  </div>
   );
 }

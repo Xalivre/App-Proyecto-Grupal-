@@ -15,8 +15,6 @@ function AddCartButton({ id, stock, setRefresh, refresh }) {
 
   let idUser = decodedToken?._id
 
-  console.log(autho)
-
   const dispatch = useDispatch();
 
   const karting = useSelector((state) => state.cart)
@@ -28,7 +26,6 @@ function AddCartButton({ id, stock, setRefresh, refresh }) {
     if (!karting.map((a) => a._id).includes(id)) {
         let json = await axios.get("http://localhost:3000/product/" + id);
     const a = localStorage.getItem("Carrito") ? JSON.parse(localStorage.getItem("Carrito")) : []
-    console.log(a)
     a.push(json.data)
     localStorage.setItem("Carrito", JSON.stringify(a))
     }  

@@ -22,6 +22,7 @@ export default function PaymentList() {
 
   useEffect(() => {
     dispatch(getTotalPayments());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAnotherClick = async (userId, paymentId) => {
@@ -31,6 +32,7 @@ export default function PaymentList() {
       paymentId,
     };
     await dispatch(changeState(delivereds));
+    dispatch(getTotalPayments())
   };
 
   const handleAnotherOtherClick = async (userId, paymentId) => {
@@ -40,6 +42,7 @@ export default function PaymentList() {
       paymentId,
     };
     await dispatch(changeState(pendings));
+    dispatch(getTotalPayments())
   };
 
   const handleClick = (e, id) => {
@@ -79,7 +82,7 @@ export default function PaymentList() {
               setPurchaseState('pendiente');
             }}
           >
-            Todos
+            Recargar
           </button>
           <button
             className="btnDash"

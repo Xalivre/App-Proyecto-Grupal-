@@ -9,8 +9,6 @@ function Reviews({ id }) {
 
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
 
-  console.log(decodedToken?.username)
-
   /* let email = decodedToken?.email; */
   let usernameTokened = decodedToken?.username;
 
@@ -31,6 +29,7 @@ function Reviews({ id }) {
       ...input,
       username: usernameTokened
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken])
 
   async function handleSubmit (e) {

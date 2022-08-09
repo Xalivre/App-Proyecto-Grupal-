@@ -47,7 +47,6 @@ export default function PaymentMercaPago() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formMercadoPago, "HOLAAAAAA AHREEEEE")
         if(cart.length > 0){
             dispatch(finishOrder(emailUser, formMercadoPago/*, total*/))   
         }

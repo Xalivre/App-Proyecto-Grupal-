@@ -173,7 +173,6 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
             email: emailUser,
           }
         );
-        console.log(data);
 
         const searchUserForEmail = await axios.get(
           'http://localhost:3000/api/checkoutEmail',
@@ -382,7 +381,7 @@ const CheckoutForm = ({ cart, amount, emailUser }) => {
             )}
           </button>
         ) : (
-          <button type="button" disabled="true" className={Style.buttonError}>
+          <button type="button" disabled className={Style.buttonError}>
             Rellenar los campos
           </button>
         )}

@@ -228,7 +228,7 @@ const rootReducer = (state = initialState, action) => {
         action.payload === 'Most Recent'
           ? {
               despachado: [state.totalPayments.despachado][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date > b.date) {
@@ -237,7 +237,7 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
               pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date > b.date) {
@@ -246,7 +246,7 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
               finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date > b.date) {
@@ -258,7 +258,7 @@ const rootReducer = (state = initialState, action) => {
           : action.payload === 'Oldest'
           ? {
               despachado: [state.totalPayments.despachado][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date < b.date) {
@@ -267,7 +267,7 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
               pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date < b.date) {
@@ -276,7 +276,7 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
               finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
-                if (a.date == b.date) {
+                if (a.date === b.date) {
                   return 0;
                 }
                 if (a.date < b.date) {

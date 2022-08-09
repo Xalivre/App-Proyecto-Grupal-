@@ -57,7 +57,6 @@ function SearchBar(props) {
       });
     }
     setSuggestions(matches);
-    console.log(suggestions.map((s) => s.name));
 
     setSearchProduct(text);
   };

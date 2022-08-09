@@ -18,10 +18,10 @@ export default function Details(props) {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"))
   let userIdFromToken = decodedToken?._id
   let userInfoGoogle = decodedToken?.email
-  console.log(decodedToken)
 
   useEffect(() => {
     dispatch(getUsers())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const users = useSelector((state) => state.users)
@@ -32,13 +32,11 @@ export default function Details(props) {
 
   const verifyPurchaseGoogle = userGoogle?.paymentHistory.some(e => e.container.some(x => x._id === id))
 
-  console.log(verifyPurchaseGoogle)
 
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log(product)
     product.name && setLoading(false)
   }, [product])
 
@@ -77,14 +75,14 @@ export default function Details(props) {
           </div>
           {
            ( verifyPurchase || verifyPurchaseGoogle) &&
-            <Reviews id={id} />
+            <Reviews id={id} key={id}/>
           }
           <div className={Style.reseñas}>
             <h2>Últimas reseñas</h2>
             {
               product.comments.length > 0 ? product.comments.map(e => {
                 return (
-                  <div className={Style.reseñasContainer}>
+                  <div key={e._id} className={Style.reseñasContainer}>
                     <div>Usuario: {e.username && e.username}</div>
                     <div>{e.comment && e.comment}</div>
                     <div>{e.commentRating && e.commentRating}</div>
