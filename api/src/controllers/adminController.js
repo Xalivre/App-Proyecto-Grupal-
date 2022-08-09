@@ -64,13 +64,14 @@ export const searchStatePayment = async (req, res) => {
     const despachado = [];
     const pendiente = [];
     const finalizado = [];
+    const cancelado = [];
 
     const allPayment = await Payment.find({});
     if (!allPayment) return res.json({ msg: "No payments found" });
 
-    allPayment.map(e => e.state === "despachado" ? despachado.push(e) : e.state === "pendiente" ? pendiente.push(e) : finalizado.push(e));
+    allPayment.map(e => e.state === "despachado" ? despachado.push(e) : e.state === "pendiente" ? pendiente.push(e) : e.state === "finalizado" ? finalizado.push(e) : cancelado.push(e));
 
-    return res.json({ despachado, pendiente, finalizado });
+    return res.json({ despachado, pendiente, finalizado, cancelado });
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
