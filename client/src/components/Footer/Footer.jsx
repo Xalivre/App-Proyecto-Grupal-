@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import logo from "../../img/favicon.png";
 
+
 function Footer() {
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
@@ -81,7 +82,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
