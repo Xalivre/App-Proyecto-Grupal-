@@ -8,6 +8,7 @@ import Style from "./Details.module.css"
 import loader from "../../img/loader.gif"
 import Reviews from "./Reviews/Reviews";
 import { useJwt } from "react-jwt";
+import { FaStar } from "react-icons/fa";
 
 
 export default function Details(props) {
@@ -85,7 +86,15 @@ export default function Details(props) {
                   <div key={e._id} className={Style.reseñasContainer}>
                     <div>Usuario: {e.username && e.username}</div>
                     <div>{e.comment && e.comment}</div>
-                    <div>{e.commentRating && e.commentRating}</div>
+                    <div>{[...Array(e.commentRating)].map((star) => {
+
+            return (
+                <FaStar
+                  color="#ffc107"
+                  size={30}
+                />
+            );
+          })}</div>
                   </div>
                 )
               })
