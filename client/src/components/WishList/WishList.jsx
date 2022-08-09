@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import RemoveWishButton from './RemoveWishButton/RemoveWishButton';
 import AddCartButton from '../AddCartButton/AddCartButton';
+import { Link } from 'react-router-dom';
 import s from "./WishList.module.css";
 import { Style } from '@mui/icons-material';
 import { getUserById } from '../../redux/actions';
@@ -21,6 +22,7 @@ function WishList() {
   useEffect(() => {
     idUser && dispatch(getUserById(idUser))
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[idUser, refresh])
 
 
@@ -34,6 +36,7 @@ function WishList() {
         {userDetails.wishList?.length > 0 ?
           <div className={s.contains}>
            {userDetails.wishList?.map((p) => (
+            <Link to={'/product/' + p._id}>
             <div key={p._id} className={s.card}>
               <div className={s.btnContainer} >
                 <p style={{ color: "#156dbfb7", textAlign: "left" }} >{p.name}</p>
@@ -43,6 +46,7 @@ function WishList() {
               <img alt="img" className={s.img} src={p.image[0].url} />
               <AddCartButton id={p._id} stock={p.stock} setRefresh={setRefresh} refresh={refresh}/>
             </div>
+            </Link>
             ))}
           </div>
           : <h3 style={{ width: "100%", textAlign: "center" }}>Aun no tienes productos en la Lista!</h3>}

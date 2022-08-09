@@ -40,7 +40,7 @@ export default function PaymentMethod() {
               {
                 karting && karting.map(e => {
                   return (
-                    <div className={Style.cartProducts}>
+                    <div key={e._id} className={Style.cartProducts}>
                       <img className={Style.image} src={e.image[0]?.url} alt=":P" />
                       <div className={Style.text}>{e.name}</div>
                       <div className={Style.quantity}>
