@@ -16,7 +16,7 @@ function Cart() {
           <p>{e.name}</p>
           <p>Precio: {e.price}</p>
           <p>Caracteristicas: {e.description}</p>
-          <img src={e.image[0].url} />
+          <img alt="img" src={e.image[0].url} />
         </div>
       ))
        : <div>Aun no tienes productos en el Carrito!</div>}
