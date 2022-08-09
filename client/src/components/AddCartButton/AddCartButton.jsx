@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromWishList, getUserById } from '../../redux/actions/index'
+import { addToCart, getUserById } from '../../redux/actions/index'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Style from "./AddCartButton.module.css"
 import axios from "axios"
@@ -44,8 +44,6 @@ function AddCartButton({ id, stock, setRefresh, refresh }) {
     } else {
       await swal("Oops", "Este producto ya se encuentra en tu carrito!", "warning")
     }
-    
-    idUser && dispatch(removeFromWishList(idUser, id))
     idUser && await dispatch(getUserById(idUser))
     setRefresh(!refresh)
   }
