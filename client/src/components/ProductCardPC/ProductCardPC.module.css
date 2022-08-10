@@ -1,3 +1,6 @@
+.carouselOrder{
+    margin: 2rem 0;
+}
 .cardContainer{
     display: flex;
     gap: .5rem;
@@ -28,6 +31,7 @@
     align-items: center;
     flex-direction: column;
     transition: 0.2s ease-in-out;
+    padding: 1rem;
 }
 
 .container:hover{
@@ -43,8 +47,8 @@
     font-weight: bold;
 }
 .image{
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
 }
 
 .buttonsContainer {

@@ -105,7 +105,7 @@ export default function UsersList() {
 
   return (
     <div className={Style.containerAll}>
-      <div  className={Style.generalBarsPositioning}>
+      <div className={Style.generalBarsPositioning}>
         <div className={Style.searchBarPositioning}>
           <input className='input' value={input} onChange={(e) => handleChange(e)}></input>
           <button className='button' type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
@@ -114,7 +114,6 @@ export default function UsersList() {
           <button className='button' onClick={() => dispatch(searchUserByUsername(""))}>Recargar Usuarios</button>
         </div>
       </div>
-      <br /> <br />
       {loading === false ? (
         <table className="table container">
           <thead className="table-dark">
@@ -143,27 +142,29 @@ export default function UsersList() {
                       </Link>
                     )}</td>
                     <td> {e.accountState === "banned" ? (
-                      <button className="buttonDelete2" value={e._id} onClick={(e) => unbanUserFunction(e)}>
-                        Desbanear
-                      </button>
+                      <div className="buttonConfigContainer">
+                        <button className={`buttonDelete2 ${Style.buttonConfig}`}  value={e._id} onClick={(e) => unbanUserFunction(e)}>
+                          Desbanear
+                        </button>
+                      </div>
                     ) : autho === "owner" && e.role === "admin" ? (
-                      <div>
+                      <div className={Style.buttonConfigContainer}>
                         <button
-                          className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
+                          className={`buttonDelete ${Style.buttonConfig}`} value={e._id} onClick={(e) => banUserFunction(e)}>
                           Banear usuario
                         </button>
                         <button
-                          className="buttonDelete" value={e._id} onClick={(e) => removeAdmin(e)}>
+                          className={`buttonDelete ${Style.buttonConfig}`} value={e._id} onClick={(e) => removeAdmin(e)}>
                           Remover admin
                         </button>
                       </div>
                     ) : (autho === "owner" || autho === "admin") && e.role === "user" ? (
-                      <div>
-                        <button className="buttonDelete2" value={e._id} onClick={(e) => giveAdmin(e)}>
+                      <div className={Style.buttonConfigContainer}>
+                        <button className={`buttonDelete2 ${Style.buttonConfig}`} value={e._id} onClick={(e) => giveAdmin(e)}>
                           Ascender a admin
                         </button>
-                        <button
-                          className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
+                        <button className={`buttonDelete ${Style.buttonConfig2}`}
+                          value={e._id} onClick={(e) => banUserFunction(e)}>
                           Banear usuario
                         </button>
                       </div>
@@ -172,7 +173,7 @@ export default function UsersList() {
                       e.role === "user" && (
                         <div>
                           <button
-                            className="buttonDelete"
+                            className={`buttonDelete ${Style.buttonConfig}`}
                             value={e._id}
                             onClick={(e) => banUserFunction(e)}
                           >
@@ -200,17 +201,19 @@ export default function UsersList() {
                         </Link>
                       )}</td>
                       <td> {e.accountState === "banned" ? (
-                        <button className="buttonDelete2" value={e._id} onClick={(e) => unbanUserFunction(e)}>
-                          Desbanear
-                        </button>
+                        <div className="buttonConfigContainer">
+                          <button className={`buttonDelete2 ${Style.buttonConfig}`} value={e._id} onClick={(e) => unbanUserFunction(e)}>
+                            Desbanear
+                          </button>
+                        </div>
                       ) : autho === "owner" && e.role === "admin" ? (
-                        <div>
+                        <div className={Style.buttonConfigContainer}>
                           <button
-                            className="buttonDelete" value={e._id} onClick={(e) => banUserFunction(e)}>
+                            className={`buttonDelete ${Style.buttonConfig}`} value={e._id} onClick={(e) => banUserFunction(e)}>
                             Banear usuario
                           </button>
                           <button
-                            className="buttonDelete" value={e._id} onClick={(e) => removeAdmin(e)}>
+                            className={`buttonDelete2 ${Style.buttonConfig}`} value={e._id} onClick={(e) => removeAdmin(e)}>
                             Remover admin
                           </button>
                         </div>
@@ -229,7 +232,7 @@ export default function UsersList() {
                         e.role === "user" && (
                           <div>
                             <button
-                              className="buttonDelete"
+                              className={`buttonDelete2 ${Style.buttonConfig}`}
                               value={e._id}
                               onClick={(e) => banUserFunction(e)}
                             >

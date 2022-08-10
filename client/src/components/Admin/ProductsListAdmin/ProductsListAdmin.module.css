@@ -133,3 +133,29 @@
     margin: auto;
 
 }
+
+/* @media screen and (max-width: 990px){
+    .container{
+        flex-direction: column;
+    }
+} */
+
+@media screen and (max-width: 990px){
+    .containerAll{
+        display: flex;
+        flex-direction: column;
+    }
+    .container{
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .categoriesBar{
+        width: 100%;
+        top: auto;
+        height: 100%;
+    }
+    .pagingOrder{
+        margin: 2rem 0;
+    }
+}
