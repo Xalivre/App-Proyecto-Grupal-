@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearPage, getUsers } from "../../redux/actions";
@@ -46,6 +47,10 @@ export default function Details(props) {
     return () => { dispatch(clearPage()) }
   }, [dispatch, id]);
 
+  const [srcImagen, setSrcImagen] = useState(product.image && product.image[0].url)
+
+  console.log(srcImagen)
+
   return (
     <div className={Style.containerAll}>
       {!loading ?
@@ -60,7 +65,19 @@ export default function Details(props) {
             </div>
 
             <div className={Style.imageContainer}>
-              <img src={product.image && product.image[0].url} alt="img" />
+              <div className={Style.imgRenderContainer}>
+                <img className={Style.imgRender} src={srcImagen ? srcImagen : product.image && product.image[0].url} alt="img" />
+              </div>
+              <div className={Style.littleImages}>
+                {
+                  product.image.length && product.image.map(image =>
+                  (
+                    <div key={image.url} className={Style.cardImageContainer}>
+                      <img onClick={() => setSrcImagen(image.url)} src={image.url} alt="img" />
+                    </div>
+                  ))
+                }
+              </div>
             </div>
 
             <div className={Style.descriptionContainer}>
@@ -93,14 +110,14 @@ export default function Details(props) {
                         <i className={`fa-solid fa-user-astronaut ${Style.icon}`}></i>
                         <div>{[...Array(e.commentRating)].map((star) => {
 
-            return (
-                <FaStar
-                  color="#ffc107"
-                  size={30}
-                />
-            );
-          })}</div>
-                        
+                          return (
+                            <FaStar
+                              color="#ffc107"
+                              size={30}
+                            />
+                          );
+                        })}</div>
+
                       </div>
                     )
                   })}

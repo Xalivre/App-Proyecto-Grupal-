@@ -11,14 +11,14 @@ function Reviews({ id }) {
 
   let usernameTokened = decodedToken?.username;
 
-  
+
   const [input, setInput] = useState({
     id: id,
     comment: "",
     commentRating: 1,
     username: "",
   });
-  
+
   useEffect(() => {
     setInput({
       ...input,
@@ -27,7 +27,7 @@ function Reviews({ id }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken])
 
-  async function handleSubmit (e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setInput({
       comment: "",
@@ -51,10 +51,10 @@ function Reviews({ id }) {
   }
 
   return (
-    <div>
+    <div className={s.containerAll}>
       <h1>Reseña</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
+        <div className={s.stars}>
           {[...Array(5)].map((star, i) => {
             const ratingValue = i + 1;
 
@@ -82,14 +82,19 @@ function Reviews({ id }) {
             );
           })}
         </div>
-        <label>Reseña:</label>
-        <input
-          name="comment"
-          type="text"
-          placeholder="Ingrese su reseña..."
-          onChange={(e) => handleChange(e)}
-        />
-        <button type="submit">Enviar reseña</button>
+        <div className={s.formContainer}>
+          <label className="label">Reseña:</label>
+          <input
+            className="input"
+            style={{borderBottom: "2px solid #ffc107"}}
+            name="comment"
+            type="text"
+            placeholder="Ingrese su reseña..."
+            onChange={(e) => handleChange(e)}
+          />
+          <button 
+            style={{textTransform: "capitalize"}} className="btnDash" type="submit">Enviar reseña</button>
+        </div>
       </form>
     </div>
   );

@@ -1,7 +1,16 @@
+.containerAll{
+    padding: 1rem;
+}
 .inputradio{
     display: none;
 }
-
+.formContainer{
+    display: flex;
+    gap: .6rem;
+}
+.stars{
+    margin-bottom: 1rem;
+}
 .star{
     cursor: pointer;
 }
