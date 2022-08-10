@@ -75,13 +75,13 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
                   :
                   showing === "Mothers" ? dispatch(addToBuilder(id)) && setShowing("Coolers")
                   :
-                  showing === "Coolers" ? dispatch(addToBuilder(id)) && setShowing("RAM")
+                  showing === "Coolers" ? dispatch(addToBuilder(id)) && setShowing("Memorias RAM")
                   :
-                  showing === "RAM" ? dispatch(addToBuilder(id)) && setShowing("Discos Rígidos")
+                  showing === "Memorias RAM" ? dispatch(addToBuilder(id)) && setShowing("Discos Rígidos")
                   :
-                  showing === "Discos Rígidos" ? dispatch(addToBuilder(id)) && setShowing("Discos Solidos")
+                  showing === "Discos Rígidos" ? dispatch(addToBuilder(id)) && setShowing("Discos Sólidos")
                   :
-                  showing === "Discos Solidos" ? dispatch(addToBuilder(id)) && setShowing("Placas de Video")
+                  showing === "Discos Sólidos" ? dispatch(addToBuilder(id)) && setShowing("Placas de Video")
                   :
                   showing === "Placas de Video" ? dispatch(addToBuilder(id)) && setShowing("Gabinetes")
                   :
