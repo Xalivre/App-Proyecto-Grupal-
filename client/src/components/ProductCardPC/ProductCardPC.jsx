@@ -47,9 +47,7 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
       <div className={Style.container}>
         <div className={Style.cardContainer}>
           <Link to={'/product/' + id}>
-            <br />
             <img className={Style.image} src={image} alt="img" />
-            <br /> <br />
             <div className={Style.text}>
               <div className={Style.name}>
                 {name.length >= 45 ? (
@@ -62,7 +60,6 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
             <p className={Style.price}>${price}</p>
           </Link>
         </div>
-        <br />
         <div className={Style.buttonsContainer}>
           {stock > 0 && (
             <button
@@ -95,8 +92,6 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
               Seleccionar
             </button>
           )}
-          <br />
-          <br />
         </div>
       </div>
     </div>

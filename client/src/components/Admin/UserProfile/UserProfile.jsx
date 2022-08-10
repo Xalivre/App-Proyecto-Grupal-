@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { clearPage, getUserById } from "../../../redux/actions";
 import axios from "axios";
-
+import styles from './UserProfile.module.css'
 export default function UserProfile() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -18,26 +18,37 @@ export default function UserProfile() {
 
   const handleClick = async (e, email) => {
     e.preventDefault();
-    const {data} = await axios.put(`http://localhost:3000/forcepassword`, { email });
+    const { data } = await axios.put(`http://localhost:3000/forcepassword`, { email });
     setMsg(data.msg)
-   
+
   };
-  
+
 
   return (
-    <div>
+    <div className={styles.containerAll}>
       {user.username && (
-        <div>
-          <h2>Username: {user.username}</h2>
-          <h2>Rol de usuario: {user.role}</h2>
-          <h2>Email de usuario: {user.email}</h2>
-          <button onClick={(e) => handleClick(e, user.email)}>
-            Reset Password
-          </button>
-          <br/>
-            {msg ? <div> {msg} </div> : null}
+        <div className={styles.container}>
+          <div className={styles.textContainerUno}>
+            <i className="fa-solid fa-user-astronaut"></i>
+            <p className={styles.text}>{user.username}</p>
+          </div>
+          <div className={styles.dos}>
+            <div className={styles.textContainer}>
+              <i className="fa-solid fa-key"></i>
+              <p className={styles.text}>{user.role}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <i className="fa-solid fa-envelope"></i>
+              <p className={styles.text}>{user.email}</p>
+            </div>
+            <button className="button" onClick={(e) => handleClick(e, user.email)}>
+              Reset Password
+            </button>
+          </div>
+          <br />
+          {msg ? <div> {msg} </div> : null}
 
-        
+
         </div>
       )}
     </div>

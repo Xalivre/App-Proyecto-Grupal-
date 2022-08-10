@@ -387,9 +387,9 @@ export default function PaymentList() {
                       return (
                         <div id={item.idPayment}>
                           <hr />
-                          <p>Nombre del producto: {item.name}</p>
-                          <p>Stock del producto: {item.stock}</p>
-                          <p>Precio del producto: ${item.price}</p>
+                          <p style={{fontWeight: "bold"}}>♨️ {item.name}</p>
+                          <p style={{fontWeight: "bold"}}>📦Stock: {item.stock}</p>
+                          {/* <p>Precio del producto: ${item.price}</p> */}
                         </div>
                       );
                     })}

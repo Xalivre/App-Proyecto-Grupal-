@@ -5,27 +5,28 @@ import styles from "./DashBoard.module.css"
 import { useJwt } from "react-jwt"
 import UsersList from '../UsersList/UsersList'
 import PaymentList from '../PaymentList/PaymentList'
+import Landing404 from '../../Landing404/Landing404'
 
 
 export default function DashBoard() {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"))
 
   let autho = decodedToken?.role
-  
+
   const [first, setfirst] = useState("list")
   const [loading, setLoading] = useState(true)
-  
+
   function handleState(e) {
     e.preventDefault();
     setfirst(e.target.value)
   }
-  
+
   useEffect(() => {
     autho && (autho === "admin" || autho === "owner") && setLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [decodedToken])
 
-    
+
 
 
 
@@ -50,7 +51,7 @@ export default function DashBoard() {
             </div>
           </div>
           :
-          <div>Acceso denegado</div>
+          <Landing404 message={"Acceso denegado"}/>
       }
     </div>
   )

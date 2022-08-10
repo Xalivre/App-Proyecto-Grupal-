@@ -42,7 +42,7 @@ export default function ProductsListAdmin() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className={Style.containerAll}>
       <div className={Style.pagingContainer}>
         <div className={Style.pagingOrder}>
           <PagingOficial setPage1={setPage1} setPage2={setPage2} filtereds={Math.ceil(filtereds.filter((x) => categoryFilter ? x.category === categoryFilter : x.category !== categoryFilter)
