@@ -70,7 +70,7 @@ export default function ArmaTuPC() {
   return (
     <div>
       <div>
-        {autho === "user" ? <div>{showing !== "Finished" ? <div>
+        {(autho === "user" || autho === "admin" || autho === "owner") ? <div>{showing !== "Finished" ? <div>
           <div className={Style.logoContainer}>
             <p className={Style.logo}>Game<span className={Style.span}>Hub</span></p>
             <p className={Style.componente}>{showing}</p>
