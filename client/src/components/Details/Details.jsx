@@ -24,7 +24,7 @@ export default function Details(props) {
     dispatch(getUsers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
+
   const users = useSelector((state) => state.users)
   const user = users.find(e => e._id === userIdFromToken)
   const userGoogle = users.find(e => e.email === userInfoGoogle)
@@ -60,7 +60,7 @@ export default function Details(props) {
             </div>
 
             <div className={Style.imageContainer}>
-              <img src={product.image && product.image[0].url} alt="img" />  
+              <img src={product.image && product.image[0].url} alt="img" />
             </div>
 
             <div className={Style.descriptionContainer}>
@@ -68,25 +68,30 @@ export default function Details(props) {
               <p className={Style.description}>{product.description}</p>
               <p>Stock: <span className={Style.stock}>{product.stock}</span></p>
               <>
-              <AddCartButton id={product._id} stock={product.stock} />
-              <AddWishButton id={product._id} />
+                <AddCartButton id={product._id} stock={product.stock} />
+                <AddWishButton id={product._id} />
               </>
 
             </div>
           </div>
           {
-           ( verifyPurchase || verifyPurchaseGoogle) &&
-            <Reviews id={id} key={id}/>
+            (verifyPurchase || verifyPurchaseGoogle) &&
+            <Reviews id={id} key={id} />
           }
-          <div className={Style.reseñas}>
+          <div className={Style.allreseñas}>
             <h2>Últimas reseñas</h2>
             {
-              product.comments.length > 0 ? product.comments.map(e => {
-                return (
-                  <div key={e._id} className={Style.reseñasContainer}>
-                    <div>Usuario: {e.username && e.username}</div>
-                    <div>{e.comment && e.comment}</div>
-                    <div>{[...Array(e.commentRating)].map((star) => {
+              product.comments.length > 0 ?
+
+                <div className={Style.reseñasContainer}>
+                  {product.comments.map(e => {
+                    return (
+                      <div key={e._id} className={Style.reseña}>
+                        <p className={Style.titlep}>{e.username && e.username}</p>
+                        <p className={Style.comment}>{e.comment && e.comment}</p>
+                        <p className={Style.rating}>{e.commentRating && e.commentRating}</p>
+                        <i className={`fa-solid fa-user-astronaut ${Style.icon}`}></i>
+                        <div>{[...Array(e.commentRating)].map((star) => {
 
             return (
                 <FaStar
@@ -95,11 +100,14 @@ export default function Details(props) {
                 />
             );
           })}</div>
-                  </div>
-                )
-              })
-              :
-              <h6>Este producto no tiene comentarios, recuerda dejarnos el tuyo cuando hagas una compra</h6>
+                        
+                      </div>
+                    )
+                  })}
+                </div>
+                :
+                <h6>Este producto no tiene comentarios, recuerda dejarnos el tuyo cuando hagas una compra</h6>
+
             }
           </div>
         </div> : <div className={Style.loader}><img className={Style.gif} src={loader} alt='loading'></img></div>
