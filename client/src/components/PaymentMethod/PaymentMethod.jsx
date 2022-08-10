@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import Style from "./PaymentMethod.module.css"
@@ -11,9 +11,9 @@ export default function PaymentMethod() {
 
   const karting = useSelector((state) => state.cart)
 
-  useEffect(() => {
+/*   useEffect(() => {
     localStorage.setItem("Carrito", JSON.stringify(karting))
-  }, [karting])
+  }, [karting]) */
 
   const modifyQuantityUpFunction = (id) => {
     dispatch(modifyQuantityUp(id))

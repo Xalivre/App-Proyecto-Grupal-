@@ -25,6 +25,7 @@ const initialState = {
   userDetails: {},
   userSearchedFor: [],
   userPaymentId: {},
+  builder: []
 };
 
 const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -66,6 +67,8 @@ const SORT_DATE = 'SORT_DATE';
 const GET_PAYMENT_BY_ID = 'GET_PAYMENT_BY_ID';
 const CLEAR_HISTORY_PAGE = 'CLEAR_HISTORY_PAGE';
 const EDIT_USER = 'EDIT_USER'
+const ADD_TO_BUILDER = "ADD_TO_BUILDER"
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -94,7 +97,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case REMOVE_FROM_WISHLIST:
-      state.userDetails.wishList.filter((e) => e._id !== action.payload);
+      state.userDetails.wishList.filter((e) => e._id !== action.payload)
       return {
         ...state,
       };
@@ -122,6 +125,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
+
+    case ADD_TO_BUILDER:
+      return {
+        ...state,
+        builder: [...state.builder, action.payload]
+      }
 
     case REMOVE_CART:
       localStorage.setItem(
@@ -155,8 +164,8 @@ const rootReducer = (state = initialState, action) => {
         action.payload === 'aklsjdhlaksjdaskldazzzz'
           ? state.allProducts
           : [...state.allProducts].filter((x) =>
-              x.name.toLowerCase().includes(action.payload.toLowerCase())
-            );
+            x.name.toLowerCase().includes(action.payload.toLowerCase())
+          );
       return {
         ...state,
         filteredProducts: a.length > 0 ? a : state.allProducts,
@@ -165,8 +174,8 @@ const rootReducer = (state = initialState, action) => {
           a.length < 1
             ? 'Error SearchBar'
             : action.payload === 'aklsjdhlaksjdaskldazzzz'
-            ? 'No hacer nada'
-            : 'SearchBar',
+              ? 'No hacer nada'
+              : 'SearchBar',
       };
     }
 
@@ -194,23 +203,23 @@ const rootReducer = (state = initialState, action) => {
       const sortedArray =
         action.payload === 'Ascending'
           ? [...state.filteredProducts].sort(function (a, b) {
-              if (a.price > b.price) {
-                return 1;
-              }
-              if (b.price > a.price) {
-                return -1;
-              }
-              return 0;
-            })
+            if (a.price > b.price) {
+              return 1;
+            }
+            if (b.price > a.price) {
+              return -1;
+            }
+            return 0;
+          })
           : [...state.filteredProducts].sort(function (a, b) {
-              if (a.price > b.price) {
-                return -1;
-              }
-              if (b.price > a.price) {
-                return 1;
-              }
-              return 0;
-            });
+            if (a.price > b.price) {
+              return -1;
+            }
+            if (b.price > a.price) {
+              return 1;
+            }
+            return 0;
+          });
       return {
         ...state,
         products:
@@ -227,45 +236,45 @@ const rootReducer = (state = initialState, action) => {
       const sortedByDate =
         action.payload === 'Most Recent'
           ? {
-              despachado: [state.totalPayments.despachado][0].sort((a, b) => {
-                if (a.date === b.date) {
-                  return 0;
-                }
-                if (a.date > b.date) {
-                  return -1;
-                }
-                return 1;
-              }),
-              pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
-                if (a.date === b.date) {
-                  return 0;
-                }
-                if (a.date > b.date) {
-                  return -1;
-                }
-                return 1;
-              }),
-              finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
-                if (a.date === b.date) {
-                  return 0;
-                }
-                if (a.date > b.date) {
-                  return -1;
-                }
-                return 1;
-              }),
-              cancelado: [state.totalPayments.cancelado][0].sort((a, b) => {
-                if (a.date === b.date) {
-                  return 0;
-                }
-                if (a.date > b.date) {
-                  return -1;
-                }
-                return 1;
-              }),
-            }
+            despachado: [state.totalPayments.despachado][0].sort((a, b) => {
+              if (a.date === b.date) {
+                return 0;
+              }
+              if (a.date > b.date) {
+                return -1;
+              }
+              return 1;
+            }),
+            pendiente: [state.totalPayments.pendiente][0].sort((a, b) => {
+              if (a.date === b.date) {
+                return 0;
+              }
+              if (a.date > b.date) {
+                return -1;
+              }
+              return 1;
+            }),
+            finalizado: [state.totalPayments.finalizado][0].sort((a, b) => {
+              if (a.date === b.date) {
+                return 0;
+              }
+              if (a.date > b.date) {
+                return -1;
+              }
+              return 1;
+            }),
+            cancelado: [state.totalPayments.cancelado][0].sort((a, b) => {
+              if (a.date === b.date) {
+                return 0;
+              }
+              if (a.date > b.date) {
+                return -1;
+              }
+              return 1;
+            }),
+          }
           : action.payload === 'Oldest'
-          ? {
+            ? {
               despachado: [state.totalPayments.despachado][0].sort((a, b) => {
                 if (a.date === b.date) {
                   return 0;
@@ -303,7 +312,7 @@ const rootReducer = (state = initialState, action) => {
                 return 1;
               }),
             }
-          : state.totalPayments;
+            : state.totalPayments;
       return {
         ...state,
         totalPayments: sortedByDate,
@@ -326,6 +335,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         details: [],
         userDetails: {},
+        builder: [],
       };
 
     case EDIT_PRODUCT:
@@ -408,10 +418,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userPaymentId: {},
       };
-    case EDIT_USER: 
-    return {
-      ...state,
-    }
+    case EDIT_USER:
+      return {
+        ...state,
+      }
     default:
       return state;
   }

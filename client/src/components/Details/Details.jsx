@@ -8,6 +8,7 @@ import Style from "./Details.module.css"
 import loader from "../../img/loader.gif"
 import Reviews from "./Reviews/Reviews";
 import { useJwt } from "react-jwt";
+import { FaStar } from "react-icons/fa";
 
 
 export default function Details(props) {
@@ -90,12 +91,23 @@ export default function Details(props) {
                         <p className={Style.comment}>{e.comment && e.comment}</p>
                         <p className={Style.rating}>{e.commentRating && e.commentRating}</p>
                         <i className={`fa-solid fa-user-astronaut ${Style.icon}`}></i>
+                        <div>{[...Array(e.commentRating)].map((star) => {
+
+            return (
+                <FaStar
+                  color="#ffc107"
+                  size={30}
+                />
+            );
+          })}</div>
+                        
                       </div>
                     )
                   })}
                 </div>
                 :
                 <h6>Este producto no tiene comentarios, recuerda dejarnos el tuyo cuando hagas una compra</h6>
+
             }
           </div>
         </div> : <div className={Style.loader}><img className={Style.gif} src={loader} alt='loading'></img></div>

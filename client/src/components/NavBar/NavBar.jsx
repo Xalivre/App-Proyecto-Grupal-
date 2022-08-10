@@ -1,17 +1,27 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Style from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import { searchName } from "../../redux/actions/";
 import logo from '../../img/favicon.png'
 import { useJwt } from 'react-jwt'
+import swal from "sweetalert";
 
 function NavBar() {
   const dispatch = useDispatch();
  /*  const products = useSelector((state) => state.products);
   const allProducts = useSelector((state) => state.allProducts);
   const navigate = useNavigate(); */
+
+  const { decodedToken } = useJwt(localStorage.getItem('usuario'));
+
+  let autho = "scorpygato"
+
+  useEffect(() => {
+    autho = decodedToken ? decodedToken.role : "scorpygato"
+  }, [decodedToken])
+
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -42,7 +52,9 @@ function NavBar() {
         >
           <h1>Productos</h1>
         </NavLink>
-        <NavLink
+       {
+       autho !== "scorpygato" && (autho !== "user" && autho !== "admin"  && autho !== "owner") ? swal("Oops", "Debes estar logeado para armar tu pc!", "warning") : 
+       <NavLink
           to="/ArmaTuPC"
           style={{ textDecoration: "none" }}
           className={({ isActive }) =>
@@ -50,7 +62,7 @@ function NavBar() {
           }
         >
           <h1>Arma tu PC</h1>
-        </NavLink>
+        </NavLink>}
         <NavLink
           to="/help"
           style={{ textDecoration: "none" }}

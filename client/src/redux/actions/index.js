@@ -111,6 +111,17 @@ export function addToCart(id) {
   };
 }
 
+export function addToBuilder(id) {
+  return async function (dispatch) {
+    let json = await axios.get('http://localhost:3000/product/' + id)
+    return dispatch({
+      type: "ADD_TO_BUILDER",
+      payload: json.data
+    })
+  }
+}
+
+
 export function deleteFromCart(id) {
   return {
     type: 'REMOVE_CART',
