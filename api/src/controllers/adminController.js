@@ -4,11 +4,20 @@ import Payment from '../models/Payments.js';
 import { sendMail } from '../librarys/emailer.js';
 
 export const forcePasswordAdmin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
     if (!email) return res.status(404).send('User not found');
-    let defaultPassword = password || 'default';
+    let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let passwordLength = 12;
+    let defaultPassword = ""
+
+    for (var i = 0; i <= passwordLength; i++) {
+      var randomNumber = Math.floor(Math.random() * chars.length);
+      defaultPassword += chars.substring(randomNumber, randomNumber +1);
+     }
+    console.log("MAIL: ",email);
+    console.log("PASS: ",defaultPassword);
 
     const passwordHash = await encrypt(defaultPassword);
 
