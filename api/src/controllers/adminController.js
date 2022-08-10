@@ -8,16 +8,15 @@ export const forcePasswordAdmin = async (req, res) => {
 
   try {
     if (!email) return res.status(404).send('User not found');
-    let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let chars =
+      '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let passwordLength = 12;
-    let defaultPassword = ""
+    let defaultPassword = '';
 
     for (var i = 0; i <= passwordLength; i++) {
       var randomNumber = Math.floor(Math.random() * chars.length);
-      defaultPassword += chars.substring(randomNumber, randomNumber +1);
-     }
-    console.log("MAIL: ",email);
-    console.log("PASS: ",defaultPassword);
+      defaultPassword += chars.substring(randomNumber, randomNumber + 1);
+    }
 
     const passwordHash = await encrypt(defaultPassword);
 
@@ -28,6 +27,10 @@ export const forcePasswordAdmin = async (req, res) => {
       },
       { new: true }
     );
+
+    sendMail(email, userDB.username, null, null, defaultPassword)
+      .then((r) => console.log('password reseted'))
+      .catch((err) => console.log(err));
 
     if (!userDB) return res.status(404).send('User not found');
 
