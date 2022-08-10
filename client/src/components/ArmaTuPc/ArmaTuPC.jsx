@@ -89,7 +89,6 @@ export default function ArmaTuPC() {
                 </div>)
             }
           </div>
-          <p style={{ textAlign: 'center', fontSize: '50px', fontWeight: 'bold' }}>Obtén el pc de tus sueños</p>
         </div>
           :
           <div className={Style.containerProducts}>
