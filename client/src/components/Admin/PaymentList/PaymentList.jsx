@@ -25,7 +25,6 @@ export default function PaymentList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const handleAnotherClick = async (userId, paymentId) => {
     const delivereds = {
       userId,
@@ -33,7 +32,7 @@ export default function PaymentList() {
       paymentId,
     };
     await dispatch(changeState(delivereds));
-    dispatch(getTotalPayments())
+    dispatch(getTotalPayments());
   };
 
   const handleAnotherOtherClick = async (userId, paymentId) => {
@@ -43,7 +42,7 @@ export default function PaymentList() {
       paymentId,
     };
     await dispatch(changeState(pendings));
-    dispatch(getTotalPayments())
+    dispatch(getTotalPayments());
   };
 
   const handleAnotherOtherFinalClick = async (userId, paymentId) => {
@@ -53,8 +52,8 @@ export default function PaymentList() {
       paymentId,
     };
     await dispatch(changeState(canceleds));
-    dispatch(getTotalPayments())
-  }
+    dispatch(getTotalPayments());
+  };
 
   const handleClick = (e, id) => {
     e.preventDefault();
@@ -62,11 +61,15 @@ export default function PaymentList() {
   };
   const handleClickId = (e) => {
     e.preventDefault();
-    if (!totalPayments.despachado.find(e => e._id === input) && !totalPayments.finalizado.find(e => e._id === input) &&
-    !totalPayments.cancelado.find(e => e._id === input) && !totalPayments.pendiente.find(e => e._id === input)
-      /* input.length === 0 || input.length < 23 */) {
-      setInput("")
-      setPurchaseState("pendiente")
+    if (
+      !totalPayments.despachado.find((e) => e._id === input) &&
+      !totalPayments.finalizado.find((e) => e._id === input) &&
+      !totalPayments.cancelado.find((e) => e._id === input) &&
+      !totalPayments.pendiente.find((e) => e._id === input)
+      /* input.length === 0 || input.length < 23 */
+    ) {
+      setInput('');
+      setPurchaseState('pendiente');
       return dispatch(clearHistoryPage());
     }
     dispatch(getPaymentHistoryById(input));
@@ -83,16 +86,21 @@ export default function PaymentList() {
     <div className={styles.containerAll}>
       <div className={styles.topPositioning}>
         <div className={styles.buttonsTab}>
-          <button className='button' type="submit" onClick={(e) => handleClickId(e)}>
+          <button
+            className="button"
+            type="submit"
+            onClick={(e) => handleClickId(e)}
+          >
             Buscar
           </button>
           <input
-            className='input'
+            className="input"
             onChange={(e) => handleChange(e)}
             value={input}
             placeholder="ID de compra"
           ></input>
-          <button className='button'
+          <button
+            className="button"
             onClick={async () => {
               await dispatch(clearHistoryPage());
               setPurchaseState('pendiente');
@@ -262,40 +270,41 @@ export default function PaymentList() {
                 )}
                 {userPaymentId.state === 'pendiente' ? (
                   <div>
-                  <button
-                    className="btnDash"
-                    onClick={(e) =>
-                      handleAnotherOtherClick(
-                        userPaymentId.userId,
-                        userPaymentId._id
-                      )
-                    }
-                  >
-                    Marcar como despachado
-                  </button>
-                  <br/><br/>
-                  <button
-                  className="btnDashCanceled"
-                  onClick={(e) =>
-                    handleAnotherOtherFinalClick(
-                      userPaymentId.userId,
-                      userPaymentId._id
-                    )
-                  }
-                >
-                  Marcar como cancelado
-                </button>
-                </div>
+                    <button
+                      className="btnDash"
+                      onClick={(e) =>
+                        handleAnotherOtherClick(
+                          userPaymentId.userId,
+                          userPaymentId._id
+                        )
+                      }
+                    >
+                      Marcar como despachado
+                    </button>
+                    <br />
+                    <br />
+                    <button
+                      className="btnDashCanceled"
+                      onClick={(e) =>
+                        handleAnotherOtherFinalClick(
+                          userPaymentId.userId,
+                          userPaymentId._id
+                        )
+                      }
+                    >
+                      Marcar como cancelado
+                    </button>
+                  </div>
                 ) : (
                   <div>
-                  <button disabled="true" className={styles.invisibleButton}>
-                    Marcar como despachado
-                  </button>
-                  <br/>
-                  <button disabled="true" className={styles.invisibleButton}>
-                  Marcar como despachado
-                </button>
-                </div>
+                    <button disabled="true" className={styles.invisibleButton}>
+                      Marcar como despachado
+                    </button>
+                    <br />
+                    <button disabled="true" className={styles.invisibleButton}>
+                      Marcar como despachado
+                    </button>
+                  </div>
                 )}
               </div>
             }
@@ -399,29 +408,33 @@ export default function PaymentList() {
                 )}
                 {x.state === 'pendiente' ? (
                   <div>
-                  <button
-                    className="btnDash"
-                    onClick={(e) => handleAnotherOtherClick(x.userId, x._id)}
-                  >
-                    Marcar como despachado
-                  </button>
-                  <br/><br/>
-                  <button
-                  className="btnDashCanceled"
-                  onClick={(e) => handleAnotherOtherFinalClick(x.userId, x._id)}
-                >
-                  Marcar como cancelado
-                </button>
-                </div>
+                    <button
+                      className="btnDash"
+                      onClick={(e) => handleAnotherOtherClick(x.userId, x._id)}
+                    >
+                      Marcar como despachado
+                    </button>
+                    <br />
+                    <br />
+                    <button
+                      className="btnDashCanceled"
+                      onClick={(e) =>
+                        handleAnotherOtherFinalClick(x.userId, x._id)
+                      }
+                    >
+                      Marcar como cancelado
+                    </button>
+                  </div>
                 ) : (
                   <div>
-                  <button disabled className={styles.invisibleButton}>
-                    Marcar como despachado
-                  </button>
-                  <br/><br/>
-                  <button disabled className={styles.invisibleButton}>
-                    Marcar como cancelado
-                  </button>
+                    <button disabled className={styles.invisibleButton}>
+                      Marcar como despachado
+                    </button>
+                    <br />
+                    <br />
+                    <button disabled className={styles.invisibleButton}>
+                      Marcar como cancelado
+                    </button>
                   </div>
                 )}
               </div>

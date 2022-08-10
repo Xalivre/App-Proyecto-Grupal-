@@ -1,14 +1,14 @@
-import User from "../models/User.js";
-import { encrypt } from "./helpers/handleBCrypt.js";
-import Payment from "../models/Payments.js";
-import { sendMail } from "../librarys/emailer.js";
+import User from '../models/User.js';
+import { encrypt } from './helpers/handleBCrypt.js';
+import Payment from '../models/Payments.js';
+import { sendMail } from '../librarys/emailer.js';
 
 export const forcePasswordAdmin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    if (!email) return res.status(404).send("User not found");
-    let defaultPassword = password || "default";
+    if (!email) return res.status(404).send('User not found');
+    let defaultPassword = password || 'default';
 
     const passwordHash = await encrypt(defaultPassword);
 
@@ -20,9 +20,9 @@ export const forcePasswordAdmin = async (req, res) => {
       { new: true }
     );
 
-    if (!userDB) return res.status(404).send("User not found");
+    if (!userDB) return res.status(404).send('User not found');
 
-    return res.json({ msg: "Password updated" });
+    return res.json({ msg: 'Password updated' });
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
@@ -38,7 +38,7 @@ export const changeState = async (req, res) => {
       { state: state },
       { new: true }
     );
-    if (!updatedPayment) return res.status(404).send("Payment not found");
+    if (!updatedPayment) return res.status(404).send('Payment not found');
     updatedPayment.save();
 
     const updatePaymentHistory = user.paymentHistory.map((item) =>
@@ -49,8 +49,9 @@ export const changeState = async (req, res) => {
     user.save();
 
     const paymentObjectEmail = updatedPayment.container.map((e) => e.name);
-
-    /* sendMail(user.email, user.username, null, paymentObjectEmail); */
+    if (state === 'despachado') {
+      sendMail(user.email, user.username, null, paymentObjectEmail);
+    }
 
     return res.json(user);
   } catch (e) {
@@ -59,7 +60,6 @@ export const changeState = async (req, res) => {
 };
 
 export const searchStatePayment = async (req, res) => {
-
   try {
     const despachado = [];
     const pendiente = [];
@@ -67,26 +67,35 @@ export const searchStatePayment = async (req, res) => {
     const cancelado = [];
 
     const allPayment = await Payment.find({});
-    if (!allPayment) return res.json({ msg: "No payments found" });
+    if (!allPayment) return res.json({ msg: 'No payments found' });
 
-    allPayment.map(e => e.state === "despachado" ? despachado.push(e) : e.state === "pendiente" ? pendiente.push(e) : e.state === "finalizado" ? finalizado.push(e) : cancelado.push(e));
+    allPayment.map((e) =>
+      e.state === 'despachado'
+        ? despachado.push(e)
+        : e.state === 'pendiente'
+        ? pendiente.push(e)
+        : e.state === 'finalizado'
+        ? finalizado.push(e)
+        : cancelado.push(e)
+    );
 
     return res.json({ despachado, pendiente, finalizado, cancelado });
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
-}
+};
 
 export const searchUserByUsername = async (req, res) => {
-  const { username } = req.body
+  const { username } = req.body;
   try {
-    const users = await User.find({})
-    if(users){
-      const foundUser = users.filter(e => e.username.toLowerCase().includes(username))
-      return res.status(200).json(foundUser)
+    const users = await User.find({});
+    if (users) {
+      const foundUser = users.filter((e) =>
+        e.username.toLowerCase().includes(username)
+      );
+      return res.status(200).json(foundUser);
     }
   } catch (e) {
     return res.json({ msg: `Error 404 - ${e}` });
   }
-}
-
+};
