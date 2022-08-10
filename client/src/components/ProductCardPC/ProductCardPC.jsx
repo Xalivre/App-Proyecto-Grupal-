@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import Style from './ProductCardPC.module.css';
 import swal from 'sweetalert';
 /* import AddCartButton from "../AddCartButton/AddCartButton"; */
-import { Link } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 /* import WishListButton from "../CardButtons/WishListButton"; */
 
@@ -46,7 +45,7 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
     <div className={Style.carouselOrder}>
       <div className={Style.container}>
         <div className={Style.cardContainer}>
-          <Link to={'/product/' + id}>
+          <a href={'/product/' + id} target="_blanck">
             <img className={Style.image} src={image} alt="img" />
             <div className={Style.text}>
               <div className={Style.name}>
@@ -58,7 +57,7 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
               </div>
             </div>
             <p className={Style.price}>${price}</p>
-          </Link>
+          </a>
         </div>
         <div className={Style.buttonsContainer}>
           {stock > 0 && (
