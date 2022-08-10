@@ -11,9 +11,9 @@ export default function PaymentMethod() {
 
   const karting = useSelector((state) => state.cart)
 
-  useEffect(() => {
+/*   useEffect(() => {
     localStorage.setItem("Carrito", JSON.stringify(karting))
-  }, [karting])
+  }, [karting]) */
 
   const modifyQuantityUpFunction = (id) => {
     dispatch(modifyQuantityUp(id))

@@ -14,7 +14,7 @@ function RemoveWishButton({id, setRefresh, refresh}) {
 
   async function removeWish(e){
     e.preventDefault()
-    idUser && dispatch(removeFromWishList(idUser, id));
+    idUser && await dispatch(removeFromWishList(idUser, id));
     idUser && await dispatch(getUserById(idUser))
     setRefresh(!refresh)
   }

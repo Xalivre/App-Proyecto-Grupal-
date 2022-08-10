@@ -69,6 +69,7 @@ const CLEAR_HISTORY_PAGE = 'CLEAR_HISTORY_PAGE';
 const EDIT_USER = 'EDIT_USER'
 const ADD_TO_BUILDER = "ADD_TO_BUILDER"
 
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -96,7 +97,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case REMOVE_FROM_WISHLIST:
-      state.userDetails.wishList.filter((e) => e._id !== action.payload);
+      state.userDetails.wishList.filter((e) => e._id !== action.payload)
       return {
         ...state,
       };
@@ -334,6 +335,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         details: [],
         userDetails: {},
+        builder: [],
       };
 
     case EDIT_PRODUCT:

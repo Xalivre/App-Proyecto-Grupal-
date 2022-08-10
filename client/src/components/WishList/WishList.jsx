@@ -25,7 +25,9 @@ function WishList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[idUser, refresh])
 
-
+useEffect(() => {
+  console.log(userDetails)
+}, [userDetails])
 
 
 
