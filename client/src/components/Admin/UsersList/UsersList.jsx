@@ -107,11 +107,11 @@ export default function UsersList() {
     <div className={Style.containerAll}>
       <div  className={Style.generalBarsPositioning}>
         <div className={Style.searchBarPositioning}>
-          <input value={input} onChange={(e) => handleChange(e)}></input>
-          <button type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
+          <input className='input' value={input} onChange={(e) => handleChange(e)}></input>
+          <button className='button' type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
         </div>
         <div className={Style.refreshButtonPositioning}>
-          <button onClick={() => dispatch(searchUserByUsername(""))}>Recargar Usuarios</button>
+          <button className='button' onClick={() => dispatch(searchUserByUsername(""))}>Recargar Usuarios</button>
         </div>
       </div>
       <br /> <br />

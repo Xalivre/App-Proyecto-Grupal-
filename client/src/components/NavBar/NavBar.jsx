@@ -52,8 +52,6 @@ function NavBar() {
         >
           <h1>Productos</h1>
         </NavLink>
-       {
-       autho !== "scorpygato" && (autho !== "user" && autho !== "admin"  && autho !== "owner") ? swal("Oops", "Debes estar logeado para armar tu pc!", "warning") : 
        <NavLink
           to="/ArmaTuPC"
           style={{ textDecoration: "none" }}
@@ -62,7 +60,7 @@ function NavBar() {
           }
         >
           <h1>Arma tu PC</h1>
-        </NavLink>}
+        </NavLink>
         <NavLink
           to="/help"
           style={{ textDecoration: "none" }}

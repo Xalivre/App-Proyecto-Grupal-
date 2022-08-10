@@ -83,15 +83,16 @@ export default function PaymentList() {
     <div className={styles.containerAll}>
       <div className={styles.topPositioning}>
         <div className={styles.buttonsTab}>
-          <button type="submit" onClick={(e) => handleClickId(e)}>
+          <button className='button' type="submit" onClick={(e) => handleClickId(e)}>
             Buscar
           </button>
           <input
+            className='input'
             onChange={(e) => handleChange(e)}
             value={input}
             placeholder="ID de compra"
           ></input>
-          <button
+          <button className='button'
             onClick={async () => {
               await dispatch(clearHistoryPage());
               setPurchaseState('pendiente');

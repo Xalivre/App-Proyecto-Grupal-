@@ -24,7 +24,9 @@ th, td{
 
 .generalBarsPositioning {
     display: flex;
+    grid: .5rem;
     justify-content: space-evenly;
-    flex-direction: row;
 }
+
+
 
