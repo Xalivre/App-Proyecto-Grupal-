@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react';
 import {
-  addToCart,
-  addToWishList,
   modifyCart,
   getUserById,
   addToBuilder,
 } from '../../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Style from './ProductCardPC.module.css';
 import swal from 'sweetalert';
 /* import AddCartButton from "../AddCartButton/AddCartButton"; */
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useJwt } from 'react-jwt';
-import { StartRounded } from '@mui/icons-material';
 /* import WishListButton from "../CardButtons/WishListButton"; */
 
 export default function ProductCardPC({ id, name, price, image, stock, showing, setShowing }) {
@@ -23,7 +19,6 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
   let idUser = decodedToken?._id;
 
   const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.userDetails);
 
   useEffect(() => {
     idUser && dispatch(getUserById(idUser));
@@ -32,9 +27,6 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
   useEffect(() => {
     idUser && dispatch(getUserById(idUser));
   }, [dispatch]);
-
-  const karting = useSelector((state) => state.cart);
-  const builder = useSelector((state) => state.builder)
 
   const f = localStorage.getItem('Carrito')
     ? JSON.parse(localStorage.getItem('Carrito'))
@@ -50,19 +42,6 @@ export default function ProductCardPC({ id, name, price, image, stock, showing, 
     refresh(f);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const cartStorage = async (id) => {
-    if (autho === 'admin' || autho === 'owner') {
-      return alert('borrenme algun dia');
-    }
-    let json = await axios.get('http://localhost:3000/product/' + id);
-    const a = localStorage.getItem('Carrito')
-      ? JSON.parse(localStorage.getItem('Carrito'))
-      : [];
-    a.push(json.data);
-    localStorage.setItem('Carrito', JSON.stringify(a));
-  };
-
   return (
     <div className={Style.carouselOrder}>
       <div className={Style.container}>

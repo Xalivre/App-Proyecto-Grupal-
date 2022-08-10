@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import swal from 'sweetalert'
 import { addToCart, clearPage, getProducts, modifyCart } from '../../redux/actions'
 import ProductCardPC from '../ProductCardPC/ProductCardPC'
 import Style from "./ArmaTuPC.module.css"
@@ -14,16 +13,17 @@ export default function ArmaTuPC() {
 
   let autho = decodedToken?.role;
 
+  
   const f = localStorage.getItem('Carrito')
-    ? JSON.parse(localStorage.getItem('Carrito'))
-    : [];
-
+  ? JSON.parse(localStorage.getItem('Carrito'))
+  : [];
+  
   const refresh = (f) => {
     const w = f.filter((e) => e?.stock > 0);
     localStorage.setItem('Carrito', JSON.stringify(w));
     dispatch(modifyCart(w));
   };
-
+  
   useEffect(() => {
     refresh(f);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,7 +68,8 @@ export default function ArmaTuPC() {
 
   return (
     <div>
-      {showing !== "Finished" ? <div>
+      <div>
+        {autho === "user" ?  <div>{showing !== "Finished" ? <div>
         <h1>Elige tus componentes...</h1>
         <h1>{showing}</h1>
         {
@@ -100,7 +101,16 @@ export default function ArmaTuPC() {
           <button className='button' onClick={() => { finishPurchase()}}>
             Realizar pedido
           </button>
+        </div>
+        }
+        </div> 
+        : 
+        <div>
+          
+          logeate capo
+          
         </div>}
+      </div>
     </div>
   )
 }
