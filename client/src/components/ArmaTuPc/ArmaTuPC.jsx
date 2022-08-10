@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import swal from 'sweetalert'
-import { addToCart, getProducts, modifyCart } from '../../redux/actions'
+import { addToCart, clearPage, getProducts, modifyCart } from '../../redux/actions'
 import ProductCardPC from '../ProductCardPC/ProductCardPC'
 import Style from "./ArmaTuPC.module.css"
 import { useJwt } from "react-jwt"
@@ -57,8 +57,10 @@ export default function ArmaTuPC() {
   };
 
   const finishPurchase = () => {
-    let addeds = karting.length > 0 ? builder.filter(e => !e._id.includes(karting?.map(a => a._id))) : builder
-    addeds.map(x => dispatch(addToCart(x._id)) && cartStorage(x._id)) 
+    let addeds = karting.length > 0 ? builder.filter(e => !karting.map(x => x._id).includes(e._id) && e) : builder;
+    addeds.map(x => dispatch(addToCart(x._id)) && cartStorage(x._id)) ;
+    dispatch(clearPage())
+    navigate("/paymentMethod")
   }
 
 
