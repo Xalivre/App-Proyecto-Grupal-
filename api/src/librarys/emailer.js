@@ -30,6 +30,18 @@ export const sendMail = async (
         refreshToken: REFRESH_TOKEN,
       },
     });
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
     const formatUsername = (username) =>
       username
         .split('')
@@ -38,18 +50,18 @@ export const sendMail = async (
 
     defaultPassword
       ? (mailOptions = {
-          from: '"GameHUB!" <gaminggamehub1@gmail.com>',
-          to: email,
-          subject: 'Se ha reseteado tu contraseña',
-          html: `<p> Hola <b>${formatUsername(
-            username
-          )}</b>, tu contraseña ha sido reseteada a: <b>${defaultPassword}</b>
+        from: '"GameHUB!" <gaminggamehub1@gmail.com>',
+        to: email,
+        subject: 'Se ha reseteado tu contraseña',
+        html: `<p> Hola <b>${formatUsername(
+          username
+        )}</b>, tu contraseña ha sido reseteada a: <b>${defaultPassword}</b>
 
 Desde <b>GameHUB</b> te deseamos éxitos.</p>
 `,
-        })
+      })
       : amount
-      ? (mailOptions = {
+        ? (mailOptions = {
           from: '"GameHUB!" <gaminggamehub1@gmail.com>',
           to: email,
           subject: 'Detalles de tu compra en GameHUB',
@@ -62,33 +74,33 @@ Desde <b>GameHUB</b> te deseamos éxitos.</p>
   Desde <b>GameHUB</b> te deseamos éxitos.</p>
   `,
         })
-      : paymentObjectEmail
-      ? (mailOptions = {
-          from: '"GameHUB!" <gaminggamehub1@gmail.com>',
-          to: email,
-          subject: 'Tu compra fue despachada desde GameHUB',
-          html: `<p> Hola <b>${formatUsername(
-            username
-          )}</b>. Los productos que compraste fueron: <b>${paymentObjectEmail.join(
-            ', '
-          )}</b>. </br>
+        : paymentObjectEmail
+          ? (mailOptions = {
+            from: '"GameHUB!" <gaminggamehub1@gmail.com>',
+            to: email,
+            subject: 'Tu compra fue despachada desde GameHUB',
+            html: `<p> Hola <b>${formatUsername(
+              username
+            )}</b>. Los productos que compraste fueron: <b>${paymentObjectEmail.join(
+              ', '
+            )}</b>. </br>
        Tu compra fue despachada.  
        </br> 
       Desde <b>GameHUB</b> te deseamos éxitos.</p>`,
-        })
-      : (mailOptions = {
-          from: '"Bienvenido/a a GameHUB!" <gaminggamehub1@gmail.com>',
-          to: email,
-          subject: 'Te has registrado en GameHUB',
-          html: `<p> Hola <b>${formatUsername(
-            username
-          )}</b> bienvenido/a a <b>GameHUB</b>. Para realizar una compra, selecciona todos aquellos productos que
+          })
+          : (mailOptions = {
+            from: '"Bienvenido/a a GameHUB!" <gaminggamehub1@gmail.com>',
+            to: email,
+            subject: 'Te has registrado en GameHUB',
+            html: `<p> Hola <b>${formatUsername(
+              username
+            )}</b> bienvenido/a a <b>GameHUB</b>. Para realizar una compra, selecciona todos aquellos productos que
     quieras añadir a tu carrito de compras. Esperamos que disfrutes de nuestros productos y servicios.
     En caso de necesitar ayuda, dirigete a la sección <b>Ayuda</b> donde encontraras una guía.
 
     Desde <b>GameHUB</b> te deseamos éxitos.</p>
     `,
-        });
+          });
 
     const result = await transporter.sendMail(mailOptions);
     return result;

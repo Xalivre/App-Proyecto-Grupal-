@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postProduct, getProducts } from "../../redux/actions";
 import Style from "./CreateProduct.module.css"
+import swal from "sweetalert";
 /* import { State } from "@splidejs/splide"; */
 
 export default function CreateProduct() {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const [input, setInput] = useState({
         name: "",
@@ -42,7 +41,7 @@ export default function CreateProduct() {
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData()
-        data.append("image", input.mainImage)
+        data.append("image", input.mainImage ? input.mainImage : "https://i5.walmartimages.com/asr/5b8f58b8-b1a5-4be8-a093-99f493c8ee4f.90a8495ad135b7e9474eb9cfc30c21fd.png")
         for (let index = 0; index < input.secondaryImage.length; index++) {
             data.append("image", input.secondaryImage[index]);
         }
@@ -63,8 +62,7 @@ export default function CreateProduct() {
             description: "",
         })
         dispatch(getProducts())
-        alert("Producto agregado con éxito")
-        navigate(0)
+        swal("Ya está", "El producto fue agregado con éxito", "success")
     }
 
     const validate = (input) => {
@@ -139,7 +137,7 @@ export default function CreateProduct() {
                 {
                     !input.name || !input.price || !input.stock || !input.mainImage || !input.category || !input.brands || !input.description
                         ?
-                        <button className="button" onClick={() => { alert("Debes completar todos los campos"); setErrorTrue(!false) }}>Añadir producto</button>
+                        <button className="button" onClick={() => { swal("Error", "Debes completar todos los campos", "error"); setErrorTrue(!false) }}>Añadir producto</button>
                         :
                         <button className="button" onClick={(e) => handleSubmit(e)}>Añadir producto</button>
                 }
