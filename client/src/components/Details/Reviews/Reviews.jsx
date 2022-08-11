@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import s from "./Reviews.module.css";
 import axios from "axios"
 import { useJwt } from "react-jwt"
+import { useNavigate } from "react-router-dom";
 
 function Reviews({ id }) {
   const [hover, setHover] = useState(null);
@@ -10,6 +11,8 @@ function Reviews({ id }) {
   const { decodedToken } = useJwt(localStorage.getItem("usuario"));
 
   let usernameTokened = decodedToken?.username;
+
+  const navigate = useNavigate()
 
 
   const [input, setInput] = useState({
@@ -34,6 +37,7 @@ function Reviews({ id }) {
       commentRating: 1,
     });
     await axios.put("http://localhost:3000/comments", input)
+    navigate(0)
   }
 
   function onClickStar(e) {
