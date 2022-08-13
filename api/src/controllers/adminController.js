@@ -11,7 +11,7 @@ export const forcePasswordAdmin = async (req, res) => {
     let chars =
       '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let passwordLength = 12;
-    let defaultPassword = '';
+    let defaultPassword = ''; 
 
     for (var i = 0; i <= passwordLength; i++) {
       var randomNumber = Math.floor(Math.random() * chars.length);
