@@ -5,9 +5,9 @@ En la cual usamos tecnologias como React, Redux, TypeScript, Material-UI, Css pu
 </br>
  <a href="https://gamehub-chi.vercel.app/" rel="noopener noreferrer" target="_blank">Sitio WEB</a>
 <p>Te invito a visitar la pagina!</p>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce.jpg" alt="background" width="500px" height="250px"/>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce2.png" alt="background" width="500px" height="250px"/>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce3.png" alt="background" width="500px" height="250px"/>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce4.png" alt="background" width="500px" height="250px"/>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce5.png" alt="background" width="500px" height="250px"/>
-<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/blob/main/ecommerce6.png" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/blob/main/ecommerce.jpg" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/blob/main/ecommerce2.png" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/Imagenes/Imagenes/blob/main/ecommerce3.png" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/Imagenes/blob/main/ecommerce4.png" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/blob/main/ecommerce5.png" alt="background" width="500px" height="250px"/>
+<img src="https://github.com/Tdibacco17/App-Proyecto-Grupal-/Imagenes/blob/main/ecommerce6.png" alt="background" width="500px" height="250px"/>
