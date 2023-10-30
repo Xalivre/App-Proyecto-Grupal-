@@ -1,6 +1,6 @@
 <h1>GameHub 🖥️</h1>  
 <h4>Proyecto grupal</h4>
-  <p>GameHub es una aplicacion web que ah sido pensada para la compra y venta de productos de computacion, la pagina cuenta con distintos roles para su navegacion.    "User" para la compra de productos, "Admin" para llevar un control de las ventas, el stock y usuarios. Y "Owner" como dueño de la pagina.</br>
+  <p>GameHub es una aplicacion web que ha sido desarrollada para la compra y venta de productos de computacion, la pagina cuenta con distintos roles para su navegacion."User" para la compra de productos, "Admin" para llevar un control de las ventas, el stock y usuarios. Y "Owner" como dueño de la pagina.</br>
 En la cual usamos tecnologias como React, Redux, TypeScript, Material-UI, Css puro para el FrontEnd, NodeJs, Express, Mongoose, Nodemailer, Stripe, MercadopagoDevelopers, Cloudinary,  para el BackEnd y MongoDB para la base de datos.</p>
 </br>
  <a href="https://gamehub-chi.vercel.app/" rel="noopener noreferrer" target="_blank">Sitio WEB</a>
